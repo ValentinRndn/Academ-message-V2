@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName  String
+  email     String   @unique
+  password  String
+  role      String   // "student", "teacher", or "admin"
+  bio       String?
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // For teachers, store subject IDs
+  subjectIds String[] @db.ObjectId
+}
+
+model Subject {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // For subjects, store teacher IDs
+  teacherIds  String[] @db.ObjectId
+}
+
+model Availability {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  teacherId String   @db.ObjectId
+  dayOfWeek Int?     // 0-6 (Sunday-Saturday), null if non-recurring
+  startTime DateTime
+  endTime   DateTime
+  recurring Boolean  @default(true)
+  date      DateTime? // Only used for non-recurring availability
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Message {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  senderId   String   @db.ObjectId
+  receiverId String   @db.ObjectId
+  content    String
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Booking {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  studentId      String   @db.ObjectId
+  teacherId      String   @db.ObjectId
+  availabilityId String   @db.ObjectId
+  startTime      DateTime
+  endTime        DateTime
+  status         String   // "pending", "confirmed", "cancelled", "completed"
+  paymentIntentId String?
+  paymentStatus  String?  // "pending", "paid", "refunded"
+  amount         Float
+  currency       String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  bookingId String   @unique @db.ObjectId
+  studentId String   @db.ObjectId
+  teacherId String   @db.ObjectId
+  rating    Int      // 1-5 stars
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
