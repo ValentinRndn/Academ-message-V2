@@ -3,35 +3,48 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
   modules: [
-    '@vite-pwa/nuxt',
     '@nuxtjs/tailwindcss'
   ],
   appConfig: {
     buildAssetsDir: '/_nuxt/'
   },
+  // Configuration Vite pour résoudre le problème de chemin
+  vite: {
+    server: {
+      fs: {
+        // Autoriser explicitement les chemins qui posent problème
+        allow: [
+          // Répertoire actuel et parent
+          '.',
+          '..',
+          // Chemin problématique explicite
+          'C:/Users/Admin/Documents/Academ-message-pwa/node_modules/nuxt/dist/app/entry.js',
+          // Répertoire du projet actuel
+          'C:/Users/Admin/Documents/Academ-message-V2'
+        ]
+      }
+    }
+  },
+  // Désactiver le PWA pour le moment pour simplifier le debugging
   pwa: {
-    registerType: 'autoUpdate',
-    manifest: {
-      name: 'Academ Message',
-      short_name: 'AcademMsg',
-      description: 'Academic messaging application',
-      theme_color: '#4F46E5',
-      background_color: '#ffffff',
-      icons: [
-        {
-          src: 'favicon.ico',
-          sizes: '64x64',
-          type: 'image/x-icon'
-        }
-      ]
-    },
-    workbox: {
-      navigateFallback: '/',
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
-    },
     devOptions: {
-      enabled: true,
-      type: 'module'
+      enabled: false
+    }
+  },
+  // Paramètres expérimentaux à ajuster
+  experimental: {
+    // Désactiver certaines fonctionnalités expérimentales qui pourraient causer des problèmes
+    payloadExtraction: false,
+    renderJsonPayloads: false,
+    viewTransition: false,
+    componentIslands: false
+  },
+  // Rétrograder les dépendances problématiques au runtime
+  nitro: {
+    esbuild: {
+      options: {
+        target: 'es2019' // Cible plus compatible
+      }
     }
   }
 })

@@ -4,7 +4,7 @@ import { verifyToken, extractTokenFromHeader } from '~/server/utils/jwt'
 import Stripe from 'stripe'
 
 const prisma = new PrismaClient()
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_votreclédetest', {
   apiVersion: '2025-02-24.acacia' as any
 })
 
