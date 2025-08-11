@@ -1,56 +1,80 @@
-import { defineEventHandler, readBody } from 'h3'
-import { createUser, getUserByEmail } from '~/server/utils/auth'
-import { generateToken } from '~/server/utils/jwt'
-import { H3Error } from 'h3'
+import { PrismaClient } from '@prisma/client'
+import { generateToken } from '../../utils/jwt'
+import bcrypt from 'bcrypt'
+
+const prisma = new PrismaClient()
+const SALT_ROUNDS = 10
 
 export default defineEventHandler(async (event) => {
   try {
-    const { firstName, lastName, email, password } = await readBody(event)
+    // Récupérer les données du corps de la requête
+    const { firstName, lastName, email, password, role } = await readBody(event)
     
+    // Validation des données
     if (!firstName || !lastName || !email || !password) {
-      throw createError({
+      return createError({
         statusCode: 400,
         message: 'All fields are required'
       })
     }
     
-    // Check if email is already in use
-    const existingUser = await getUserByEmail(email)
+    // Vérifier si l'email est déjà utilisé
+    const existingUser = await prisma.user.findUnique({
+      where: { email }
+    })
     
     if (existingUser) {
-      throw createError({
-        statusCode: 409,
-        message: 'Email is already in use'
+      return createError({
+        statusCode: 400,
+        message: 'Email already in use'
       })
     }
     
-    // Create new user with student role
-    const newUser = await createUser({
-      firstName,
-      lastName,
-      email,
-      password,
-      role: 'student'
+    // Hacher le mot de passe
+    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS)
+    
+    // Déterminer le statut initial en fonction du rôle
+    const initialStatus = role === 'teacher' ? 'pending' : 'active'
+    
+    // Créer l'utilisateur
+    const user = await prisma.user.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        passwordHash,
+        role: role || 'student',
+        status: initialStatus
+      }
     })
     
-    // Don't include password in the response
-    const { password: _, ...userWithoutPassword } = newUser
+    // Générer un token JWT
+    const token = generateToken({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      firstName: user.firstName,
+      lastName: user.lastName
+    })
     
-    // Generate JWT token
-    const token = generateToken(userWithoutPassword)
-    
+    // Retourner le token et les informations de l'utilisateur
     return {
-      user: userWithoutPassword,
-      token
-    }
-  } catch (error) {
-    if (error instanceof H3Error) {
-      throw error
+      token,
+      user: {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        role: user.role,
+        status: user.status
+      }
     }
     
-    throw createError({
+  } catch (error: any) {
+    console.error('Registration error:', error)
+    return createError({
       statusCode: 500,
-      message: 'An error occurred during registration'
+      message: error.message || 'An error occurred during registration'
     })
   }
 })

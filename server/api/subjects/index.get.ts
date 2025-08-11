@@ -1,44 +1,55 @@
-import { defineEventHandler, createError } from 'h3'
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
   try {
-    // Get all subjects
+    // Récupérer les paramètres de requête
+    const query = getQuery(event)
+    const search = query.search as string
+    const page = parseInt(query.page as string || '1')
+    const limit = parseInt(query.limit as string || '100') // Par défaut, on récupère tous les sujets
+
+    // Construire les filtres pour la requête
+    const filters: any = {}
+    
+    // Recherche textuelle
+    if (search) {
+      filters.name = {
+        contains: search,
+        mode: 'insensitive'
+      }
+    }
+    
+    // Calculer l'offset pour la pagination
+    const skip = (page - 1) * limit
+    
+    // Récupérer les sujets
     const subjects = await prisma.subject.findMany({
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        teacherIds: true
+      where: filters,
+      skip,
+      take: limit,
+      orderBy: {
+        name: 'asc'
       }
     })
     
-    // Get all teachers to map to subjects
-    const teachers = await prisma.user.findMany({
-      where: {
-        role: 'teacher'
-      },
-      select: {
-        id: true
-      }
+    // Récupérer le nombre total de sujets pour la pagination
+    const totalCount = await prisma.subject.count({
+      where: filters
     })
     
-    // Add teacher count to each subject
-    const subjectsWithTeacherCount = subjects.map((subject) => ({
-      id: subject.id,
-      name: subject.name,
-      description: subject.description,
-      teacherCount: subject.teacherIds.length
-    }))
-    
-    return subjectsWithTeacherCount
-  } catch (error) {
+    return {
+      subjects,
+      totalCount,
+      page,
+      limit
+    }
+  } catch (error: any) {
     console.error('Error fetching subjects:', error)
-    throw createError({
+    return createError({
       statusCode: 500,
-      message: 'Failed to fetch subjects'
+      message: error.message || 'Could not fetch subjects'
     })
   }
 })

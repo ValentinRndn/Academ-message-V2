@@ -11,19 +11,27 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  firstName String
-  lastName  String
-  email     String   @unique
-  password  String
-  role      String   // "student", "teacher", or "admin"
-  bio       String?
-  avatar    String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // For teachers, store subject IDs
-  subjectIds String[] @db.ObjectId
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  firstName    String
+  lastName     String
+  email        String        @unique
+  password     String
+  role         String        // "student", "teacher", or "admin"
+  bio          String?
+  avatar       String?
+  status       String        @default("active") // "active", "inactive", "suspended"
+  lastLoginAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  subjectIds   String[]      @db.ObjectId
+  
+  // Relations (références) pour MongoDB
+  sentMessages     Message[]      @relation("SentMessages", fields: [id], references: [senderId])
+  receivedMessages Message[]      @relation("ReceivedMessages", fields: [id], references: [receiverId])
+  teacherBookings  Booking[]      @relation("TeacherBookings", fields: [id], references: [teacherId])
+  studentBookings  Booking[]      @relation("StudentBookings", fields: [id], references: [studentId])
+  reviews          Review[]       @relation("TeacherReviews", fields: [id], references: [teacherId])
+  availability     Availability[] @relation("TeacherAvailability", fields: [id], references: [teacherId])
 }
 
 model Subject {
@@ -32,56 +40,62 @@ model Subject {
   description String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
 
-  // For subjects, store teacher IDs
-  teacherIds  String[] @db.ObjectId
+model Message {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  content    String
+  senderId   String   @db.ObjectId
+  receiverId String   @db.ObjectId
+  read       Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations (références)
+  sender   User @relation("SentMessages", fields: [senderId], references: [id])
+  receiver User @relation("ReceivedMessages", fields: [receiverId], references: [id])
+}
+
+model Booking {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  teacherId String   @db.ObjectId
+  studentId String   @db.ObjectId
+  start     DateTime
+  end       DateTime
+  status    String   @default("pending") // "pending", "confirmed", "cancelled", "completed"
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations (références)
+  teacher User @relation("TeacherBookings", fields: [teacherId], references: [id])
+  student User @relation("StudentBookings", fields: [studentId], references: [id])
+}
+
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  teacherId String   @db.ObjectId
+  studentId String   @db.ObjectId
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations (références)
+  teacher User @relation("TeacherReviews", fields: [teacherId], references: [id])
 }
 
 model Availability {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   teacherId String   @db.ObjectId
-  dayOfWeek Int?     // 0-6 (Sunday-Saturday), null if non-recurring
+  dayOfWeek Int      // 0-6, 0 = Sunday
   startTime DateTime
   endTime   DateTime
   recurring Boolean  @default(true)
-  date      DateTime? // Only used for non-recurring availability
+  date      DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
 
-model Message {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  senderId   String   @db.ObjectId
-  receiverId String   @db.ObjectId
-  content    String
-  read       Boolean  @default(false)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-}
-
-model Booking {
-  id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  studentId      String   @db.ObjectId
-  teacherId      String   @db.ObjectId
-  availabilityId String   @db.ObjectId
-  startTime      DateTime
-  endTime        DateTime
-  status         String   // "pending", "confirmed", "cancelled", "completed"
-  paymentIntentId String?
-  paymentStatus  String?  // "pending", "paid", "refunded"
-  amount         Float
-  currency       String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
-
-model Review {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  bookingId String   @unique @db.ObjectId
-  studentId String   @db.ObjectId
-  teacherId String   @db.ObjectId
-  rating    Int      // 1-5 stars
-  comment   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  // Relations (références)
+  teacher User @relation("TeacherAvailability", fields: [teacherId], references: [id])
 }

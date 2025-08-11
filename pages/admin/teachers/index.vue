@@ -13,7 +13,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
         </svg>
-        Add Teacher
+        Ajouter un enseignant
       </button>
     </div>
     
@@ -411,7 +411,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
-            Previous
+            Précédent
           </button>
           <button 
             @click="nextPage" 
@@ -423,7 +423,7 @@
                 : 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50 transition-colors'
             ]"
           >
-            Next
+            Suivant
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
@@ -439,9 +439,9 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       </div>
-      <h3 class="text-xl font-bold text-gray-900 mb-2">No teachers found</h3>
+      <h3 class="text-xl font-bold text-gray-900 mb-2">Aucun enseignant trouvé</h3>
       <p class="text-gray-600 mb-8 max-w-md mx-auto">
-        {{ searchQuery ? 'No teachers match your search criteria. Try different keywords or clear filters.' : 'Get started by adding your first teacher to build your academic team.' }}
+        {{ searchQuery ? 'Aucun enseignant ne correspond à vos critères de recherche. Essayez d\'autres mots-clés ou effacez les filtres.' : 'Commencez par ajouter votre premier enseignant pour constituer votre équipe académique.' }}
       </p>
       <div class="flex justify-center">
         <button 
@@ -452,7 +452,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
-          Clear Filters
+          Effacer les filtres
         </button>
         <button 
           @click="showAddTeacherModal = true"
@@ -461,7 +461,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          Add Teacher
+          Ajouter un enseignant
         </button>
       </div>
     </div>
@@ -473,7 +473,7 @@
           <!-- Modal header -->
           <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-indigo-600 to-indigo-500 rounded-t-xl">
             <h3 class="text-lg font-bold text-white">
-              {{ showEditTeacherModal ? 'Edit Teacher' : 'Add New Teacher' }}
+              {{ showEditTeacherModal ? 'Modifier l\'enseignant' : 'Ajouter un nouvel enseignant' }}
             </h3>
             <button 
               @click="cancelTeacherModal"
@@ -490,7 +490,7 @@
             <form @submit.prevent="showEditTeacherModal ? updateTeacher() : addTeacher()">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <div class="animate-fade-in" style="animation-delay: 100ms;">
-                  <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                  <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">Prénom</label>
                   <div class="relative rounded-md">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -503,13 +503,13 @@
                       type="text" 
                       required 
                       class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                      placeholder="Enter first name"
+                      placeholder="Entrez le prénom"
                     />
                   </div>
                 </div>
                 
                 <div class="animate-fade-in" style="animation-delay: 200ms;">
-                  <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                  <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
                   <div class="relative rounded-md">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -522,13 +522,13 @@
                       type="text" 
                       required 
                       class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                      placeholder="Enter last name"
+                      placeholder="Entrez le nom"
                     />
                   </div>
                 </div>
                 
                 <div class="animate-fade-in" style="animation-delay: 300ms;">
-                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Adresse e-mail</label>
                   <div class="relative rounded-md">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -547,7 +547,7 @@
                 </div>
                 
                 <div v-if="!showEditTeacherModal" class="animate-fade-in" style="animation-delay: 400ms;">
-                  <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                  <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
                   <div class="relative rounded-md">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -564,12 +564,12 @@
                     />
                   </div>
                   <p class="mt-1 text-xs text-gray-500">
-                    Password should be at least 8 characters long.
+                    Le mot de passe doit contenir au moins 8 caractères.
                   </p>
                 </div>
                 
                 <div v-if="showEditTeacherModal" class="animate-fade-in" style="animation-delay: 400ms;">
-                  <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                  <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
                   <div class="relative rounded-md">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -581,8 +581,8 @@
                       v-model="teacherForm.status" 
                       class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                     >
-                      <option value="active">Active</option>
-                      <option value="inactive">Inactive</option>
+                      <option value="active">Actif</option>
+                      <option value="inactive">Inactif</option>
                     </select>
                   </div>
                 </div>
@@ -612,7 +612,7 @@
                         v-model="newSubject" 
                         @keydown.enter.prevent="addSubjectToForm"
                         type="text" 
-                        placeholder="Add subject..." 
+                        placeholder="Ajouter une matière..." 
                         class="border-0 p-1 focus:ring-0 text-sm bg-transparent"
                       />
                       <button 
@@ -627,18 +627,18 @@
                     </div>
                   </div>
                   <p class="mt-1 text-xs text-gray-500">
-                    Press Enter or click the + icon to add a subject.
+                    Appuyez sur Entrée ou cliquez sur l'icône + pour ajouter une matière.
                   </p>
                 </div>
                 
                 <div class="md:col-span-2 animate-fade-in" style="animation-delay: 600ms;">
-                  <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">Biography</label>
+                  <label for="bio" class="block text-sm font-medium text-gray-700 mb-1">Biographie</label>
                   <textarea 
                     id="bio" 
                     v-model="teacherForm.bio" 
                     rows="4" 
                     class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
-                    placeholder="Teacher's biography, experience, and specialties..."
+                    placeholder="Biographie, expérience et spécialités de l'enseignant..."
                   ></textarea>
                 </div>
               </div>
@@ -649,7 +649,7 @@
                   @click="cancelTeacherModal"
                   class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
-                  Cancel
+                  Annuler
                 </button>
                 <button 
                   type="submit"
@@ -658,7 +658,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  {{ showEditTeacherModal ? 'Update Teacher' : 'Add Teacher' }}
+                  {{ showEditTeacherModal ? 'Mettre à jour l\'enseignant' : 'Ajouter un enseignant' }}
                 </button>
               </div>
             </form>

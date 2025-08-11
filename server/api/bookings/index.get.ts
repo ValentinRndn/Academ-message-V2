@@ -1,98 +1,90 @@
-import { defineEventHandler, getQuery, createError } from 'h3'
 import { PrismaClient } from '@prisma/client'
-import { verifyToken, extractTokenFromHeader } from '~/server/utils/jwt'
+import { extractTokenFromHeader, verifyToken } from '../../utils/jwt'
 
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
   try {
-    // Get user from token
-    const authHeader = event.node.req.headers.authorization
+    // Vérifier l'authentification
+    const authHeader = getHeader(event, 'authorization')
     const token = extractTokenFromHeader(authHeader)
     
     if (!token) {
-      throw createError({
+      return createError({
         statusCode: 401,
         message: 'Unauthorized'
       })
     }
     
     const user = verifyToken(token)
-    const { status } = getQuery(event)
     
-    // Build filter conditions
-    const whereConditions: any = {}
+    // Récupérer les paramètres de requête
+    const query = getQuery(event)
+    const status = query.status as string
+    const role = user.role
+    const page = parseInt(query.page as string || '1')
+    const limit = parseInt(query.limit as string || '10')
+    const skip = (page - 1) * limit
     
-    // Filter by user role
-    if (user.role === 'student') {
-      whereConditions.studentId = user.id
-    } else if (user.role === 'teacher') {
-      whereConditions.teacherId = user.id
+    // Construire le filtre en fonction du rôle de l'utilisateur
+    const filter: any = {}
+    
+    if (role === 'teacher') {
+      filter.teacherId = user.id
     } else {
-      // Admin can see all bookings
+      filter.studentId = user.id
     }
     
-    // Filter by status if provided
+    // Filtrer par statut si spécifié
     if (status) {
-      whereConditions.status = status
+      filter.status = status
     }
     
-    // Get bookings
+    // Récupérer les réservations
     const bookings = await prisma.booking.findMany({
-      where: whereConditions,
+      where: filter,
+      skip,
+      take: limit,
+      orderBy: {
+        startTime: 'asc'
+      },
       include: {
-        student: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true,
-            avatar: true
-          }
-        },
         teacher: {
           select: {
             id: true,
             firstName: true,
             lastName: true,
-            email: true,
             avatar: true
           }
         },
-        availability: true,
-        review: {
+        student: {
           select: {
             id: true,
-            rating: true,
-            comment: true,
-            createdAt: true
+            firstName: true,
+            lastName: true,
+            avatar: true
           }
         }
-      },
-      orderBy: {
-        startTime: 'asc'
       }
     })
     
-    // Group bookings by status
-    const groupedBookings = {
-      upcoming: bookings.filter(booking => 
-        booking.status !== 'cancelled' && booking.status !== 'completed' && new Date(booking.startTime) > new Date()
-      ),
-      past: bookings.filter(booking => 
-        booking.status === 'completed' || new Date(booking.endTime) < new Date()
-      ),
-      cancelled: bookings.filter(booking => 
-        booking.status === 'cancelled'
-      )
+    // Récupérer le nombre total de réservations pour la pagination
+    const totalCount = await prisma.booking.count({
+      where: filter
+    })
+    
+    return {
+      bookings,
+      totalCount,
+      page,
+      limit
     }
     
-    return groupedBookings
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching bookings:', error)
-    throw createError({
+    return createError({
       statusCode: 500,
-      message: 'Failed to fetch bookings'
+      message: error.message || 'Could not fetch bookings'
     })
   }
 })

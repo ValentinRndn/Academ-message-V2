@@ -1,100 +1,117 @@
-import { defineEventHandler, createError } from 'h3'
 import { PrismaClient } from '@prisma/client'
+import { extractTokenFromHeader, verifyToken } from '../../../utils/jwt'
 
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
   try {
+    const authHeader = getHeader(event, 'authorization')
+    const token = extractTokenFromHeader(authHeader)
+    
+    // Pour cette API, on permet l'accès même sans authentification
+    // mais on limite certaines informations si l'utilisateur n'est pas authentifié
+    let authenticatedUser = null
+    if (token) {
+      try {
+        authenticatedUser = verifyToken(token)
+      } catch (error) {
+        // On ignore l'erreur si le token est invalide
+      }
+    }
+    
+    // Récupérer l'ID de l'enseignant depuis l'URL
     const teacherId = event.context.params?.id
     
     if (!teacherId) {
-      throw createError({
+      return createError({
         statusCode: 400,
         message: 'Teacher ID is required'
       })
     }
     
-    // Check if teacher exists
-    const teacher = await prisma.user.findUnique({
+    // Vérifier si l'enseignant existe
+    const teacherExists = await prisma.user.findUnique({
       where: {
         id: teacherId,
         role: 'teacher'
+      },
+      select: {
+        id: true
       }
     })
     
-    if (!teacher) {
-      throw createError({
+    if (!teacherExists) {
+      return createError({
         statusCode: 404,
         message: 'Teacher not found'
       })
     }
     
-    // Get teacher's availability
-    const availability = await prisma.availability.findMany({
+    // Récupérer les paramètres de requête
+    const query = getQuery(event)
+    const startDate = query.startDate ? new Date(query.startDate as string) : new Date()
+    const endDate = query.endDate 
+      ? new Date(query.endDate as string) 
+      : new Date(startDate.getTime() + 30 * 24 * 60 * 60 * 1000) // Par défaut, 30 jours à partir de la date de début
+    
+    // Récupérer les disponibilités récurrentes de l'enseignant
+    const recurringAvailability = await prisma.availability.findMany({
       where: {
-        teacherId
-      },
-      orderBy: [
-        { dayOfWeek: 'asc' },
-        { startTime: 'asc' }
-      ]
+        teacherId,
+        recurring: true
+      }
     })
     
-    // Get existing bookings for this teacher
+    // Récupérer les disponibilités ponctuelles de l'enseignant
+    const singleAvailability = await prisma.availability.findMany({
+      where: {
+        teacherId,
+        recurring: false,
+        date: {
+          gte: startDate,
+          lte: endDate
+        }
+      }
+    })
+    
+    // Récupérer les réservations confirmées pour bloquer ces créneaux
     const bookings = await prisma.booking.findMany({
       where: {
         teacherId,
-        status: { not: 'cancelled' },
+        status: { in: ['pending', 'confirmed'] },
         startTime: {
-          gte: new Date() // Only future bookings
+          gte: startDate,
+          lte: endDate
         }
       },
       select: {
         id: true,
-        availabilityId: true,
         startTime: true,
         endTime: true,
-        status: true
-      }
-    })
-    
-    // Group availability by day of week
-    const availabilityByDay: Record<string, any[]> = {
-      '0': [], // Sunday
-      '1': [], // Monday
-      '2': [], // Tuesday
-      '3': [], // Wednesday
-      '4': [], // Thursday
-      '5': [], // Friday
-      '6': []  // Saturday
-    }
-    
-    // Add one-time availability to special array
-    const oneTimeAvailability: any[] = []
-    
-    // Process availability
-    availability.forEach((slot) => {
-      const availabilityWithBookings = {
-        ...slot,
-        bookings: bookings.filter(booking => booking.availabilityId === slot.id)
-      }
-      
-      if (slot.recurring) {
-        availabilityByDay[slot.dayOfWeek.toString()].push(availabilityWithBookings)
-      } else {
-        oneTimeAvailability.push(availabilityWithBookings)
+        status: true,
+        // Ne renvoyer les informations de l'étudiant que si l'utilisateur est authentifié
+        studentId: authenticatedUser ? true : false,
+        student: authenticatedUser ? {
+          select: {
+            firstName: true,
+            lastName: true
+          }
+        } : undefined
       }
     })
     
     return {
-      recurring: availabilityByDay,
-      oneTime: oneTimeAvailability
+      availability: {
+        recurring: recurringAvailability,
+        single: singleAvailability,
+        bookings
+      }
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching teacher availability:', error)
-    throw createError({
+    return createError({
       statusCode: 500,
-      message: 'Failed to fetch teacher availability'
+      message: error.message || 'Could not fetch teacher availability'
     })
   }
 })

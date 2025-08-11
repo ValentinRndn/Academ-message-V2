@@ -6,8 +6,8 @@
     
     <!-- Header section with animation -->
     <div class="relative animate-fade-in">
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Find Your Perfect Teacher</h1>
-      <p class="text-lg text-gray-600 mb-8">Connect with qualified experts in any subject to help you excel in your studies</p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Trouvez Votre Professeur Idéal</h1>
+      <p class="text-lg text-gray-600 mb-8">Connectez-vous avec des experts qualifiés dans toutes les matières pour exceller dans vos études</p>
     </div>
     
     <!-- Search and Filters with animation -->
@@ -15,7 +15,7 @@
       <div class="flex flex-col md:flex-row md:items-end gap-6 mb-6">
         <!-- Search -->
         <div class="flex-grow">
-          <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+          <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Recherche</label>
           <div class="relative rounded-md shadow-sm">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,7 +26,7 @@
               id="search"
               v-model="searchQuery"
               type="text"
-              placeholder="Search by name, subject, or keyword..."
+              placeholder="Rechercher par nom, matière ou mot-clé..."
               class="block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
               @keyup.enter="applyFilters"
             />
@@ -42,14 +42,14 @@
         
         <!-- Subject Filter -->
         <div class="w-full md:w-64">
-          <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+          <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Matière</label>
           <div class="relative">
             <select
               id="subject"
               v-model="selectedSubject"
               class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
             >
-              <option value="">All Subjects</option>
+              <option value="">Toutes les matières</option>
               <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{ subject.name }}</option>
             </select>
             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -62,17 +62,17 @@
         
         <!-- Rating Filter -->
         <div class="w-full md:w-64">
-          <label for="rating" class="block text-sm font-medium text-gray-700 mb-1">Minimum Rating</label>
+          <label for="rating" class="block text-sm font-medium text-gray-700 mb-1">Note minimum</label>
           <div class="relative">
             <select
               id="rating"
               v-model="minRating"
               class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
             >
-              <option value="0">Any Rating</option>
-              <option value="3">3+ Stars</option>
-              <option value="4">4+ Stars</option>
-              <option value="5">5 Stars</option>
+              <option value="0">Toutes les notes</option>
+              <option value="3">3+ Étoiles</option>
+              <option value="4">4+ Étoiles</option>
+              <option value="5">5 Étoiles</option>
             </select>
             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -84,14 +84,14 @@
         
         <!-- Price Filter -->
         <div class="w-full md:w-64">
-          <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
+          <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Gamme de prix</label>
           <div class="relative">
             <select
               id="price"
               v-model="priceRange"
               class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
             >
-              <option value="">Any Price</option>
+              <option value="">Tous les prix</option>
               <option value="low">$25-$40</option>
               <option value="medium">$40-$60</option>
               <option value="high">$60+</option>
@@ -114,7 +114,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
           </svg>
-          {{ showAdvancedFilters ? 'Hide advanced filters' : 'Show advanced filters' }}
+          {{ showAdvancedFilters ? 'Masquer les filtres avancés' : 'Afficher les filtres avancés' }}
         </button>
         
         <button 
@@ -125,7 +125,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
-          Clear all filters
+          Effacer tous les filtres
         </button>
       </div>
       
@@ -134,11 +134,11 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <!-- Availability -->
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Availability</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Disponibilité</label>
             <div class="space-y-2">
               <label class="inline-flex items-center cursor-pointer">
                 <input type="checkbox" v-model="availabilityFilters.weekdays" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                <span class="ml-2 text-sm text-gray-700">Weekdays</span>
+                <span class="ml-2 text-sm text-gray-700">Jours de semaine</span>
               </label>
               <label class="inline-flex items-center ml-4 cursor-pointer">
                 <input type="checkbox" v-model="availabilityFilters.weekends" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
@@ -146,24 +146,24 @@
               </label>
               <label class="inline-flex items-center ml-4 cursor-pointer">
                 <input type="checkbox" v-model="availabilityFilters.evenings" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                <span class="ml-2 text-sm text-gray-700">Evenings</span>
+                <span class="ml-2 text-sm text-gray-700">Soirées</span>
               </label>
             </div>
           </div>
           
-          <!-- Experience -->
+          <!-- Expérience -->
           <div>
-            <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Experience</label>
+            <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Expérience</label>
             <div class="relative">
               <select
                 id="experience"
                 v-model="experienceLevel"
                 class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
               >
-                <option value="">Any Experience</option>
-                <option value="beginner">1-3 years</option>
-                <option value="intermediate">4-7 years</option>
-                <option value="expert">8+ years</option>
+                <option value="">Toutes expériences</option>
+                <option value="beginner">1-3 ans</option>
+                <option value="intermediate">4-7 ans</option>
+                <option value="expert">8+ ans</option>
               </select>
               <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -175,20 +175,20 @@
           
           <!-- Language -->
           <div>
-            <label for="language" class="block text-sm font-medium text-gray-700 mb-2">Language</label>
+            <label for="language" class="block text-sm font-medium text-gray-700 mb-2">Langue</label>
             <div class="relative">
               <select
                 id="language"
                 v-model="language"
                 class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
               >
-                <option value="">Any Language</option>
-                <option value="english">English</option>
-                <option value="spanish">Spanish</option>
-                <option value="french">French</option>
+                <option value="">Toutes langues</option>
+                <option value="english">Anglais</option>
+                <option value="spanish">Espagnol</option>
+                <option value="french">Français</option>
                 <option value="mandarin">Mandarin</option>
-                <option value="german">German</option>
-                <option value="japanese">Japanese</option>
+                <option value="german">Allemand</option>
+                <option value="japanese">Japonais</option>
               </select>
               <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -203,7 +203,7 @@
       <!-- Active Filters -->
       <div v-if="hasActiveFilters" class="flex flex-wrap gap-2 animate-fade-in">
         <div v-if="searchQuery" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-          Search: {{ searchQuery }}
+          Recherche : {{ searchQuery }}
           <button @click="searchQuery = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -211,7 +211,7 @@
           </button>
         </div>
         <div v-if="selectedSubject" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-          Subject: {{ getSubjectName(selectedSubject) }}
+          Matière : {{ getSubjectName(selectedSubject) }}
           <button @click="selectedSubject = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -219,7 +219,7 @@
           </button>
         </div>
         <div v-if="minRating > 0" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-          Rating: {{ minRating }}+ Stars
+          Note : {{ minRating }}+ Stars
           <button @click="minRating = 0" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -227,7 +227,7 @@
           </button>
         </div>
         <div v-if="priceRange" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-          Price: {{ getPriceRangeLabel() }}
+          Prix : {{ getPriceRangeLabel() }}
           <button @click="priceRange = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -235,7 +235,7 @@
           </button>
         </div>
         <div v-if="experienceLevel" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-          Experience: {{ getExperienceLevelLabel() }}
+          Expérience : {{ getExpérienceLevelLabel() }}
           <button @click="experienceLevel = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -243,7 +243,7 @@
           </button>
         </div>
         <div v-if="language" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-          Language: {{ language.charAt(0).toUpperCase() + language.slice(1) }}
+          Langue : {{ language.charAt(0).toUpperCase() + language.slice(1) }}
           <button @click="language = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -251,7 +251,7 @@
           </button>
         </div>
         <div v-if="hasAvailabilityFilters" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-          Availability: {{ getAvailabilityLabel() }}
+          Disponibilité : {{ getAvailabilityLabel() }}
           <button @click="clearAvailabilityFilters" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -264,20 +264,20 @@
     <!-- Results count and sorting options -->
     <div v-if="!loading && filteredTeachers.length > 0" class="flex flex-col sm:flex-row items-center justify-between mb-6 animate-fade-in-up">
       <p class="text-gray-600 mb-3 sm:mb-0">
-        Found <span class="font-semibold text-gray-900">{{ filteredTeachers.length }}</span> teachers matching your criteria
+        <span class="font-semibold text-gray-900">{{ filteredTeachers.length }}</span> enseignants trouvés correspondant à vos critères
       </p>
       
       <div class="flex items-center space-x-2">
-        <span class="text-sm text-gray-700">Sort by:</span>
+        <span class="text-sm text-gray-700">Trier par :</span>
         <select
           v-model="sortOption"
           class="text-sm border border-gray-300 rounded-md py-1.5 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
         >
-          <option value="relevance">Relevance</option>
-          <option value="rating">Highest Rating</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-          <option value="experience">Most Experienced</option>
+          <option value="relevance">Pertinence</option>
+          <option value="rating">Meilleure note</option>
+          <option value="price-asc">Prix : Croissant</option>
+          <option value="price-desc">Prix : Décroissant</option>
+          <option value="experience">Plus expérimenté</option>
         </select>
         
         <!-- View toggle -->
@@ -315,7 +315,7 @@
         <div></div>
         <div></div>
       </div>
-      <p class="mt-6 text-gray-500">Finding the best teachers for you...</p>
+      <p class="mt-6 text-gray-500">Recherche des meilleurs enseignants pour vous...</p>
     </div>
     
     <!-- Empty results state -->
@@ -325,8 +325,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
-      <h3 class="text-xl font-bold text-gray-900 mb-2">No teachers found</h3>
-      <p class="text-gray-600 mb-8">We couldn't find any teachers matching your current search criteria. Try adjusting your filters or starting a new search.</p>
+      <h3 class="text-xl font-bold text-gray-900 mb-2">Aucun enseignant trouvé</h3>
+      <p class="text-gray-600 mb-8">Nous n'avons trouvé aucun enseignant correspondant à vos critères de recherche. Essayez d'ajuster vos filtres ou de commencer une nouvelle recherche.</p>
       <button 
         @click="clearFilters" 
         class="inline-flex items-center px-5 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 transform hover:translate-y-[-2px] shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -334,7 +334,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
         </svg>
-        Clear all filters
+        Effacer tous les filtres
       </button>
     </div>
     
@@ -350,7 +350,7 @@
         <div class="relative">
           <!-- Available now indicator -->
           <div v-if="teacher.isAvailableNow" class="absolute top-4 right-4 bg-green-500 text-white text-xs px-2.5 py-0.5 rounded-full font-medium animate-pulse">
-            Available Now
+            Disponible maintenant
           </div>
           
           <div class="p-6">
@@ -392,7 +392,7 @@
             
             <!-- Subjects taught -->
             <div class="mt-4">
-              <h3 class="text-sm font-medium text-gray-900 mb-2">Subjects</h3>
+              <h3 class="text-sm font-medium text-gray-900 mb-2">Matières</h3>
               <div class="flex flex-wrap gap-2">
                 <span 
                   v-for="subject in teacher.subjects.slice(0, 3)" 
@@ -410,13 +410,13 @@
               </div>
             </div>
             
-            <!-- Experience and other info -->
+            <!-- Expérience and other info -->
             <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-500">
               <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                {{ getTeacherExperience(teacher) }} Experience
+                {{ getTeacherExpérience(teacher) }} Expérience
               </div>
               <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -452,7 +452,7 @@
                   :to="`/teachers/${teacher.id}`" 
                   class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 shadow-sm"
                 >
-                  View Profile
+                  Voir le profil
                 </NuxtLink>
               </div>
             </div>
@@ -485,7 +485,7 @@
             </div>
             
             <div v-if="teacher.isAvailableNow" class="mt-2 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">
-              Available Now
+              Disponible maintenant
             </div>
           </div>
           
@@ -529,7 +529,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                {{ getTeacherExperience(teacher) }} Experience
+                {{ getTeacherExpérience(teacher) }} Expérience
               </div>
               <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -558,7 +558,7 @@
                 :to="`/teachers/${teacher.id}`" 
                 class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 shadow-sm"
               >
-                View Profile
+                Voir le profil
               </NuxtLink>
               
               <button 
@@ -587,7 +587,7 @@
             currentPage === 1 ? 'cursor-not-allowed opacity-50' : 'hover:text-gray-700'
           ]"
         >
-          <span class="sr-only">Previous</span>
+          <span class="sr-only">Précédent</span>
           <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
           </svg>
@@ -615,7 +615,7 @@
             currentPage === totalPages ? 'cursor-not-allowed opacity-50' : 'hover:text-gray-700'
           ]"
         >
-          <span class="sr-only">Next</span>
+          <span class="sr-only">Suivant</span>
           <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
           </svg>
@@ -628,8 +628,22 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
+import { useTeachers } from '~/composables/useTeachers';
 
 const router = useRouter();
+
+// Utiliser le composable useTeachers
+const {
+  teachers: teachersData,
+  filteredTeachers: filteredTeachersData,
+  loading: teachersLoading,
+  filters: teachersFilters,
+  subjects: teachersSubjects,
+  fetchTeachers,
+  fetchSubjects,
+  applyFilters: applyTeachersFilters,
+  clearFilters: clearTeachersFilters
+} = useTeachers();
 
 // State
 const searchQuery = ref('');
@@ -784,7 +798,7 @@ const totalPages = computed(() => {
 });
 
 // Methods
-const clearFilters = () => {
+const clearFilters = async () => {
   searchQuery.value = '';
   selectedSubject.value = '';
   minRating.value = 0;
@@ -793,6 +807,10 @@ const clearFilters = () => {
   experienceLevel.value = '';
   clearAvailabilityFilters();
   currentPage.value = 1;
+  
+  // Utiliser le composable pour réinitialiser les filtres
+  await clearTeachersFilters();
+  teachers.value = teachersData.value;
 };
 
 const clearAvailabilityFilters = () => {
@@ -813,23 +831,23 @@ const getPriceRangeLabel = () => {
   return '';
 };
 
-const getExperienceLevelLabel = () => {
-  if (experienceLevel.value === 'beginner') return '1-3 years';
-  if (experienceLevel.value === 'intermediate') return '4-7 years';
-  if (experienceLevel.value === 'expert') return '8+ years';
+const getExpérienceLevelLabel = () => {
+  if (experienceLevel.value === 'beginner') return '1-3 ans';
+  if (experienceLevel.value === 'intermediate') return '4-7 ans';
+  if (experienceLevel.value === 'expert') return '8+ ans';
   return '';
 };
 
 const getAvailabilityLabel = () => {
   const labels = [];
-  if (availabilityFilters.value.weekdays) labels.push('Weekdays');
+  if (availabilityFilters.value.weekdays) labels.push('Jours de semaine');
   if (availabilityFilters.value.weekends) labels.push('Weekends');
-  if (availabilityFilters.value.evenings) labels.push('Evenings');
+  if (availabilityFilters.value.evenings) labels.push('Soirées');
   return labels.join(', ');
 };
 
-const getTeacherExperience = (teacher) => {
-  return `${teacher.experience || 5}+ years`;
+const getTeacherExpérience = (teacher) => {
+  return `${teacher.experience || 5}+ ans`;
 };
 
 const getTeacherSessions = (teacher) => {
@@ -840,355 +858,43 @@ const getTeacherLanguage = (teacher) => {
   if (teacher.languages && teacher.languages.length > 0) {
     return teacher.languages.map(l => l.charAt(0).toUpperCase() + l.slice(1)).join(', ');
   }
-  return 'English';
+  return 'Anglais';
 };
 
-const applyFilters = () => {
+const applyFilters = async () => {
   console.log('Applying filters...');
   currentPage.value = 1;
+  
+  // Synchroniser les filtres et appliquer
+  syncFilters();
+  await applyTeachersFilters();
+  teachers.value = teachersData.value;
 };
 
 const messageTeacher = (teacherId) => {
   router.push(`/messages?teacher=${teacherId}`);
 };
 
-const fetchSubjects = async () => {
+// Utiliser le composable pour récupérer les sujets
+const fetchSubjectsLocal = async () => {
   try {
-    // In a real app, this would be an API call
-    // For now, we'll simulate it
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    subjects.value = [
-      { id: 'math', name: 'Mathematics' },
-      { id: 'phys', name: 'Physics' },
-      { id: 'chem', name: 'Chemistry' },
-      { id: 'bio', name: 'Biology' },
-      { id: 'cs', name: 'Computer Science' },
-      { id: 'eng', name: 'English' },
-      { id: 'hist', name: 'History' },
-      { id: 'geog', name: 'Geography' },
-      { id: 'econ', name: 'Economics' },
-      { id: 'psych', name: 'Psychology' },
-      { id: 'art', name: 'Art' },
-      { id: 'music', name: 'Music' }
-    ];
+    const fetchedSubjects = await fetchSubjects();
+    subjects.value = fetchedSubjects || teachersSubjects.value;
   } catch (error) {
     console.error('Error fetching subjects:', error);
     subjects.value = [];
   }
 };
 
-const fetchTeachers = async () => {
+// Utiliser le composable pour récupérer les enseignants
+const fetchTeachersLocal = async () => {
   loading.value = true;
   
   try {
-    // In a real app, this would be an API call
-    // For now, we'll simulate it
-    await new Promise(resolve => setTimeout(resolve, 1200));
-    
-    teachers.value = [
-      {
-        id: '1',
-        firstName: 'John',
-        lastName: 'Smith',
-        email: 'john.smith@example.com',
-        bio: 'I am a dedicated mathematics teacher with over 10 years of experience. I specialize in calculus, algebra, and statistics. My approach to teaching is student-centered, focusing on building strong foundations and problem-solving skills.',
-        subjects: [
-          { id: 'math', name: 'Mathematics' },
-          { id: 'calc', name: 'Calculus' },
-          { id: 'alg', name: 'Algebra' }
-        ],
-        averageRating: 4.8,
-        reviewCount: 32,
-        avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-        hourlyRate: 50,
-        isAvailableNow: true,
-        experience: 10,
-        languages: ['english', 'spanish'],
-        sessionsCompleted: 124,
-        availability: [
-          { dayOfWeek: 1, startTime: '09:00:00', endTime: '17:00:00' },
-          { dayOfWeek: 3, startTime: '09:00:00', endTime: '17:00:00' },
-          { dayOfWeek: 5, startTime: '13:00:00', endTime: '18:00:00' }
-        ]
-      },
-      {
-        id: '2',
-        firstName: 'Sarah',
-        lastName: 'Johnson',
-        email: 'sarah.johnson@example.com',
-        bio: 'Physics teacher specializing in mechanics and electromagnetism. I have a PhD in Physics and have been teaching for 7 years. I believe in making complex concepts intuitive and relatable through real-world examples.',
-        subjects: [
-          { id: 'phys', name: 'Physics' },
-          { id: 'mech', name: 'Mechanics' },
-          { id: 'elec', name: 'Electromagnetism' }
-        ],
-        averageRating: 4.9,
-        reviewCount: 27,
-        avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-        hourlyRate: 55,
-        isAvailableNow: false,
-        experience: 7,
-        languages: ['english', 'french'],
-        sessionsCompleted: 89,
-        availability: [
-          { dayOfWeek: 2, startTime: '10:00:00', endTime: '18:00:00' },
-          { dayOfWeek: 4, startTime: '10:00:00', endTime: '18:00:00' },
-          { dayOfWeek: 6, startTime: '12:00:00', endTime: '16:00:00' }
-        ]
-      },
-      {
-        id: '3',
-        firstName: 'Michael',
-        lastName: 'Brown',
-        email: 'michael.brown@example.com',
-        bio: 'Computer Science teacher with expertise in programming, algorithms, and data structures. I have a background in software development and have been teaching for 5 years. I focus on practical skills that prepare students for real-world challenges.',
-        subjects: [
-          { id: 'cs', name: 'Computer Science' },
-          { id: 'prog', name: 'Programming' },
-          { id: 'algo', name: 'Algorithms' },
-          { id: 'data', name: 'Data Structures' }
-        ],
-        averageRating: 4.7,
-        reviewCount: 19,
-        avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
-        hourlyRate: 60,
-        isAvailableNow: true,
-        experience: 5,
-        languages: ['english', 'german'],
-        sessionsCompleted: 67,
-        availability: [
-          { dayOfWeek: 1, startTime: '13:00:00', endTime: '20:00:00' },
-          { dayOfWeek: 3, startTime: '13:00:00', endTime: '20:00:00' },
-          { dayOfWeek: 5, startTime: '13:00:00', endTime: '20:00:00' }
-        ]
-      },
-      {
-        id: '4',
-        firstName: 'Emily',
-        lastName: 'Davis',
-        email: 'emily.davis@example.com',
-        bio: 'Chemistry teacher specializing in organic chemistry and biochemistry. I have a Masters in Chemistry and 8 years of teaching experience. My goal is to make chemistry accessible and interesting for all students.',
-        subjects: [
-          { id: 'chem', name: 'Chemistry' },
-          { id: 'org', name: 'Organic Chemistry' },
-          { id: 'bio', name: 'Biochemistry' }
-        ],
-        averageRating: 4.6,
-        reviewCount: 24,
-        avatar: 'https://randomuser.me/api/portraits/women/17.jpg',
-        hourlyRate: 45,
-        isAvailableNow: false,
-        experience: 8,
-        languages: ['english'],
-        sessionsCompleted: 103,
-        availability: [
-          { dayOfWeek: 2, startTime: '09:00:00', endTime: '15:00:00' },
-          { dayOfWeek: 4, startTime: '09:00:00', endTime: '15:00:00' },
-          { dayOfWeek: 0, startTime: '10:00:00', endTime: '14:00:00' }
-        ]
-      },
-      {
-        id: '5',
-        firstName: 'Robert',
-        lastName: 'Wilson',
-        email: 'robert.wilson@example.com',
-        bio: 'English teacher with a focus on literature, writing, and grammar. I have a background in journalism and have been teaching for 12 years. I help students develop their critical thinking and communication skills through analyzing and creating texts.',
-        subjects: [
-          { id: 'eng', name: 'English' },
-          { id: 'lit', name: 'Literature' },
-          { id: 'writ', name: 'Writing' }
-        ],
-        averageRating: 4.5,
-        reviewCount: 31,
-        avatar: 'https://randomuser.me/api/portraits/men/67.jpg',
-        hourlyRate: 40,
-        isAvailableNow: true,
-        experience: 12,
-        languages: ['english', 'spanish'],
-        sessionsCompleted: 156,
-        availability: [
-          { dayOfWeek: 1, startTime: '10:00:00', endTime: '16:00:00' },
-          { dayOfWeek: 3, startTime: '10:00:00', endTime: '16:00:00' },
-          { dayOfWeek: 5, startTime: '10:00:00', endTime: '16:00:00' }
-        ]
-      },
-      {
-        id: '6',
-        firstName: 'Jennifer',
-        lastName: 'Lee',
-        email: 'jennifer.lee@example.com',
-        bio: 'Biology teacher specializing in genetics, ecology, and human biology. I have a PhD in Biology and have been teaching for 6 years. I use interactive methods and visual aids to make complex biological concepts easier to understand.',
-        subjects: [
-          { id: 'bio', name: 'Biology' },
-          { id: 'gen', name: 'Genetics' },
-          { id: 'eco', name: 'Ecology' }
-        ],
-        averageRating: 4.9,
-        reviewCount: 18,
-        avatar: 'https://randomuser.me/api/portraits/women/63.jpg',
-        hourlyRate: 55,
-        isAvailableNow: false,
-        experience: 6,
-        languages: ['english', 'mandarin'],
-        sessionsCompleted: 72,
-        availability: [
-          { dayOfWeek: 2, startTime: '13:00:00', endTime: '19:00:00' },
-          { dayOfWeek: 4, startTime: '13:00:00', endTime: '19:00:00' },
-          { dayOfWeek: 6, startTime: '10:00:00', endTime: '15:00:00' }
-        ]
-      },
-      {
-        id: '7',
-        firstName: 'David',
-        lastName: 'Taylor',
-        email: 'david.taylor@example.com',
-        bio: 'History teacher with expertise in world history, European history, and historical analysis. I have a Masters in History and have been teaching for 9 years. I help students understand historical contexts and develop critical thinking about historical events.',
-        subjects: [
-          { id: 'hist', name: 'History' },
-          { id: 'world', name: 'World History' },
-          { id: 'euro', name: 'European History' }
-        ],
-        averageRating: 4.7,
-        reviewCount: 23,
-        avatar: 'https://randomuser.me/api/portraits/men/52.jpg',
-        hourlyRate: 45,
-        isAvailableNow: true,
-        experience: 9,
-        languages: ['english', 'french'],
-        sessionsCompleted: 112,
-        availability: [
-          { dayOfWeek: 1, startTime: '09:00:00', endTime: '15:00:00' },
-          { dayOfWeek: 3, startTime: '09:00:00', endTime: '15:00:00' },
-          { dayOfWeek: 5, startTime: '09:00:00', endTime: '15:00:00' }
-        ]
-      },
-      {
-        id: '8',
-        firstName: 'Lisa',
-        lastName: 'Miller',
-        email: 'lisa.miller@example.com',
-        bio: 'Economics teacher with a background in finance and business. I have a Masters in Economics and 7 years of teaching experience. I focus on making economic theories relevant through real-world applications and current events.',
-        subjects: [
-          { id: 'econ', name: 'Economics' },
-          { id: 'fin', name: 'Finance' },
-          { id: 'bus', name: 'Business Studies' }
-        ],
-        averageRating: 4.8,
-        reviewCount: 21,
-        avatar: 'https://randomuser.me/api/portraits/women/28.jpg',
-        hourlyRate: 60,
-        isAvailableNow: false,
-        experience: 7,
-        languages: ['english'],
-        sessionsCompleted: 85,
-        availability: [
-          { dayOfWeek: 2, startTime: '10:00:00', endTime: '18:00:00' },
-          { dayOfWeek: 4, startTime: '10:00:00', endTime: '18:00:00' },
-          { dayOfWeek: 0, startTime: '12:00:00', endTime: '16:00:00' }
-        ]
-      },
-      {
-        id: '9',
-        firstName: 'James',
-        lastName: 'Anderson',
-        email: 'james.anderson@example.com',
-        bio: 'Geography teacher specializing in physical geography, human geography, and GIS. I have a PhD in Geography and have been teaching for 11 years. I use maps, data visualization, and field studies to bring geographical concepts to life.',
-        subjects: [
-          { id: 'geog', name: 'Geography' },
-          { id: 'phys', name: 'Physical Geography' },
-          { id: 'hum', name: 'Human Geography' }
-        ],
-        averageRating: 4.6,
-        reviewCount: 19,
-        avatar: 'https://randomuser.me/api/portraits/men/42.jpg',
-        hourlyRate: 50,
-        isAvailableNow: true,
-        experience: 11,
-        languages: ['english', 'german'],
-        sessionsCompleted: 127,
-        availability: [
-          { dayOfWeek: 1, startTime: '12:00:00', endTime: '20:00:00' },
-          { dayOfWeek: 3, startTime: '12:00:00', endTime: '20:00:00' },
-          { dayOfWeek: 6, startTime: '09:00:00', endTime: '15:00:00' }
-        ]
-      },
-      {
-        id: '10',
-        firstName: 'Michelle',
-        lastName: 'Thomas',
-        email: 'michelle.thomas@example.com',
-        bio: 'Psychology teacher with expertise in cognitive psychology, developmental psychology, and research methods. I have a Masters in Psychology and have been teaching for 8 years. I help students understand human behavior through theory and practical examples.',
-        subjects: [
-          { id: 'psych', name: 'Psychology' },
-          { id: 'cog', name: 'Cognitive Psychology' },
-          { id: 'dev', name: 'Developmental Psychology' }
-        ],
-        averageRating: 4.9,
-        reviewCount: 25,
-        avatar: 'https://randomuser.me/api/portraits/women/36.jpg',
-        hourlyRate: 55,
-        isAvailableNow: false,
-        experience: 8,
-        languages: ['english', 'french'],
-        sessionsCompleted: 96,
-        availability: [
-          { dayOfWeek: 2, startTime: '09:00:00', endTime: '17:00:00' },
-          { dayOfWeek: 4, startTime: '09:00:00', endTime: '17:00:00' },
-          { dayOfWeek: 0, startTime: '10:00:00', endTime: '14:00:00' }
-        ]
-      },
-      {
-        id: '11',
-        firstName: 'Richard',
-        lastName: 'Clark',
-        email: 'richard.clark@example.com',
-        bio: 'Art teacher specializing in drawing, painting, and art history. I have a BFA in Fine Arts and have been teaching for a decade. I help students develop their artistic skills and express their creativity while understanding the context and theory behind art.',
-        subjects: [
-          { id: 'art', name: 'Art' },
-          { id: 'draw', name: 'Drawing' },
-          { id: 'paint', name: 'Painting' }
-        ],
-        averageRating: 4.7,
-        reviewCount: 22,
-        avatar: 'https://randomuser.me/api/portraits/men/91.jpg',
-        hourlyRate: 45,
-        isAvailableNow: true,
-        experience: 10,
-        languages: ['english', 'italian'],
-        sessionsCompleted: 118,
-        availability: [
-          { dayOfWeek: 2, startTime: '13:00:00', endTime: '19:00:00' },
-          { dayOfWeek: 4, startTime: '13:00:00', endTime: '19:00:00' },
-          { dayOfWeek: 6, startTime: '10:00:00', endTime: '16:00:00' }
-        ]
-      },
-      {
-        id: '12',
-        firstName: 'Patricia',
-        lastName: 'Walker',
-        email: 'patricia.walker@example.com',
-        bio: 'Music teacher with expertise in piano, music theory, and composition. I have a Masters in Music and have been teaching for 15 years. I help students develop their musical skills while fostering a deep appreciation for different musical genres and traditions.',
-        subjects: [
-          { id: 'music', name: 'Music' },
-          { id: 'piano', name: 'Piano' },
-          { id: 'theory', name: 'Music Theory' }
-        ],
-        averageRating: 4.8,
-        reviewCount: 30,
-        avatar: 'https://randomuser.me/api/portraits/women/76.jpg',
-        hourlyRate: 50,
-        isAvailableNow: false,
-        experience: 15,
-        languages: ['english', 'spanish'],
-        sessionsCompleted: 172,
-        availability: [
-          { dayOfWeek: 1, startTime: '14:00:00', endTime: '20:00:00' },
-          { dayOfWeek: 3, startTime: '14:00:00', endTime: '20:00:00' },
-          { dayOfWeek: 5, startTime: '14:00:00', endTime: '20:00:00' }
-        ]
-      }
-    ];
+    // Synchroniser les filtres avant de récupérer les enseignants
+    syncFilters();
+    await fetchTeachers();
+    teachers.value = teachersData.value;
   } catch (error) {
     console.error('Error fetching teachers:', error);
     teachers.value = [];
@@ -1202,9 +908,39 @@ watch([searchQuery, selectedSubject, minRating, priceRange, language, experience
   currentPage.value = 1;
 });
 
+// Synchroniser les filtres locaux avec le composable
+const syncFilters = () => {
+  teachersFilters.query = searchQuery.value;
+  teachersFilters.subject = selectedSubject.value;
+  teachersFilters.minRating = minRating.value;
+  teachersFilters.priceRange = priceRange.value;
+  teachersFilters.language = language.value;
+  teachersFilters.experienceLevel = experienceLevel.value;
+  teachersFilters.availability.weekdays = availabilityFilters.value.weekdays;
+  teachersFilters.availability.weekends = availabilityFilters.value.weekends;
+  teachersFilters.availability.evenings = availabilityFilters.value.evenings;
+};
+
+// Observer les changements dans les données du composable
+watch(teachersData, (newTeachers) => {
+  teachers.value = newTeachers;
+});
+
+// Observer les changements dans les filtres locaux
+watch([searchQuery, selectedSubject, minRating, priceRange, language, experienceLevel, availabilityFilters], () => {
+  syncFilters();
+  currentPage.value = 1;
+});
+
 // Lifecycle
 onMounted(async () => {
+  loading.value = true;
   await Promise.all([fetchSubjects(), fetchTeachers()]);
+  
+  // Mettre à jour les données locales avec celles du composable
+  teachers.value = teachersData.value;
+  subjects.value = teachersSubjects.value;
+  loading.value = false;
 });
 </script>
 
@@ -1306,7 +1042,7 @@ onMounted(async () => {
   animation: pop-in 0.3s ease-out forwards;
 }
 
-/* Pulse animation for "Available Now" badge */
+/* Pulse animation for "Disponible maintenant" badge */
 @keyframes pulse {
   0% {
     opacity: 0.6;

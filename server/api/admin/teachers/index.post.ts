@@ -1,18 +1,16 @@
-import { defineEventHandler, readBody, createError } from 'h3'
 import { PrismaClient } from '@prisma/client'
-import { verifyToken, extractTokenFromHeader } from '~/server/utils/jwt'
-import { createUser } from '~/server/utils/auth'
+import { extractTokenFromHeader, verifyToken } from '../../../utils/jwt'
 
 const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
   try {
-    // Get user from token
-    const authHeader = event.node.req.headers.authorization
+    // Vérifier l'authentification
+    const authHeader = getHeader(event, 'authorization')
     const token = extractTokenFromHeader(authHeader)
     
     if (!token) {
-      throw createError({
+      return createError({
         statusCode: 401,
         message: 'Unauthorized'
       })
@@ -20,106 +18,179 @@ export default defineEventHandler(async (event) => {
     
     const user = verifyToken(token)
     
-    // Only admins can create teacher accounts
+    // Vérifier que l'utilisateur est un administrateur
     if (user.role !== 'admin') {
-      throw createError({
+      return createError({
         statusCode: 403,
-        message: 'Only administrators can create teacher accounts'
+        message: 'Forbidden: Admin access required'
       })
     }
     
-    // Get teacher data from request body
-    const { firstName, lastName, email, password, bio, subjects } = await readBody(event)
+    // Récupérer les données du corps de la requête
+    const body = await readBody(event)
+    const { action, teacherId, data } = body
     
-    if (!firstName || !lastName || !email || !password) {
-      throw createError({
+    if (!action || !teacherId) {
+      return createError({
         statusCode: 400,
-        message: 'First name, last name, email, and password are required'
+        message: 'action and teacherId are required'
       })
     }
     
-    // Check if email is already in use
-    const existingUser = await prisma.user.findUnique({
-      where: { email }
+    // Vérifier que l'enseignant existe
+    const teacherExists = await prisma.user.findUnique({
+      where: {
+        id: teacherId,
+        role: 'teacher'
+      }
     })
     
-    if (existingUser) {
-      throw createError({
-        statusCode: 409,
-        message: 'Email is already in use'
+    if (!teacherExists) {
+      return createError({
+        statusCode: 404,
+        message: 'Teacher not found'
       })
     }
     
-    // Create teacher account
-    const teacher = await createUser({
-      firstName,
-      lastName,
-      email,
-      password,
-      role: 'teacher'
-    })
+    let result
     
-    // Update teacher with bio if provided
-    if (bio) {
-      await prisma.user.update({
-        where: { id: teacher.id },
-        data: { bio }
-      })
-    }
-    
-    // Add subjects if provided
-    if (subjects && Array.isArray(subjects) && subjects.length > 0) {
-      // Create any new subjects that don't exist
-      for (const subjectName of subjects) {
-        // Check if subject exists
-        let subject = await prisma.subject.findFirst({
-          where: { name: subjectName }
+    // Effectuer l'action demandée
+    switch (action) {
+      case 'approve':
+        // Approuver un enseignant
+        result = await prisma.user.update({
+          where: {
+            id: teacherId
+          },
+          data: {
+            status: 'active',
+            verifiedAt: new Date()
+          }
         })
         
-        // Create subject if it doesn't exist
-        if (!subject) {
-          subject = await prisma.subject.create({
-            data: { name: subjectName }
+        // Envoyer une notification à l'enseignant
+        await prisma.notification.create({
+          data: {
+            userId: teacherId,
+            type: 'account_approved',
+            message: 'Votre compte enseignant a été approuvé.',
+            read: false
+          }
+        })
+        
+        break
+        
+      case 'reject':
+        // Rejeter un enseignant
+        result = await prisma.user.update({
+          where: {
+            id: teacherId
+          },
+          data: {
+            status: 'rejected',
+            rejectedAt: new Date(),
+            rejectionReason: data?.reason || null
+          }
+        })
+        
+        // Envoyer une notification à l'enseignant
+        await prisma.notification.create({
+          data: {
+            userId: teacherId,
+            type: 'account_rejected',
+            message: 'Votre compte enseignant a été rejeté.',
+            metadata: {
+              reason: data?.reason || 'Aucune raison spécifiée'
+            },
+            read: false
+          }
+        })
+        
+        break
+        
+      case 'suspend':
+        // Suspendre un enseignant
+        result = await prisma.user.update({
+          where: {
+            id: teacherId
+          },
+          data: {
+            status: 'suspended',
+            suspendedAt: new Date(),
+            suspensionReason: data?.reason || null
+          }
+        })
+        
+        // Envoyer une notification à l'enseignant
+        await prisma.notification.create({
+          data: {
+            userId: teacherId,
+            type: 'account_suspended',
+            message: 'Votre compte enseignant a été suspendu.',
+            metadata: {
+              reason: data?.reason || 'Aucune raison spécifiée'
+            },
+            read: false
+          }
+        })
+        
+        break
+        
+      case 'update':
+        // Mettre à jour les informations d'un enseignant
+        if (!data) {
+          return createError({
+            statusCode: 400,
+            message: 'data is required for update action'
           })
         }
         
-        // Connect subject to teacher
-        await prisma.user.update({
-          where: { id: teacher.id },
-          data: {
-            subjects: {
-              connect: { id: subject.id }
-            }
+        // Filtrer les champs autorisés à la mise à jour
+        const allowedFields = ['bio', 'hourlyRate', 'availability', 'subjectIds']
+        const updateData: any = {}
+        
+        allowedFields.forEach(field => {
+          if (data[field] !== undefined) {
+            updateData[field] = data[field]
           }
         })
-      }
+        
+        result = await prisma.user.update({
+          where: {
+            id: teacherId
+          },
+          data: updateData
+        })
+        
+        // Envoyer une notification à l'enseignant
+        await prisma.notification.create({
+          data: {
+            userId: teacherId,
+            type: 'profile_updated',
+            message: 'Votre profil a été mis à jour par un administrateur.',
+            read: false
+          }
+        })
+        
+        break
+        
+      default:
+        return createError({
+          statusCode: 400,
+          message: `Unknown action: ${action}`
+        })
     }
     
-    // Get the updated teacher with subjects
-    const updatedTeacher = await prisma.user.findUnique({
-      where: { id: teacher.id },
-      select: {
-        id: true,
-        firstName: true,
-        lastName: true,
-        email: true,
-        bio: true,
-        role: true,
-        subjects: {
-          select: {
-            id: true,
-            name: true
-          }
-        }
-      }
-    })
+    return {
+      success: true,
+      teacher: result
+    }
     
-    return updatedTeacher
-  } catch (error) {
-    console.error('Error creating teacher account:', error)
-    throw createError({
+  } catch (error: any) {
+    console.error('Error managing teacher:', error)
+    return createError({
       statusCode: 500,
-      message: 'Failed to create teacher account'
+      message: error.message || 'Could not perform the requested action'
     })
   }
 })

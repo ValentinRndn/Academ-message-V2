@@ -36,6 +36,7 @@ export function verifyToken(token: string): TokenPayload {
   try {
     return jwt.verify(token, JWT_SECRET) as TokenPayload
   } catch (error) {
+    console.error('JWT verification error:', error)
     throw new Error('Invalid token')
   }
 }
@@ -49,4 +50,18 @@ export function extractTokenFromHeader(authHeader: string | undefined): string |
   }
   
   return authHeader.substring(7) // Remove 'Bearer ' prefix
+}
+
+/**
+ * Check if a token is valid without throwing an error
+ */
+export function isValidToken(token: string | null): boolean {
+  if (!token) return false
+  
+  try {
+    jwt.verify(token, JWT_SECRET)
+    return true
+  } catch (error) {
+    return false
+  }
 }

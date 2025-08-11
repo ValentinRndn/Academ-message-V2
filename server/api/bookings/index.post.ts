@@ -1,45 +1,16 @@
-import { defineEventHandler, readBody, createError } from 'h3'
 import { PrismaClient } from '@prisma/client'
-import { verifyToken, extractTokenFromHeader } from '~/server/utils/jwt'
-import Stripe from 'stripe'
+import { extractTokenFromHeader, verifyToken } from '../../utils/jwt'
 
 const prisma = new PrismaClient()
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_votreclédetest', {
-  apiVersion: '2025-02-24.acacia' as any
-})
-
-// Define types for better type safety
-interface User {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-}
-
-interface Booking {
-  id: string;
-  studentId: string;
-  teacherId: string;
-  availabilityId: string;
-  startTime: Date;
-  endTime: Date;
-  status: string;
-  paymentIntentId: string | null;
-  paymentStatus: string | null;
-  amount: number;
-  currency: string;
-  student: User;
-  teacher: User;
-}
 
 export default defineEventHandler(async (event) => {
   try {
-    // Get user from token
-    const authHeader = event.node.req.headers.authorization
+    // Vérifier l'authentification
+    const authHeader = getHeader(event, 'authorization')
     const token = extractTokenFromHeader(authHeader)
     
     if (!token) {
-      throw createError({
+      return createError({
         statusCode: 401,
         message: 'Unauthorized'
       })
@@ -47,152 +18,127 @@ export default defineEventHandler(async (event) => {
     
     const user = verifyToken(token)
     
-    // Get booking data from request body
-    const { teacherId, availabilityId, startTime, endTime } = await readBody(event)
+    // Récupérer les données du corps de la requête
+    const body = await readBody(event)
+    const { teacherId, availabilityId, startTime, endTime, notes } = body
     
-    if (!teacherId || !availabilityId || !startTime || !endTime) {
-      throw createError({
+    // Validation des données
+    if (!teacherId || !startTime || !endTime) {
+      return createError({
         statusCode: 400,
-        message: 'All booking details are required'
+        message: 'teacherId, startTime, and endTime are required'
       })
     }
     
-    // Check if teacher exists
+    // Vérifier si l'enseignant existe
     const teacher = await prisma.user.findUnique({
-      where: { 
+      where: {
         id: teacherId,
         role: 'teacher'
       }
     })
     
     if (!teacher) {
-      throw createError({
+      return createError({
         statusCode: 404,
         message: 'Teacher not found'
       })
     }
     
-    // Check if availability exists and belongs to the teacher
-    const availability = await prisma.availability.findUnique({
-      where: {
-        id: availabilityId,
-        teacherId
-      }
-    })
-    
-    if (!availability) {
-      throw createError({
-        statusCode: 404,
-        message: 'Availability slot not found'
-      })
-    }
-    
-    // Check if the time slot is already booked
-    const startTimeDate = new Date(startTime);
-    const endTimeDate = new Date(endTime);
-    
-    const existingBooking = await prisma.booking.findFirst({
+    // Vérifier si le créneau est disponible
+    const bookingExists = await prisma.booking.findFirst({
       where: {
         teacherId,
-        availabilityId,
+        status: { in: ['pending', 'confirmed'] },
         OR: [
           {
-            // New booking starts during an existing booking
-            AND: [
-              { startTime: { lte: startTimeDate } },
-              { endTime: { gt: startTimeDate } }
-            ]
+            // Vérifie si une réservation existante chevauche le début du nouveau créneau
+            startTime: { lte: new Date(startTime) },
+            endTime: { gt: new Date(startTime) }
           },
           {
-            // New booking ends during an existing booking
-            AND: [
-              { startTime: { lt: endTimeDate } },
-              { endTime: { gte: endTimeDate } }
-            ]
-          },
-          {
-            // New booking completely contains an existing booking
-            AND: [
-              { startTime: { gte: startTimeDate } },
-              { endTime: { lte: endTimeDate } }
-            ]
+            // Vérifie si une réservation existante chevauche la fin du nouveau créneau
+            startTime: { lt: new Date(endTime) },
+            endTime: { gte: new Date(endTime) }
           }
         ]
       }
     })
     
-    if (existingBooking) {
-      throw createError({
+    if (bookingExists) {
+      return createError({
         statusCode: 409,
         message: 'This time slot is already booked'
       })
     }
     
-    // Calculate booking amount (e.g., $50 per hour)
-    const hourlyRate = 50 // In a real app, this would come from the teacher's profile
-    const durationMs = endTimeDate.getTime() - startTimeDate.getTime()
-    const durationHours = durationMs / (1000 * 60 * 60)
-    const amount = Math.round(hourlyRate * durationHours * 100) // Convert to cents for Stripe
+    // Si un ID de disponibilité est fourni, vérifier qu'il existe et qu'il appartient bien à l'enseignant
+    if (availabilityId) {
+      const availability = await prisma.availability.findUnique({
+        where: {
+          id: availabilityId,
+          teacherId
+        }
+      })
+      
+      if (!availability) {
+        return createError({
+          statusCode: 404,
+          message: 'Availability not found'
+        })
+      }
+    }
     
-    // Create a payment intent with Stripe
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency: 'usd',
-      automatic_payment_methods: {
-        enabled: true
-      },
-      metadata: {
-        studentId: user.id,
+    // Calculer le prix de la session (pour l'instant, un prix fixe)
+    const startDateTime = new Date(startTime)
+    const endDateTime = new Date(endTime)
+    const durationInMinutes = (endDateTime.getTime() - startDateTime.getTime()) / (1000 * 60)
+    
+    // Prix arbitraire de 1.5€ par minute
+    const pricePerMinute = 1.5
+    const amount = durationInMinutes * pricePerMinute
+    
+    // Créer la réservation
+    const booking = await prisma.booking.create({
+      data: {
         teacherId,
+        studentId: user.id,
         availabilityId,
-        startTime: startTime.toString(),
-        endTime: endTime.toString()
+        startTime: startDateTime,
+        endTime: endDateTime,
+        status: 'pending',
+        paymentStatus: 'pending',
+        amount,
+        currency: 'EUR',
+        notes
       }
     })
     
-    // Create booking in database
-    const booking = await prisma.booking.create({
+    // Créer une notification pour l'enseignant
+    await prisma.notification.create({
       data: {
-        studentId: user.id,
-        teacherId,
-        availabilityId,
-        startTime: startTimeDate,
-        endTime: endTimeDate,
-        status: 'pending',
-        paymentIntentId: paymentIntent.id,
-        paymentStatus: 'pending',
-        amount: amount / 100, // Store in dollars
-        currency: 'USD'
-      },
-      include: {
-        student: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true
-          }
+        userId: teacherId,
+        type: 'new_booking',
+        message: `Nouvelle demande de réservation de ${user.firstName} ${user.lastName}`,
+        metadata: {
+          bookingId: booking.id,
+          studentId: user.id,
+          studentName: `${user.firstName} ${user.lastName}`
         },
-        teacher: {
-          select: {
-            id: true,
-            firstName: true,
-            lastName: true,
-            email: true
-          }
-        }
+        read: false
       }
     })
     
     return {
-      booking,
-      clientSecret: paymentIntent.client_secret
+      success: true,
+      booking
     }
-  } catch (error) {
+    
+  } catch (error: any) {
     console.error('Error creating booking:', error)
-    throw createError({
+    return createError({
       statusCode: 500,
-      message: 'Failed to create booking'
+      message: error.message || 'Could not create booking'
     })
   }
 })
