@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      allowedHosts: ['https://524e7f1539c3.ngrok-free.app']
+      
     }
   },
   appConfig: {
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
         ]
       },
       cors: {
-        origin: ['https://524e7f1539c3.ngrok-free.app', 'http://localhost:3000', 'http://localhost:3001'],
+        origin: ['http://localhost:3001'],
         credentials: true
       }
     }
@@ -55,28 +55,11 @@ export default defineNuxtConfig({
         target: 'es2019' // Cible plus compatible
       }
     },
-    devProxy: {
-      '/api': {
-        target: 'https://524e7f1539c3.ngrok-free.app',
-        changeOrigin: true
-      }
-    },
+
     routeRules: {
       '/api/**': {
-        cors: true,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-          'Access-Control-Allow-Credentials': 'true',
-          'Access-Control-Max-Age': '86400'
-        }
+        cors: true
       }
-    },
-    cors: {
-      origin: '*',
-      credentials: true,
-      methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE']
     }
   }
 })

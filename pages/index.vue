@@ -646,7 +646,22 @@
 </template>
 
 <script setup>
-// Home page logic can go here
+// Récupérer l'état d'authentification
+const { user, isAuthenticated } = useAuth();
+
+// Redirection automatique pour les utilisateurs connectés
+watchEffect(() => {
+  if (process.client && isAuthenticated.value && user.value) {
+    // Rediriger vers le dashboard
+    navigateTo('/dashboard');
+  }
+});
+
+// Configuration de la page
+definePageMeta({
+  title: 'Academ Message - Plateforme d\'apprentissage',
+  layout: 'default'
+});
 </script>
 
 <style scoped>
