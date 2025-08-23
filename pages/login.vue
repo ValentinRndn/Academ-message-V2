@@ -145,6 +145,8 @@
 </template>
 
 <script setup>
+import { useAuth } from '~/composables/useAuth';
+
 const router = useRouter();
 const route = useRoute();
 const { login: authLogin, loading, error } = useAuth();

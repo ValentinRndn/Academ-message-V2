@@ -31,20 +31,11 @@ export const useBookings = () => {
       loading.value = true
       error.value = null
 
-      const response = await fetch('/api/bookings', {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+      const data = await $fetch('/api/bookings', {
+        credentials: 'include'
       })
 
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Erreur lors de la récupération des réservations')
-      }
-
-      const data = await response.json()
       bookings.value = data.bookings
-
       return data.bookings
     } catch (err: any) {
       console.error('Error fetching bookings:', err)
@@ -61,21 +52,11 @@ export const useBookings = () => {
       loading.value = true
       error.value = null
 
-      const response = await fetch('/api/bookings', {
+      const data = await $fetch('/api/bookings/create', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(bookingData)
+        body: bookingData,
+        credentials: 'include'
       })
-
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Erreur lors de la création de la réservation')
-      }
-
-      const data = await response.json()
       
       // Rafraîchir la liste des réservations
       await fetchBookings()

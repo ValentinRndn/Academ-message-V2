@@ -5,8 +5,13 @@
 
 export default defineEventHandler(async (event) => {
   try {
-    // Si nous avions des jetons d'actualisation ou des sessions côté serveur,
-    // nous les invaliderions ici
+    // Supprimer le cookie d'authentification
+    deleteCookie(event, 'auth_token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      path: '/'
+    });
     
     return {
       success: true,

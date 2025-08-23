@@ -37,27 +37,17 @@ export const usePayment = () => {
       loading.value = true
       error.value = null
       
-      const response = await fetch('/api/payments/create-intent', {
+      const data = await $fetch('/api/payments/create-intent', {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ bookingId })
+        body: { bookingId },
+        credentials: 'include'
       })
       
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Erreur lors de la création du paiement')
-      }
-      
-      const data = await response.json()
       clientSecret.value = data.clientSecret
-      
       return data.clientSecret
     } catch (err: any) {
       console.error('Error creating payment intent:', err)
-      error.value = err.message
+      error.value = err.data?.message || err.message || 'Erreur lors de la création du paiement'
       return null
     } finally {
       loading.value = false

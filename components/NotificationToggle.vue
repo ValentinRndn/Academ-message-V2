@@ -1,0 +1,211 @@
+<template>
+  <div class="notification-toggle">
+    <div v-if="!isSupported" class="text-sm text-gray-500">
+      Les notifications ne sont pas supportées par votre navigateur
+    </div>
+    
+    <div v-else-if="permission === 'default'" class="space-y-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-sm font-medium text-gray-900">Notifications push</h3>
+          <p class="text-sm text-gray-500">
+            Recevez des notifications pour vos cours, messages et rappels
+          </p>
+        </div>
+                 <button
+           @click="requestPermissionHandler"
+           :disabled="loading"
+          class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        >
+          <svg v-if="loading" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          {{ loading ? 'Activation...' : 'Activer' }}
+        </button>
+      </div>
+    </div>
+    
+    <div v-else-if="permission === 'granted'" class="space-y-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-sm font-medium text-gray-900">Notifications push</h3>
+          <p class="text-sm text-gray-500">
+            <span class="text-green-600">✓ Activées</span> - Vous recevrez des notifications
+          </p>
+        </div>
+        <button
+          @click="unsubscribe"
+          :disabled="loading"
+          class="px-4 py-2 bg-gray-200 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-300 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        >
+          <svg v-if="loading" class="animate-spin -ml-1 mr-2 h-4 w-4 text-gray-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          {{ loading ? 'Désactivation...' : 'Désactiver' }}
+        </button>
+      </div>
+      
+      <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-green-800">
+              Notifications activées
+            </h3>
+                              <div class="mt-2 text-sm text-green-700">
+                    <p>Vous recevrez des notifications pour :</p>
+                    <ul class="mt-1 list-disc list-inside space-y-1">
+                      <li>Nouvelles réservations de cours</li>
+                      <li>Confirmations et annulations</li>
+                      <li>Nouveaux messages</li>
+                      <li>Rappels de cours (1h avant)</li>
+                      <li>Nouveaux avis</li>
+                      <li>Paiements confirmés</li>
+                    </ul>
+                    
+                    <!-- Bouton de test -->
+                    <div class="mt-4">
+                      <button
+                        @click="testNotification"
+                        :disabled="testing"
+                        class="px-3 py-1.5 bg-green-600 text-white text-xs font-medium rounded hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      >
+                        <svg v-if="testing" class="animate-spin -ml-1 mr-1 h-3 w-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        {{ testing ? 'Envoi...' : 'Tester' }}
+                      </button>
+                    </div>
+                  </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div v-else-if="permission === 'denied'" class="space-y-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-sm font-medium text-gray-900">Notifications push</h3>
+          <p class="text-sm text-red-600">
+            Permission refusée - Activez les notifications dans les paramètres de votre navigateur
+          </p>
+        </div>
+      </div>
+      
+      <div class="bg-red-50 border border-red-200 rounded-lg p-3">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800">
+              Notifications désactivées
+            </h3>
+            <div class="mt-2 text-sm text-red-700">
+              <p>Pour activer les notifications :</p>
+              <ol class="mt-1 list-decimal list-inside space-y-1">
+                <li>Cliquez sur l'icône de cadenas dans la barre d'adresse</li>
+                <li>Autorisez les notifications pour ce site</li>
+                <li>Rechargez la page</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Message d'erreur -->
+    <div v-if="error" class="bg-red-50 border border-red-200 rounded-lg p-3">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+          </svg>
+        </div>
+        <div class="ml-3">
+          <h3 class="text-sm font-medium text-red-800">
+            Erreur
+          </h3>
+          <div class="mt-2 text-sm text-red-700">
+            <p>{{ error }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { onMounted } from 'vue'
+import { useNotifications } from '~/composables/useNotifications'
+
+const {
+  isSupported,
+  permission,
+  loading,
+  error,
+  checkSupport,
+  requestPermission,
+  unsubscribeFromPush
+} = useNotifications()
+
+const testing = ref(false)
+
+// Initialiser les notifications au montage du composant
+onMounted(() => {
+  checkSupport()
+})
+
+// Demander la permission
+const requestPermissionHandler = async () => {
+  const success = await requestPermission()
+  if (success) {
+    // Optionnel : afficher un message de succès
+    console.log('Notifications activées avec succès !')
+  }
+}
+
+// Se désabonner
+const unsubscribe = async () => {
+  const success = await unsubscribeFromPush()
+  if (success) {
+    // Optionnel : afficher un message de succès
+    console.log('Notifications désactivées avec succès !')
+  }
+}
+
+// Tester les notifications
+const testNotification = async () => {
+  try {
+    testing.value = true
+    
+    const response = await $fetch('/api/notifications/test', {
+      method: 'POST',
+      credentials: 'include'
+    })
+    
+    if (response.success) {
+      console.log('Notification de test envoyée avec succès !')
+    }
+  } catch (err) {
+    console.error('Erreur lors du test de notification:', err)
+  } finally {
+    testing.value = false
+  }
+}
+</script>
+
+<style scoped>
+.notification-toggle {
+  @apply w-full;
+}
+</style>

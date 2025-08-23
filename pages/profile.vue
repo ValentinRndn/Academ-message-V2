@@ -37,13 +37,11 @@
       <div class="container mx-auto px-8 -mt-16">
         <div class="flex flex-col sm:flex-row sm:items-end">
           <div class="relative group animate-fade-in">
-            <div class="w-32 h-32 rounded-full border-4 border-white shadow-xl overflow-hidden bg-indigo-100 flex items-center justify-center">
-              <img 
-                :src="profile.avatar || 'https://randomuser.me/api/portraits/men/32.jpg'" 
-                alt="Profile avatar" 
-                class="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110"
-              />
-            </div>
+            <Avatar
+              :avatar-url="profile.avatar"
+              :alt="profile.firstName + ' ' + profile.lastName"
+              size="2xl"
+            />
             
             <div v-if="isEditing" class="absolute bottom-1 right-1">
               <button 

@@ -2,14 +2,15 @@
 export default defineNuxtPlugin(async (nuxtApp) => {
   // Initialiser l'authentification côté client uniquement
   if (process.client) {
+    const { useAuth } = await import('~/composables/useAuth.js');
     const { initAuth } = useAuth();
-    await initAuth();
+    console.log('🔐 Initialisation de l\'authentification...');
+    const isAuth = await initAuth();
+    console.log('🔐 Résultat auth:', isAuth);
   }
   
-  // Ajouter un intercepteur pour ajouter le token d'authentification aux requêtes
+  // Ajouter un intercepteur pour les requêtes API
   nuxtApp.hook('app:created', () => {
-    const { token } = useAuth();
-    
     const originalFetch = globalThis.fetch;
     globalThis.fetch = async (resource, options = {}) => {
       // Cloner les options pour ne pas modifier l'objet original
@@ -17,13 +18,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       
       // Vérifier si la requête est vers notre API
       if (typeof resource === 'string' && resource.startsWith('/api')) {
-        // Ajouter le token d'authentification si disponible
-        if (token.value) {
-          customOptions.headers = {
-            ...customOptions.headers,
-            'Authorization': `Bearer ${token.value}`
-          };
-        }
+        // Ajouter les credentials pour envoyer les cookies
+        customOptions.credentials = 'include';
       }
       
       return originalFetch(resource, customOptions);

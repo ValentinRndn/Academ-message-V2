@@ -13,15 +13,32 @@ export default defineEventHandler(async (event) => {
     '/api/auth/me',
     '/api/auth/logout',
     '/api/auth/check-token',
+    '/api/teachers', // Liste publique des professeurs
+    '/api/subjects', // Liste publique des matières
+  ];
+
+  // Routes qui nécessitent une authentification (messages, profils, etc.)
+  const protectedRoutes = [
+    '/api/messages', // Toutes les routes de messages nécessitent une auth
+    '/api/teachers/my-profile', // Profil du professeur connecté
+  ];
+
+  // Routes publiques avec paramètres dynamiques
+  const publicRoutePatterns = [
+    /^\/api\/teachers\/[0-9a-fA-F]{24}$/, // /api/teachers/[objectId] - détail d'un professeur (public)
   ];
   
-  if (publicRoutes.includes(event.path)) {
+  // Vérifier si la route est publique
+  const isPublicRoute = publicRoutes.includes(event.path) || 
+                       publicRoutePatterns.some(pattern => pattern.test(event.path));
+  
+  if (isPublicRoute) {
     return;
   }
   
   // Vérifier le token pour les routes API
   if (event.path.startsWith('/api/')) {
-    const token = extractTokenFromHeader(event);
+    const token = getCookie(event, 'auth_token');
     
     if (!token) {
       return createError({

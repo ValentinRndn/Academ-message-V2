@@ -9,33 +9,50 @@ interface ConnectedUser {
 }
 
 export default function (httpServer: HttpServer) {
-  // Initialisation de Socket.io
-  const io = new SocketServer(httpServer, {
-    cors: {
-      origin: process.env.NODE_ENV === 'development' ? '*' : undefined,
-      methods: ['GET', 'POST']
-    }
-  })
+  console.log('🎯 Initialisation du serveur Socket.io...')
+  
+                // Initialisation de Socket.io
+              const io = new SocketServer(httpServer, {
+                cors: {
+                  origin: process.env.NODE_ENV === 'development' ? ['http://localhost:3000', 'http://localhost:3001'] : undefined,
+                  methods: ['GET', 'POST'],
+                  credentials: true // Important pour les cookies
+                }
+              })
+  
+  console.log('✅ Serveur Socket.io créé avec CORS pour http://localhost:3001')
 
   // Stocker les utilisateurs connectés
   const connectedUsers: ConnectedUser[] = []
 
-  // Middleware d'authentification
+  // Middleware d'authentification (basé sur les cookies)
   io.use((socket, next) => {
     try {
-      // Récupérer le token du client
-      const token = socket.handshake.auth.token
-      if (!token) {
-        return next(new Error('Authentication error'))
+      // Récupérer le token depuis les cookies
+      const cookies = socket.handshake.headers.cookie
+      if (!cookies) {
+        return next(new Error('Authentication error: No cookies'))
       }
+      
+      // Parser les cookies pour récupérer auth_token
+      const authTokenMatch = cookies.match(/auth_token=([^;]+)/)
+      if (!authTokenMatch) {
+        return next(new Error('Authentication error: No auth token'))
+      }
+      
+      const token = authTokenMatch[1]
       
       // Vérifier le token JWT
       const user = verifyToken(token)
+      if (!user) {
+        return next(new Error('Authentication error: Invalid token'))
+      }
       
-      // Stocker l'ID de l'utilisateur dans l'objet socket
+      // Stocker les informations de l'utilisateur dans l'objet socket
       socket.data.user = user
       return next()
     } catch (error) {
+      console.error('Socket.io auth error:', error)
       return next(new Error('Authentication error'))
     }
   })
@@ -59,36 +76,71 @@ export default function (httpServer: HttpServer) {
     // Événement pour envoyer un message
     socket.on('send_message', async (data) => {
       try {
-        const { receiverId, content } = data
+        const { receiverId, content, conversationId } = data
         const senderId = socket.data.user.id
         
-        // Créer le message dans la base de données (à implémenter)
-        // const message = await createMessage(senderId, receiverId, content)
+        console.log(`Message from ${senderId} to ${receiverId} in conversation ${conversationId}`)
         
-        // Envoyer le message au destinataire s'il est connecté
-        const receiverSocket = connectedUsers.find(
-          user => user.userId === receiverId
-        )
-        
-        if (receiverSocket) {
-          io.to(receiverSocket.socketId).emit('receive_message', {
+        // Envoyer le message à tous les participants de la conversation (sauf l'expéditeur)
+        if (conversationId) {
+          socket.to(`conversation_${conversationId}`).emit('receive_message', {
             senderId,
-            content
+            receiverId,
+            content,
+            conversationId,
+            timestamp: new Date().toISOString()
           })
+        } else {
+          // Fallback: envoyer directement au destinataire si pas de conversationId
+          const receiverSocket = connectedUsers.find(
+            user => user.userId === receiverId
+          )
+          
+          if (receiverSocket) {
+            io.to(receiverSocket.socketId).emit('receive_message', {
+              senderId,
+              receiverId,
+              content,
+              conversationId,
+              timestamp: new Date().toISOString()
+            })
+          }
         }
         
-        // Confirmer l'envoi au sender
-        socket.emit('message_sent', {
-          success: true,
-          // messageId: message.id
-        })
+        console.log(`Message sent successfully`)
       } catch (error) {
         console.error('Error sending message:', error)
-        socket.emit('message_sent', {
-          success: false,
-          error: 'Failed to send message'
-        })
       }
+    })
+
+    // Événement pour rejoindre une conversation
+    socket.on('join_conversation', (conversationId) => {
+      socket.join(`conversation_${conversationId}`)
+      console.log(`User ${socket.data.user.id} joined conversation ${conversationId}`)
+    })
+
+    // Événement pour quitter une conversation
+    socket.on('leave_conversation', (conversationId) => {
+      socket.leave(`conversation_${conversationId}`)
+      console.log(`User ${socket.data.user.id} left conversation ${conversationId}`)
+    })
+
+    // Événement pour indiquer qu'un utilisateur est en train de taper
+    socket.on('typing_start', (data) => {
+      const { conversationId } = data
+      socket.to(`conversation_${conversationId}`).emit('user_typing', {
+        userId: socket.data.user.id,
+        isTyping: true
+      })
+    })
+
+    // Événement pour indiquer qu'un utilisateur a arrêté de taper
+    socket.on('typing_stop', (data) => {
+      const { conversationId } = data
+      socket.to(`conversation_${conversationId}`).emit('user_typing', {
+        userId: socket.data.user.id,
+        isTyping: false
+      })
     })
     
     // Événement pour marquer un message comme lu

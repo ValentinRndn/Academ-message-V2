@@ -1,6 +1,6 @@
 // API pour récupérer les informations de l'utilisateur connecté
 import { findUserById } from '../../models/userModel.js';
-import { verifyToken, extractTokenFromHeader } from '../../utils/jwt.js';
+import { verifyToken } from '../../utils/jwt.js';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -24,8 +24,8 @@ export default defineEventHandler(async (event) => {
       };
     }
     
-    // Sinon, vérifier le token manuellement
-    const token = extractTokenFromHeader(event);
+    // Sinon, vérifier le token du cookie
+    const token = getCookie(event, 'auth_token');
     
     if (!token) {
       return {

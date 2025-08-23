@@ -72,27 +72,21 @@ export const useTeachers = () => {
       loading.value = true
       error.value = null
       
-      // Construire l'URL avec les paramètres de requête
-      let url = '/api/teachers?'
+      // Construire les paramètres de requête
+      const params: any = {};
       
       if (filters.query) {
-        url += `query=${encodeURIComponent(filters.query)}&`
+        params.search = filters.query;
       }
       
       if (filters.subject) {
-        url += `subject=${encodeURIComponent(filters.subject)}&`
+        params.subject = filters.subject;
       }
       
-      url += `page=${filters.page}&limit=${filters.limit}`
+      params.page = filters.page.toString();
+      params.limit = filters.limit.toString();
       
-      const response = await fetch(url)
-      
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Erreur lors de la récupération des enseignants')
-      }
-      
-      const data: TeachersResponse = await response.json()
+      const data: TeachersResponse = await $fetch('/api/teachers', { query: params })
       
       teachers.value = data.teachers
       totalCount.value = data.totalCount
@@ -120,18 +114,11 @@ export const useTeachers = () => {
       loading.value = true
       error.value = null
       
-      const response = await fetch(`/api/teachers/${id}`)
-      
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Erreur lors de la récupération de l\'enseignant')
-      }
-      
-      const data = await response.json()
+      const data = await $fetch(`/api/teachers/${id}`)
       return data
     } catch (err: any) {
       console.error(`Error fetching teacher ${id}:`, err)
-      error.value = err.message
+      error.value = err.data?.message || err.message
       return null
     } finally {
       loading.value = false
@@ -141,14 +128,7 @@ export const useTeachers = () => {
   // Récupérer tous les sujets
   const fetchSubjects = async () => {
     try {
-      const response = await fetch('/api/subjects')
-      
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.message || 'Erreur lors de la récupération des sujets')
-      }
-      
-      const data = await response.json()
+      const data = await $fetch('/api/subjects')
       subjects.value = data.subjects
       return data.subjects
     } catch (err: any) {

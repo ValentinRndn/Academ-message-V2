@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'academ-secure-jwt-secret-2025';
 const JWT_EXPIRES_IN = '7d'; // 7 jours
+const ONE_DAY_MS = 24 * 60 * 60 * 1000; // 1 jour en millisecondes
+const ALERT_THRESHOLD_MS = 6 * ONE_DAY_MS; // Alerte quand il reste 1 jour
 
 /**
  * Génère un token JWT
@@ -53,9 +55,10 @@ export function checkTokenExpiry(token) {
     const oneDayInMs = 24 * 60 * 60 * 1000;
     
     return {
-      isExpiring: timeLeft < oneDayInMs && timeLeft > 0,
+      isExpiring: timeLeft < ALERT_THRESHOLD_MS && timeLeft > 0,
       timeLeft: timeLeft,
-      isExpired: timeLeft <= 0
+      isExpired: timeLeft <= 0,
+      expiresAt: decoded.exp * 1000 // Convertir en millisecondes
     };
   } catch (error) {
     return { isExpiring: false, timeLeft: 0, isExpired: true };

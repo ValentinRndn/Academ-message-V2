@@ -56,12 +56,13 @@ export const useNavigation = () => {
       icon: 'chat',
       description: 'Conversations'
     },
-    {
-      name: 'Planning',
-      to: '/teacher/schedule',
-      icon: 'calendar',
-      description: 'Mes cours'
-    },
+         {
+       name: 'Planning',
+       to: '/teacher/schedule',
+       icon: 'calendar',
+       description: 'Mon planning'
+     },
+     
     {
       name: 'Disponibilités',
       to: '/teacher/availability',
@@ -115,14 +116,8 @@ export const useNavigation = () => {
       description: 'Réservations'
     },
     {
-      name: 'Matières',
-      to: '/subjects',
-      icon: 'book',
-      description: 'Parcourir'
-    },
-    {
       name: 'Profil',
-      to: '/profile',
+      to: '/student/profile',
       icon: 'user',
       description: 'Mon compte'
     }
@@ -152,7 +147,7 @@ export const useNavigation = () => {
           { name: 'Dashboard', to: '/dashboard', icon: 'home' },
           { name: 'Enseignants', to: '/teachers', icon: 'users' },
           { name: 'Messages', to: '/messages', icon: 'chat' },
-          { name: 'Profil', to: '/profile', icon: 'user' }
+          { name: 'Profil', to: '/student/profile', icon: 'user' }
         ];
       default:
         return [];

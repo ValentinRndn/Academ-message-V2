@@ -1,0 +1,4 @@
+# Clés VAPID générées le 2025-08-23T23:16:50.717Z
+# Ajoutez ces lignes à votre fichier .env
+VAPID_PUBLIC_KEY=BHzkjHDmBhqVM6D69zxxPyZfLCdgrIKddRTGTEuQ6SOTzGVsmy4Vs1CRJKjNSQh-VjNh3VgmaQNgKP3mKwuUJ0o
+VAPID_PRIVATE_KEY=aMFxuT6vi-EKG7MnEX4HV5arwyUyKm5ldV-iDSosO1c

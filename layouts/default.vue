@@ -6,6 +6,26 @@
         <NuxtLink to="/">
           <h1 class="text-xl font-bold text-gray-800">Academ Message</h1>
         </NuxtLink>
+        
+        <!-- Actions du header -->
+        <div class="flex items-center space-x-4">
+          <!-- Notifications -->
+          <NotificationsPanel />
+          
+          <!-- Profil utilisateur -->
+          <div class="flex items-center space-x-3">
+            <div class="text-sm text-gray-600">
+              {{ user?.firstName }} {{ user?.lastName }}
+            </div>
+            <button @click="handleLogout" 
+              class="p-2 text-gray-400 hover:text-red-600 transition-colors" 
+              title="Se déconnecter">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+            </button>
+          </div>
+        </div>
       </div>
     </header>
     
@@ -17,8 +37,14 @@
     <!-- Alerte de session expirée -->
     <SessionExpiredAlert />
     
+    <!-- Alerte d'expiration de session -->
+    <SessionExpirationAlert ref="sessionExpirationAlert" />
+    
     <!-- Notifications globales -->
     <NotificationsContainer />
+    
+    <!-- Toast notifications -->
+    <ToastContainer />
 
     <!-- Sidebar en bas pour mobile, sur le côté pour desktop -->
     <div v-if="$route.path !== '/' && $route.path !== '/login' && $route.path !== '/register'" 
@@ -68,57 +94,21 @@
         <nav>
           <NuxtLink v-for="item in navigation" :key="item.to" 
             :to="item.to" 
-            class="flex items-center p-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-md mx-2 transition-colors"
+            class="flex items-center p-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-md mx-2 transition-colors relative"
             :class="{ 'text-indigo-600 bg-indigo-50': $route.path === item.to }">
             <component :is="getNavIcon(item.icon)" class="h-5 w-5 mr-3" 
               :class="$route.path === item.to ? 'text-indigo-600' : 'text-gray-500'" />
             {{ item.name }}
+            <!-- Notification bubble for Messages -->
+            <div v-if="item.to === '/messages' && unreadCount && unreadCount > 0" 
+                 class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+              {{ unreadCount > 99 ? '99+' : unreadCount }}
+            </div>
           </NuxtLink>
         </nav>
       </div>
 
-      <!-- Recent conversations section - visible uniquement sur desktop -->
-      <div class="hidden md:block">
-        <div class="p-2 mt-3 font-medium text-xs text-gray-500 uppercase tracking-wider">Conversations récentes</div>
-        <div class="overflow-y-auto flex-grow conversations-container">
-          <div class="space-y-1">
-            <!-- Conversation items -->
-            <div class="flex items-center p-3 text-gray-700 hover:bg-indigo-50 cursor-pointer rounded-md mx-2">
-              <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 mr-3">AP</div>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between">
-                  <span class="text-sm font-medium truncate">Alice Professeur</span>
-                  <span class="text-xs text-gray-500">11:15</span>
-                </div>
-                <p class="text-xs text-gray-500 truncate">Bonjour, je suis disponible...</p>
-              </div>
-            </div>
 
-            <div class="flex items-center p-3 text-gray-700 hover:bg-indigo-50 cursor-pointer rounded-md mx-2">
-              <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 mr-3">KD</div>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between">
-                  <span class="text-sm font-medium truncate">Kevin Durant</span>
-                  <span class="text-xs text-gray-500">10:05</span>
-                </div>
-                <p class="text-xs text-gray-500 truncate">Pouvez-vous m'aider avec...</p>
-              </div>
-            </div>
-
-            <!-- Autres conversations -->
-            <div class="flex items-center p-3 text-gray-700 hover:bg-indigo-50 cursor-pointer rounded-md mx-2">
-              <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-3">MP</div>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center justify-between">
-                  <span class="text-sm font-medium truncate">Marie Professeur</span>
-                  <span class="text-xs text-gray-500">09:30</span>
-                </div>
-                <p class="text-xs text-gray-500 truncate">Pour le prochain cours...</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- Navigation mobile fixée en bas de l'écran -->
@@ -133,11 +123,16 @@
           
           <NuxtLink v-for="item in mobileNavigation" :key="item.to"
             :to="item.to" 
-            class="mobile-nav-item" 
+            class="mobile-nav-item relative" 
             :class="{ 'text-indigo-600': $route.path === item.to }"
             :style="{ width: `${100/mobileNavigation.length}%` }">
             <component :is="getNavIcon(item.icon)" class="h-6 w-6" />
             <span class="text-xs mt-1 font-medium">{{ item.name }}</span>
+            <!-- Notification bubble for Messages on mobile -->
+            <div v-if="item.to === '/messages' && unreadCount && unreadCount > 0" 
+                 class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-medium">
+              {{ unreadCount > 9 ? '9+' : unreadCount }}
+            </div>
           </NuxtLink>
         </div>
       </div>
@@ -146,12 +141,27 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, h } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const { navigation, mobileNavigation } = useNavigation()
 const { user, logout } = useAuth()
+const { unreadCount } = useMessagesV2()
+const sessionExpirationAlert = ref(null)
+
+// Écouter l'événement d'expiration de session
+onMounted(() => {
+  window.addEventListener('session-expiring', (event) => {
+    if (sessionExpirationAlert.value) {
+      sessionExpirationAlert.value.showAlert(event.detail.expiresAt);
+    }
+  });
+})
+
+onUnmounted(() => {
+  window.removeEventListener('session-expiring', () => {});
+})
 
 // Calculer la position de l'indicateur actif mobile
 const activeMobileTabPosition = computed(() => {
@@ -233,29 +243,7 @@ const getRoleLabel = (role) => {
   }
 }
 
-/* Personnalisation du scrollbar pour les conversations */
-.conversations-container {
-  scrollbar-width: thin;
-  scrollbar-color: #c7d2fe #f1f1f1;
-  max-height: calc(100vh - 350px); /* Limiter la hauteur pour permettre le scroll */
-}
 
-.conversations-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.conversations-container::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.conversations-container::-webkit-scrollbar-thumb {
-  background: #c7d2fe;
-  border-radius: 3px;
-}
-
-.conversations-container::-webkit-scrollbar-thumb:hover {
-  background: #818cf8;
-}
 
 /* Personnalisation du scrollbar pour le contenu principal */
 main::-webkit-scrollbar {

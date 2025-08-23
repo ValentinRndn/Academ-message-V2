@@ -357,15 +357,12 @@
             <div class="flex items-center">
               <!-- Teacher avatar -->
               <div class="relative">
-                <img 
-                  :src="teacher.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'" 
-                  :alt="`${teacher.firstName} ${teacher.lastName}`" 
-                  class="h-16 w-16 rounded-full object-cover border-2 border-white shadow-md"
+                <Avatar
+                  :avatar-url="teacher.avatar"
+                  :alt="`${teacher.firstName} ${teacher.lastName}`"
+                  size="lg"
+                  :online="teacher.isAvailableNow"
                 />
-                <div 
-                  class="absolute bottom-0 right-0 h-4 w-4 rounded-full border-2 border-white"
-                  :class="teacher.isAvailableNow ? 'bg-green-500' : 'bg-gray-300'"
-                ></div>
               </div>
               
               <!-- Teacher name and rating -->
@@ -449,7 +446,7 @@
                   </svg>
                 </button>
                 <NuxtLink 
-                  :to="`/teachers/${teacher.id}`" 
+                  :to="`/teachers/${teacher._id}`" 
                   class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 shadow-sm"
                 >
                   Voir le profil
@@ -473,15 +470,12 @@
           <!-- Avatar and availability -->
           <div class="md:w-1/6 flex flex-col items-center">
             <div class="relative">
-              <img 
-                :src="teacher.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'" 
-                :alt="`${teacher.firstName} ${teacher.lastName}`" 
-                class="h-24 w-24 rounded-full object-cover border-2 border-white shadow-md"
+              <Avatar
+                :avatar-url="teacher.avatar"
+                :alt="`${teacher.firstName} ${teacher.lastName}`"
+                size="xl"
+                :online="teacher.isAvailableNow"
               />
-              <div 
-                class="absolute bottom-0 right-0 h-4 w-4 rounded-full border-2 border-white"
-                :class="teacher.isAvailableNow ? 'bg-green-500' : 'bg-gray-300'"
-              ></div>
             </div>
             
             <div v-if="teacher.isAvailableNow" class="mt-2 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">
@@ -554,8 +548,8 @@
             </div>
             
             <div class="mt-4 flex flex-col space-y-2">
-              <NuxtLink 
-                :to="`/teachers/${teacher.id}`" 
+                              <NuxtLink 
+                :to="`/teachers/${teacher._id}`"  
                 class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 shadow-sm"
               >
                 Voir le profil

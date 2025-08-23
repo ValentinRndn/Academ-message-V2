@@ -303,15 +303,12 @@
                 <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10 relative">
-                      <img 
-                        :src="teacher.avatar || 'https://ui-avatars.com/api/?name=' + teacher.firstName + '+' + teacher.lastName + '&background=6366F1&color=fff'" 
+                      <Avatar
+                        :avatar-url="teacher.avatar"
                         :alt="`${teacher.firstName} ${teacher.lastName}`"
-                        class="h-10 w-10 rounded-full object-cover"
+                        size="md"
+                        :online="teacher.status !== 'inactive'"
                       />
-                      <div 
-                        class="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white"
-                        :class="teacher.status === 'inactive' ? 'bg-gray-300' : 'bg-green-400'"
-                      ></div>
                     </div>
                     <div class="ml-4">
                       <div class="text-sm font-semibold text-gray-900">

@@ -3,7 +3,7 @@ import { checkTokenExpiry, extractTokenFromHeader } from '../../utils/jwt.js';
 
 export default defineEventHandler(async (event) => {
   try {
-    const token = extractTokenFromHeader(event);
+    const token = getCookie(event, 'auth_token');
     
     if (!token) {
       return {

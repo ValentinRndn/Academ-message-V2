@@ -6,8 +6,14 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss'
   ],
   runtimeConfig: {
+    // Variables privées côté serveur uniquement
+    DATABASE_URL: process.env.DATABASE_URL,
+    JWT_SECRET: process.env.JWT_SECRET,
+    JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN,
+    vapidPrivateKey: process.env.VAPID_PRIVATE_KEY,
     public: {
-      
+      // Variables publiques accessibles côté client
+      vapidPublicKey: process.env.VAPID_PUBLIC_KEY,
     }
   },
   appConfig: {
@@ -16,6 +22,7 @@ export default defineNuxtConfig({
   // Configuration Vite pour résoudre le problème de chemin
   vite: {
     server: {
+      port: 3000,
       fs: {
         // Autoriser explicitement les chemins qui posent problème
         allow: [
@@ -29,17 +36,12 @@ export default defineNuxtConfig({
         ]
       },
       cors: {
-        origin: ['http://localhost:3001'],
+        origin: ['http://localhost:3000', 'http://localhost:3001'],
         credentials: true
       }
     }
   },
-  // Désactiver le PWA pour le moment pour simplifier le debugging
-  pwa: {
-    devOptions: {
-      enabled: false
-    }
-  },
+
   // Paramètres expérimentaux à ajuster
   experimental: {
     // Désactiver certaines fonctionnalités expérimentales qui pourraient causer des problèmes
@@ -60,6 +62,9 @@ export default defineNuxtConfig({
       '/api/**': {
         cors: true
       }
-    }
+    },
+
+    // Configuration du serveur
+    serverDir: './server'
   }
 })

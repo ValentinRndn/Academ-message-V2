@@ -2,6 +2,9 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "imports": {
+    "#config/*": "./config/*"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -9,9 +12,19 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "test-db": "node scripts/test-database.js",
-    "server": "node scripts/start-server.js"
+    "server": "node scripts/start-server.js",
+    "init-db": "node scripts/init-database.js",
+    "seed-teachers": "node scripts/seed-teachers.js",
+    "sync-users-teachers": "node scripts/sync-users-teachers.js",
+    "create-missing-users": "node scripts/create-missing-users.js",
+    "add-availability": "node scripts/add-default-availability.js",
+    "create-test-bookings": "node scripts/create-test-bookings.js",
+    "create-test-reviews": "node scripts/create-test-reviews.js",
+    "create-test-teacher-profiles": "node scripts/create-test-teacher-profile.js",
+    "create-test-student-bookings": "node scripts/create-test-student-bookings.js",
+    "create-test-student-profiles": "node scripts/create-test-student-profiles.js",
+    "cleanup-avatars": "node scripts/cleanup-avatars.js"
   },
-
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -19,12 +32,14 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
+    "mongoose": "^8.17.2",
     "nuxt": "^3.16.2",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",
     "stripe": "^17.7.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "web-push": "^3.6.6"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.13.2",
@@ -32,7 +47,6 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.14",
-    "@vite-pwa/nuxt": "^0.10.8",
     "autoprefixer": "^10.4.21",
     "nodemon": "^3.0.3",
     "postcss": "^8.5.3",
