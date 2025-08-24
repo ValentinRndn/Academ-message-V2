@@ -23,16 +23,12 @@
 </template>
 
 <script setup>
-// Middleware d'authentification
+// Middleware d'authentification et configuration de la page
 definePageMeta({
-  middleware: 'auth'
+  middleware: 'auth',
+  title: 'Tableau de bord'
 });
 
 // Récupérer l'utilisateur connecté
 const { user } = useAuth();
-
-// Configuration de la page
-definePageMeta({
-  title: 'Tableau de bord'
-});
 </script>
