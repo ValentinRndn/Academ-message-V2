@@ -69,12 +69,15 @@ export const useAuthStore = () => {
         
         // Notification de succès
         if (process.client) {
-          const { showSuccess } = useToast();
-          showSuccess(
-            'Connexion réussie !', 
-            `Bienvenue ${data.user.firstName} ${data.user.lastName}`,
-            3000
-          );
+          // Petit délai pour s'assurer que le ToastContainer est monté
+          setTimeout(() => {
+            const { showSuccess } = useToast();
+            showSuccess(
+              'Connexion réussie !', 
+              `Bienvenue ${data.user.firstName} ${data.user.lastName}`,
+              5000
+            );
+          }, 100);
         }
         
         // Démarrer la vérification de session

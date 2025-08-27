@@ -24,7 +24,9 @@
     "create-test-teacher-profiles": "node scripts/create-test-teacher-profile.js",
     "create-test-student-bookings": "node scripts/create-test-student-bookings.js",
     "create-test-student-profiles": "node scripts/create-test-student-profiles.js",
-    "cleanup-avatars": "node scripts/cleanup-avatars.js"
+    "cleanup-avatars": "node scripts/cleanup-avatars.js",
+    "create-test-subjects": "node scripts/create-test-subjects.js",
+    "check-env": "node scripts/check-env.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -34,6 +36,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
     "mongoose": "^8.17.2",
+    "nodemailer": "^6.10.1",
     "nuxt": "^3.16.2",
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.1",

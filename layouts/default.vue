@@ -2,29 +2,12 @@
   <div class="min-h-screen bg-gray-50 flex flex-col">
     <!-- Header pour les pages avec navigation -->
     <header v-if="$route.path !== '/' && $route.path !== '/login' && $route.path !== '/register'" class="bg-white border-b border-gray-200 shadow-sm flex-shrink-0">
-      <div class="px-4 py-3 flex justify-between items-center">
-        <NuxtLink to="/">
-          <h1 class="text-xl font-bold text-gray-800">Academ Message</h1>
-        </NuxtLink>
-        
+      <div class="px-4 py-3 flex justify-end items-center">        
         <!-- Actions du header -->
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center">
           <!-- Notifications -->
           <NotificationsPanel />
-          
-          <!-- Profil utilisateur -->
-          <div class="flex items-center space-x-3">
-            <div class="text-sm text-gray-600">
-              {{ user?.firstName }} {{ user?.lastName }}
-            </div>
-            <button @click="handleLogout" 
-              class="p-2 text-gray-400 hover:text-red-600 transition-colors" 
-              title="Se déconnecter">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-            </button>
-          </div>
+
         </div>
       </div>
     </header>
@@ -40,10 +23,7 @@
     <!-- Alerte d'expiration de session -->
     <SessionExpirationAlert ref="sessionExpirationAlert" />
     
-    <!-- Notifications globales -->
-    <NotificationsContainer />
-    
-    <!-- Toast notifications -->
+    <!-- Toast notifications (système principal) -->
     <ToastContainer />
 
     <!-- Sidebar en bas pour mobile, sur le côté pour desktop -->

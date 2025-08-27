@@ -326,6 +326,36 @@
         </button>
       </div>
       
+      <!-- Section Sécurité -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="bg-gray-50 px-8 py-6 border-b">
+          <h2 class="text-xl font-bold text-gray-900 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            Sécurité
+          </h2>
+        </div>
+        
+        <div class="p-8">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900">Mot de passe</h3>
+              <p class="text-gray-600 mt-1">Changez votre mot de passe pour sécuriser votre compte</p>
+            </div>
+            <button 
+              @click="showChangePasswordModal = true"
+              class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+              Changer le mot de passe
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Section Notifications -->
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div class="bg-gray-50 px-8 py-6 border-b">
@@ -342,6 +372,13 @@
         </div>
       </div>
 
+      <!-- Modal de changement de mot de passe -->
+      <ChangePasswordModal 
+        :is-open="showChangePasswordModal"
+        @close="showChangePasswordModal = false"
+        @success="handlePasswordChangeSuccess"
+      />
+
     </div>
   </div>
 </template>
@@ -350,6 +387,7 @@
 import { ref, onMounted } from 'vue'
 import AvatarUpload from '~/components/AvatarUpload.vue'
 import NotificationToggle from '~/components/NotificationToggle.vue'
+import ChangePasswordModal from '~/components/ChangePasswordModal.vue'
 
 // Middleware d'authentification
 definePageMeta({
@@ -365,6 +403,7 @@ const loading = ref(true);
 const error = ref(null);
 const stats = ref(null);
 const availableSubjects = ref([]);
+const showChangePasswordModal = ref(false);
 
 // Niveaux d'études disponibles
 const educationLevels = [
@@ -433,6 +472,11 @@ const handleAvatarUploadSuccess = (avatarUrl) => {
 const handleAvatarUploadError = (errorMessage) => {
   console.error('Erreur upload avatar:', errorMessage);
   // TODO: Afficher une notification d'erreur
+};
+
+const handlePasswordChangeSuccess = () => {
+  console.log('Mot de passe changé avec succès');
+  // Le modal se ferme automatiquement et la notification est affichée par le composant
 };
 
 // Charger les données

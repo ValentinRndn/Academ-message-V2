@@ -11,6 +11,15 @@ export default defineNuxtConfig({
     JWT_SECRET: process.env.JWT_SECRET,
     JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN,
     vapidPrivateKey: process.env.VAPID_PRIVATE_KEY,
+    
+    // Configuration SMTP
+    smtpHost: process.env.SMTP_HOST,
+    smtpPort: process.env.SMTP_PORT,
+    smtpUser: process.env.SMTP_USER,
+    smtpPass: process.env.SMTP_PASS,
+    smtpFrom: process.env.SMTP_FROM,
+    baseUrl: process.env.BASE_URL,
+    
     public: {
       // Variables publiques accessibles côté client
       vapidPublicKey: process.env.VAPID_PUBLIC_KEY,
