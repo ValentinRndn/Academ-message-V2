@@ -9,7 +9,7 @@ import { ObjectId } from 'mongodb';
  */
 export async function findUsers(filter = {}) {
   const db = await connectToMongoDB();
-  return db.collection('User').find(filter).toArray();
+  return db.collection('users').find(filter).toArray();
 }
 
 /**
@@ -20,7 +20,7 @@ export async function findUsers(filter = {}) {
 export async function findUserById(id) {
   const db = await connectToMongoDB();
   const objectId = typeof id === 'string' ? new ObjectId(id) : id;
-  return db.collection('User').findOne({ _id: objectId });
+  return db.collection('users').findOne({ _id: objectId });
 }
 
 /**
@@ -30,7 +30,7 @@ export async function findUserById(id) {
  */
 export async function findUserByEmail(email) {
   const db = await connectToMongoDB();
-  return db.collection('User').findOne({ email });
+  return db.collection('users').findOne({ email });
 }
 
 /**
@@ -42,7 +42,7 @@ export async function createUser(userData) {
   const db = await connectToMongoDB();
   userData.createdAt = new Date();
   userData.updatedAt = new Date();
-  const result = await db.collection('User').insertOne(userData);
+  const result = await db.collection('users').insertOne(userData);
   return { _id: result.insertedId, ...userData };
 }
 
@@ -57,7 +57,7 @@ export async function updateUser(id, updateData) {
   const objectId = typeof id === 'string' ? new ObjectId(id) : id;
   
   updateData.updatedAt = new Date();
-  const result = await db.collection('User').updateOne(
+  const result = await db.collection('users').updateOne(
     { _id: objectId },
     { $set: updateData }
   );
@@ -73,7 +73,7 @@ export async function updateUser(id, updateData) {
 export async function deleteUser(id) {
   const db = await connectToMongoDB();
   const objectId = typeof id === 'string' ? new ObjectId(id) : id;
-  return db.collection('User').deleteOne({ _id: objectId });
+  return db.collection('users').deleteOne({ _id: objectId });
 }
 
 /**

@@ -14,8 +14,10 @@ export async function connectToMongoDB() {
     return db;
   }
 
-  // Récupérer l'URL de connexion depuis les variables d'environnement
-  const url = process.env.DATABASE_URL || 'mongodb://localhost:27017/academ-message-db';
+  // Récupérer l'URL de connexion depuis la configuration Nuxt
+  const config = useRuntimeConfig();
+  const url = config.DATABASE_URL || process.env.DATABASE_URL || 'mongodb://localhost:27017/academ-message-db';
+  console.log('🔍 MongoDB URL utilisée:', url);
   
   try {
     if (!client) {
@@ -25,6 +27,7 @@ export async function connectToMongoDB() {
     }
     
     db = client.db();
+    console.log('🔍 Base de données connectée:', db.databaseName);
     return db;
   } catch (error) {
     console.error('Erreur de connexion à MongoDB:', error);
