@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
     const receiverObjectId = new ObjectId(receiverId);
 
     // Vérifier que le destinataire existe
-    const receiver = await db.collection('User').findOne({ _id: receiverObjectId });
+    const receiver = await db.collection('users').findOne({ _id: receiverObjectId });
     if (!receiver) {
       throw createError({
         statusCode: 404,
@@ -129,7 +129,7 @@ export default defineEventHandler(async (event) => {
     await conversation.updateLastMessage(newMessage._id);
 
     // Populer les informations du sender pour la réponse
-    const sender = await db.collection('User').findOne(
+    const sender = await db.collection('users').findOne(
       { _id: senderId },
       { projection: { password: 0 } }
     );

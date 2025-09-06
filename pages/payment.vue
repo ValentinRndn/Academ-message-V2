@@ -20,7 +20,7 @@
         </div>
         <h2 class="text-xl font-semibold text-gray-900 mb-2">Erreur</h2>
         <p class="text-gray-600 mb-6">{{ error }}</p>
-        <NuxtLink to="/teachers" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+        <NuxtLink to="/teachers" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">
           Retour aux professeurs
         </NuxtLink>
       </div>
@@ -34,8 +34,8 @@
             <div class="space-y-4">
               <!-- Professeur -->
               <div class="flex items-center">
-                <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
-                  <span class="text-indigo-600 font-medium text-lg">
+                <div class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+                  <span class="text-purple-600 font-medium text-lg">
                     {{ booking.teacherId?.firstName?.charAt(0) }}{{ booking.teacherId?.lastName?.charAt(0) }}
                   </span>
                 </div>
@@ -103,7 +103,7 @@
               <button
                 type="submit"
                 :disabled="paymentLoading || !clientSecret"
-                class="w-full bg-indigo-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
+                class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center justify-center"
               >
                 <svg v-if="paymentLoading" class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -139,14 +139,14 @@
               </div>
             </div>
 
-            <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+            <div class="mt-6 p-4 bg-purple-50 rounded-lg">
               <div class="flex items-start">
-                <svg class="h-5 w-5 text-blue-400 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="h-5 w-5 text-purple-400 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div>
-                  <p class="text-sm font-medium text-blue-900">Paiement sécurisé</p>
-                  <p class="text-xs text-blue-700 mt-1">Vos informations sont protégées par Stripe</p>
+                  <p class="text-sm font-medium text-purple-900">Paiement sécurisé</p>
+                  <p class="text-xs text-purple-700 mt-1">Vos informations sont protégées par Stripe</p>
                 </div>
               </div>
             </div>

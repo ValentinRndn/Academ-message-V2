@@ -27,7 +27,7 @@
       <div class="flex justify-end space-x-3">
         <button
           @click="closeSessionAlert"
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
+          class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
         >
           Se reconnecter
         </button>

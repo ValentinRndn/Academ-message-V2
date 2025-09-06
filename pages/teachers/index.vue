@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative">
+  <div class=" mx-auto px-4 sm:px-6 lg:px-8 py-10 relative">
     <!-- Background decorative elements -->
-    <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 rounded-full bg-indigo-100 opacity-20 blur-3xl"></div>
+    <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 rounded-full bg-purple-100 opacity-20 blur-3xl"></div>
     <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-purple-100 opacity-20 blur-3xl"></div>
     
     <!-- Header section with animation -->
@@ -27,7 +27,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Rechercher par nom, matière ou mot-clé..."
-              class="block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              class="block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
               @keyup.enter="applyFilters"
             />
             <div v-if="searchQuery" class="absolute inset-y-0 right-0 pr-3 flex items-center">
@@ -47,10 +47,10 @@
             <select
               id="subject"
               v-model="selectedSubject"
-              class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
             >
               <option value="">Toutes les matières</option>
-              <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{ subject.name }}</option>
+              <option v-for="subject in teachersSubjects" :key="subject.id" :value="subject.id">{{ subject.name }}</option>
             </select>
             <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,7 +67,7 @@
             <select
               id="rating"
               v-model="minRating"
-              class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
             >
               <option value="0">Toutes les notes</option>
               <option value="3">3+ Étoiles</option>
@@ -89,7 +89,7 @@
             <select
               id="price"
               v-model="priceRange"
-              class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+              class="block w-full pl-3 pr-10 py-3 border border-gray-300 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
             >
               <option value="">Tous les prix</option>
               <option value="low">$25-$40</option>
@@ -109,7 +109,7 @@
       <div class="flex items-center mb-4">
         <button 
           @click="showAdvancedFilters = !showAdvancedFilters" 
-          class="text-sm text-indigo-600 hover:text-indigo-800 font-medium flex items-center focus:outline-none transition-colors"
+          class="text-sm text-purple-600 hover:text-purple-800 font-medium flex items-center focus:outline-none transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -137,15 +137,15 @@
             <label class="block text-sm font-medium text-gray-700 mb-2">Disponibilité</label>
             <div class="space-y-2">
               <label class="inline-flex items-center cursor-pointer">
-                <input type="checkbox" v-model="availabilityFilters.weekdays" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <input type="checkbox" v-model="availabilityFilters.weekdays" class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
                 <span class="ml-2 text-sm text-gray-700">Jours de semaine</span>
               </label>
               <label class="inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" v-model="availabilityFilters.weekends" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <input type="checkbox" v-model="availabilityFilters.weekends" class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
                 <span class="ml-2 text-sm text-gray-700">Weekends</span>
               </label>
               <label class="inline-flex items-center ml-4 cursor-pointer">
-                <input type="checkbox" v-model="availabilityFilters.evenings" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                <input type="checkbox" v-model="availabilityFilters.evenings" class="rounded border-gray-300 text-purple-600 focus:ring-purple-500">
                 <span class="ml-2 text-sm text-gray-700">Soirées</span>
               </label>
             </div>
@@ -158,7 +158,7 @@
               <select
                 id="experience"
                 v-model="experienceLevel"
-                class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
               >
                 <option value="">Toutes expériences</option>
                 <option value="beginner">1-3 ans</option>
@@ -180,7 +180,7 @@
               <select
                 id="language"
                 v-model="language"
-                class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                class="block w-full pl-3 pr-10 py-2 border border-gray-300 rounded-md appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
               >
                 <option value="">Toutes langues</option>
                 <option value="english">Anglais</option>
@@ -202,57 +202,57 @@
       
       <!-- Active Filters -->
       <div v-if="hasActiveFilters" class="flex flex-wrap gap-2 animate-fade-in">
-        <div v-if="searchQuery" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+        <div v-if="searchQuery" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
           Recherche : {{ searchQuery }}
-          <button @click="searchQuery = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
+          <button @click="searchQuery = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div v-if="selectedSubject" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+        <div v-if="selectedSubject" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
           Matière : {{ getSubjectName(selectedSubject) }}
-          <button @click="selectedSubject = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
+          <button @click="selectedSubject = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div v-if="minRating > 0" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+        <div v-if="minRating > 0" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
           Note : {{ minRating }}+ Stars
-          <button @click="minRating = 0" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
+          <button @click="minRating = 0" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div v-if="priceRange" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+        <div v-if="priceRange" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
           Prix : {{ getPriceRangeLabel() }}
-          <button @click="priceRange = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
+          <button @click="priceRange = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div v-if="experienceLevel" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+        <div v-if="experienceLevel" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
           Expérience : {{ getExpérienceLevelLabel() }}
-          <button @click="experienceLevel = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
+          <button @click="experienceLevel = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div v-if="language" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+        <div v-if="language" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
           Langue : {{ language.charAt(0).toUpperCase() + language.slice(1) }}
-          <button @click="language = ''" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
+          <button @click="language = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div v-if="hasAvailabilityFilters" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+        <div v-if="hasAvailabilityFilters" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
           Disponibilité : {{ getAvailabilityLabel() }}
-          <button @click="clearAvailabilityFilters" class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors">
+          <button @click="clearAvailabilityFilters" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -271,7 +271,7 @@
         <span class="text-sm text-gray-700">Trier par :</span>
         <select
           v-model="sortOption"
-          class="text-sm border border-gray-300 rounded-md py-1.5 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+          class="text-sm border border-gray-300 rounded-md py-1.5 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
         >
           <option value="relevance">Pertinence</option>
           <option value="rating">Meilleure note</option>
@@ -286,7 +286,7 @@
             @click="viewMode = 'grid'" 
             :class="[
               'p-1.5 rounded transition-colors', 
-              viewMode === 'grid' ? 'bg-white text-indigo-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+              viewMode === 'grid' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'
             ]"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -297,7 +297,7 @@
             @click="viewMode = 'list'" 
             :class="[
               'p-1.5 rounded transition-colors', 
-              viewMode === 'list' ? 'bg-white text-indigo-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'
+              viewMode === 'list' ? 'bg-white text-purple-600 shadow-sm' : 'text-gray-500 hover:text-gray-700'
             ]"
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -309,7 +309,7 @@
     </div>
     
     <!-- Loading state with animation -->
-    <div v-if="loading" class="flex flex-col justify-center items-center py-20 animate-fade-in">
+          <div v-if="teachersLoading" class="flex flex-col justify-center items-center py-20 animate-fade-in">
       <div class="teacher-loader">
         <div></div>
         <div></div>
@@ -320,8 +320,8 @@
     
     <!-- Empty results state -->
     <div v-else-if="filteredTeachers.length === 0" class="bg-white shadow-lg rounded-xl p-10 text-center max-w-xl mx-auto animate-fade-in-up">
-      <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
@@ -329,7 +329,7 @@
       <p class="text-gray-600 mb-8">Nous n'avons trouvé aucun enseignant correspondant à vos critères de recherche. Essayez d'ajuster vos filtres ou de commencer une nouvelle recherche.</p>
       <button 
         @click="clearFilters" 
-        class="inline-flex items-center px-5 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 transform hover:translate-y-[-2px] shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        class="inline-flex items-center px-5 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-purple-600 hover:bg-purple-700 transition-all duration-300 transform hover:translate-y-[-2px] shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -394,7 +394,7 @@
                 <span 
                   v-for="subject in teacher.subjects.slice(0, 3)" 
                   :key="subject.id"
-                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors animate-pop-in"
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 hover:bg-purple-200 transition-colors animate-pop-in"
                 >
                   {{ subject.name }}
                 </span>
@@ -410,19 +410,19 @@
             <!-- Expérience and other info -->
             <div class="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-500">
               <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 {{ getTeacherExpérience(teacher) }} Expérience
               </div>
               <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 {{ getTeacherSessions(teacher) }} Sessions
               </div>
               <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                 </svg>
                 {{ getTeacherLanguage(teacher) }}
@@ -438,7 +438,7 @@
               <div class="flex space-x-2">
                 <button 
                   @click="messageTeacher(teacher.id)"
-                  class="p-2 text-indigo-600 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors"
+                  class="p-2 text-purple-600 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors"
                   title="Message"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -447,7 +447,7 @@
                 </button>
                 <NuxtLink 
                   :to="`/teachers/${teacher._id}`" 
-                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 shadow-sm"
+                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-purple-600 hover:bg-purple-700 transition-all duration-300 shadow-sm"
                 >
                   Voir le profil
                 </NuxtLink>
@@ -504,7 +504,7 @@
               <span 
                 v-for="subject in teacher.subjects.slice(0, 4)" 
                 :key="subject.id"
-                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800"
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
               >
                 {{ subject.name }}
               </span>
@@ -520,19 +520,19 @@
             
             <div class="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-gray-500">
               <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 {{ getTeacherExpérience(teacher) }} Expérience
               </div>
               <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 {{ getTeacherSessions(teacher) }} Sessions
               </div>
               <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                 </svg>
                 {{ getTeacherLanguage(teacher) }}
@@ -550,7 +550,7 @@
             <div class="mt-4 flex flex-col space-y-2">
                               <NuxtLink 
                 :to="`/teachers/${teacher._id}`"  
-                class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 shadow-sm"
+                class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-purple-600 hover:bg-purple-700 transition-all duration-300 shadow-sm"
               >
                 Voir le profil
               </NuxtLink>
@@ -594,7 +594,7 @@
           :class="[
             'relative inline-flex items-center px-4 py-2 border text-sm font-medium transition-colors',
             currentPage === page 
-              ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600' 
+              ? 'z-10 bg-purple-50 border-purple-500 text-purple-600' 
               : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
           ]"
         >
@@ -639,13 +639,13 @@ const {
   clearFilters: clearTeachersFilters
 } = useTeachers();
 
+// Créer un alias pour la propriété loading utilisée dans le template
+const loading = teachersLoading;
+
 // State
 const searchQuery = ref('');
 const selectedSubject = ref('');
 const minRating = ref(0);
-const loading = ref(true);
-const teachers = ref([]);
-const subjects = ref([]);
 const priceRange = ref('');
 const language = ref('');
 const experienceLevel = ref('');
@@ -678,7 +678,7 @@ const hasAvailabilityFilters = computed(() => {
 });
 
 const filteredTeachers = computed(() => {
-  let result = [...teachers.value];
+  let result = [...teachersData.value];
   
   // Apply search filter
   if (searchQuery.value) {
@@ -869,33 +869,7 @@ const messageTeacher = (teacherId) => {
   router.push(`/messages?teacher=${teacherId}`);
 };
 
-// Utiliser le composable pour récupérer les sujets
-const fetchSubjectsLocal = async () => {
-  try {
-    const fetchedSubjects = await fetchSubjects();
-    subjects.value = fetchedSubjects || teachersSubjects.value;
-  } catch (error) {
-    console.error('Error fetching subjects:', error);
-    subjects.value = [];
-  }
-};
 
-// Utiliser le composable pour récupérer les enseignants
-const fetchTeachersLocal = async () => {
-  loading.value = true;
-  
-  try {
-    // Synchroniser les filtres avant de récupérer les enseignants
-    syncFilters();
-    await fetchTeachers();
-    teachers.value = teachersData.value;
-  } catch (error) {
-    console.error('Error fetching teachers:', error);
-    teachers.value = [];
-  } finally {
-    loading.value = false;
-  }
-};
 
 // Watch for changes to reset pagination
 watch([searchQuery, selectedSubject, minRating, priceRange, language, experienceLevel, availabilityFilters], () => {
@@ -915,26 +889,11 @@ const syncFilters = () => {
   teachersFilters.availability.evenings = availabilityFilters.value.evenings;
 };
 
-// Observer les changements dans les données du composable
-watch(teachersData, (newTeachers) => {
-  teachers.value = newTeachers;
-});
 
-// Observer les changements dans les filtres locaux
-watch([searchQuery, selectedSubject, minRating, priceRange, language, experienceLevel, availabilityFilters], () => {
-  syncFilters();
-  currentPage.value = 1;
-});
 
 // Lifecycle
 onMounted(async () => {
-  loading.value = true;
   await Promise.all([fetchSubjects(), fetchTeachers()]);
-  
-  // Mettre à jour les données locales avec celles du composable
-  teachers.value = teachersData.value;
-  subjects.value = teachersSubjects.value;
-  loading.value = false;
 });
 </script>
 
@@ -966,7 +925,7 @@ onMounted(async () => {
   height: 16px;
   margin: 0 6px;
   border-radius: 50%;
-  background-color: #6366F1; /* indigo-500 */
+  background-color: #6366F1; /* purple-500 */
   animation: teacher-loader 1.5s infinite ease-in-out both;
 }
 

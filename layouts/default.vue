@@ -1,7 +1,8 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col">
     <!-- Header pour les pages avec navigation -->
-    <header v-if="$route.path !== '/' && $route.path !== '/login' && $route.path !== '/register'" class="bg-white border-b border-gray-200 shadow-sm flex-shrink-0">
+    <header v-if="shouldShowSidebar" class="bg-white border-b border-gray-200 shadow-sm flex-shrink-0"
+            :class="{ 'header-with-sidebar': shouldShowSidebar }">
       <div class="px-4 py-3 flex justify-end items-center">        
         <!-- Actions du header -->
         <div class="flex items-center">
@@ -13,7 +14,7 @@
     </header>
     
     <!-- Main content avec scroll -->
-    <main class="flex-1 overflow-auto bg-gray-50">
+    <main class="flex-1 overflow-auto bg-gray-50" :class="{ 'main-with-sidebar': shouldShowSidebar }">
       <slot />
     </main>
     
@@ -27,21 +28,20 @@
     <ToastContainer />
 
     <!-- Sidebar en bas pour mobile, sur le côté pour desktop -->
-    <div v-if="$route.path !== '/' && $route.path !== '/login' && $route.path !== '/register'" 
+    <div v-if="shouldShowSidebar" 
          class="bg-white border-t border-gray-200 md:border-t-0 md:border-r shadow-sm md:w-64 md:h-screen md:fixed md:top-0 md:left-0 md:flex md:flex-col">
       
       <!-- Logo section - visible uniquement sur desktop -->
       <div class="hidden md:block p-4 border-b border-gray-200">
-        <NuxtLink to="/" class="text-indigo-600 text-xl font-bold flex items-center">
-          <span class="flex items-center justify-center w-8 h-8 bg-indigo-600 text-white rounded-md mr-2">AM</span>
-          Academ Message
+        <NuxtLink to="/" class="text-purple-600 text-xl font-bold flex items-center">
+          <img src="/assets/images/logo_academ.png" alt="Academ Logo" class="w-8 h-8 mr-2" />
         </NuxtLink>
       </div>
 
       <!-- User profile section - visible uniquement sur desktop -->
       <div class="hidden md:flex p-4 border-b border-gray-200 items-center">
-        <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 mr-3">
-          <span class="text-indigo-600 font-semibold text-sm">
+        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-3">
+          <span class="text-purple-600 font-semibold text-sm">
             {{ user?.firstName?.charAt(0) || 'U' }}{{ user?.lastName?.charAt(0) || 'S' }}
           </span>
         </div>
@@ -61,7 +61,7 @@
       <!-- Search bar - visible uniquement sur desktop -->
       <div class="hidden md:block p-4 border-b border-gray-200">
         <div class="relative">
-          <input type="text" placeholder="Rechercher..." class="w-full bg-gray-100 rounded-md pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <input type="text" placeholder="Rechercher..." class="w-full bg-gray-100 rounded-md pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
@@ -74,10 +74,10 @@
         <nav>
           <NuxtLink v-for="item in navigation" :key="item.to" 
             :to="item.to" 
-            class="flex items-center p-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-md mx-2 transition-colors relative"
-            :class="{ 'text-indigo-600 bg-indigo-50': $route.path === item.to }">
+            class="flex items-center p-3 text-gray-700 hover:bg-purple-50 hover:text-purple-600 rounded-md mx-2 transition-colors relative"
+            :class="{ 'text-purple-600 bg-purple-50': $route.path === item.to }">
             <component :is="getNavIcon(item.icon)" class="h-5 w-5 mr-3" 
-              :class="$route.path === item.to ? 'text-indigo-600' : 'text-gray-500'" />
+              :class="$route.path === item.to ? 'text-purple-600' : 'text-gray-500'" />
             {{ item.name }}
             <!-- Notification bubble for Messages -->
             <div v-if="item.to === '/messages' && unreadCount && unreadCount > 0" 
@@ -92,19 +92,19 @@
     </div>
 
     <!-- Navigation mobile fixée en bas de l'écran -->
-    <nav v-if="$route.path !== '/' && $route.path !== '/login' && $route.path !== '/register'" 
+    <nav v-if="shouldShowSidebar" 
          class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
       <div class="max-w-md mx-auto px-2">
         <!-- Barre de navigation avec indicateur de position -->
         <div class="flex justify-around items-center relative py-2">
           <!-- Indicateur de position actif -->
-          <div class="absolute bottom-full left-0 h-1 bg-indigo-600 transition-all duration-300 ease-in-out"
+          <div class="absolute bottom-full left-0 h-1 bg-purple-600 transition-all duration-300 ease-in-out"
                :style="{ width: `${100/mobileNavigation.length}%`, transform: `translateX(${activeMobileTabPosition}%)` }"></div>
           
           <NuxtLink v-for="item in mobileNavigation" :key="item.to"
             :to="item.to" 
             class="mobile-nav-item relative" 
-            :class="{ 'text-indigo-600': $route.path === item.to }"
+            :class="{ 'text-purple-600': $route.path === item.to }"
             :style="{ width: `${100/mobileNavigation.length}%` }">
             <component :is="getNavIcon(item.icon)" class="h-6 w-6" />
             <span class="text-xs mt-1 font-medium">{{ item.name }}</span>
@@ -130,8 +130,22 @@ const { user, logout } = useAuth()
 const { unreadCount } = useMessagesV2()
 const sessionExpirationAlert = ref(null)
 
+// État pour gérer l'affichage de la sidebar après hydration
+const isMounted = ref(false)
+
+// Routes où la sidebar ne doit pas apparaître
+const noSidebarRoutes = ['/', '/login', '/register']
+
+// Fonction pour déterminer si la sidebar doit être affichée
+const shouldShowSidebar = computed(() => {
+  return isMounted.value && !noSidebarRoutes.includes(route.path)
+})
+
 // Écouter l'événement d'expiration de session
 onMounted(() => {
+  // Marquer comme monté pour éviter les problèmes d'hydration
+  isMounted.value = true
+  
   window.addEventListener('session-expiring', (event) => {
     if (sessionExpirationAlert.value) {
       sessionExpirationAlert.value.showAlert(event.detail.expiresAt);
@@ -212,13 +226,12 @@ const getRoleLabel = (role) => {
     height: 100vh;
   }
   
-  /* Ajuster le contenu principal pour laisser de l'espace pour la sidebar seulement sur les pages avec sidebar */
-  body:not(.no-sidebar) main {
+  /* Appliquer la marge uniquement aux pages avec sidebar pour éviter le shift lors du hydration */
+  .main-with-sidebar {
     margin-left: 16rem; /* 64px * 4 = 256px = 16rem */
   }
   
-  /* Ajuster le header pour laisser de l'espace pour la sidebar seulement sur les pages avec sidebar */
-  body:not(.no-sidebar) header {
+  .header-with-sidebar {
     margin-left: 16rem;
   }
 }

@@ -1,11 +1,11 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="mx-auto px-4 py-8">
     <!-- Header -->
     <div class="mb-8">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900">Créer un professeur</h1>
-          <p class="text-gray-600 mt-2">Inscrire un nouveau professeur sur la plateforme</p>
+          <h1 class="text-3xl font-bold text-gray-900">Créer un utilisateur</h1>
+          <p class="text-gray-600 mt-2">Inscrire un nouveau utilisateur sur la plateforme</p>
         </div>
         <NuxtLink 
           to="/admin/users" 
@@ -21,12 +21,12 @@
 
     <!-- Formulaire -->
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-      <div class="bg-gradient-to-r from-purple-600 to-indigo-600 px-8 py-6">
+      <div class="bg-gradient-to-r from-purple-600 to-purple-600 px-8 py-6">
         <h2 class="text-xl font-bold text-white flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
           </svg>
-          Informations du professeur
+          Informations de l'utilisateur
         </h2>
       </div>
 
@@ -43,7 +43,7 @@
               type="text"
               required
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-              placeholder="Prénom du professeur"
+              placeholder="Prénom de l'utilisateur"
             />
           </div>
 
@@ -57,7 +57,7 @@
               type="text"
               required
               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-              placeholder="Nom du professeur"
+              placeholder="Nom de l'utilisateur"
             />
           </div>
 
@@ -89,8 +89,70 @@
           </div>
         </div>
 
-        <!-- Informations professionnelles -->
+        <!-- Sélection du rôle -->
         <div class="mb-8">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            Type d'utilisateur *
+          </h3>
+          
+          <div class="grid grid-cols-2 gap-3">
+            <label class="relative cursor-pointer">
+              <input
+                v-model="form.role"
+                type="radio"
+                value="student"
+                class="sr-only"
+              />
+              <div
+                :class="form.role === 'student' ? 'ring-2 ring-purple-500 bg-purple-50 border-purple-200' : 'border-gray-200 hover:border-gray-300'"
+                class="p-4 border rounded-xl transition-all duration-200 bg-white"
+              >
+                <div class="flex items-center space-x-3">
+                  <div class="flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-medium text-gray-900">Étudiant</div>
+                    <div class="text-sm text-gray-500">Peut réserver des cours</div>
+                  </div>
+                </div>
+              </div>
+            </label>
+            
+            <label class="relative cursor-pointer">
+              <input
+                v-model="form.role"
+                type="radio"
+                value="teacher"
+                class="sr-only"
+              />
+              <div
+                :class="form.role === 'teacher' ? 'ring-2 ring-purple-500 bg-purple-50 border-purple-200' : 'border-gray-200 hover:border-gray-300'"
+                class="p-4 border rounded-xl transition-all duration-200 bg-white"
+              >
+                <div class="flex items-center space-x-3">
+                  <div class="flex-shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="font-medium text-gray-900">Professeur</div>
+                    <div class="text-sm text-gray-500">Peut donner des cours</div>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Informations professionnelles (uniquement pour les professeurs) -->
+        <div v-if="form.role === 'teacher'" class="mb-8">
           <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
@@ -143,8 +205,8 @@
           </div>
         </div>
 
-        <!-- Matières enseignées -->
-        <div class="mb-8">
+        <!-- Matières enseignées (uniquement pour les professeurs) -->
+        <div v-if="form.role === 'teacher'" class="mb-8">
           <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -183,7 +245,7 @@
         </div>
 
         <!-- Mot de passe généré -->
-        <div class="mb-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg">
+        <div class="mb-8 p-6 bg-gradient-to-r from-green-50 to-purple-50 border border-green-200 rounded-lg">
           <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -232,7 +294,7 @@
               </svg>
               <div class="text-sm text-yellow-800">
                 <p class="font-medium">Important :</p>
-                <p>Ce mot de passe sera envoyé par email au professeur. Il devra le changer lors de sa première connexion.</p>
+                <p>Ce mot de passe sera envoyé par email à l'utilisateur. Il devra le changer lors de sa première connexion.</p>
               </div>
             </div>
           </div>
@@ -257,7 +319,7 @@
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
             <span v-if="loading">Création en cours...</span>
-            <span v-else>Créer le professeur</span>
+            <span v-else>Créer l'utilisateur</span>
           </button>
         </div>
       </form>
@@ -268,8 +330,7 @@
 <script setup>
 // Middleware d'authentification et vérification du rôle admin
 definePageMeta({
-  middleware: 'auth',
-  title: 'Créer un professeur'
+  title: 'Créer un utilisateur'
 });
 
 // Vérifier que l'utilisateur est admin
@@ -288,6 +349,7 @@ const form = ref({
   lastName: '',
   email: '',
   phone: '',
+  role: 'student', // Par défaut étudiant
   specialization: '',
   experience: '',
   bio: '',
@@ -321,6 +383,11 @@ const generateNewPassword = () => {
   generatedPassword.value = generatePassword();
 };
 
+// Générer un mot de passe au chargement de la page
+onMounted(() => {
+  generateNewPassword();
+});
+
 // Copier le mot de passe dans le presse-papiers
 const copyPassword = async () => {
   try {
@@ -336,14 +403,20 @@ const copyPassword = async () => {
 
 // Validation du formulaire
 const isFormValid = computed(() => {
-  return form.value.firstName && 
-         form.value.lastName && 
-         form.value.email && 
-         form.value.specialization &&
-         generatedPassword.value;
+  const baseValid = form.value.firstName && 
+                   form.value.lastName && 
+                   form.value.email && 
+                   generatedPassword.value;
+  
+  // Si c'est un professeur, vérifier la spécialisation
+  if (form.value.role === 'teacher') {
+    return baseValid && form.value.specialization;
+  }
+  
+  return baseValid;
 });
 
-// Créer le professeur
+// Créer l'utilisateur
 const createTeacher = async () => {
   if (!isFormValid.value) {
     const { showError } = useToast();
@@ -354,7 +427,7 @@ const createTeacher = async () => {
   loading.value = true;
 
   try {
-    const response = await $fetch('/api/admin/teachers', {
+    const response = await $fetch('/api/admin/users', {
       method: 'POST',
       body: {
         ...form.value,
@@ -364,24 +437,25 @@ const createTeacher = async () => {
 
     if (response.success) {
       const { showSuccess } = useToast();
+      const roleText = form.value.role === 'teacher' ? 'professeur' : 'étudiant';
       const emailStatus = response.emailSent 
-        ? 'Un email avec ses identifiants a été envoyé.'
+        ? 'Un email avec le lien de configuration a été envoyé.'
         : 'Aucun email envoyé (configuration SMTP manquante).';
       
       showSuccess(
-        'Professeur créé !', 
-        `Le professeur ${form.value.firstName} ${form.value.lastName} a été créé avec succès. ${emailStatus}`
+        `${roleText.charAt(0).toUpperCase() + roleText.slice(1)} créé !`, 
+        `${roleText.charAt(0).toUpperCase() + roleText.slice(1)} ${form.value.firstName} ${form.value.lastName} a été créé avec succès. ${emailStatus}`
       );
       
       // Rediriger vers la liste des utilisateurs
       await navigateTo('/admin/users');
     }
   } catch (error) {
-    console.error('Erreur lors de la création du professeur:', error);
+    console.error('Erreur lors de la création de l\'utilisateur:', error);
     const { showError } = useToast();
     showError(
       'Erreur', 
-      error.data?.message || 'Une erreur est survenue lors de la création du professeur.'
+      error.data?.message || 'Une erreur est survenue lors de la création de l\'utilisateur.'
     );
   } finally {
     loading.value = false;

@@ -72,7 +72,7 @@
           <button 
             @click="uploadAvatar"
             :disabled="uploading"
-            class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <span v-if="uploading" class="flex items-center justify-center">
               <svg class="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -157,7 +157,12 @@ const sizeClasses = computed(() => {
 const defaultAvatar = computed(() => {
   // Générer un avatar par défaut avec les initiales
   const initials = props.alt.split(' ').map(name => name.charAt(0)).join('').toUpperCase();
-  return `https://via.placeholder.com/150/3b82f6/ffffff?text=${initials}`;
+  // Générer un avatar SVG en data URL au lieu d'utiliser via.placeholder.com
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+    <rect width="150" height="150" fill="%233b82f6"/>
+    <text x="75" y="85" font-family="Arial, sans-serif" font-size="60" font-weight="bold" text-anchor="middle" fill="white">${initials}</text>
+  </svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 });
 
 // Méthodes

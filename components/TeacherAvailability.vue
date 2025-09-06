@@ -9,8 +9,8 @@
           <label 
             v-for="day in daysOfWeek" 
             :key="day.value"
-            class="relative flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-indigo-300 transition-colors"
-            :class="{ 'border-indigo-500 bg-indigo-50': availableDays.includes(day.value) }"
+            class="relative flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-purple-300 transition-colors"
+            :class="{ 'border-purple-500 bg-purple-50': availableDays.includes(day.value) }"
           >
             <input
               type="checkbox"
@@ -21,7 +21,7 @@
             <div class="flex items-center space-x-3">
               <div 
                 class="w-5 h-5 rounded border-2 flex items-center justify-center"
-                :class="availableDays.includes(day.value) ? 'border-indigo-500 bg-indigo-500' : 'border-gray-300'"
+                :class="availableDays.includes(day.value) ? 'border-purple-500 bg-purple-500' : 'border-gray-300'"
               >
                 <svg v-if="availableDays.includes(day.value)" class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -48,7 +48,7 @@
                 <input
                   type="time"
                   v-model="slot.startTime"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                 />
               </div>
               <div>
@@ -56,7 +56,7 @@
                 <input
                   type="time"
                   v-model="slot.endTime"
-                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                 />
               </div>
             </div>
@@ -73,7 +73,7 @@
           
           <button
             @click="addTimeSlot"
-            class="w-full py-3 px-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-indigo-300 hover:text-indigo-600 transition-colors"
+            class="w-full py-3 px-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-purple-300 hover:text-purple-600 transition-colors"
           >
             <div class="flex items-center justify-center space-x-2">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +96,7 @@
         <button
           @click="saveAvailability"
           :disabled="!canSave"
-          class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Sauvegarder
         </button>
@@ -111,7 +111,7 @@
           <h3 class="text-lg font-medium text-gray-900">Vos disponibilités actuelles</h3>
           <button
             @click="startEdit"
-            class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+            class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Modifier
           </button>
@@ -154,7 +154,7 @@
         <div class="mt-6">
           <button
             @click="startEdit"
-            class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+            class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Définir mes disponibilités
           </button>
@@ -164,7 +164,7 @@
 
     <!-- Indicateur de chargement -->
     <div v-if="loading" class="text-center py-4">
-      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 mx-auto"></div>
+      <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-600 mx-auto"></div>
       <p class="text-sm text-gray-500 mt-2">Chargement...</p>
     </div>
   </div>

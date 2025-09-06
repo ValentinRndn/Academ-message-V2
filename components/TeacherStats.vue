@@ -3,26 +3,26 @@
     <h3 class="text-lg font-semibold text-gray-900 mb-4">Mes statistiques</h3>
     
     <div v-if="loading" class="text-center py-8">
-      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto"></div>
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
       <p class="text-gray-500 mt-2">Chargement des statistiques...</p>
     </div>
 
     <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       <!-- Cours ce mois -->
-      <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg">
+      <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm font-medium text-blue-600">Cours ce mois</p>
-            <p class="text-2xl font-bold text-blue-900">{{ stats.monthlyBookings }}</p>
+            <p class="text-sm font-medium text-purple-600">Cours ce mois</p>
+            <p class="text-2xl font-bold text-purple-900">{{ stats.monthlyBookings }}</p>
           </div>
-          <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
+          <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
         </div>
         <div class="mt-2">
-          <span class="text-xs text-blue-600">
+          <span class="text-xs text-purple-600">
             {{ stats.monthlyGrowth > 0 ? '+' : '' }}{{ stats.monthlyGrowth }}% vs mois dernier
           </span>
         </div>
@@ -105,7 +105,7 @@
           class="flex-1 flex flex-col items-center"
         >
           <div 
-            class="w-full bg-indigo-200 rounded-t transition-all duration-300 hover:bg-indigo-300"
+            class="w-full bg-purple-200 rounded-t transition-all duration-300 hover:bg-purple-300"
             :style="{ height: `${(day.count / maxWeeklyCount) * 100}%` }"
           ></div>
           <span class="text-xs text-gray-500 mt-1">{{ day.day }}</span>
@@ -120,7 +120,7 @@
       <div class="flex flex-wrap gap-2">
         <button 
           @click="exportStats"
-          class="px-3 py-1 bg-indigo-100 text-indigo-700 text-sm rounded-full hover:bg-indigo-200 transition-colors"
+          class="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full hover:bg-purple-200 transition-colors"
         >
           Exporter les stats
         </button>

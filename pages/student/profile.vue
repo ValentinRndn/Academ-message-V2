@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-4xl mx-auto px-4 py-8">
+  <div class="mx-auto px-4 py-8">
     <!-- Header avec gradient -->
-    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
+    <div class="bg-gradient-to-r from-purple-600 to-purple-600 rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
       <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -translate-y-32 translate-x-32"></div>
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full translate-y-16 -translate-x-16"></div>
       
@@ -9,11 +9,11 @@
         <div class="flex items-center justify-between">
           <div>
             <h1 class="text-3xl font-bold mb-2">Mon Profil</h1>
-            <p class="text-blue-100">Gérez vos informations personnelles et préférences</p>
+            <p class="text-purple-100">Gérez vos informations personnelles et préférences</p>
           </div>
           <button 
             @click="isEditing = !isEditing" 
-            class="px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            class="px-6 py-3 bg-white text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             <span class="flex items-center">
               <svg v-if="!isEditing" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -31,18 +31,18 @@
 
     <!-- Loading state -->
     <div v-if="loading" class="flex items-center justify-center py-12">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
     </div>
 
     <!-- Error state -->
-    <div v-else-if="error" class="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+    <div v-else-if="error" class="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-8">
       <div class="flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div>
-          <h3 class="text-lg font-medium text-red-800">Erreur</h3>
-          <p class="text-red-600">{{ error }}</p>
+          <h3 class="text-lg font-medium text-purple-800">Erreur</h3>
+          <p class="text-purple-600">{{ error }}</p>
         </div>
       </div>
     </div>
@@ -53,7 +53,7 @@
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div class="bg-gray-50 px-8 py-6 border-b">
           <h2 class="text-xl font-bold text-gray-900 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
             Informations personnelles
@@ -76,14 +76,14 @@
                 <h3 class="text-2xl font-bold text-gray-900">{{ profile.firstName }} {{ profile.lastName }}</h3>
                 <p class="text-gray-600">{{ profile.email }}</p>
                 <div class="flex items-center mt-2">
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                     </svg>
                     Étudiant
                   </span>
-                  <span class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                  <span class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-50 text-purple-600">
                     Actif
                   </span>
                 </div>
@@ -92,10 +92,10 @@
 
             <!-- Statistiques rapides -->
             <div class="grid grid-cols-2 gap-4">
-              <div class="bg-blue-50 rounded-lg p-4">
+              <div class="bg-purple-50 rounded-lg p-4">
                 <div class="flex items-center">
-                  <div class="bg-blue-100 p-2 rounded-lg mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="bg-purple-100 p-2 rounded-lg mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                   </div>
@@ -106,10 +106,10 @@
                 </div>
               </div>
               
-              <div class="bg-green-50 rounded-lg p-4">
+              <div class="bg-purple-50 rounded-lg p-4">
                 <div class="flex items-center">
-                  <div class="bg-green-100 p-2 rounded-lg mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="bg-purple-100 p-2 rounded-lg mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
@@ -134,10 +134,10 @@
                 </div>
               </div>
               
-              <div class="bg-yellow-50 rounded-lg p-4">
+              <div class="bg-purple-100 rounded-lg p-4">
                 <div class="flex items-center">
-                  <div class="bg-yellow-100 p-2 rounded-lg mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div class="bg-purple-200 p-2 rounded-lg mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                     </svg>
                   </div>
@@ -158,7 +158,7 @@
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div class="bg-gray-50 px-8 py-6 border-b">
             <h2 class="text-xl font-bold text-gray-900 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               Informations de contact
@@ -176,7 +176,7 @@
                 v-else
                 v-model="editedProfile.email"
                 type="email"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                 placeholder="votre.email@exemple.com"
               />
             </div>
@@ -191,7 +191,7 @@
                 v-else
                 v-model="editedProfile.phone"
                 type="tel"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                 placeholder="+33 6 12 34 56 78"
               />
             </div>
@@ -205,7 +205,7 @@
               <select
                 v-else
                 v-model="editedProfile.educationLevel"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
                 <option value="">Sélectionner un niveau</option>
                 <option v-for="level in educationLevels" :key="level.value" :value="level.value">
@@ -220,7 +220,7 @@
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div class="bg-gray-50 px-8 py-6 border-b">
             <h2 class="text-xl font-bold text-gray-900 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
               Préférences d'apprentissage
@@ -236,7 +236,7 @@
                   <span 
                     v-for="subject in profile.subjectsOfInterest" 
                     :key="subject._id || subject"
-                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800"
+                    class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-purple-100 text-purple-800"
                   >
                     {{ subject.name || subject }}
                   </span>
@@ -252,7 +252,7 @@
                       v-model="editedProfile.subjectsOfInterest"
                       :value="subject._id"
                       type="checkbox"
-                      class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
                     />
                     <label :for="subject._id" class="ml-3 text-sm text-gray-700">
                       {{ subject.name }}
@@ -272,7 +272,7 @@
                 v-else
                 v-model="editedProfile.learningGoals"
                 rows="3"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 resize-none"
                 placeholder="Décrivez vos objectifs d'apprentissage..."
               />
             </div>
@@ -306,14 +306,14 @@
       <div v-if="isEditing" class="flex justify-end space-x-4">
         <button 
           @click="cancelEdit"
-          class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+          class="px-6 py-3 border border-purple-200 text-purple-600 rounded-lg hover:bg-purple-50 transition-colors"
         >
           Annuler
         </button>
         <button 
           @click="saveProfile"
           :disabled="saving"
-          class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           <span v-if="saving" class="flex items-center">
             <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -330,7 +330,7 @@
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div class="bg-gray-50 px-8 py-6 border-b">
           <h2 class="text-xl font-bold text-gray-900 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
             Sécurité
@@ -345,7 +345,7 @@
             </div>
             <button 
               @click="showChangePasswordModal = true"
-              class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+              class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -360,7 +360,7 @@
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div class="bg-gray-50 px-8 py-6 border-b">
           <h2 class="text-xl font-bold text-gray-900 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.19 4.19A4 4 0 006.73 3H11a4 4 0 014 4v1.5a2.5 2.5 0 002.5 2.5H20a2 2 0 012 2v8a2 2 0 01-2 2H6.73a4 4 0 01-2.54-.81L4.19 4.19z" />
             </svg>
             Notifications
@@ -389,10 +389,7 @@ import AvatarUpload from '~/components/AvatarUpload.vue'
 import NotificationToggle from '~/components/NotificationToggle.vue'
 import ChangePasswordModal from '~/components/ChangePasswordModal.vue'
 
-// Middleware d'authentification
-definePageMeta({
-  middleware: 'auth'
-});
+// L'authentification est gérée par le middleware global
 
 // État réactif
 const isEditing = ref(false);

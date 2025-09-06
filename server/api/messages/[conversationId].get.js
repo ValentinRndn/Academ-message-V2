@@ -72,7 +72,7 @@ export default defineEventHandler(async (event) => {
 
     // Récupérer les informations des participants
     const otherParticipantId = conversation.getOtherParticipant(userId);
-    const otherParticipant = await db.collection('User').findOne(
+    const otherParticipant = await db.collection('users').findOne(
       { _id: otherParticipantId },
       { projection: { password: 0 } }
     );

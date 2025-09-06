@@ -4,7 +4,7 @@
     <header class="bg-white border-b border-gray-200 shadow-sm">
       <div class="px-4 py-3 flex justify-between items-center">
         <h1 class="text-xl font-bold text-gray-800">Messages</h1>
-        <button class="p-2 rounded-full bg-indigo-50 text-indigo-600">
+        <button class="p-2 rounded-full bg-purple-50 text-purple-600">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
           </svg>
@@ -36,10 +36,10 @@
           <!-- Sophie Martin -->
           <div
             @click="openConversation"
-            class="flex items-center px-4 py-3 border-b border-gray-100 active:bg-gray-100 cursor-pointer bg-indigo-50"
+            class="flex items-center px-4 py-3 border-b border-gray-100 active:bg-gray-100 cursor-pointer bg-purple-50"
           >
             <div class="relative">
-              <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-xl">
+              <div class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-xl">
                 SM
               </div>
               <div class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></div>
@@ -50,12 +50,12 @@
                 <span class="text-xs text-gray-500">5m</span>
               </div>
               <div class="flex items-center">
-                <span class="text-xs text-indigo-600 mr-2">Enseignant</span>
+                <span class="text-xs text-purple-600 mr-2">Enseignant</span>
                 <p class="text-xs text-gray-500 truncate flex-1">Bonjour, je suis disponible pour votre session aujourd'hui</p>
               </div>
             </div>
             <div class="ml-2 flex-shrink-0">
-              <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-indigo-600 text-xs font-medium text-white">
+              <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-purple-600 text-xs font-medium text-white">
                 2
               </span>
             </div>
@@ -65,7 +65,7 @@
           <div
             class="flex items-center px-4 py-3 border-b border-gray-100 active:bg-gray-100 cursor-pointer"
           >
-            <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-xl">
+            <div class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-xl">
               TD
             </div>
             <div class="ml-3 flex-1 min-w-0">
@@ -74,7 +74,7 @@
                 <span class="text-xs text-gray-500">Hier</span>
               </div>
               <div class="flex items-center">
-                <span class="text-xs text-indigo-600 mr-2">Enseignant</span>
+                <span class="text-xs text-purple-600 mr-2">Enseignant</span>
                 <p class="text-xs text-gray-500 truncate flex-1">Merci pour votre message. Nous pouvons discuter...</p>
               </div>
             </div>
@@ -85,7 +85,7 @@
             class="flex items-center px-4 py-3 border-b border-gray-100 active:bg-gray-100 cursor-pointer"
           >
             <div class="relative">
-              <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-xl">
+              <div class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-xl">
                 EP
               </div>
               <div class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 border-2 border-white"></div>
@@ -96,7 +96,7 @@
                 <span class="text-xs text-gray-500">24 avr</span>
               </div>
               <div class="flex items-center">
-                <span class="text-xs text-indigo-600 mr-2">Enseignant</span>
+                <span class="text-xs text-purple-600 mr-2">Enseignant</span>
                 <p class="text-xs text-gray-500 truncate flex-1">Avez-vous pu terminer l'exercice que nous avons...</p>
               </div>
             </div>
@@ -106,7 +106,7 @@
           <div
             class="flex items-center px-4 py-3 border-b border-gray-100 active:bg-gray-100 cursor-pointer"
           >
-            <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-xl">
+            <div class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-xl">
               PL
             </div>
             <div class="ml-3 flex-1 min-w-0">
@@ -115,12 +115,12 @@
                 <span class="text-xs text-gray-500">18 avr</span>
               </div>
               <div class="flex items-center">
-                <span class="text-xs text-indigo-600 mr-2">Enseignant</span>
+                <span class="text-xs text-purple-600 mr-2">Enseignant</span>
                 <p class="text-xs text-gray-500 truncate flex-1">Je vous ai envoyé les documents pour notre...</p>
               </div>
             </div>
             <div class="ml-2 flex-shrink-0">
-              <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-indigo-600 text-xs font-medium text-white">
+              <span class="inline-flex items-center justify-center h-5 w-5 rounded-full bg-purple-600 text-xs font-medium text-white">
                 1
               </span>
             </div>
@@ -129,7 +129,7 @@
 
         <!-- Bouton nouvelle conversation -->
         <div class="fixed right-5 bottom-20">
-          <button class="w-14 h-14 rounded-full bg-indigo-600 flex items-center justify-center shadow-lg text-white">
+          <button class="w-14 h-14 rounded-full bg-purple-600 flex items-center justify-center shadow-lg text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
@@ -142,12 +142,12 @@
         <!-- En-tête de conversation -->
         <div class="flex items-center px-4 py-3 border-b border-gray-200 bg-white sticky top-0 z-10">
           <button @click="showConversationList = true" class="mr-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
           </button>
           <div class="relative">
-            <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium">
+            <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium">
               SM
             </div>
             <div class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></div>
@@ -155,7 +155,7 @@
           <div class="ml-3">
             <h3 class="text-sm font-medium text-gray-900">Sophie Martin</h3>
             <p class="text-xs text-gray-500 flex items-center">
-              <span class="text-indigo-600">Enseignant</span>
+              <span class="text-purple-600">Enseignant</span>
               <span class="mx-1">•</span>
               <span>En ligne</span>
             </p>
@@ -174,7 +174,7 @@
           <!-- Message de Sophie -->
           <div class="flex">
             <div class="flex-shrink-0 mr-2">
-              <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+              <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
                 S
               </div>
             </div>
@@ -186,9 +186,9 @@
           
           <!-- Message de l'utilisateur -->
           <div class="flex justify-end">
-            <div class="max-w-[75%] px-4 py-2 rounded-lg bg-indigo-600 text-white shadow-sm message-sent">
+            <div class="max-w-[75%] px-4 py-2 rounded-lg bg-purple-600 text-white shadow-sm message-sent">
               <p class="text-sm">Bonjour Sophie ! Oui, j'avais quelques difficultés avec les exercices que vous nous avez envoyés la semaine dernière.</p>
-              <div class="flex justify-end items-center mt-1 space-x-1 text-indigo-200">
+              <div class="flex justify-end items-center mt-1 space-x-1 text-purple-200">
                 <span class="text-xs">09:18</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -200,7 +200,7 @@
           <!-- Message de Sophie -->
           <div class="flex">
             <div class="flex-shrink-0 mr-2">
-              <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+              <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
                 S
               </div>
             </div>
@@ -212,9 +212,9 @@
           
           <!-- Message de l'utilisateur -->
           <div class="flex justify-end">
-            <div class="max-w-[75%] px-4 py-2 rounded-lg bg-indigo-600 text-white shadow-sm message-sent">
+            <div class="max-w-[75%] px-4 py-2 rounded-lg bg-purple-600 text-white shadow-sm message-sent">
               <p class="text-sm">C'est surtout l'exercice 3 qui me pose problème. J'ai essayé plusieurs méthodes mais je n'arrive pas à la bonne solution. Une session aujourd'hui serait parfaite !</p>
-              <div class="flex justify-end items-center mt-1 space-x-1 text-indigo-200">
+              <div class="flex justify-end items-center mt-1 space-x-1 text-purple-200">
                 <span class="text-xs">09:23</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -226,7 +226,7 @@
           <!-- Message de Sophie -->
           <div class="flex">
             <div class="flex-shrink-0 mr-2">
-              <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+              <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
                 S
               </div>
             </div>
@@ -239,7 +239,7 @@
           <!-- Nouveau message de Sophie -->
           <div class="flex">
             <div class="flex-shrink-0 mr-2">
-              <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+              <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
                 S
               </div>
             </div>
@@ -262,7 +262,7 @@
             </div>
             <button
               type="button"
-              class="p-1.5 rounded-full bg-indigo-600 text-white flex-shrink-0"
+              class="p-1.5 rounded-full bg-purple-600 text-white flex-shrink-0"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -277,7 +277,7 @@
     <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
       <div class="flex justify-around items-center relative">
         <!-- Indicateur de position actif -->
-        <div class="absolute bottom-full left-0 w-1/4 h-1 bg-indigo-600 transition-all duration-300 ease-in-out"
+        <div class="absolute bottom-full left-0 w-1/4 h-1 bg-purple-600 transition-all duration-300 ease-in-out"
              style="transform: translateX(100%);"></div>
         
         <a href="#" class="flex flex-col items-center p-2 w-1/4">
@@ -288,10 +288,10 @@
         </a>
 
         <a href="#" class="flex flex-col items-center p-2 w-1/4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
           </svg>
-          <span class="text-xs mt-0.5 font-medium text-indigo-600">Messages</span>
+          <span class="text-xs mt-0.5 font-medium text-purple-600">Messages</span>
         </a>
 
         <a href="#" class="flex flex-col items-center p-2 w-1/4">

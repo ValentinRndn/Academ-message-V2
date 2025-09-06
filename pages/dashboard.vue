@@ -14,7 +14,7 @@
       <div class="text-center">
         <h1 class="text-2xl font-bold text-gray-900 mb-4">Accès non autorisé</h1>
         <p class="text-gray-600 mb-4">Votre rôle n'est pas reconnu ou vous n'êtes pas connecté.</p>
-        <NuxtLink to="/login" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+        <NuxtLink to="/login" class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700">
           Se connecter
         </NuxtLink>
       </div>
@@ -25,10 +25,17 @@
 <script setup>
 // Middleware d'authentification et configuration de la page
 definePageMeta({
-  middleware: 'auth',
   title: 'Tableau de bord'
 });
 
 // Récupérer l'utilisateur connecté
 const { user } = useAuth();
+
+// Log pour debug
+console.log('🏠 Dashboard - User:', user.value);
+console.log('🏠 Dashboard - Role:', user.value?.role);
+
+onMounted(() => {
+  console.log('🏠 Dashboard monté');
+});
 </script>

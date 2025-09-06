@@ -14,6 +14,8 @@ const userSchema = {
   status: { type: String, default: "active" }, // "active", "inactive", "suspended"
   lastLoginAt: { type: Date },
   subjectIds: { type: Array },
+  stripeCustomerId: { type: String }, // ID Stripe pour les paiements
+  stripeAccountId: { type: String }, // ID compte Stripe Connect pour les professeurs
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 };
@@ -26,7 +28,7 @@ class User {
    * @param {Object} db - Instance de la base de données MongoDB
    */
   constructor(db) {
-    this.collection = db.collection('User');
+    this.collection = db.collection('users');
   }
 
   /**

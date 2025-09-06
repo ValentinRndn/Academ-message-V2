@@ -91,6 +91,14 @@ const teacherSchema = new Schema({
     enum: ['active', 'inactive'],
     default: 'active'
   },
+  stripeCustomerId: {
+    type: String,
+    default: null
+  },
+  stripeAccountId: {
+    type: String,
+    default: null
+  },
   createdAt: {
     type: Date,
     default: Date.now
@@ -113,7 +121,7 @@ teacherSchema.methods.getUser = async function() {
   const { ObjectId } = await import('mongodb');
   
   const db = await connectToMongoDB();
-  return db.collection('User').findOne({ _id: new ObjectId(this.userId) });
+  return db.collection('users').findOne({ _id: new ObjectId(this.userId) });
 };
 
 // Méthode pour vérifier si le professeur est disponible maintenant
@@ -141,4 +149,4 @@ teacherSchema.methods.calculateAverageRating = async function() {
   return this.averageRating;
 };
 
-export default model('Teacher', teacherSchema);
+export default model('Teacher', teacherSchema, 'teachers');

@@ -5,9 +5,7 @@
       @click="togglePanel"
       class="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
     >
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.19 4.19A2 2 0 004 6v10a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-1.41.59z" />
-      </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><!-- Icon from Material Symbols by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M4 19v-2h2v-7q0-2.075 1.25-3.687T10.5 4.2V2h3v2.2q2 .5 3.25 2.113T18 10v7h2v2zm8 3q-.825 0-1.412-.587T10 20h4q0 .825-.587 1.413T12 22m-4-5h8v-7q0-1.65-1.175-2.825T12 6T9.175 7.175T8 10z"/></svg>
       
       <!-- Badge de notifications non lues -->
       <span
@@ -30,7 +28,7 @@
           <button
             v-if="hasUnread"
             @click="markAllAsRead"
-            class="text-sm text-indigo-600 hover:text-indigo-800"
+            class="text-sm text-purple-600 hover:text-purple-800"
           >
             Tout marquer comme lu
           </button>
@@ -57,7 +55,7 @@
             v-for="notification in sortedNotifications"
             :key="notification.id"
             class="p-4 hover:bg-gray-50 transition-colors cursor-pointer"
-            :class="{ 'bg-blue-50': !notification.read }"
+            :class="{ 'bg-purple-50': !notification.read }"
             @click="handleNotificationClick(notification)"
           >
             <div class="flex items-start space-x-3">
@@ -100,7 +98,7 @@
 
               <!-- Indicateur de non lu -->
               <div v-if="!notification.read" class="flex-shrink-0">
-                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <div class="w-2 h-2 bg-purple-500 rounded-full"></div>
               </div>
             </div>
           </div>
@@ -111,7 +109,7 @@
       <div class="p-4 border-t border-gray-200">
         <button
           @click="viewAllNotifications"
-          class="w-full text-center text-sm text-indigo-600 hover:text-indigo-800"
+          class="w-full text-center text-sm text-purple-600 hover:text-purple-800"
         >
           Voir toutes les notifications
         </button>
@@ -201,7 +199,7 @@ const getNotificationIcon = (type) => {
 
 const getNotificationIconClass = (type) => {
   const classes = {
-    booking: 'bg-blue-500',
+    booking: 'bg-purple-500',
     cancellation: 'bg-red-500',
     confirmation: 'bg-green-500',
     reminder: 'bg-yellow-500'

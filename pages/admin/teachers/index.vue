@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class=" mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Header section with animation -->
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 animate-fade-in">
       <div>
@@ -8,7 +8,7 @@
       </div>
       <button 
         @click="showAddTeacherModal = true"
-        class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-lg text-white bg-purple-600 hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -20,8 +20,8 @@
     <!-- Stats overview -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 animate-fade-in-up">
       <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex items-center transform transition duration-300 hover:shadow-lg hover:translate-y-[-4px]">
-        <div class="bg-indigo-100 p-3 rounded-lg mr-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="bg-purple-100 p-3 rounded-lg mr-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
           </svg>
         </div>
@@ -73,7 +73,7 @@
                 type="text"
                 placeholder="Search teachers by name, email, or subject..."
                 v-model="searchQuery"
-                class="block w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                class="block w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
               />
             </div>
           </div>
@@ -81,7 +81,7 @@
             <div class="relative inline-block text-left">
               <select
                 v-model="statusFilter"
-                class="block w-full pl-3 pr-10 py-3 border border-gray-200 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                class="block w-full pl-3 pr-10 py-3 border border-gray-200 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active</option>
@@ -97,7 +97,7 @@
             <div class="relative inline-block text-left">
               <select
                 v-model="sortBy"
-                class="block w-full pl-3 pr-10 py-3 border border-gray-200 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                class="block w-full pl-3 pr-10 py-3 border border-gray-200 rounded-lg appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
               >
                 <option value="name">Sort by Name</option>
                 <option value="rating">Sort by Rating</option>
@@ -136,7 +136,7 @@
             :class="[
               'px-4 py-2 text-sm font-medium transition-colors',
               viewMode === 'grid' 
-                ? 'bg-white text-indigo-600 shadow-sm rounded-md'
+                ? 'bg-white text-purple-600 shadow-sm rounded-md'
                 : 'text-gray-600 hover:text-gray-900'
             ]"
           >
@@ -149,7 +149,7 @@
             :class="[
               'px-4 py-2 text-sm font-medium transition-colors',
               viewMode === 'table' 
-                ? 'bg-white text-indigo-600 shadow-sm rounded-md'
+                ? 'bg-white text-purple-600 shadow-sm rounded-md'
                 : 'text-gray-600 hover:text-gray-900'
             ]"
           >
@@ -230,7 +230,7 @@
                   <span 
                     v-for="subject in teacher.subjects.slice(0, 3)" 
                     :key="subject.id"
-                    class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800"
+                    class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
                   >
                     {{ subject.name }}
                   </span>
@@ -249,7 +249,7 @@
               <div class="mt-5 flex space-x-2 justify-end">
                 <button 
                   @click="viewTeacher(teacher.id)"
-                  class="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
+                  class="inline-flex items-center px-3 py-1.5 border border-gray-300 text-xs font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -259,7 +259,7 @@
                 </button>
                 <button 
                   @click="editTeacher(teacher)"
-                  class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all"
+                  class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -325,7 +325,7 @@
                     <span 
                       v-for="subject in teacher.subjects.slice(0, 2)" 
                       :key="subject.id"
-                      class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800"
+                      class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
                     >
                       {{ subject.name }}
                     </span>
@@ -372,13 +372,13 @@
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button 
                     @click="viewTeacher(teacher.id)"
-                    class="text-indigo-600 hover:text-indigo-900 mr-4"
+                    class="text-purple-600 hover:text-purple-900 mr-4"
                   >
                     View
                   </button>
                   <button 
                     @click="editTeacher(teacher)"
-                    class="text-indigo-600 hover:text-indigo-900"
+                    class="text-purple-600 hover:text-purple-900"
                   >
                     Edit
                   </button>
@@ -431,8 +431,8 @@
     
     <!-- Empty state with animation -->
     <div v-else-if="!loading" class="bg-white p-10 rounded-xl shadow-md text-center animate-fade-in-up" style="animation-delay: 0.3s;">
-      <div class="bg-indigo-50 w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div class="bg-purple-50 w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
       </div>
@@ -444,7 +444,7 @@
         <button 
           v-if="searchQuery"
           @click="clearFilters"
-          class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-4"
+          class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 mr-4"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -453,7 +453,7 @@
         </button>
         <button 
           @click="showAddTeacherModal = true"
-          class="inline-flex items-center px-5 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-105"
+          class="inline-flex items-center px-5 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 transform hover:scale-105"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -468,7 +468,7 @@
       <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full animate-modal-in">
         <div class="relative">
           <!-- Modal header -->
-          <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-indigo-600 to-indigo-500 rounded-t-xl">
+          <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-purple-600 to-purple-500 rounded-t-xl">
             <h3 class="text-lg font-bold text-white">
               {{ showEditTeacherModal ? 'Modifier l\'enseignant' : 'Ajouter un nouvel enseignant' }}
             </h3>
@@ -499,7 +499,7 @@
                       v-model="teacherForm.firstName" 
                       type="text" 
                       required 
-                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                       placeholder="Entrez le prénom"
                     />
                   </div>
@@ -518,7 +518,7 @@
                       v-model="teacherForm.lastName" 
                       type="text" 
                       required 
-                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                       placeholder="Entrez le nom"
                     />
                   </div>
@@ -537,7 +537,7 @@
                       v-model="teacherForm.email" 
                       type="email" 
                       required 
-                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                       placeholder="teacher@example.com"
                     />
                   </div>
@@ -556,7 +556,7 @@
                       v-model="teacherForm.password" 
                       type="password" 
                       required 
-                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                       placeholder="••••••••"
                     />
                   </div>
@@ -576,7 +576,7 @@
                     <select 
                       id="status" 
                       v-model="teacherForm.status" 
-                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                     >
                       <option value="active">Actif</option>
                       <option value="inactive">Inactif</option>
@@ -586,17 +586,17 @@
                 
                 <div class="md:col-span-2 animate-fade-in" style="animation-delay: 500ms;">
                   <label for="subjects" class="block text-sm font-medium text-gray-700 mb-1">Subjects</label>
-                  <div class="flex flex-wrap gap-2 p-4 border border-gray-300 rounded-lg min-h-[100px] bg-gray-50 focus-within:ring-2 focus-within:ring-indigo-200 transition-all">
+                  <div class="flex flex-wrap gap-2 p-4 border border-gray-300 rounded-lg min-h-[100px] bg-gray-50 focus-within:ring-2 focus-within:ring-purple-200 transition-all">
                     <div 
                       v-for="subject in teacherForm.subjects" 
                       :key="subject"
-                      class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 animate-pop-in"
+                      class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 animate-pop-in"
                     >
                       {{ subject }}
                       <button 
                         type="button"
                         @click="removeSubject(subject)"
-                        class="ml-1.5 text-indigo-500 hover:text-indigo-700 focus:outline-none transition-colors"
+                        class="ml-1.5 text-purple-500 hover:text-purple-700 focus:outline-none transition-colors"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -615,7 +615,7 @@
                       <button 
                         type="button"
                         @click="addSubjectToForm"
-                        class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none transition-colors"
+                        class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -634,7 +634,7 @@
                     id="bio" 
                     v-model="teacherForm.bio" 
                     rows="4" 
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
                     placeholder="Biographie, expérience et spécialités de l'enseignant..."
                   ></textarea>
                 </div>
@@ -650,7 +650,7 @@
                 </button>
                 <button 
                   type="submit"
-                  class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center"
+                  class="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 flex items-center"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -1085,7 +1085,7 @@ onMounted(async () => {
   height: 16px;
   margin: 0 6px;
   border-radius: 50%;
-  background-color: #6366F1; /* indigo-500 */
+  background-color: #6366F1; /* purple-500 */
   animation: teacher-loader 1.5s infinite ease-in-out both;
 }
 

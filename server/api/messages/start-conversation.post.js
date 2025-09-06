@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Vérifier que le participant existe
-    const participant = await db.collection('User').findOne({ _id: participantObjectId });
+    const participant = await db.collection('users').findOne({ _id: participantObjectId });
     if (!participant) {
       throw createError({
         statusCode: 404,
@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
     const conversation = await Conversation.findOrCreate(userId, participantObjectId);
 
     // Récupérer les informations de l'autre participant (sans le mot de passe)
-    const otherParticipant = await db.collection('User').findOne(
+    const otherParticipant = await db.collection('users').findOne(
       { _id: participantObjectId },
       { projection: { password: 0 } }
     );

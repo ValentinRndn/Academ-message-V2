@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-4xl mx-auto px-4">
+    <div class="mx-auto px-4">
       <h1 class="text-3xl font-bold text-gray-900 mb-8">Test d'authentification</h1>
       
       <!-- État d'authentification -->
@@ -22,7 +22,7 @@
           <button 
             @click="testApiCall"
             :disabled="!isAuthenticated || loadingApi"
-            class="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
+            class="px-4 py-2 bg-purple-600 text-white rounded disabled:opacity-50"
           >
             {{ loadingApi ? 'Chargement...' : 'Tester API protégée' }}
           </button>

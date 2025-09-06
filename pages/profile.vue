@@ -1,18 +1,18 @@
 <template>
   <div class="max-w-5xl mx-auto px-4 py-8">
     <!-- Background decoration -->
-    <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 rounded-full bg-indigo-100 opacity-30 blur-3xl"></div>
+    <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 rounded-full bg-purple-100 opacity-30 blur-3xl"></div>
     <div class="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-purple-100 opacity-30 blur-3xl"></div>
     
     <!-- Main Profile Card -->
     <div class="bg-white shadow-xl rounded-2xl overflow-hidden mb-10 relative transform transition-all duration-300 hover:shadow-2xl">
       <!-- Profile header with gradient -->
-      <div class="bg-gradient-to-r from-indigo-600 to-indigo-500 h-40 flex items-end">
+      <div class="bg-gradient-to-r from-purple-600 to-purple-500 h-40 flex items-end">
         <div class="container mx-auto px-8 pb-6 flex justify-between items-end relative z-10">
           <h1 class="text-2xl sm:text-3xl font-bold text-white animate-fade-in">My Profile</h1>
           <button 
             @click="isEditing = !isEditing" 
-            class="px-5 py-2 bg-white text-indigo-600 rounded-lg font-medium hover:bg-indigo-50 transition-all duration-300 transform hover:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2"
+            class="px-5 py-2 bg-white text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-300 focus:ring-offset-2"
           >
             <span class="flex items-center">
               <svg v-if="!isEditing" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,7 +45,7 @@
             
             <div v-if="isEditing" class="absolute bottom-1 right-1">
               <button 
-                class="bg-indigo-600 text-white rounded-full p-2 shadow-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="bg-purple-600 text-white rounded-full p-2 shadow-lg hover:bg-purple-700 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                 title="Change avatar"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,7 +67,7 @@
                 </svg>
                 Teacher
               </span>
-              <span v-else class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+              <span v-else class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -92,7 +92,7 @@
           <!-- Personal Information -->
           <div>
             <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
               Personal Information
@@ -101,7 +101,7 @@
               <div class="bg-gray-50 p-5 rounded-lg transform transition hover:shadow-md">
                 <p class="text-sm font-medium text-gray-500">Email</p>
                 <p class="mt-2 text-gray-900 font-medium flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                   {{ profile.email }}
@@ -110,7 +110,7 @@
               <div class="bg-gray-50 p-5 rounded-lg transform transition hover:shadow-md">
                 <p class="text-sm font-medium text-gray-500">Institution</p>
                 <p class="mt-2 text-gray-900 font-medium flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                   {{ profile.institution || 'Not specified' }}
@@ -125,7 +125,7 @@
           <!-- Personal Information -->
           <div>
             <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
               Personal Information
@@ -143,7 +143,7 @@
                     id="firstName" 
                     v-model="editedProfile.firstName" 
                     type="text" 
-                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                   />
                 </div>
               </div>
@@ -159,7 +159,7 @@
                     id="lastName" 
                     v-model="editedProfile.lastName" 
                     type="text" 
-                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                   />
                 </div>
               </div>
@@ -175,7 +175,7 @@
                     id="email" 
                     v-model="editedProfile.email" 
                     type="email" 
-                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                   />
                 </div>
               </div>
@@ -191,7 +191,7 @@
                     id="institution" 
                     v-model="editedProfile.institution" 
                     type="text" 
-                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                    class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
                   />
                 </div>
               </div>
@@ -202,7 +202,7 @@
           <div class="flex justify-end">
             <button 
               type="submit" 
-              class="px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center"
+              class="px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 flex items-center"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -226,7 +226,7 @@
         <div class="p-8">
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl font-bold text-gray-900 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
               Subjects
@@ -234,7 +234,7 @@
             <button 
               v-if="!isEditingSubjects"
               @click="isEditingSubjects = true"
-              class="inline-flex items-center px-4 py-2 border border-indigo-600 text-sm font-medium rounded-lg text-indigo-600 bg-white hover:bg-indigo-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              class="inline-flex items-center px-4 py-2 border border-purple-600 text-sm font-medium rounded-lg text-purple-600 bg-white hover:bg-purple-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -248,17 +248,17 @@
           </p>
           
           <div v-if="isEditingSubjects" class="animate-fade-in">
-            <div class="flex flex-wrap gap-2 p-4 border border-gray-200 rounded-lg min-h-[100px] mb-6 bg-gray-50 focus-within:ring-2 focus-within:ring-indigo-200 transition-all">
+            <div class="flex flex-wrap gap-2 p-4 border border-gray-200 rounded-lg min-h-[100px] mb-6 bg-gray-50 focus-within:ring-2 focus-within:ring-purple-200 transition-all">
               <div 
                 v-for="subject in teacherSubjects" 
                 :key="subject"
-                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 transition-all hover:bg-indigo-200"
+                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800 transition-all hover:bg-purple-200"
               >
                 {{ subject }}
                 <button 
                   type="button"
                   @click="removeSubject(subject)"
-                  class="ml-1.5 text-indigo-500 hover:text-indigo-700 focus:outline-none"
+                  class="ml-1.5 text-purple-500 hover:text-purple-700 focus:outline-none"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -277,7 +277,7 @@
                 <button 
                   type="button"
                   @click="addSubject"
-                  class="ml-1 text-indigo-600 hover:text-indigo-800 focus:outline-none"
+                  class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -295,7 +295,7 @@
               </button>
               <button 
                 @click="saveSubjects"
-                class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition-all duration-300 transform hover:translate-y-[-2px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex items-center"
+                class="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-medium hover:bg-purple-700 transition-all duration-300 transform hover:translate-y-[-2px] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 flex items-center"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -313,7 +313,7 @@
               <p class="text-gray-500 mb-4">No subjects added yet</p>
               <button 
                 @click="isEditingSubjects = true"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 transition-all duration-300"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -326,7 +326,7 @@
               <span 
                 v-for="subject in teacherSubjects" 
                 :key="subject"
-                class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors cursor-default"
+                class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-purple-100 text-purple-800 hover:bg-purple-200 transition-colors cursor-default"
               >
                 {{ subject }}
               </span>
@@ -338,8 +338,8 @@
       <!-- Stats overview for teachers -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-fade-in-up">
         <div class="bg-white p-6 rounded-2xl shadow-lg flex items-center transform transition-all duration-300 hover:shadow-xl hover:translate-y-[-4px]">
-          <div class="bg-indigo-100 p-3 rounded-xl mr-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="bg-purple-100 p-3 rounded-xl mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
           </div>
@@ -382,7 +382,7 @@
         <div class="p-8">
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl font-bold text-gray-900 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               Upcoming Sessions
@@ -397,7 +397,7 @@
             <div class="mt-4">
               <NuxtLink 
                 to="/teachers" 
-                class="inline-flex items-center px-5 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                class="inline-flex items-center px-5 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-purple-600 hover:bg-purple-700 transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -413,7 +413,7 @@
       <div class="bg-white shadow-lg rounded-2xl overflow-hidden animate-fade-in-up transform transition-all duration-300 hover:shadow-xl hover:translate-y-[-4px]">
         <div class="p-8">
           <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
             Learning Progress
@@ -424,19 +424,19 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div class="text-center">
-                  <div class="text-3xl font-bold text-indigo-600">0</div>
+                  <div class="text-3xl font-bold text-purple-600">0</div>
                   <div class="text-sm text-gray-500">Completed Sessions</div>
                 </div>
               </div>
               <div class="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div class="text-center">
-                  <div class="text-3xl font-bold text-indigo-600">0</div>
+                  <div class="text-3xl font-bold text-purple-600">0</div>
                   <div class="text-sm text-gray-500">Hours of Learning</div>
                 </div>
               </div>
               <div class="bg-white p-4 rounded-lg shadow border border-gray-100">
                 <div class="text-center">
-                  <div class="text-3xl font-bold text-indigo-600">0</div>
+                  <div class="text-3xl font-bold text-purple-600">0</div>
                   <div class="text-sm text-gray-500">Subjects Explored</div>
                 </div>
               </div>

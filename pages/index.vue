@@ -1,37 +1,38 @@
 <template>
-  <div class="landing-page overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+  <div class="landing-page overflow-hidden bg-gradient-to-br from-purple-50 via-white to-purple-50">
     <!-- Hero Section -->
     <section class="min-h-screen relative flex items-center">
       <!-- Subtle diagonal pattern background -->
       <div class="absolute inset-0 -z-10 bg-diagonal-pattern"></div>
       <!-- Subtle decorative element -->
-      <div class="absolute top-1/4 right-1/4 h-32 w-32 rounded-full bg-indigo-200/20 blur-2xl"></div>
+      <div class="absolute top-1/4 right-1/4 h-32 w-32 rounded-full bg-purple-200/20 blur-2xl"></div>
       <div class="absolute bottom-1/3 left-1/3 h-48 w-48 rounded-full bg-purple-200/20 blur-3xl"></div>
       
       <!-- Navigation -->
       <div class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm py-4">
-        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div class="flex items-center gap-2">
-            <span class="text-2xl font-bold text-indigo-600">Academ</span>
+            <Nuxt-link to="/">
+            <img src="/assets/images/logo_academ.png" alt="Academ Logo" class="w-12 h-12" />
+          </Nuxt-link>
             <span class="sr-only">Message</span>
           </div>
           
           <div class="flex items-center gap-4">
-            <NuxtLink to="/teachers" class="text-gray-600 hover:text-indigo-600 transition-colors">Enseignants</NuxtLink>
-            <NuxtLink to="/login" class="px-4 py-2 text-gray-700 hover:text-indigo-600 transition-colors">Connexion</NuxtLink>
-            <NuxtLink to="/register" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all shadow-sm">Inscription</NuxtLink>
+            <NuxtLink to="/login" class="px-4 py-2 text-gray-700 hover:text-purple-600 transition-colors">Connexion</NuxtLink>
+            <NuxtLink to="/register" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all shadow-sm">Inscription</NuxtLink>
           </div>
         </div>
       </div>
 
-      <div class="max-w-7xl mx-auto px-3 py-28 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 py-28 relative z-10">
         <div class="grid md:grid-cols-5 gap-8 items-center">
           <div class="md:col-span-3 animate-fade-in-up">
             <div class="relative">
               <h1 class="relative text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
-                <span class="text-indigo-600 relative">
+                <span class="text-purple-600 relative">
                   Connectez-vous
-                  <span class="absolute bottom-0 left-0 w-full h-1 bg-indigo-200"></span>
+                  <span class="absolute bottom-0 left-0 w-full h-1 bg-purple-200"></span>
                 </span>
                 <br class="hidden md:block" /> aux meilleurs experts académiques
               </h1>
@@ -43,7 +44,7 @@
             <!-- Points forts avec style amélioré -->
             <div class="flex flex-wrap gap-4 mb-10">
               <div class="flex items-center gap-2 bg-white/80 py-2 px-4 rounded-full shadow-sm hover:bg-white transition-all">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-sm">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-sm">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
@@ -59,7 +60,7 @@
                 <span class="text-gray-700 font-medium">Experts vérifiés</span>
               </div>
               <div class="flex items-center gap-2 bg-white/80 py-2 px-4 rounded-full shadow-sm hover:bg-white transition-all">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-indigo-500 flex items-center justify-center shadow-sm">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center shadow-sm">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
@@ -71,7 +72,7 @@
             <div class="flex flex-wrap gap-4">
               <NuxtLink 
                 to="/register" 
-                class="group px-8 py-4 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-500 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-indigo-200/50 flex items-center justify-center"
+                class="group px-8 py-4 bg-purple-600 text-white font-medium rounded-xl hover:bg-purple-500 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-purple-200/50 flex items-center justify-center"
               >
                 <span>Commencer</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
@@ -80,7 +81,7 @@
               </NuxtLink>
               <NuxtLink 
                 to="/teachers" 
-                class="group px-8 py-4 bg-white text-indigo-600 font-medium rounded-xl transform hover:translate-y-[-2px] transition-all shadow-md hover:shadow-lg flex items-center justify-center"
+                class="group px-8 py-4 bg-white text-purple-600 font-medium rounded-xl transform hover:translate-y-[-2px] transition-all shadow-md hover:shadow-lg flex items-center justify-center"
               >
                 <span>Trouver un enseignant</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
@@ -93,11 +94,11 @@
             <div class="mt-12 grid grid-cols-3 gap-4">
               <div class="text-center py-4 px-2 bg-white backdrop-blur-sm rounded-lg shadow-md transform hover:-translate-y-1 transition-all">
                 <div class="flex justify-center mb-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-indigo-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-purple-500">
                     <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
                   </svg>
                 </div>
-                <p class="text-3xl font-bold text-indigo-600">500+</p>
+                <p class="text-3xl font-bold text-purple-600">500+</p>
                 <p class="text-gray-600 text-sm font-medium">Enseignants</p>
               </div>
               <div class="text-center py-4 px-2 bg-white backdrop-blur-sm rounded-lg shadow-md transform hover:-translate-y-1 transition-all">
@@ -113,11 +114,11 @@
               </div>
               <div class="text-center py-4 px-2 bg-white backdrop-blur-sm rounded-lg shadow-md transform hover:-translate-y-1 transition-all">
                 <div class="flex justify-center mb-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-indigo-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-purple-400">
                     <path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z" clip-rule="evenodd" />
                   </svg>
                 </div>
-                <p class="text-3xl font-bold text-indigo-600">98%</p>
+                <p class="text-3xl font-bold text-purple-600">98%</p>
                 <p class="text-gray-600 text-sm font-medium">Satisfaction</p>
               </div>
             </div>
@@ -134,34 +135,34 @@
                     <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
                     <div class="w-3 h-3 bg-green-400 rounded-full"></div>
                   </div>
-                  <div class="text-sm text-gray-500 mx-auto font-medium">Academ Message</div>
+                  <div class="text-sm text-gray-500 mx-auto font-medium">Academ</div>
                 </div>
                 
                 <!-- Chat interface with typing animation -->
                 <div class="space-y-4">
                   <div class="flex items-start">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 mr-3 flex-shrink-0">T</div>
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-3 flex-shrink-0">T</div>
                     <div class="bg-gray-100 rounded-xl rounded-tl-none p-3 text-sm">
                       <p>Bonjour ! Je suis disponible pour vous aider avec vos questions de calcul.</p>
                     </div>
                   </div>
                   
                   <div class="flex items-start justify-end">
-                    <div class="bg-indigo-100 rounded-xl rounded-tr-none p-3 text-sm">
+                    <div class="bg-purple-100 rounded-xl rounded-tr-none p-3 text-sm">
                       <p>Super ! J'ai des difficultés avec les dérivées. Pouvons-nous programmer une session ?</p>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 ml-3 flex-shrink-0">E</div>
                   </div>
                   
                   <div class="flex items-start">
-                    <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 mr-3 flex-shrink-0">T</div>
+                    <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-3 flex-shrink-0">T</div>
                     <div class="bg-gray-100 rounded-xl rounded-tl-none p-3 text-sm">
                       <p>Bien sûr ! Je suis libre demain à 15h. Cela vous convient ?</p>
                     </div>
                   </div>
                   
                   <div class="animate-pulse flex items-start justify-end opacity-70">
-                    <div class="bg-indigo-100 rounded-xl rounded-tr-none p-3 text-sm flex items-center">
+                    <div class="bg-purple-100 rounded-xl rounded-tr-none p-3 text-sm flex items-center">
                       <span class="animate-pulse-dots">...</span>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 ml-3 flex-shrink-0">E</div>
@@ -170,8 +171,8 @@
                 
                 <!-- Message input -->
                 <div class="mt-4 flex">
-                  <input type="text" placeholder="Tapez un message..." class="flex-1 bg-gray-100 rounded-l-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
-                  <button class="bg-indigo-600 text-white p-2 rounded-r-lg hover:bg-indigo-500 transition-colors">
+                  <input type="text" placeholder="Tapez un message..." class="flex-1 bg-gray-100 rounded-l-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                  <button class="bg-purple-600 text-white p-2 rounded-r-lg hover:bg-purple-500 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                     </svg>
@@ -181,23 +182,23 @@
                 <!-- Simple testimonial sans bordure -->
                 <div class="absolute -top-16 -right-12 bg-white rounded-lg p-3 shadow-sm max-w-[180px]">
                   <div class="flex items-center mb-2">
-                    <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-xs font-medium">M</div>
+                    <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xs font-medium">M</div>
                     <div class="text-xs font-medium ml-2">Marie L.</div>
                     <div class="ml-auto">
                       <div class="flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-indigo-600" viewBox="0 0 20 20" fill="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
                           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                         </svg>
                       </div>
@@ -212,7 +213,7 @@
       </div>
       
       <!-- Scroll indicator -->
-      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-indigo-400">
+      <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-purple-400">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
@@ -222,15 +223,15 @@
     <!-- Comment ça marche - Section avec effet parallax -->
     <section class="py-24 relative overflow-hidden" id="how-it-works">
       <!-- Arrière-plan avec effet parallax et motif -->
-      <div class="absolute inset-0 bg-gradient-to-r from-indigo-50 to-white -z-10"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-purple-50 to-white -z-10"></div>
       <div class="absolute inset-0 -z-10 bg-how-it-works-pattern"></div>
-      <div class="absolute -top-40 -right-40 w-96 h-96 bg-indigo-100 rounded-full opacity-20 blur-3xl"></div>
+      <div class="absolute -top-40 -right-40 w-96 h-96 bg-purple-100 rounded-full opacity-20 blur-3xl"></div>
       <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-100 rounded-full opacity-30 blur-3xl"></div>
       
-      <div class="max-w-7xl mx-auto px-3">
+      <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <span class="px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium inline-block mb-4">Processus simple</span>
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">Comment fonctionne Academ Message</h2>
+          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">Processus simple</span>
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">Comment fonctionne Academ</h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
             Notre plateforme vous connecte facilement avec des experts académiques pour obtenir l'aide dont vous avez besoin
           </p>
@@ -239,16 +240,16 @@
         <!-- Steps Grid -->
         <div class="grid md:grid-cols-3 gap-8">
           <!-- Étape 1 -->
-          <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-indigo-100 transition-all duration-300 relative">
+          <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-purple-100 transition-all duration-300 relative">
             <!-- Élément décoratif -->
-            <div class="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-indigo-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
-            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">1</div>
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">1</div>
             <h3 class="text-xl font-semibold mb-3 text-center">Créez votre compte</h3>
             <p class="text-gray-600 text-center mb-6">Inscrivez-vous en tant qu'étudiant ou connectez-vous en tant qu'enseignant vérifié pour accéder à toutes les fonctionnalités.</p>
             <div class="flex justify-center">
-              <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 group-hover:bg-indigo-200 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 group-hover:bg-purple-200 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </span>
@@ -256,16 +257,16 @@
           </div>
           
           <!-- Étape 2 -->
-          <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-indigo-100 transition-all duration-300 relative">
+          <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-purple-100 transition-all duration-300 relative">
             <!-- Élément décoratif -->
-            <div class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-indigo-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
-            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">2</div>
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">2</div>
             <h3 class="text-xl font-semibold mb-3 text-center">Trouvez le bon professeur</h3>
             <p class="text-gray-600 text-center mb-6">Parcourez les profils ou publiez vos besoins d'apprentissage pour trouver le professeur idéal.</p>
             <div class="flex justify-center">
-              <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 group-hover:bg-indigo-200 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 group-hover:bg-purple-200 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg> 
               </span>
@@ -273,16 +274,16 @@
           </div>
           
           <!-- Étape 3 -->
-          <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-indigo-100 transition-all duration-300 relative">
+          <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-purple-100 transition-all duration-300 relative">
             <!-- Élément décoratif -->
-            <div class="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-indigo-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
-            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">3</div>
+            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">3</div>
             <h3 class="text-xl font-semibold mb-3 text-center">Connectez-vous et apprenez</h3>
             <p class="text-gray-600 text-center mb-6">Échangez des messages, planifiez des sessions et collaborez via notre plateforme sécurisée.</p>
             <div class="flex justify-center">
-              <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 group-hover:bg-indigo-200 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 group-hover:bg-purple-200 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </span>
@@ -295,15 +296,15 @@
     <!-- Pourquoi nous choisir - Section avec effet de "card hover" -->
     <section class="py-28 bg-white relative overflow-hidden">
       <!-- Éléments décoratifs en arrière-plan -->
-      <div class="absolute inset-0 bg-gradient-to-br from-white via-indigo-50/30 to-white -z-10"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-white via-purple-50/30 to-white -z-10"></div>
       <div class="absolute inset-0 -z-10 bg-features-pattern"></div>
       <div class="absolute top-20 right-0 w-72 h-72 bg-yellow-100/30 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-10 left-10 w-80 h-80 bg-indigo-100/40 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-10 left-10 w-80 h-80 bg-purple-100/40 rounded-full blur-3xl"></div>
       
-      <div class="max-w-7xl mx-auto px-3">
+      <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <span class="px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium inline-block mb-4">Nos avantages</span>
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">Pourquoi choisir Academ Message</h2>
+          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">Nos avantages</span>
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">Pourquoi choisir Academ</h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
             Une plateforme conçue pour offrir la meilleure expérience d'apprentissage possible
           </p>
@@ -313,12 +314,12 @@
           <!-- Carte 1 : Enseignants experts -->
           <div class="group bg-white p-8 rounded-2xl shadow-md transition-all duration-300 hover:shadow-xl relative overflow-hidden">
             <!-- Effet de fond au survol amélioré -->
-            <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
-            <div class="absolute right-0 bottom-0 w-40 h-40 bg-indigo-100 rounded-full -mr-20 -mb-20 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
-            <div class="absolute left-0 top-0 w-20 h-20 bg-indigo-100 rounded-full -ml-10 -mt-10 opacity-0 group-hover:opacity-10 transition-all duration-500 delay-100"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+            <div class="absolute right-0 bottom-0 w-40 h-40 bg-purple-100 rounded-full -mr-20 -mb-20 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
+            <div class="absolute left-0 top-0 w-20 h-20 bg-purple-100 rounded-full -ml-10 -mt-10 opacity-0 group-hover:opacity-10 transition-all duration-500 delay-100"></div>
             
-            <div class="text-indigo-600 text-4xl mb-6 flex justify-center">
-              <span class="rounded-2xl bg-gradient-to-br from-indigo-50 to-indigo-100 group-hover:from-indigo-100 group-hover:to-indigo-200 p-5 inline-flex transition-all duration-300 shadow-sm group-hover:shadow-md transform group-hover:scale-105 group-hover:-rotate-3">
+            <div class="text-purple-600 text-4xl mb-6 flex justify-center">
+              <span class="rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 group-hover:from-purple-100 group-hover:to-purple-200 p-5 inline-flex transition-all duration-300 shadow-sm group-hover:shadow-md transform group-hover:scale-105 group-hover:-rotate-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                 </svg>
@@ -329,7 +330,7 @@
             <div class="mt-6 text-center">
               <NuxtLink 
                 to="/teachers" 
-                class="text-indigo-600 font-medium hover:text-indigo-800 inline-flex items-center group"
+                class="text-purple-600 font-medium hover:text-purple-800 inline-flex items-center group"
               >
                 Parcourir les enseignants
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
@@ -342,11 +343,11 @@
           <!-- Carte 2 : Planning flexible -->
           <div class="group bg-white p-8 rounded-2xl shadow-md transition-all duration-300 hover:shadow-xl relative overflow-hidden">
             <!-- Effet de fond au survol amélioré -->
-            <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
             <div class="absolute right-0 bottom-0 w-40 h-40 bg-purple-100 rounded-full -mr-20 -mb-20 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
             <div class="absolute left-0 top-0 w-20 h-20 bg-purple-100 rounded-full -ml-10 -mt-10 opacity-0 group-hover:opacity-10 transition-all duration-500 delay-100"></div>
             
-            <div class="text-indigo-600 text-4xl mb-6 flex justify-center">
+            <div class="text-purple-600 text-4xl mb-6 flex justify-center">
               <span class="rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 group-hover:from-purple-100 group-hover:to-purple-200 p-5 inline-flex transition-all duration-300 shadow-sm group-hover:shadow-md transform group-hover:scale-105 group-hover:rotate-3">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -358,7 +359,7 @@
             <div class="mt-6 text-center">
               <NuxtLink 
                 to="/teachers" 
-                class="text-indigo-600 font-medium hover:text-indigo-800 inline-flex items-center group"
+                class="text-purple-600 font-medium hover:text-purple-800 inline-flex items-center group"
               >
                 Trouver des sessions disponibles
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
@@ -371,12 +372,12 @@
           <!-- Carte 3 : Plateforme sécurisée -->
           <div class="group bg-white p-8 rounded-2xl shadow-md transition-all duration-300 hover:shadow-xl relative overflow-hidden">
             <!-- Effet de fond au survol amélioré -->
-            <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
-            <div class="absolute right-0 bottom-0 w-40 h-40 bg-blue-100 rounded-full -mr-20 -mb-20 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
-            <div class="absolute left-0 top-0 w-20 h-20 bg-blue-100 rounded-full -ml-10 -mt-10 opacity-0 group-hover:opacity-10 transition-all duration-500 delay-100"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+            <div class="absolute right-0 bottom-0 w-40 h-40 bg-purple-100 rounded-full -mr-20 -mb-20 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
+            <div class="absolute left-0 top-0 w-20 h-20 bg-purple-100 rounded-full -ml-10 -mt-10 opacity-0 group-hover:opacity-10 transition-all duration-500 delay-100"></div>
             
-            <div class="text-indigo-600 text-4xl mb-6 flex justify-center">
-              <span class="rounded-2xl bg-gradient-to-br from-blue-50 to-blue-100 group-hover:from-blue-100 group-hover:to-blue-200 p-5 inline-flex transition-all duration-300 shadow-sm group-hover:shadow-md transform group-hover:scale-105 group-hover:-rotate-2">
+            <div class="text-purple-600 text-4xl mb-6 flex justify-center">
+              <span class="rounded-2xl bg-gradient-to-br from-purple-50 to-purple-100 group-hover:from-purple-100 group-hover:to-purple-200 p-5 inline-flex transition-all duration-300 shadow-sm group-hover:shadow-md transform group-hover:scale-105 group-hover:rotate-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -387,7 +388,7 @@
             <div class="mt-6 text-center">
               <NuxtLink 
                 to="/messages" 
-                class="text-indigo-600 font-medium hover:text-indigo-800 inline-flex items-center group"
+                class="text-purple-600 font-medium hover:text-purple-800 inline-flex items-center group"
               >
                 Voir les messages
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
@@ -403,12 +404,12 @@
     <!-- Pour qui - Section avec deux colonnes -->
     <section class="py-24 relative overflow-hidden">
       <!-- Arrière-plan décoratif -->
-      <div class="absolute inset-0 bg-gradient-to-br from-white via-indigo-50/20 to-white -z-10"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-white via-purple-50/20 to-white -z-10"></div>
       <div class="absolute inset-0 -z-10 bg-for-who-pattern"></div>
       
-      <div class="max-w-7xl mx-auto px-3">
+      <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <span class="px-4 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-sm font-medium inline-block mb-4">Pour tous</span>
+          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">Pour tous</span>
           <h2 class="text-4xl font-bold text-gray-900 mb-4">Une solution adaptée à chaque besoin</h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
             Que vous soyez étudiant ou enseignant, notre plateforme est conçue pour vous
@@ -419,7 +420,7 @@
           <!-- Carte Étudiants -->
           <div class="group bg-white p-8 md:p-10 rounded-2xl shadow-xl flex flex-col hover:shadow-2xl transition-all duration-300">
             <div class="text-center mb-8">
-              <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-2xl text-3xl shadow-lg group-hover:shadow-indigo-200 mb-6 transform group-hover:scale-105 transition-all">
+              <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl text-3xl shadow-lg group-hover:shadow-purple-200 mb-6 transform group-hover:scale-105 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M12 14l9-5-9-5-9 5 9 5z" />
                   <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
@@ -434,20 +435,20 @@
             
             <div class="flex-grow">
               <ul class="space-y-4 mb-10">
-                <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-indigo-50/40 shadow-sm group-hover:shadow-md transition-shadow">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-purple-50/40 shadow-sm group-hover:shadow-md transition-shadow">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   <span>Accès à des enseignants vérifiés dans diverses matières académiques</span>
                 </li>
-                <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-indigo-50/40 shadow-sm group-hover:shadow-md transition-shadow">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-purple-50/40 shadow-sm group-hover:shadow-md transition-shadow">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   <span>Planifiez des sessions individuelles aux horaires qui vous conviennent</span>
                 </li>
-                <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-indigo-50/40 shadow-sm group-hover:shadow-md transition-shadow">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-purple-50/40 shadow-sm group-hover:shadow-md transition-shadow">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                   <span>Communiquez et échangez des fichiers via notre plateforme sécurisée</span>
@@ -458,7 +459,7 @@
             <div class="text-center mt-auto">
               <NuxtLink 
                 to="/register" 
-                class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-500 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-indigo-200/50 w-full md:w-auto"
+                class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-purple-600 hover:bg-purple-500 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-purple-200/50 w-full md:w-auto"
               >
                 S'inscrire comme étudiant
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -522,24 +523,24 @@
     </section>
     
     <!-- Call to Action - Section avec effet de gradient dynamique -->
-    <section class="py-24 bg-gradient-to-br from-indigo-600 via-indigo-700 to-purple-700 text-white relative overflow-hidden">
+    <section class="py-24 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-700 text-white relative overflow-hidden">
       <!-- Éléments décoratifs -->
       <div class="absolute inset-0 bg-cta-pattern opacity-25"></div>
       
       <!-- Blob shapes -->
       <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply opacity-20 blur-3xl animate-blob"></div>
-      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply opacity-20 blur-3xl animate-blob animation-delay-2000"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply opacity-20 blur-3xl animate-blob animation-delay-2000"></div>
       
       <div class="max-w-5xl mx-auto px-3 relative z-10">
         <div class="text-center">
           <h2 class="text-4xl md:text-5xl font-bold mb-6 drop-shadow-sm">Prêt à commencer ?</h2>
-          <p class="text-xl text-indigo-100 mb-12 max-w-2xl mx-auto">
-            Rejoignez des milliers d'étudiants et d'enseignants qui utilisent déjà Academ Message pour atteindre l'excellence académique.
+          <p class="text-xl text-purple-100 mb-12 max-w-2xl mx-auto">
+            Rejoignez des milliers d'étudiants et d'enseignants qui utilisent déjà Academ pour atteindre l'excellence académique.
           </p>
           <div class="flex flex-col sm:flex-row justify-center gap-6 max-w-md mx-auto">
             <NuxtLink 
               to="/register" 
-              class="group px-8 py-4 bg-white text-indigo-600 font-medium rounded-xl hover:bg-indigo-50 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-indigo-900/30 flex items-center justify-center"
+              class="group px-8 py-4 bg-white text-purple-600 font-medium rounded-xl hover:bg-purple-50 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-purple-900/30 flex items-center justify-center"
             >
               <span>Créer un compte</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
@@ -563,18 +564,18 @@
     <!-- Footer moderne avec effet de blur -->
     <footer class="bg-gray-900 text-gray-300 py-16 relative overflow-hidden">
       <!-- Éléments décoratifs -->
-      <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-indigo-900/10 to-transparent"></div>
-      <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-indigo-800/10 blur-3xl"></div>
+      <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-purple-900/10 to-transparent"></div>
+      <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-purple-800/10 blur-3xl"></div>
       <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-purple-800/5 blur-3xl"></div>
       <!-- Motif subtil en fond -->
       <div class="absolute inset-0 bg-footer-pattern"></div>
       
-      <div class="max-w-7xl mx-auto px-3 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 relative z-10">
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
             <div class="flex items-center mb-4">
               <span class="text-2xl font-bold text-white">Academ</span>
-              <span class="text-indigo-400 ml-1">Message</span>
+              <span class="text-purple-400 ml-1">Message</span>
             </div>
             <p class="text-gray-400 mb-6">Connecter les étudiants avec des enseignants qualifiés pour un soutien académique personnalisé.</p>
             <div class="flex space-x-4">
@@ -593,19 +594,19 @@
           <div>
             <h3 class="text-white text-lg font-bold mb-5">Liens rapides</h3>
             <ul class="space-y-3">
-              <li><NuxtLink to="/" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-indigo-400">→</span> Accueil</NuxtLink></li>
-              <li><NuxtLink to="/teachers" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-indigo-400">→</span> Trouver des enseignants</NuxtLink></li>
-              <li><NuxtLink to="/messages" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-indigo-400">→</span> Messages</NuxtLink></li>
-              <li><NuxtLink to="/profile" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-indigo-400">→</span> Mon profil</NuxtLink></li>
+              <li><NuxtLink to="/" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Accueil</NuxtLink></li>
+              <li><NuxtLink to="/teachers" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Trouver des enseignants</NuxtLink></li>
+              <li><NuxtLink to="/messages" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Messages</NuxtLink></li>
+              <li><NuxtLink to="/profile" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Mon profil</NuxtLink></li>
             </ul>
           </div>
           
           <div>
             <h3 class="text-white text-lg font-bold mb-5">Légal</h3>
             <ul class="space-y-3">
-              <li><NuxtLink to="/terms" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-indigo-400">→</span> Conditions d'utilisation</NuxtLink></li>
-              <li><NuxtLink to="/privacy" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-indigo-400">→</span> Politique de confidentialité</NuxtLink></li>
-              <li><NuxtLink to="/cookies" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-indigo-400">→</span> Politique de cookies</NuxtLink></li>
+              <li><NuxtLink to="/terms" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Conditions d'utilisation</NuxtLink></li>
+              <li><NuxtLink to="/privacy" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Politique de confidentialité</NuxtLink></li>
+              <li><NuxtLink to="/cookies" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Politique de cookies</NuxtLink></li>
             </ul>
           </div>
           
@@ -614,7 +615,7 @@
             <ul class="space-y-4">
               <li class="flex items-center">
                 <div class="bg-gray-800/90 p-2 rounded-lg mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
@@ -622,7 +623,7 @@
               </li>
               <li class="flex items-center">
                 <div class="bg-gray-800/90 p-2 rounded-lg mr-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
@@ -632,8 +633,8 @@
           </div>
         </div>
         
-        <div class="pt-8 mt-8 text-center text-gray-500 text-sm flex flex-col sm:flex-row justify-between items-center">
-          <p>&copy; 2025 Academ Message. Tous droits réservés.</p>
+        <div class="pt-8 mt-8 border-t border-gray-800 text-center text-gray-500 text-sm flex flex-col sm:flex-row justify-between items-center">
+          <p>&copy; 2025 Academ. Tous droits réservés.</p>
           <div class="mt-3 sm:mt-0 flex space-x-6">
             <NuxtLink to="/" class="hover:text-gray-400 transition-colors">Aide</NuxtLink>
             <NuxtLink to="/" class="hover:text-gray-400 transition-colors">Blog</NuxtLink>
@@ -659,7 +660,7 @@ watchEffect(() => {
 
 // Configuration de la page
 definePageMeta({
-  title: 'Academ Message - Plateforme d\'apprentissage',
+  title: 'Academ - Plateforme d\'apprentissage',
   layout: 'default'
 });
 </script>

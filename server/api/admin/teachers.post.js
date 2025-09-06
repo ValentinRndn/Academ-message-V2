@@ -1,6 +1,8 @@
 // API pour créer un professeur (admin seulement)
 import bcrypt from 'bcrypt';
 import { MongoClient } from 'mongodb';
+import mongoose from 'mongoose';
+import Teacher from '../../models/Teacher.js';
 
 // Configuration du transporteur email (à adapter selon votre fournisseur)
 const createTransporter = async () => {
@@ -51,7 +53,7 @@ async function sendWelcomeEmail({ to, firstName, lastName, email, password, role
     return { success: false, message: 'Variables SMTP non configurées' };
   }
 
-  const subject = 'Bienvenue sur Academ Message - Vos identifiants de connexion';
+  const subject = 'Bienvenue sur Academ - Vos identifiants de connexion';
   
   const htmlContent = `
     <!DOCTYPE html>
@@ -59,7 +61,7 @@ async function sendWelcomeEmail({ to, firstName, lastName, email, password, role
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Bienvenue sur Academ Message</title>
+      <title>Bienvenue sur Academ</title>
       <style>
         body {
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -136,12 +138,12 @@ async function sendWelcomeEmail({ to, firstName, lastName, email, password, role
     </head>
     <body>
       <div class="header">
-        <h1>🎓 Bienvenue sur Academ Message</h1>
+        <h1>🎓 Bienvenue sur Academ</h1>
         <p>Bonjour ${firstName} ${lastName}</p>
       </div>
       
       <div class="content">
-        <p>Nous sommes ravis de vous accueillir sur la plateforme Academ Message !</p>
+        <p>Nous sommes ravis de vous accueillir sur la plateforme Academ !</p>
         
         <p>Votre compte professeur a été créé avec succès. Voici vos identifiants de connexion :</p>
         
@@ -166,7 +168,7 @@ async function sendWelcomeEmail({ to, firstName, lastName, email, password, role
           Se connecter
         </a>
         
-        <h3>Que pouvez-vous faire sur Academ Message ?</h3>
+        <h3>Que pouvez-vous faire sur Academ ?</h3>
         <ul>
           <li>📚 Gérer vos matières et spécialités</li>
           <li>📅 Définir vos disponibilités</li>
@@ -177,23 +179,23 @@ async function sendWelcomeEmail({ to, firstName, lastName, email, password, role
         
         <p>Si vous avez des questions ou besoin d'aide, n'hésitez pas à contacter notre équipe support.</p>
         
-        <p>Cordialement,<br>L'équipe Academ Message</p>
+        <p>Cordialement,<br>L'équipe Academ</p>
       </div>
       
       <div class="footer">
         <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
-        <p>© 2024 Academ Message. Tous droits réservés.</p>
+        <p>© 2024 Academ. Tous droits réservés.</p>
       </div>
     </body>
     </html>
   `;
 
   const textContent = `
-    Bienvenue sur Academ Message !
+    Bienvenue sur Academ !
     
     Bonjour ${firstName} ${lastName},
     
-    Nous sommes ravis de vous accueillir sur la plateforme Academ Message !
+    Nous sommes ravis de vous accueillir sur la plateforme Academ !
     
     Votre compte professeur a été créé avec succès. Voici vos identifiants de connexion :
     
@@ -204,7 +206,7 @@ async function sendWelcomeEmail({ to, firstName, lastName, email, password, role
     
     Vous pouvez dès maintenant vous connecter à votre espace professeur sur: ${config.baseUrl || 'http://localhost:3000'}/login
     
-    Que pouvez-vous faire sur Academ Message ?
+    Que pouvez-vous faire sur Academ ?
     - Gérer vos matières et spécialités
     - Définir vos disponibilités
     - Recevoir des demandes de cours
@@ -214,11 +216,11 @@ async function sendWelcomeEmail({ to, firstName, lastName, email, password, role
     Si vous avez des questions ou besoin d'aide, n'hésitez pas à contacter notre équipe support.
     
     Cordialement,
-    L'équipe Academ Message
+    L'équipe Academ
     
     ---
     Cet email a été envoyé automatiquement. Merci de ne pas y répondre.
-    © 2024 Academ Message. Tous droits réservés.
+    © 2024 Academ. Tous droits réservés.
   `;
 
   try {
@@ -321,7 +323,7 @@ export default defineEventHandler(async (event) => {
     const database = await connectToMongoDB();
 
     // Vérifier si l'email existe déjà
-    const existingUser = await database.collection('User').findOne({ email: email.toLowerCase() });
+    const existingUser = await database.collection('users').findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return createError({
         statusCode: 409,
@@ -333,7 +335,49 @@ export default defineEventHandler(async (event) => {
     // Hasher le mot de passe
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Créer l'utilisateur professeur
+    // Créer un ID Stripe Customer pour les paiements (étudiants qui deviennent professeurs peuvent avoir besoin)
+    let stripeCustomerId = null;
+    let stripeAccountId = null;
+    
+    try {
+      // Initialiser Stripe si configuré
+      const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+      if (stripeSecretKey) {
+        const stripe = (await import('stripe')).default(stripeSecretKey);
+        
+        // Créer un customer Stripe
+        const customer = await stripe.customers.create({
+          email: email.toLowerCase().trim(),
+          name: `${firstName.trim()} ${lastName.trim()}`,
+          metadata: {
+            role: 'teacher',
+            academ_user_type: 'teacher'
+          }
+        });
+        stripeCustomerId = customer.id;
+        
+        // Créer un compte Stripe Connect pour les professeurs (pour recevoir des paiements)
+        const account = await stripe.accounts.create({
+          type: 'express',
+          email: email.toLowerCase().trim(),
+          metadata: {
+            teacher_name: `${firstName.trim()} ${lastName.trim()}`,
+            academ_user_type: 'teacher'
+          }
+        });
+        stripeAccountId = account.id;
+        
+        console.log(`✅ Stripe Customer créé: ${stripeCustomerId}`);
+        console.log(`✅ Stripe Account créé: ${stripeAccountId}`);
+      } else {
+        console.warn('⚠️ STRIPE_SECRET_KEY non configuré, IDs Stripe non créés');
+      }
+    } catch (stripeError) {
+      console.error('❌ Erreur lors de la création des comptes Stripe:', stripeError);
+      // On continue sans Stripe si ça échoue
+    }
+
+    // Créer l'utilisateur professeur dans la collection users
     const teacherData = {
       firstName: firstName.trim(),
       lastName: lastName.trim(),
@@ -346,6 +390,8 @@ export default defineEventHandler(async (event) => {
       bio: bio?.trim() || '',
       subjects: subjects || [],
       password: hashedPassword,
+      stripeCustomerId: stripeCustomerId,
+      stripeAccountId: stripeAccountId,
       isFirstLogin: true, // Flag pour forcer le changement de mot de passe
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -355,7 +401,7 @@ export default defineEventHandler(async (event) => {
     };
 
     // Insérer le professeur dans la base de données
-    const result = await database.collection('User').insertOne(teacherData);
+    const result = await database.collection('users').insertOne(teacherData);
 
     if (!result.insertedId) {
       return createError({
@@ -365,8 +411,41 @@ export default defineEventHandler(async (event) => {
       });
     }
 
+    // S'assurer que Mongoose est connecté
+    const config = useRuntimeConfig();
+    const mongoUrl = config.DATABASE_URL || 'mongodb://localhost:27017/academ-message-db';
+    
+    if (mongoose.connection.readyState === 0) {
+      await mongoose.connect(mongoUrl);
+      console.log('✅ Mongoose connecté pour Teacher');
+    }
+
+    // Créer l'enregistrement correspondant dans la collection Teacher avec Mongoose
+    const teacherRecord = new Teacher({
+      userId: result.insertedId,
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      email: email.toLowerCase().trim(),
+      bio: bio?.trim() || '',
+      avatar: '',
+      subjects: subjects || [],
+      availability: [],
+      hourlyRate: 50, // Tarif par défaut
+      languages: ['french', 'english'],
+      experience: experience ? parseInt(experience) : 0,
+      averageRating: 0,
+      reviewCount: 0,
+      sessionsCompleted: 0,
+      status: 'active',
+      stripeCustomerId: stripeCustomerId,
+      stripeAccountId: stripeAccountId
+    });
+
+    const savedTeacher = await teacherRecord.save();
+    console.log('✅ Teacher enregistré avec ID:', savedTeacher._id);
+
     // Récupérer le professeur créé (sans le mot de passe)
-    const createdTeacher = await database.collection('User').findOne(
+    const createdTeacher = await database.collection('users').findOne(
       { _id: result.insertedId },
       { projection: { password: 0 } }
     );
@@ -388,26 +467,49 @@ export default defineEventHandler(async (event) => {
     }
 
     console.log(`✅ Professeur créé par l'admin ${event.context.auth.user.email}:`, {
-      teacherId: result.insertedId,
+      userId: result.insertedId,
+      teacherRecordId: savedTeacher._id,
       teacherEmail: email,
       createdBy: event.context.auth.user._id,
-      emailSent: emailResult?.success || false
+      emailSent: emailResult?.success || false,
+      stripeCustomerId: stripeCustomerId,
+      stripeAccountId: stripeAccountId
     });
 
     return {
       success: true,
       message: 'Professeur créé avec succès',
       teacher: createdTeacher,
+      teacherRecord: {
+        _id: savedTeacher._id.toString(),
+        userId: savedTeacher.userId.toString()
+      },
       emailSent: emailResult?.success || false,
-      emailMessage: emailResult?.message || 'Email non envoyé'
+      emailMessage: emailResult?.message || 'Email non envoyé',
+      stripeSetup: stripeCustomerId ? 'Comptes Stripe créés' : 'Stripe non configuré'
     };
 
   } catch (error) {
-    console.error('Erreur lors de la création du professeur:', error);
+    console.error('Erreur détaillée lors de la création du professeur:', {
+      error: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+    
+    // Essayer de nettoyer si l'utilisateur a été créé mais pas le Teacher
+    if (result?.insertedId) {
+      try {
+        await database.collection('users').deleteOne({ _id: result.insertedId });
+        console.log('🧹 Utilisateur nettoyé après erreur Teacher');
+      } catch (cleanupError) {
+        console.error('Erreur lors du nettoyage:', cleanupError);
+      }
+    }
+    
     return createError({
       statusCode: 500,
       statusMessage: 'Internal Server Error',
-      message: 'Erreur lors de la création du professeur'
+      message: `Erreur lors de la création du professeur: ${error.message}`
     });
   }
 });

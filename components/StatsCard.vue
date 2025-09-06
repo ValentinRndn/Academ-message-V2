@@ -39,7 +39,7 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: 'blue'
+    default: 'purple'
   },
   subtitle: {
     type: String,
@@ -85,26 +85,20 @@ const getIconComponent = (iconName) => {
 
 const getIconBackgroundClass = (color) => {
   const classes = {
-    blue: 'bg-blue-100',
-    green: 'bg-green-100',
     purple: 'bg-purple-100',
-    orange: 'bg-orange-100',
-    yellow: 'bg-yellow-100',
-    red: 'bg-red-100'
+    gray: 'bg-gray-100',
+    light: 'bg-purple-50'
   };
-  return classes[color] || classes.blue;
+  return classes[color] || classes.purple;
 };
 
 const getIconTextClass = (color) => {
   const classes = {
-    blue: 'text-blue-600',
-    green: 'text-green-600',
     purple: 'text-purple-600',
-    orange: 'text-orange-600',
-    yellow: 'text-yellow-600',
-    red: 'text-red-600'
+    gray: 'text-gray-600',
+    light: 'text-purple-500'
   };
-  return classes[color] || classes.blue;
+  return classes[color] || classes.purple;
 };
 
 const formatValue = (value) => {

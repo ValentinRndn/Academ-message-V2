@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 // URL de connexion MongoDB
-const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost:27017/academ-message-db';
+const DATABASE_URL = process.env.DATABASE_URL || 'mongodb+srv://valentinrenaudin2206:C2dIAq0H4qUsnpfb@cluster0.z39ca.mongodb.net/academ-message-db';
 
 // Options de configuration Mongoose
 const options = {

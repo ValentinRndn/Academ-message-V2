@@ -4,10 +4,26 @@ import { ObjectId } from 'mongodb';
 
 // Initialiser Stripe avec la clé secrète
 import Stripe from 'stripe';
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_dummy_key_replace_with_your_actual_key');
 
 export default defineEventHandler(async (event) => {
   try {
+    // Récupérer la configuration runtime
+    const config = useRuntimeConfig();
+    const stripeSecretKey = config.STRIPE_SECRET_KEY;
+
+    console.log('🔍 STRIPE_SECRET_KEY reçue:', stripeSecretKey ? `${stripeSecretKey.slice(0, 12)}...${stripeSecretKey.slice(-4)}` : 'undefined');
+    
+    if (!stripeSecretKey) {
+      console.error('❌ STRIPE_SECRET_KEY manquante');
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Payment Service Error',
+        message: 'Configuration Stripe manquante'
+      });
+    }
+
+    const stripe = new Stripe(stripeSecretKey);
+    
     // S'assurer que la connexion à la base de données est établie
     await connectToDatabase();
     
@@ -137,10 +153,27 @@ export default defineEventHandler(async (event) => {
       };
     } catch (stripeError) {
       console.error('Erreur Stripe:', stripeError);
+      console.error('Type erreur:', stripeError.type);
+      console.error('Code erreur:', stripeError.code);
+      console.error('Message:', stripeError.message);
+      
+      // Messages d'erreur spécifiques selon le type d'erreur Stripe
+      let errorMessage = 'Erreur lors de la création du paiement';
+      
+      if (stripeError.type === 'StripeAuthenticationError') {
+        errorMessage = 'Clé API Stripe invalide ou expirée';
+      } else if (stripeError.type === 'StripeCardError') {
+        errorMessage = 'Problème avec la carte de paiement';
+      } else if (stripeError.type === 'StripeRateLimitError') {
+        errorMessage = 'Trop de requêtes, veuillez réessayer plus tard';
+      } else if (stripeError.type === 'StripeConnectionError') {
+        errorMessage = 'Problème de connexion avec Stripe';
+      }
+      
       throw createError({
         statusCode: 500,
         statusMessage: 'Payment Service Error',
-        message: 'Erreur lors de la création du paiement'
+        message: errorMessage
       });
     }
   } catch (error) {

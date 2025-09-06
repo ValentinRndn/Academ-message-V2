@@ -59,17 +59,17 @@ export default function (httpServer: HttpServer) {
 
   // Événement de connexion
   io.on('connection', (socket) => {
-    console.log('User connected:', socket.data.user.id)
+    console.log('User connected:', socket.data.user.userId)
     
     // Ajouter l'utilisateur à la liste des connectés
     connectedUsers.push({
-      userId: socket.data.user.id,
+      userId: socket.data.user.userId,
       socketId: socket.id
     })
     
     // Informer les autres que l'utilisateur est en ligne
     io.emit('user_status', {
-      userId: socket.data.user.id,
+      userId: socket.data.user.userId,
       status: 'online'
     })
 
@@ -77,7 +77,7 @@ export default function (httpServer: HttpServer) {
     socket.on('send_message', async (data) => {
       try {
         const { receiverId, content, conversationId } = data
-        const senderId = socket.data.user.id
+        const senderId = socket.data.user.userId
         
         console.log(`Message from ${senderId} to ${receiverId} in conversation ${conversationId}`)
         
@@ -116,20 +116,20 @@ export default function (httpServer: HttpServer) {
     // Événement pour rejoindre une conversation
     socket.on('join_conversation', (conversationId) => {
       socket.join(`conversation_${conversationId}`)
-      console.log(`User ${socket.data.user.id} joined conversation ${conversationId}`)
+      console.log(`User ${socket.data.user.userId} joined conversation ${conversationId}`)
     })
 
     // Événement pour quitter une conversation
     socket.on('leave_conversation', (conversationId) => {
       socket.leave(`conversation_${conversationId}`)
-      console.log(`User ${socket.data.user.id} left conversation ${conversationId}`)
+      console.log(`User ${socket.data.user.userId} left conversation ${conversationId}`)
     })
 
     // Événement pour indiquer qu'un utilisateur est en train de taper
     socket.on('typing_start', (data) => {
       const { conversationId } = data
       socket.to(`conversation_${conversationId}`).emit('user_typing', {
-        userId: socket.data.user.id,
+        userId: socket.data.user.userId,
         isTyping: true
       })
     })
@@ -138,7 +138,7 @@ export default function (httpServer: HttpServer) {
     socket.on('typing_stop', (data) => {
       const { conversationId } = data
       socket.to(`conversation_${conversationId}`).emit('user_typing', {
-        userId: socket.data.user.id,
+        userId: socket.data.user.userId,
         isTyping: false
       })
     })
@@ -147,7 +147,7 @@ export default function (httpServer: HttpServer) {
     socket.on('mark_read', async (data) => {
       try {
         const { messageId } = data
-        const userId = socket.data.user.id
+        const userId = socket.data.user.userId
         
         // Mettre à jour le message dans la base de données (à implémenter)
         // await markMessageAsRead(messageId, userId)
@@ -180,7 +180,7 @@ export default function (httpServer: HttpServer) {
     
     // Événement de déconnexion
     socket.on('disconnect', () => {
-      console.log('User disconnected:', socket.data.user.id)
+      console.log('User disconnected:', socket.data.user.userId)
       
       // Retirer l'utilisateur de la liste des connectés
       const index = connectedUsers.findIndex(
@@ -193,7 +193,7 @@ export default function (httpServer: HttpServer) {
       
       // Informer les autres que l'utilisateur est hors ligne
       io.emit('user_status', {
-        userId: socket.data.user.id,
+        userId: socket.data.user.userId,
         status: 'offline'
       })
     })

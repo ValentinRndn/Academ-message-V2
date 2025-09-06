@@ -16,24 +16,24 @@ export const useNavigation = () => {
       icon: 'users',
       description: 'Gestion des comptes'
     },
-    {
-      name: 'Messages',
-      to: '/admin/messages',
-      icon: 'chat',
-      description: 'Modération'
-    },
+    // {
+    //   name: 'Messages',
+    //   to: '/admin/messages',
+    //   icon: 'chat',
+    //   description: 'Modération'
+    // },
     {
       name: 'Matières',
       to: '/admin/subjects',
       icon: 'book',
       description: 'Configuration'
     },
-    {
-      name: 'Rapports',
-      to: '/admin/reports',
-      icon: 'chart',
-      description: 'Analytics'
-    },
+    // {
+    //   name: 'Rapports',
+    //   to: '/admin/reports',
+    //   icon: 'chart',
+    //   description: 'Analytics'
+    // },
     {
       name: 'Paramètres',
       to: '/admin/settings',
@@ -132,7 +132,7 @@ export const useNavigation = () => {
         return [
           { name: 'Dashboard', to: '/dashboard', icon: 'home' },
           { name: 'Utilisateurs', to: '/admin/users', icon: 'users' },
-          { name: 'Messages', to: '/admin/messages', icon: 'chat' },
+          { name: 'Matières', to: '/admin/subjects', icon: 'book' },
           { name: 'Paramètres', to: '/admin/settings', icon: 'settings' }
         ];
       case 'teacher':

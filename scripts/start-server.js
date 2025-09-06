@@ -1,5 +1,5 @@
 /**
- * Script pour démarrer le serveur backend d'Academ Message
+ * Script pour démarrer le serveur backend d'Academ
  */
 
 import { exec } from 'child_process';

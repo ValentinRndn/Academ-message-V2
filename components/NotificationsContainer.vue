@@ -9,7 +9,7 @@
           'bg-green-100 border-l-4 border-green-500': notification.type === 'success',
           'bg-red-100 border-l-4 border-red-500': notification.type === 'error',
           'bg-yellow-100 border-l-4 border-yellow-500': notification.type === 'warning',
-          'bg-blue-100 border-l-4 border-blue-500': notification.type === 'info'
+          'bg-purple-100 border-l-4 border-purple-500': notification.type === 'info'
         }"
       >
         <div class="flex items-start">
@@ -18,7 +18,7 @@
               'text-green-800': notification.type === 'success',
               'text-red-800': notification.type === 'error',
               'text-yellow-800': notification.type === 'warning',
-              'text-blue-800': notification.type === 'info'
+              'text-purple-800': notification.type === 'info'
             }">
               {{ notification.title }}
             </h3>
@@ -26,7 +26,7 @@
               'text-green-700': notification.type === 'success',
               'text-red-700': notification.type === 'error',
               'text-yellow-700': notification.type === 'warning',
-              'text-blue-700': notification.type === 'info'
+              'text-purple-700': notification.type === 'info'
             }">
               {{ notification.message }}
             </p>

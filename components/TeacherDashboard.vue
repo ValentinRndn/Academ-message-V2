@@ -12,14 +12,14 @@
         title="Étudiants" 
         :value="stats?.overview?.totalStudents || 0"
         icon="users"
-        color="blue"
+        color="purple"
         subtitle="Élèves uniques"
       />
       <StatsCard 
         title="Réservations" 
         :value="stats?.overview?.totalBookings || 0"
         icon="calendar"
-        color="green"
+        color="purple"
         subtitle="Sessions programmées"
       />
       <StatsCard 
@@ -33,20 +33,20 @@
         title="Note moyenne" 
         :value="stats?.overview?.averageRating || 0"
         icon="star"
-        color="yellow"
+        color="purple"
         subtitle="Sur 5 étoiles"
         :is-rating="true"
       />
     </div>
 
     <!-- Actions rapides -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 hidden">
       <!-- Gestion des cours -->
       <div class="bg-white rounded-lg shadow p-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">📚 Mes Cours</h3>
         <div class="space-y-3">
           <NuxtLink to="/teacher/schedule" 
-            class="block w-full text-left px-4 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors">
+            class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
             📅 Voir mon planning
           </NuxtLink>
           <NuxtLink to="/teacher/availability" 
@@ -88,7 +88,7 @@
             ⭐ Mes avis ({{ stats?.overview?.totalReviews || 0 }})
           </NuxtLink>
           <NuxtLink to="/teacher/analytics" 
-            class="block w-full text-left px-4 py-2 bg-indigo-50 text-indigo-700 rounded-md hover:bg-indigo-100 transition-colors">
+            class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
             📈 Statistiques détaillées
           </NuxtLink>
           <NuxtLink to="/teacher/profile" 
@@ -108,15 +108,15 @@
         </div>
         <div class="p-6">
           <div v-if="loading" class="text-center py-4">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
             <p class="text-gray-500 mt-2">Chargement...</p>
           </div>
           <div v-else-if="stats?.recent?.bookings?.length" class="space-y-4">
             <div v-for="booking in stats.recent.bookings" :key="booking._id" 
               class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                  <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                   </svg>
                 </div>
@@ -138,7 +138,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
             <p>Aucune réservation récente</p>
-            <NuxtLink to="/teacher/availability" class="text-blue-600 text-sm hover:text-blue-800">
+            <NuxtLink to="/teacher/availability" class="text-purple-600 text-sm hover:text-purple-800">
               Configurer mes disponibilités
             </NuxtLink>
           </div>
@@ -202,10 +202,10 @@ const formatBookingDate = (dateString) => {
 
 const getBookingStatusClass = (status) => {
   const classes = {
-    pending: 'bg-yellow-100 text-yellow-800',
-    confirmed: 'bg-green-100 text-green-800',
-    completed: 'bg-blue-100 text-blue-800',
-    cancelled: 'bg-red-100 text-red-800'
+    pending: 'bg-purple-100 text-purple-800',
+    confirmed: 'bg-purple-100 text-purple-800',
+    completed: 'bg-purple-100 text-purple-800',
+    cancelled: 'bg-gray-100 text-gray-800'
   };
   return classes[status] || 'bg-gray-100 text-gray-800';
 };

@@ -24,7 +24,7 @@ async function createMissingUsers() {
 
     for (const teacher of orphanedTeachers) {
       // Vérifier si un utilisateur avec cet email existe déjà
-      const existingUser = await db.collection('User').findOne({ email: teacher.email });
+      const existingUser = await db.collection('users').findOne({ email: teacher.email });
 
       if (existingUser) {
         // Lier le profil à l'utilisateur existant
@@ -44,7 +44,7 @@ async function createMissingUsers() {
           updatedAt: new Date()
         };
 
-        const result = await db.collection('User').insertOne(newUser);
+        const result = await db.collection('users').insertOne(newUser);
         
         // Lier le profil Teacher au nouvel utilisateur
         teacher.userId = result.insertedId;

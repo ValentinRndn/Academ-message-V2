@@ -72,7 +72,7 @@ export default defineEventHandler(async (event) => {
     const database = await connectToMongoDB();
 
     // Récupérer l'utilisateur avec son mot de passe actuel
-    const user = await database.collection('User').findOne({ 
+    const user = await database.collection('users').findOne({ 
       _id: event.context.auth.user._id 
     });
 
@@ -98,7 +98,7 @@ export default defineEventHandler(async (event) => {
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
 
     // Mettre à jour le mot de passe dans la base de données
-    await database.collection('User').updateOne(
+    await database.collection('users').updateOne(
       { _id: event.context.auth.user._id },
       { 
         $set: { 

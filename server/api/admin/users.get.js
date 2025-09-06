@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
     const database = await connectToMongoDB();
 
     // Récupérer tous les utilisateurs (sans les mots de passe)
-    const users = await database.collection('User').find(
+    const users = await database.collection('users').find(
       {},
       { 
         projection: { 
@@ -91,6 +91,8 @@ export default defineEventHandler(async (event) => {
       updatedAt: user.updatedAt,
       lastLogin: user.lastLogin
     }));
+
+
 
     return {
       users: formattedUsers,

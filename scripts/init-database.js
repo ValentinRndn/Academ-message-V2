@@ -6,7 +6,7 @@ async function initializeDatabase() {
     const db = await connectToDatabase();
     
     // Créer la collection users si elle n'existe pas
-    const usersCollection = db.collection('User');
+    const usersCollection = db.collection('users');
     
     // Supprimer les utilisateurs existants
     await usersCollection.deleteMany({});

@@ -56,8 +56,16 @@ export default defineEventHandler(async (event) => {
     // Masquer le mot de passe dans la réponse
     const { password: _, ...safeUser } = newUser;
     
+    // Définir le cookie avec le token
+    setCookie(event, 'auth_token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60, // 7 jours en secondes
+      path: '/'
+    });
+    
     return {
-      token,
       user: safeUser
     };
   } catch (error) {

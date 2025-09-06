@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900">Gérer mes disponibilités</h1>
@@ -15,9 +15,9 @@
       </div>
 
       <!-- Instructions -->
-      <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-blue-900 mb-3">💡 Comment ça marche ?</h3>
-        <div class="space-y-2 text-sm text-blue-800">
+      <div class="mt-8 bg-purple-50 border border-purple-200 rounded-lg p-6">
+        <h3 class="text-lg font-semibold text-purple-900 mb-3">💡 Comment ça marche ?</h3>
+        <div class="space-y-2 text-sm text-purple-800">
           <p>• <strong>Sélectionnez les jours</strong> où vous êtes disponible</p>
           <p>• <strong>Définissez vos créneaux horaires</strong> pour chaque jour</p>
           <p>• <strong>Sauvegardez</strong> vos disponibilités</p>
@@ -33,7 +33,7 @@
         </div>
         <div class="p-6">
           <div v-if="loading" class="text-center py-8">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto"></div>
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
             <p class="text-gray-500 mt-2">Chargement...</p>
           </div>
           
@@ -70,7 +70,6 @@ import { ref, computed, onMounted } from 'vue';
 
 // Définir les métadonnées de la page
 definePageMeta({
-  middleware: 'auth'
 });
 
 // État

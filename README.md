@@ -1,4 +1,4 @@
-# Academ Message
+# Academ
 
 Une plateforme de messagerie et de réservation pour connecter étudiants et enseignants.
 

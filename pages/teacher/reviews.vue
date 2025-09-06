@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class=" mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900">Mes Avis</h1>
@@ -14,7 +14,7 @@
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center">
+              <div class="w-8 h-8 bg-purple-500 rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -107,11 +107,11 @@
               v-model="searchQuery" 
               type="text" 
               placeholder="Rechercher dans les avis..."
-              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
           
-          <select v-model="ratingFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+          <select v-model="ratingFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
             <option value="all">Toutes les notes</option>
             <option value="5">5 étoiles</option>
             <option value="4">4 étoiles</option>
@@ -120,18 +120,18 @@
             <option value="1">1 étoile</option>
           </select>
           
-          <select v-model="sortBy" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+          <select v-model="sortBy" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
             <option value="date">Plus récents</option>
             <option value="rating">Note</option>
             <option value="student">Étudiant</option>
           </select>
           
-          <button 
+          <!-- <button 
             @click="exportReviews"
-            class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+            class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
             Exporter
-          </button>
+          </button> -->
         </div>
       </div>
 
@@ -142,7 +142,7 @@
         </div>
 
         <div v-if="loading" class="p-8 text-center">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto"></div>
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
           <p class="text-gray-500 mt-2">Chargement des avis...</p>
         </div>
 
@@ -161,8 +161,8 @@
           >
             <div class="flex items-start space-x-4">
               <!-- Avatar de l'étudiant -->
-              <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                <span class="text-indigo-600 font-semibold text-lg">
+              <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                <span class="text-purple-600 font-semibold text-lg">
                   {{ review.studentName.charAt(0) }}
                 </span>
               </div>
@@ -214,7 +214,7 @@
                   <span 
                     v-for="tag in review.tags" 
                     :key="tag"
-                    class="px-2 py-1 bg-indigo-100 text-indigo-700 text-xs rounded-full"
+                    class="px-2 py-1 bg-purple-100 text-purple-700 text-xs rounded-full"
                   >
                     {{ tag }}
                   </span>
@@ -224,7 +224,7 @@
                 <div class="flex items-center space-x-4">
                   <button 
                     @click="replyToReview(review)"
-                    class="text-sm text-indigo-600 hover:text-indigo-800 font-medium"
+                    class="text-sm text-purple-600 hover:text-purple-800 font-medium"
                   >
                     Répondre
                   </button>
@@ -290,7 +290,7 @@
               :class="[
                 'px-3 py-2 text-sm font-medium rounded-lg transition-colors',
                 page === currentPage 
-                  ? 'bg-indigo-600 text-white' 
+                  ? 'bg-purple-600 text-white' 
                   : 'text-gray-700 hover:bg-gray-100'
               ]"
             >

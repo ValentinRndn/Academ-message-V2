@@ -12,40 +12,40 @@
         title="Cours réservés" 
         :value="stats?.overview?.totalBookings || 0"
         icon="calendar"
-        color="blue"
+        color="purple"
         subtitle="Sessions programmées"
       />
       <StatsCard 
         title="Messages envoyés" 
         :value="stats?.overview?.totalMessages || 0"
         icon="chat"
-        color="green"
+        color="purple"
         subtitle="Conversations actives"
       />
       <StatsCard 
         title="Avis laissés" 
         :value="stats?.overview?.totalReviews || 0"
         icon="star"
-        color="yellow"
+        color="purple"
         subtitle="Évaluations"
       />
       <StatsCard 
         title="Enseignants favoris" 
         :value="stats?.overview?.favoriteTeachers || 0"
         icon="heart"
-        color="red"
+        color="purple"
         subtitle="Professeurs préférés"
       />
     </div>
 
     <!-- Actions rapides -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 hidden">
       <!-- Trouver des cours -->
       <div class="bg-white rounded-lg shadow p-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">🔍 Trouver des cours</h3>
         <div class="space-y-3">
           <NuxtLink to="/teachers" 
-            class="block w-full text-left px-4 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors">
+            class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
             👨‍🏫 Parcourir les enseignants
           </NuxtLink>
           <NuxtLink to="/student/profile" 
@@ -72,7 +72,7 @@
             🗓️ Mon planning
           </NuxtLink>
           <NuxtLink to="/student/history" 
-            class="block w-full text-left px-4 py-2 bg-indigo-50 text-indigo-700 rounded-md hover:bg-indigo-100 transition-colors">
+            class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
             📜 Historique des cours
           </NuxtLink>
         </div>
@@ -110,8 +110,8 @@
             <div v-for="teacher in recommendedTeachers" :key="teacher._id" 
               class="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
               <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span class="text-blue-600 font-semibold text-lg">
+                <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+                  <span class="text-purple-600 font-semibold text-lg">
                     {{ teacher.firstName?.charAt(0) }}{{ teacher.lastName?.charAt(0) }}
                   </span>
                 </div>
@@ -132,7 +132,7 @@
               </div>
               <div>
                 <NuxtLink :to="`/teachers/${teacher._id}`" 
-                  class="px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors">
+                  class="px-3 py-1 bg-purple-600 text-white text-sm rounded-md hover:bg-purple-700 transition-colors">
                   Voir
                 </NuxtLink>
               </div>
@@ -143,7 +143,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
             </svg>
             <p>Explorez notre liste d'enseignants</p>
-            <NuxtLink to="/teachers" class="text-blue-600 text-sm hover:text-blue-800">
+            <NuxtLink to="/teachers" class="text-purple-600 text-sm hover:text-purple-800">
               Voir tous les enseignants
             </NuxtLink>
           </div>
@@ -161,7 +161,7 @@
               class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
               @click="exploreSubject(subject)">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-purple-500 to-purple-700 flex items-center justify-center">
                   <span class="text-white font-semibold text-sm">
                     {{ subject.name.substring(0, 2).toUpperCase() }}
                   </span>
@@ -197,9 +197,9 @@
         <div class="p-6">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div v-for="booking in upcomingBookings" :key="booking._id" 
-              class="p-4 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors">
+              class="p-4 border border-gray-200 rounded-lg hover:border-purple-300 transition-colors">
               <div class="flex items-center justify-between mb-2">
-                <span class="text-sm font-medium text-blue-600">{{ formatBookingDate(booking.startTime) }}</span>
+                <span class="text-sm font-medium text-purple-600">{{ formatBookingDate(booking.startTime) }}</span>
                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
                   :class="getBookingStatusClass(booking.status)">
                   {{ getBookingStatusLabel(booking.status) }}
@@ -218,7 +218,22 @@
 <script setup>
 // Récupérer l'utilisateur et les statistiques
 const { user } = useAuth();
-const { data: stats, pending: loading } = await useFetch('/api/dashboard/stats');
+
+console.log('📊 StudentDashboard - Chargement...');
+
+// Récupérer les statistiques avec gestion d'erreur
+let stats = ref(null);
+let loading = ref(false);
+
+try {
+  const result = await useFetch('/api/dashboard/stats');
+  stats.value = result.data.value;
+  loading.value = result.pending.value;
+  console.log('📊 StudentDashboard - Stats récupérées:', stats.value);
+} catch (error) {
+  console.error('❌ StudentDashboard - Erreur lors du chargement des stats:', error);
+  stats.value = null;
+}
 
 // État local
 const unreadMessages = ref(0);
@@ -244,10 +259,10 @@ const formatBookingDate = (dateString) => {
 
 const getBookingStatusClass = (status) => {
   const classes = {
-    pending: 'bg-yellow-100 text-yellow-800',
-    confirmed: 'bg-green-100 text-green-800',
-    completed: 'bg-blue-100 text-blue-800',
-    cancelled: 'bg-red-100 text-red-800'
+    pending: 'bg-purple-100 text-purple-800',
+    confirmed: 'bg-purple-100 text-purple-800',
+    completed: 'bg-purple-100 text-purple-800',
+    cancelled: 'bg-gray-100 text-gray-800'
   };
   return classes[status] || 'bg-gray-100 text-gray-800';
 };

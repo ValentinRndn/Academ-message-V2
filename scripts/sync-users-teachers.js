@@ -13,7 +13,7 @@ async function syncUsersTeachers() {
     console.log('Connexion établie, début de la synchronisation...');
 
     // Récupérer tous les utilisateurs avec le rôle 'teacher'
-    const userTeachers = await db.collection('User').find({ role: 'teacher' }).toArray();
+    const userTeachers = await db.collection('users').find({ role: 'teacher' }).toArray();
     console.log(`${userTeachers.length} utilisateurs professeurs trouvés`);
 
     // Récupérer tous les profils Teacher existants
@@ -63,7 +63,7 @@ async function syncUsersTeachers() {
       
       for (const orphan of orphanedProfiles) {
         // Essayer de trouver un utilisateur correspondant par email
-        const matchingUser = await db.collection('User').findOne({ 
+        const matchingUser = await db.collection('users').findOne({ 
           email: orphan.email,
           role: 'teacher'
         });

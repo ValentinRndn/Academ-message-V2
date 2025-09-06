@@ -30,7 +30,7 @@
 
 ## Learnings & Insights
 
-- The project is a Nuxt 3 full-stack application aiming to be a teacher/student connection platform ("Academ Message").
+- The project is a Nuxt 3 full-stack application aiming to be a teacher/student connection platform ("Academ").
 - Core backend API functionality seems largely implemented.
 - Frontend development (connecting UI to APIs) appears to be the main remaining work area.
 - The project utilizes a modern stack (Nuxt 3, Prisma, MongoDB, Tailwind).

@@ -3,7 +3,7 @@
     <!-- Header -->
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-gray-900">Tableau de bord Administrateur</h1>
-      <p class="text-gray-600 mt-2">Vue d'ensemble de la plateforme Academ Message</p>
+      <p class="text-gray-600 mt-2">Vue d'ensemble de la plateforme Academ</p>
     </div>
 
     <!-- Statistiques générales -->
@@ -12,13 +12,13 @@
         title="Utilisateurs totaux" 
         :value="stats?.overview?.totalUsers || 0"
         icon="users"
-        color="blue"
+        color="purple"
       />
       <StatsCard 
         title="Étudiants" 
         :value="stats?.overview?.totalStudents || 0"
         icon="academic-cap"
-        color="green"
+        color="purple"
       />
       <StatsCard 
         title="Enseignants" 
@@ -30,18 +30,18 @@
         title="Messages" 
         :value="stats?.overview?.totalMessages || 0"
         icon="chat"
-        color="orange"
+        color="purple"
       />
     </div>
 
     <!-- Actions rapides -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 hidden">
       <!-- Gestion des utilisateurs -->
       <div class="bg-white rounded-lg shadow p-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Gestion des utilisateurs</h3>
         <div class="space-y-3">
           <NuxtLink to="/admin/users" 
-            class="block w-full text-left px-4 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 transition-colors">
+            class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
             👥 Voir tous les utilisateurs
           </NuxtLink>
           <NuxtLink to="/admin/users?filter=pending" 
@@ -83,7 +83,7 @@
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Configuration</h3>
         <div class="space-y-3">
           <NuxtLink to="/admin/subjects" 
-            class="block w-full text-left px-4 py-2 bg-indigo-50 text-indigo-700 rounded-md hover:bg-indigo-100 transition-colors">
+            class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
             📚 Gérer les matières
           </NuxtLink>
           <NuxtLink to="/admin/settings" 
@@ -107,15 +107,15 @@
         </div>
         <div class="p-6">
           <div v-if="loading" class="text-center py-4">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
             <p class="text-gray-500 mt-2">Chargement...</p>
           </div>
           <div v-else-if="stats?.recent?.users?.length" class="space-y-4">
             <div v-for="user in stats.recent.users" :key="user._id" 
               class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
               <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                  <span class="text-blue-600 font-semibold">
+                <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                  <span class="text-purple-600 font-semibold">
                     {{ user.name.charAt(0).toUpperCase() }}
                   </span>
                 </div>
@@ -162,7 +162,7 @@
             </div>
             <div class="flex justify-between items-center py-2">
               <span class="text-gray-600">Taux d'activité</span>
-              <span class="font-semibold text-green-600">{{ activityRate }}%</span>
+              <span class="font-semibold text-purple-600">{{ activityRate }}%</span>
             </div>
           </div>
         </div>
@@ -190,9 +190,9 @@ const activityRate = computed(() => {
 // Méthodes utilitaires
 const getRoleBadgeClass = (role) => {
   const classes = {
-    admin: 'bg-red-100 text-red-800',
+    admin: 'bg-purple-100 text-purple-800',
     teacher: 'bg-purple-100 text-purple-800',
-    student: 'bg-blue-100 text-blue-800'
+    student: 'bg-purple-100 text-purple-800'
   };
   return classes[role] || 'bg-gray-100 text-gray-800';
 };

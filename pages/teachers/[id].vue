@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class=" mx-auto px-4 sm:px-6 lg:px-8 py-10">
     <!-- Loading state -->
     <div v-if="loading" class="flex justify-center items-center min-h-[60vh]">
       <div class="teacher-loader">
@@ -26,8 +26,8 @@
     <!-- Teacher profile -->
     <div v-else-if="teacher" class="bg-white shadow-lg rounded-xl overflow-hidden">
       <!-- Header section -->
-      <div class="relative h-48 bg-indigo-600">
-        <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 opacity-90"></div>
+      <div class="relative h-48 bg-purple-600">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-600 to-purple-600 opacity-90"></div>
         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
           <div class="flex items-end">
             <div class="relative">
@@ -74,7 +74,7 @@
                   <span 
                     v-for="subject in teacher.subjects" 
                   :key="subject._id"
-                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800"
+                  class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800"
                   >
                     {{ subject.name }}
                   </span>
@@ -87,7 +87,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div class="bg-gray-50 p-4 rounded-lg">
                   <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                     <span class="font-medium">{{ teacher.experience }}+ ans d'expérience</span>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="bg-gray-50 p-4 rounded-lg">
                   <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                     </svg>
                     <span class="font-medium">
@@ -140,7 +140,7 @@
                 </div>
                 
                   <button 
-                class="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors mb-4"
+                class="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors mb-4"
                 @click="bookLesson"
                   >
                 Réserver un cours
@@ -271,21 +271,51 @@ const contactTeacher = async () => {
   try {
     if (!teacher.value) return;
 
-    // Créer ou trouver une conversation avec ce professeur
-    const response = await $fetch('/api/messages/start-conversation', {
-      method: 'POST',
-      body: {
-        participantId: teacher.value.userId // Utiliser l'userId du Teacher
-      },
-      credentials: 'include'
-    });
+    // Vérifier si l'utilisateur est connecté
+    const { user, initAuth } = useAuth();
+    const isAuthenticated = await initAuth();
+    
+    if (!isAuthenticated) {
+      // Rediriger vers la page de connexion
+      router.push(`/login?redirect=${encodeURIComponent(route.fullPath)}`);
+      return;
+    }
 
-    if (response && response.conversation) {
-      // Rediriger vers la page de messages avec cette conversation
-      router.push(`/messages?conversation=${response.conversation._id}`);
+    // Créer ou trouver une conversation avec ce professeur
+    console.log('🔍 Données du professeur:', teacher.value);
+    console.log('🔍 Tentative d\'appel API avec participantId:', teacher.value.userId);
+    
+    try {
+      const response = await $fetch('/api/messages/start-conversation', {
+        method: 'POST',
+        body: {
+          participantId: teacher.value.userId // Utiliser l'userId du Teacher
+        },
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      console.log('✅ Réponse API:', response);
+      
+      if (response && response.conversation) {
+        // Rediriger vers la page de messages avec cette conversation
+        router.push(`/messages?conversation=${response.conversation._id}`);
+      }
+    } catch (fetchError) {
+      console.error('❌ Erreur fetch:', fetchError);
+      throw fetchError;
     }
   } catch (error) {
     console.error('Erreur lors de la création de la conversation:', error);
+    
+    // Si c'est une erreur 401, rediriger vers la connexion
+    if (error.statusCode === 401) {
+      router.push(`/login?redirect=${encodeURIComponent(route.fullPath)}`);
+      return;
+    }
+    
     // TODO: Afficher une notification d'erreur à l'utilisateur
   }
 };

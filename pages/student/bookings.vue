@@ -1,7 +1,7 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-8">
+  <div class=" mx-auto px-4 py-8">
     <!-- Header -->
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
+    <div class="bg-gradient-to-r from-purple-600 to-purple-600 rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
       <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -translate-y-32 translate-x-32"></div>
       <div class="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full translate-y-16 -translate-x-16"></div>
       
@@ -9,11 +9,11 @@
         <div class="flex items-center justify-between">
           <div>
             <h1 class="text-3xl font-bold mb-2">Mes Cours</h1>
-            <p class="text-blue-100">Gérez vos réservations et suivez votre progression</p>
+            <p class="text-purple-100">Gérez vos réservations et suivez votre progression</p>
           </div>
           <NuxtLink 
             to="/teachers" 
-            class="px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            class="px-6 py-3 bg-white text-purple-600 rounded-lg font-medium hover:bg-purple-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             <span class="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,8 +30,8 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <div class="bg-white rounded-xl shadow-lg p-6">
         <div class="flex items-center">
-          <div class="bg-blue-100 p-3 rounded-lg mr-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="bg-purple-100 p-3 rounded-lg mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
@@ -44,8 +44,8 @@
       
       <div class="bg-white rounded-xl shadow-lg p-6">
         <div class="flex items-center">
-          <div class="bg-green-100 p-3 rounded-lg mr-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="bg-purple-50 p-3 rounded-lg mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
@@ -58,8 +58,8 @@
       
       <div class="bg-white rounded-xl shadow-lg p-6">
         <div class="flex items-center">
-          <div class="bg-yellow-100 p-3 rounded-lg mr-4">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="bg-purple-100 p-3 rounded-lg mr-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
@@ -93,13 +93,13 @@
             v-model="searchQuery" 
             type="text" 
             placeholder="Rechercher un enseignant, une matière..."
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
           />
         </div>
         
         <select 
           v-model="statusFilter" 
-          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
         >
           <option value="all">Tous les statuts</option>
           <option value="pending">En attente</option>
@@ -110,7 +110,7 @@
         
         <select 
           v-model="timeFilter" 
-          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
         >
           <option value="all">Toutes les dates</option>
           <option value="upcoming">Cours à venir</option>
@@ -121,7 +121,7 @@
         
         <button 
           @click="resetFilters"
-          class="px-4 py-2 text-gray-600 hover:text-gray-800 transition-colors"
+          class="px-4 py-2 text-purple-600 hover:text-purple-800 transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -132,19 +132,19 @@
 
     <!-- Loading state -->
     <div v-if="loading" class="flex items-center justify-center py-12">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
       <p class="ml-3 text-gray-600">Chargement de vos cours...</p>
     </div>
 
     <!-- Error state -->
-    <div v-else-if="error" class="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+    <div v-else-if="error" class="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-8">
       <div class="flex items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div>
-          <h3 class="text-lg font-medium text-red-800">Erreur</h3>
-          <p class="text-red-600">{{ error }}</p>
+          <h3 class="text-lg font-medium text-purple-800">Erreur</h3>
+          <p class="text-purple-600">{{ error }}</p>
         </div>
       </div>
     </div>
@@ -217,7 +217,7 @@
                   v-if="booking.status === 'pending'"
                   @click="cancelBooking(booking._id)"
                   :disabled="cancelling === booking._id"
-                  class="px-3 py-1 text-sm text-red-600 hover:text-red-800 disabled:opacity-50"
+                  class="px-3 py-1 text-sm text-purple-400 hover:text-purple-600 disabled:opacity-50"
                 >
                   <span v-if="cancelling === booking._id" class="flex items-center">
                     <svg class="animate-spin -ml-1 mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -232,21 +232,21 @@
                 <button 
                   v-if="booking.status === 'completed' && !booking.hasReview"
                   @click="openReviewModal(booking)"
-                  class="px-3 py-1 text-sm text-blue-600 hover:text-blue-800"
+                  class="px-3 py-1 text-sm text-purple-600 hover:text-purple-800"
                 >
                   Laisser un avis
                 </button>
                 
                 <button 
                   @click="openMessageModal(booking)"
-                  class="px-3 py-1 text-sm text-gray-600 hover:text-gray-800"
+                  class="px-3 py-1 text-sm text-purple-600 hover:text-purple-800"
                 >
                   Message
                 </button>
                 
                 <button 
                   @click="viewDetails(booking)"
-                  class="px-3 py-1 text-sm text-gray-600 hover:text-gray-800"
+                  class="px-3 py-1 text-sm text-purple-600 hover:text-purple-800"
                 >
                   Détails
                 </button>
@@ -271,7 +271,7 @@
         </p>
         <NuxtLink 
           to="/teachers" 
-          class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -287,7 +287,7 @@
         <button 
           @click="changePage(currentPage - 1)"
           :disabled="currentPage === 1"
-          class="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="px-3 py-2 text-sm border border-purple-200 text-purple-600 rounded-lg hover:bg-purple-50 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Précédent
         </button>
@@ -300,8 +300,8 @@
             :class="[
               'px-3 py-2 text-sm rounded-lg',
               page === currentPage 
-                ? 'bg-blue-600 text-white' 
-                : 'border border-gray-300 hover:bg-gray-50'
+                ? 'bg-purple-600 text-white' 
+                : 'border border-purple-200 text-purple-600 hover:bg-purple-50'
             ]"
           >
             {{ page }}
@@ -311,7 +311,7 @@
         <button 
           @click="changePage(currentPage + 1)"
           :disabled="currentPage === totalPages"
-          class="px-3 py-2 text-sm border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="px-3 py-2 text-sm border border-purple-200 text-purple-600 rounded-lg hover:bg-purple-50 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Suivant
         </button>
@@ -321,10 +321,7 @@
 </template>
 
 <script setup>
-// Middleware d'authentification
-definePageMeta({
-  middleware: 'auth'
-});
+// L'authentification est gérée par le middleware global
 
 // État réactif
 const loading = ref(true);
@@ -419,10 +416,10 @@ const formatTime = (dateString) => {
 
 const getStatusClass = (status) => {
   const classes = {
-    pending: 'bg-yellow-100 text-yellow-800',
-    confirmed: 'bg-green-100 text-green-800',
-    completed: 'bg-blue-100 text-blue-800',
-    cancelled: 'bg-red-100 text-red-800'
+    pending: 'bg-purple-100 text-purple-700',
+    confirmed: 'bg-purple-200 text-purple-800',
+    completed: 'bg-purple-50 text-purple-600',
+    cancelled: 'bg-gray-100 text-gray-600'
   };
   return classes[status] || 'bg-gray-100 text-gray-800';
 };

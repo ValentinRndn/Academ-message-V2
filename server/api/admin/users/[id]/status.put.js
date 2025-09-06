@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
     const database = await connectToMongoDB();
 
     // Vérifier que l'utilisateur existe
-    const user = await database.collection('User').findOne({ _id: userId });
+    const user = await database.collection('users').findOne({ _id: userId });
     if (!user) {
       return createError({
         statusCode: 404,
@@ -82,7 +82,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Mettre à jour le statut
-    const result = await database.collection('User').updateOne(
+    const result = await database.collection('users').updateOne(
       { _id: userId },
       { 
         $set: { 

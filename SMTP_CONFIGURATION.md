@@ -2,7 +2,7 @@
 
 ## Vue d'ensemble
 
-Academ Message utilise Nodemailer pour envoyer des emails automatiques (emails de bienvenue, notifications, etc.). Pour que cette fonctionnalité fonctionne, vous devez configurer les variables d'environnement SMTP.
+Academ utilise Nodemailer pour envoyer des emails automatiques (emails de bienvenue, notifications, etc.). Pour que cette fonctionnalité fonctionne, vous devez configurer les variables d'environnement SMTP.
 
 ## Configuration avec Gmail
 
@@ -12,7 +12,7 @@ Academ Message utilise Nodemailer pour envoyer des emails automatiques (emails d
 2. Cliquez sur "Sécurité"
 3. Activez la "Validation en 2 étapes" si ce n'est pas déjà fait
 4. Cliquez sur "Mots de passe d'application"
-5. Sélectionnez "Autre (nom personnalisé)" et nommez-le "Academ Message"
+5. Sélectionnez "Autre (nom personnalisé)" et nommez-le "Academ"
 6. Copiez le mot de passe généré (16 caractères)
 
 ### 2. Créer le fichier .env

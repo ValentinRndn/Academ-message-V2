@@ -54,14 +54,14 @@ async function getAdminStats(db) {
     recentUsers,
     recentBookings
   ] = await Promise.all([
-    db.collection('User').countDocuments(),
-    db.collection('User').countDocuments({ role: 'student' }),
-    db.collection('User').countDocuments({ role: 'teacher' }),
+    db.collection('users').countDocuments(),
+    db.collection('users').countDocuments({ role: 'student' }),
+    db.collection('users').countDocuments({ role: 'teacher' }),
     db.collection('Message').countDocuments(),
     db.collection('Booking').countDocuments(),
     db.collection('Subject').countDocuments(),
     db.collection('Review').countDocuments(),
-    db.collection('User').find().sort({ createdAt: -1 }).limit(5).toArray(),
+    db.collection('users').find().sort({ createdAt: -1 }).limit(5).toArray(),
     db.collection('Booking').find().sort({ createdAt: -1 }).limit(5).toArray()
   ]);
 
@@ -69,7 +69,7 @@ async function getAdminStats(db) {
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
   
-  const monthlySignups = await db.collection('User').aggregate([
+  const monthlySignups = await db.collection('users').aggregate([
     { $match: { createdAt: { $gte: sixMonthsAgo } } },
     {
       $group: {
@@ -179,7 +179,7 @@ async function getStudentStats(db, studentId) {
       { $limit: 3 },
       {
         $lookup: {
-          from: 'User',
+          from: 'users',
           localField: '_id',
           foreignField: '_id',
           as: 'teacher'

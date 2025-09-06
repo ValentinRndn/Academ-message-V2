@@ -21,6 +21,7 @@ export default defineEventHandler(async (event) => {
   const protectedRoutes = [
     '/api/messages', // Toutes les routes de messages nécessitent une auth
     '/api/teachers/my-profile', // Profil du professeur connecté
+    '/api/admin', // Toutes les routes admin nécessitent une auth
   ];
 
   // Routes publiques avec paramètres dynamiques
@@ -32,7 +33,10 @@ export default defineEventHandler(async (event) => {
   const isPublicRoute = publicRoutes.includes(event.path) || 
                        publicRoutePatterns.some(pattern => pattern.test(event.path));
   
-  if (isPublicRoute) {
+  // Vérifier si la route nécessite une authentification
+  const needsAuth = event.path.startsWith('/api/') && !isPublicRoute;
+  
+  if (!needsAuth) {
     return;
   }
   

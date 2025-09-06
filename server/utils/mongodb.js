@@ -16,7 +16,7 @@ export async function connectToMongoDB() {
 
   // Récupérer l'URL de connexion depuis la configuration Nuxt
   const config = useRuntimeConfig();
-  const url = config.DATABASE_URL || process.env.DATABASE_URL || 'mongodb://localhost:27017/academ-message-db';
+  const url = config.DATABASE_URL || process.env.DATABASE_URL || 'mongodb+srv://valentinrenaudin2206:C2dIAq0H4qUsnpfb@cluster0.z39ca.mongodb.net/academ-message-db';
   console.log('🔍 MongoDB URL utilisée:', url);
   
   try {

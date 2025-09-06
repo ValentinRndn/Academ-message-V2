@@ -96,6 +96,53 @@ export const useAuthStore = () => {
     }
   };
 
+  // Inscription
+  const register = async (userData) => {
+    loading.value = true;
+    error.value = null;
+    
+    try {
+      const data = await $fetch('/api/auth/register', {
+        method: 'POST',
+        body: userData,
+        credentials: 'include'
+      });
+      
+      if (data && data.user) {
+        // Stocker les informations utilisateur
+        user.value = data.user;
+        isAuthenticated.value = true;
+        
+        console.log('✅ Inscription réussie, utilisateur:', user.value);
+        
+        // Notification de succès
+        if (process.client) {
+          setTimeout(() => {
+            const { showSuccess } = useToast();
+            showSuccess(
+              'Compte créé avec succès !', 
+              `Bienvenue ${data.user.firstName} ${data.user.lastName}`,
+              5000
+            );
+          }, 100);
+        }
+        
+        // Démarrer la vérification de session
+        startSessionCheck();
+        
+        return true;
+      }
+      
+      return false;
+    } catch (err) {
+      console.error('Erreur lors de l\'inscription:', err);
+      error.value = err.data?.message || 'Erreur lors de l\'inscription';
+      return false;
+    } finally {
+      loading.value = false;
+    }
+  };
+
   // Déconnexion
   const logout = async () => {
     try {
@@ -164,8 +211,8 @@ export const useAuthStore = () => {
 
   // Démarrer la vérification périodique de session
   const startSessionCheck = () => {
-    // Vérifier immédiatement
-    checkSessionStatus();
+    // Attendre 30 secondes avant la première vérification pour éviter les problèmes de timing
+    setTimeout(checkSessionStatus, 30000);
     
     // Puis vérifier toutes les 5 minutes
     sessionCheckInterval = setInterval(checkSessionStatus, 5 * 60 * 1000);
@@ -211,6 +258,7 @@ export const useAuthStore = () => {
     // Actions
     initAuth,
     login,
+    register,
     logout,
     checkSessionStatus,
     showSessionExpiredAlert,

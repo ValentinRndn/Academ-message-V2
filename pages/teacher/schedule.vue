@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-50 py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class=" mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900">Mon Planning</h1>
@@ -19,7 +19,7 @@
             :class="[
               'py-2 px-1 border-b-2 font-medium text-sm transition-colors',
               activeTab === tab.id
-                ? 'border-indigo-500 text-indigo-600'
+                ? 'border-purple-500 text-purple-600'
                 : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
             ]"
           >
@@ -60,7 +60,7 @@
           
           <!-- Filtres -->
           <div class="mb-6 flex flex-wrap gap-4">
-            <select v-model="bookingFilter" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+            <select v-model="bookingFilter" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
               <option value="all">Tous les cours</option>
               <option value="upcoming">Cours à venir</option>
               <option value="past">Cours passés</option>
@@ -72,13 +72,13 @@
               v-model="searchQuery" 
               type="text" 
               placeholder="Rechercher un étudiant ou une matière..."
-              class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 min-w-64"
+              class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 flex-1 min-w-64"
             />
           </div>
 
           <!-- Liste des cours -->
           <div v-if="loading" class="text-center py-8">
-            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto"></div>
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
             <p class="text-gray-500 mt-2">Chargement des cours...</p>
           </div>
 
@@ -151,7 +151,7 @@
                     </button>
                     <button 
                       @click="viewBookingDetails(booking)"
-                      class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition-colors"
+                      class="px-3 py-1 bg-purple-600 text-white text-sm rounded hover:bg-purple-700 transition-colors"
                     >
                       Détails
                     </button>
@@ -214,7 +214,7 @@
                 :class="[
                   'min-h-24 p-2 border-r border-b border-gray-200',
                   day.isCurrentMonth ? 'bg-white' : 'bg-gray-50',
-                  day.isToday ? 'bg-blue-50' : ''
+                  day.isToday ? 'bg-purple-50' : ''
                 ]"
               >
                 <div class="flex items-center justify-between mb-1">
@@ -222,7 +222,7 @@
                     :class="[
                       'text-sm font-medium',
                       day.isCurrentMonth ? 'text-gray-900' : 'text-gray-400',
-                      day.isToday ? 'text-blue-600' : ''
+                      day.isToday ? 'text-purple-600' : ''
                     ]"
                   >
                     {{ day.dayNumber }}
@@ -256,7 +256,6 @@
 <script setup>
 // Pas de middleware pour le test
 // definePageMeta({
-//   middleware: 'auth'
 // });
 
 // Récupérer l'utilisateur
@@ -393,7 +392,7 @@ const getStatusClass = (status) => {
     case 'confirmed': return 'bg-green-100 text-green-800';
     case 'pending': return 'bg-yellow-100 text-yellow-800';
     case 'cancelled': return 'bg-red-100 text-red-800';
-    case 'completed': return 'bg-blue-100 text-blue-800';
+    case 'completed': return 'bg-purple-100 text-purple-800';
     default: return 'bg-gray-100 text-gray-800';
   }
 };
@@ -413,7 +412,7 @@ const getBookingClass = (status) => {
     case 'confirmed': return 'bg-green-200 text-green-800';
     case 'pending': return 'bg-yellow-200 text-yellow-800';
     case 'cancelled': return 'bg-red-200 text-red-800';
-    case 'completed': return 'bg-blue-200 text-blue-800';
+    case 'completed': return 'bg-purple-200 text-purple-800';
     default: return 'bg-gray-200 text-gray-800';
   }
 };

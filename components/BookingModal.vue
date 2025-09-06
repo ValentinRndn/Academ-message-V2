@@ -9,8 +9,8 @@
       <div class="p-6 border-b border-gray-200">
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
-              <span class="text-indigo-600 font-medium text-lg">
+            <div class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center mr-4">
+              <span class="text-purple-600 font-medium text-lg">
                 {{ teacher?.firstName?.charAt(0) }}{{ teacher?.lastName?.charAt(0) }}
               </span>
             </div>
@@ -42,7 +42,7 @@
             </label>
             <select
               v-model="selectedSubject"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               required
             >
               <option value="">Sélectionnez une matière</option>
@@ -70,7 +70,7 @@
               type="date"
               :min="minDate"
               :max="maxDate"
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               required
             />
           </div>
@@ -83,7 +83,7 @@
               </label>
               
               <div v-if="loadingSlots" class="text-center py-4">
-                <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-indigo-600 mx-auto"></div>
+                <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-600 mx-auto"></div>
                 <p class="text-sm text-gray-500 mt-2">Chargement des créneaux...</p>
               </div>
               
@@ -96,7 +96,7 @@
                     :class="[
                       'px-3 py-2 text-sm rounded-md border transition-colors',
                       selectedStartTime === slot.formattedStartTime
-                        ? 'bg-indigo-600 text-white border-indigo-600'
+                        ? 'bg-purple-600 text-white border-purple-600'
                         : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
                     ]"
                   >
@@ -122,7 +122,7 @@
               </label>
               <select
                 v-model="selectedDuration"
-                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                 required
               >
                 <option value="">Choisir</option>
@@ -146,8 +146,8 @@
           </div>
 
           <!-- Résumé du coût -->
-          <div v-if="calculatedCost" class="bg-indigo-50 p-4 rounded-lg">
-            <h3 class="font-medium text-indigo-900 mb-2">Résumé du coût</h3>
+          <div v-if="calculatedCost" class="bg-purple-50 p-4 rounded-lg">
+            <h3 class="font-medium text-purple-900 mb-2">Résumé du coût</h3>
             <div class="space-y-1 text-sm">
               <div class="flex justify-between">
                 <span>Cours ({{ selectedDuration }} min)</span>
@@ -157,7 +157,7 @@
                 <span>Commission plateforme</span>
                 <span>5€</span>
               </div>
-              <div class="flex justify-between font-semibold text-indigo-900 pt-2 border-t border-indigo-200">
+              <div class="flex justify-between font-semibold text-purple-900 pt-2 border-t border-purple-200">
                 <span>Total</span>
                 <span>{{ calculatedCost.totalAmount }}€</span>
               </div>
@@ -173,7 +173,7 @@
               v-model="studentNotes"
               rows="3"
               placeholder="Décrivez vos objectifs pour ce cours, votre niveau, ou toute information utile..."
-              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               maxlength="500"
             ></textarea>
             <p class="text-xs text-gray-500 mt-1">{{ studentNotes.length }}/500 caractères</p>
@@ -194,7 +194,7 @@
           <button
             @click="createBooking"
             :disabled="!isFormValid || loading"
-            class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center"
+            class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center"
           >
             <svg v-if="loading" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

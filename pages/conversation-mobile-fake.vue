@@ -3,13 +3,13 @@
     <!-- Header mobile avec info utilisateur -->
     <header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-10">
       <div class="px-4 py-3 flex items-center">
-        <button class="mr-3 text-indigo-600">
+        <button class="mr-3 text-purple-600">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
           </svg>
         </button>
         <div class="relative">
-          <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-lg">
+          <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-lg">
             SM
           </div>
           <div class="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-green-500 border-2 border-white"></div>
@@ -17,18 +17,18 @@
         <div class="ml-3 flex-1">
           <h1 class="text-base font-medium text-gray-900">Sophie Martin</h1>
           <p class="text-xs text-gray-500 flex items-center">
-            <span class="text-indigo-600">Enseignant</span>
+            <span class="text-purple-600">Enseignant</span>
             <span class="mx-1">•</span>
             <span>En ligne</span>
           </p>
         </div>
         <div class="flex items-center space-x-3">
-          <button class="p-2 rounded-full bg-indigo-50 text-indigo-600">
+          <button class="p-2 rounded-full bg-purple-50 text-purple-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
           </button>
-          <button class="p-2 rounded-full bg-indigo-50 text-indigo-600">
+          <button class="p-2 rounded-full bg-purple-50 text-purple-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
             </svg>
@@ -38,7 +38,7 @@
       
       <!-- Options rapides -->
       <div class="px-4 py-2 flex items-center space-x-3 overflow-x-auto whitespace-nowrap scrollbar-hide border-t border-gray-100">
-        <button class="px-3 py-1 bg-indigo-600 text-white rounded-full text-sm font-medium">
+        <button class="px-3 py-1 bg-purple-600 text-white rounded-full text-sm font-medium">
           Réserver
         </button>
         <button class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
@@ -64,7 +64,7 @@
       <!-- Message de Sophie -->
       <div class="flex">
         <div class="flex-shrink-0 mr-2">
-          <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+          <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
             S
           </div>
         </div>
@@ -76,9 +76,9 @@
       
       <!-- Message de l'utilisateur -->
       <div class="flex justify-end">
-        <div class="max-w-[75%] px-4 py-2 rounded-lg bg-indigo-600 text-white shadow-sm message-sent">
+        <div class="max-w-[75%] px-4 py-2 rounded-lg bg-purple-600 text-white shadow-sm message-sent">
           <p class="text-sm">Bonjour Sophie ! Oui, j'avais quelques difficultés avec les exercices que vous nous avez envoyés la semaine dernière.</p>
-          <div class="flex justify-end items-center mt-1 space-x-1 text-indigo-200">
+          <div class="flex justify-end items-center mt-1 space-x-1 text-purple-200">
             <span class="text-xs">09:18</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -90,7 +90,7 @@
       <!-- Message de Sophie -->
       <div class="flex">
         <div class="flex-shrink-0 mr-2">
-          <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+          <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
             S
           </div>
         </div>
@@ -103,16 +103,16 @@
       <!-- Message de Sophie avec actions -->
       <div class="flex">
         <div class="flex-shrink-0 mr-2">
-          <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+          <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
             S
           </div>
         </div>
         <div class="max-w-[75%] px-4 py-2 rounded-lg bg-white text-gray-800 shadow-sm message-received">
           <p class="text-sm">Nous pouvons organiser une session aujourd'hui si vous êtes disponible. Voici mes créneaux :</p>
           <div class="mt-2 mb-1 flex flex-wrap gap-2">
-            <button class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-xs font-medium">14h - 15h</button>
-            <button class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-xs font-medium">15h - 16h</button>
-            <button class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-xs font-medium">17h - 18h</button>
+            <button class="px-3 py-1 bg-purple-50 text-purple-600 rounded-full text-xs font-medium">14h - 15h</button>
+            <button class="px-3 py-1 bg-purple-50 text-purple-600 rounded-full text-xs font-medium">15h - 16h</button>
+            <button class="px-3 py-1 bg-purple-50 text-purple-600 rounded-full text-xs font-medium">17h - 18h</button>
           </div>
           <span class="text-xs text-gray-500 block mt-1">09:20</span>
         </div>
@@ -120,9 +120,9 @@
       
       <!-- Message de l'utilisateur -->
       <div class="flex justify-end">
-        <div class="max-w-[75%] px-4 py-2 rounded-lg bg-indigo-600 text-white shadow-sm message-sent">
+        <div class="max-w-[75%] px-4 py-2 rounded-lg bg-purple-600 text-white shadow-sm message-sent">
           <p class="text-sm">C'est surtout l'exercice 3 qui me pose problème. J'ai essayé plusieurs méthodes mais je n'arrive pas à la bonne solution. Une session aujourd'hui serait parfaite !</p>
-          <div class="flex justify-end items-center mt-1 space-x-1 text-indigo-200">
+          <div class="flex justify-end items-center mt-1 space-x-1 text-purple-200">
             <span class="text-xs">09:23</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -133,9 +133,9 @@
       
       <!-- Message de l'utilisateur -->
       <div class="flex justify-end">
-        <div class="max-w-[75%] px-4 py-2 rounded-lg bg-indigo-600 text-white shadow-sm message-sent">
+        <div class="max-w-[75%] px-4 py-2 rounded-lg bg-purple-600 text-white shadow-sm message-sent">
           <p class="text-sm">Le créneau de 15h-16h me conviendrait bien.</p>
-          <div class="flex justify-end items-center mt-1 space-x-1 text-indigo-200">
+          <div class="flex justify-end items-center mt-1 space-x-1 text-purple-200">
             <span class="text-xs">09:24</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
@@ -147,7 +147,7 @@
       <!-- Message de Sophie -->
       <div class="flex">
         <div class="flex-shrink-0 mr-2">
-          <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+          <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
             S
           </div>
         </div>
@@ -160,21 +160,21 @@
       <!-- Message avec pièce jointe -->
       <div class="flex">
         <div class="flex-shrink-0 mr-2">
-          <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+          <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
             S
           </div>
         </div>
         <div class="max-w-[75%] px-4 py-2 rounded-lg bg-white text-gray-800 shadow-sm message-received">
           <p class="text-sm">J'ai préparé quelques exercices supplémentaires qui pourront vous aider à mieux comprendre le concept. Voici le document :</p>
-          <div class="mt-2 p-2 bg-indigo-50 rounded-md flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="mt-2 p-2 bg-purple-50 rounded-md flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
             <div class="ml-2 flex-1">
-              <p class="text-xs font-medium text-indigo-700">Exercices_supplementaires.pdf</p>
-              <p class="text-xs text-indigo-500">2.4 MB</p>
+              <p class="text-xs font-medium text-purple-700">Exercices_supplementaires.pdf</p>
+              <p class="text-xs text-purple-500">2.4 MB</p>
             </div>
-            <button class="p-1 text-indigo-600">
+            <button class="p-1 text-purple-600">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
@@ -187,7 +187,7 @@
       <!-- Message en cours de frappe -->
       <div class="flex">
         <div class="flex-shrink-0 mr-2">
-          <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium text-sm">
+          <div class="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 font-medium text-sm">
             S
           </div>
         </div>
@@ -219,7 +219,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
           </svg>
         </button>
-        <button class="ml-1 p-1.5 bg-indigo-600 rounded-full text-white flex items-center justify-center">
+        <button class="ml-1 p-1.5 bg-purple-600 rounded-full text-white flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
           </svg>

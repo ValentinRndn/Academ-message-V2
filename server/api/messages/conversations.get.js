@@ -39,8 +39,8 @@ export default defineEventHandler(async (event) => {
       conversations.map(async (conversation) => {
         const otherParticipantId = conversation.getOtherParticipant(userId);
         
-        // Récupérer les infos de l'autre participant depuis la collection User
-        const otherParticipant = await db.collection('User').findOne(
+        // Récupérer les infos de l'autre participant depuis la collection users
+        const otherParticipant = await db.collection('users').findOne(
           { _id: otherParticipantId },
           { projection: { password: 0 } } // Exclure le mot de passe
         );

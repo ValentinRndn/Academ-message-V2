@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto px-4 py-8">
+  <div class="mx-auto px-4 py-8">
     <!-- Header -->
     <div class="mb-8">
       <div class="flex items-center justify-between">
@@ -16,15 +16,6 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
             Créer un professeur
-          </NuxtLink>
-          <NuxtLink 
-            to="/admin/users/create" 
-            class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
-            Créer un utilisateur
           </NuxtLink>
         </div>
       </div>
@@ -69,7 +60,7 @@
         <div class="flex items-end">
           <button
             @click="resetFilters"
-            class="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
+            class="w-full px-4 py-2 bg-white border border-purple-200 text-purple-600 rounded-md hover:bg-purple-50 transition-colors"
           >
             Réinitialiser
           </button>
@@ -81,8 +72,8 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
       <div class="bg-white rounded-lg shadow-sm p-6">
         <div class="flex items-center">
-          <div class="p-2 bg-blue-100 rounded-lg">
-            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="p-2 bg-purple-100 rounded-lg">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
             </svg>
           </div>
@@ -109,8 +100,8 @@
 
       <div class="bg-white rounded-lg shadow-sm p-6">
         <div class="flex items-center">
-          <div class="p-2 bg-green-100 rounded-lg">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="p-2 bg-purple-50 rounded-lg">
+            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
           </div>
@@ -123,8 +114,8 @@
 
       <div class="bg-white rounded-lg shadow-sm p-6">
         <div class="flex items-center">
-          <div class="p-2 bg-yellow-100 rounded-lg">
-            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="p-2 bg-purple-100 rounded-lg">
+            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
@@ -231,7 +222,7 @@
                   </button>
                   <button
                     @click="editUser(user)"
-                    class="text-blue-600 hover:text-blue-900"
+                    class="text-purple-600 hover:text-purple-900"
                     title="Modifier"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -240,7 +231,7 @@
                   </button>
                   <button
                     @click="toggleUserStatus(user)"
-                    :class="user.status === 'active' ? 'text-red-600 hover:text-red-900' : 'text-green-600 hover:text-green-900'"
+                    :class="user.status === 'active' ? 'text-purple-400 hover:text-purple-600' : 'text-purple-600 hover:text-purple-800'"
                     :title="user.status === 'active' ? 'Désactiver' : 'Activer'"
                   >
                     <svg v-if="user.status === 'active'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,17 +258,17 @@
             <button
               @click="currentPage--"
               :disabled="currentPage === 1"
-              class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              class="px-3 py-1 border border-purple-200 text-purple-600 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-50"
             >
               Précédent
             </button>
-            <span class="px-3 py-1 text-sm text-gray-700">
+            <span class="px-3 py-1 text-sm text-purple-700">
               Page {{ currentPage }} sur {{ totalPages }}
             </span>
             <button
               @click="currentPage++"
               :disabled="currentPage === totalPages"
-              class="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+              class="px-3 py-1 border border-purple-200 text-purple-600 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-50"
             >
               Suivant
             </button>
@@ -291,19 +282,11 @@
 <script setup>
 // Middleware d'authentification et vérification du rôle admin
 definePageMeta({
-  middleware: 'auth',
   title: 'Gestion des utilisateurs'
 });
 
 // Vérifier que l'utilisateur est admin
-const { user } = useAuth();
-if (user.value?.role !== 'admin') {
-  throw createError({
-    statusCode: 403,
-    statusMessage: 'Forbidden',
-    message: 'Accès réservé aux administrateurs'
-  });
-}
+const { user, initAuth } = useAuth();
 
 // État réactif
 const loading = ref(true);
@@ -328,6 +311,20 @@ const itemsPerPage = 10;
 const fetchUsers = async () => {
   try {
     loading.value = true;
+    
+    // Vérifier l'authentification d'abord
+    const isAuthenticated = await initAuth();
+    if (!isAuthenticated) {
+      console.error('Utilisateur non authentifié');
+      return;
+    }
+    
+    // Vérifier que l'utilisateur est admin
+    if (user.value?.role !== 'admin') {
+      console.error('Accès réservé aux administrateurs');
+      return;
+    }
+    
     const response = await $fetch('/api/admin/users');
     users.value = response.users;
     stats.value = response.stats;
@@ -372,9 +369,9 @@ const resetFilters = () => {
 // Méthodes utilitaires
 const getRoleBadgeClass = (role) => {
   const classes = {
-    admin: 'bg-red-100 text-red-800',
-    teacher: 'bg-purple-100 text-purple-800',
-    student: 'bg-blue-100 text-blue-800'
+    admin: 'bg-purple-200 text-purple-900',
+    teacher: 'bg-purple-100 text-purple-700',
+    student: 'bg-purple-50 text-purple-600'
   };
   return classes[role] || 'bg-gray-100 text-gray-800';
 };
@@ -390,9 +387,9 @@ const getRoleLabel = (role) => {
 
 const getStatusBadgeClass = (status) => {
   const classes = {
-    active: 'bg-green-100 text-green-800',
-    inactive: 'bg-red-100 text-red-800',
-    pending: 'bg-yellow-100 text-yellow-800'
+    active: 'bg-purple-50 text-purple-600',
+    inactive: 'bg-gray-100 text-gray-600',
+    pending: 'bg-purple-100 text-purple-700'
   };
   return classes[status] || 'bg-gray-100 text-gray-800';
 };

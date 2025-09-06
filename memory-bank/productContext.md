@@ -9,7 +9,7 @@
 
 ## Proposed Solution
 
-- A web application ("Academ Message") that connects students and teachers.
+- A web application ("Academ") that connects students and teachers.
 - Provides searchable teacher profiles with subjects, availability, and reviews.
 - Offers an integrated booking system based on teacher-defined availability.
 - Includes a messaging feature for direct communication between users.
