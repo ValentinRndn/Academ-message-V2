@@ -1,27 +1,27 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-100 flex items-center justify-center p-4">
     <div class="w-full max-w-md">
-      <!-- Logo et titre -->
+      <!-- Logo and title -->
       <div class="text-center mb-8">
         <div class="inline-flex items-center justify-center w-16 h-16">
           <img src="../assets/images/logo_academ.png" alt="logo-academ">
         </div>
       </div>
 
-      <!-- Formulaire de connexion -->
+      <!-- Login form -->
       <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
         <div class="mb-6">
-          <h2 class="text-xl font-semibold text-gray-900 text-center mb-2">Connexion</h2>
+          <h2 class="text-xl font-semibold text-gray-900 text-center mb-2">Login</h2>
           <p class="text-sm text-gray-500 text-center">
-            Nouveau ? 
+            New here? 
             <NuxtLink to="/register" class="text-purple-600 hover:text-purple-700 font-medium">
-              Créez un compte
+              Create an account
             </NuxtLink>
           </p>
         </div>
 
         <form @submit.prevent="login" class="space-y-6">
-          <!-- Alerte d'erreur -->
+          <!-- Error alert -->
           <div v-if="error" class="bg-red-50 text-red-700 p-3 rounded-xl text-sm border border-red-100">
             {{ error }}
           </div>
@@ -37,14 +37,14 @@
               type="email"
               required
               class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-200"
-              placeholder="votre@email.com"
+              placeholder="your@email.com"
             />
           </div>
 
-          <!-- Mot de passe -->
+          <!-- Password -->
           <div>
             <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-              Mot de passe
+              Password
             </label>
             <input
               id="password"
@@ -64,14 +64,14 @@
                 type="checkbox"
                 class="rounded border-gray-300 text-purple-600 focus:ring-purple-500 focus:ring-offset-0"
               />
-              <span class="ml-2 text-sm text-gray-600">Se souvenir de moi</span>
+              <span class="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
             <a href="#" class="text-sm text-purple-600 hover:text-purple-700">
-              Mot de passe oublié ?
+              Forgot password?
             </a>
           </div>
 
-          <!-- Bouton de connexion -->
+          <!-- Login button -->
           <button
             type="submit"
             :disabled="loading"
@@ -82,9 +82,9 @@
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              Connexion...
+              Logging in...
             </span>
-            <span v-else>Se connecter</span>
+            <span v-else>Sign in</span>
           </button>
         </form>
       </div>
@@ -99,12 +99,12 @@ const router = useRouter()
 const route = useRoute()
 const { login: authLogin, loading, error } = useAuth()
 
-// État du formulaire
+// Form state
 const email = ref('')
 const password = ref('')
 const rememberMe = ref(false)
 
-// Fonction de connexion
+// Login function
 const login = async () => {
   const success = await authLogin(email.value, password.value)
   
@@ -116,7 +116,7 @@ const login = async () => {
 
 
 definePageMeta({
-  title: 'Connexion - Academ',
+  title: 'Login - Academ',
   layout: 'default',
   auth: false
 })

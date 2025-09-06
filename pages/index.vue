@@ -19,8 +19,8 @@
           </div>
           
           <div class="flex items-center gap-4">
-            <NuxtLink to="/login" class="px-4 py-2 text-gray-700 hover:text-purple-600 transition-colors">Connexion</NuxtLink>
-            <NuxtLink to="/register" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all shadow-sm">Inscription</NuxtLink>
+            <NuxtLink to="/login" class="px-4 py-2 text-gray-700 hover:text-purple-600 transition-colors">Login</NuxtLink>
+            <NuxtLink to="/register" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all shadow-sm">Sign Up</NuxtLink>
           </div>
         </div>
       </div>
@@ -31,14 +31,14 @@
             <div class="relative">
               <h1 class="relative text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
                 <span class="text-purple-600 relative">
-                  Connectez-vous
+                  Connect with
                   <span class="absolute bottom-0 left-0 w-full h-1 bg-purple-200"></span>
                 </span>
-                <br class="hidden md:block" /> aux meilleurs experts académiques
+                <br class="hidden md:block" /> the best academic experts
               </h1>
             </div>
             <p class="text-xl text-gray-600 mb-8 max-w-xl relative backdrop-blur-sm bg-white/30 p-4 rounded-lg shadow-sm">
-              Une plateforme qui connecte les étudiants avec des enseignants qualifiés pour un soutien scolaire personnalisé et efficace.
+              A platform that connects students with qualified teachers for personalized and effective academic support.
             </p>
             
             <!-- Points forts avec style amélioré -->
@@ -49,7 +49,7 @@
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                 </div>
-                <span class="text-gray-700 font-medium">Cours personnalisés</span>
+                <span class="text-gray-700 font-medium">Personalized courses</span>
               </div>
               <div class="flex items-center gap-2 bg-white/80 py-2 px-4 rounded-full shadow-sm hover:bg-white transition-all">
                 <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-sm">
@@ -57,7 +57,7 @@
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                 </div>
-                <span class="text-gray-700 font-medium">Experts vérifiés</span>
+                <span class="text-gray-700 font-medium">Verified experts</span>
               </div>
               <div class="flex items-center gap-2 bg-white/80 py-2 px-4 rounded-full shadow-sm hover:bg-white transition-all">
                 <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-purple-500 flex items-center justify-center shadow-sm">
@@ -65,7 +65,7 @@
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
                 </div>
-                <span class="text-gray-700 font-medium">Flexibilité horaire</span>
+                <span class="text-gray-700 font-medium">Schedule flexibility</span>
               </div>
             </div>
             
@@ -74,7 +74,7 @@
                 to="/register" 
                 class="group px-8 py-4 bg-purple-600 text-white font-medium rounded-xl hover:bg-purple-500 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-purple-200/50 flex items-center justify-center"
               >
-                <span>Commencer</span>
+                <span>Get Started</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -83,7 +83,7 @@
                 to="/teachers" 
                 class="group px-8 py-4 bg-white text-purple-600 font-medium rounded-xl transform hover:translate-y-[-2px] transition-all shadow-md hover:shadow-lg flex items-center justify-center"
               >
-                <span>Trouver un enseignant</span>
+                <span>Find a teacher</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                 </svg>
@@ -99,7 +99,7 @@
                   </svg>
                 </div>
                 <p class="text-3xl font-bold text-purple-600">500+</p>
-                <p class="text-gray-600 text-sm font-medium">Enseignants</p>
+                <p class="text-gray-600 text-sm font-medium">Teachers</p>
               </div>
               <div class="text-center py-4 px-2 bg-white backdrop-blur-sm rounded-lg shadow-md transform hover:-translate-y-1 transition-all">
                 <div class="flex justify-center mb-1">
@@ -110,7 +110,7 @@
                   </svg>
                 </div>
                 <p class="text-3xl font-bold text-purple-600">15k+</p>
-                <p class="text-gray-600 text-sm font-medium">Étudiants</p>
+                <p class="text-gray-600 text-sm font-medium">Students</p>
               </div>
               <div class="text-center py-4 px-2 bg-white backdrop-blur-sm rounded-lg shadow-md transform hover:-translate-y-1 transition-all">
                 <div class="flex justify-center mb-1">
@@ -143,13 +143,13 @@
                   <div class="flex items-start">
                     <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-3 flex-shrink-0">T</div>
                     <div class="bg-gray-100 rounded-xl rounded-tl-none p-3 text-sm">
-                      <p>Bonjour ! Je suis disponible pour vous aider avec vos questions de calcul.</p>
+                      <p>Hello! I'm available to help you with your calculus questions.</p>
                     </div>
                   </div>
                   
                   <div class="flex items-start justify-end">
                     <div class="bg-purple-100 rounded-xl rounded-tr-none p-3 text-sm">
-                      <p>Super ! J'ai des difficultés avec les dérivées. Pouvons-nous programmer une session ?</p>
+                      <p>Great! I'm struggling with derivatives. Can we schedule a session?</p>
                     </div>
                     <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 ml-3 flex-shrink-0">E</div>
                   </div>
@@ -157,7 +157,7 @@
                   <div class="flex items-start">
                     <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-3 flex-shrink-0">T</div>
                     <div class="bg-gray-100 rounded-xl rounded-tl-none p-3 text-sm">
-                      <p>Bien sûr ! Je suis libre demain à 15h. Cela vous convient ?</p>
+                      <p>Of course! I'm free tomorrow at 3 PM. Does that work for you?</p>
                     </div>
                   </div>
                   
@@ -171,7 +171,7 @@
                 
                 <!-- Message input -->
                 <div class="mt-4 flex">
-                  <input type="text" placeholder="Tapez un message..." class="flex-1 bg-gray-100 rounded-l-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                  <input type="text" placeholder="Type a message..." class="flex-1 bg-gray-100 rounded-l-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent">
                   <button class="bg-purple-600 text-white p-2 rounded-r-lg hover:bg-purple-500 transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
@@ -204,7 +204,7 @@
                       </div>
                     </div>
                   </div>
-                  <p class="text-xs text-gray-600">« J'ai énormément progressé grâce à mon prof de maths. Merci ! »</p>
+                  <p class="text-xs text-gray-600">"I've made tremendous progress thanks to my math teacher. Thank you!"</p>
                 </div>
               </div>
             </div>
@@ -230,10 +230,10 @@
       
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">Processus simple</span>
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">Comment fonctionne Academ</h2>
+          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">Simple process</span>
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">How Academ Works</h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Notre plateforme vous connecte facilement avec des experts académiques pour obtenir l'aide dont vous avez besoin
+            Our platform easily connects you with academic experts to get the help you need
           </p>
         </div>
         
@@ -245,8 +245,8 @@
             <div class="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
             <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">1</div>
-            <h3 class="text-xl font-semibold mb-3 text-center">Créez votre compte</h3>
-            <p class="text-gray-600 text-center mb-6">Inscrivez-vous en tant qu'étudiant ou connectez-vous en tant qu'enseignant vérifié pour accéder à toutes les fonctionnalités.</p>
+            <h3 class="text-xl font-semibold mb-3 text-center">Create your account</h3>
+            <p class="text-gray-600 text-center mb-6">Sign up as a student or log in as a verified teacher to access all features.</p>
             <div class="flex justify-center">
               <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 group-hover:bg-purple-200 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -262,8 +262,8 @@
             <div class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
             <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">2</div>
-            <h3 class="text-xl font-semibold mb-3 text-center">Trouvez le bon professeur</h3>
-            <p class="text-gray-600 text-center mb-6">Parcourez les profils ou publiez vos besoins d'apprentissage pour trouver le professeur idéal.</p>
+            <h3 class="text-xl font-semibold mb-3 text-center">Find the right teacher</h3>
+            <p class="text-gray-600 text-center mb-6">Browse profiles or post your learning needs to find the perfect teacher.</p>
             <div class="flex justify-center">
               <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 group-hover:bg-purple-200 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -279,8 +279,8 @@
             <div class="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
             <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">3</div>
-            <h3 class="text-xl font-semibold mb-3 text-center">Connectez-vous et apprenez</h3>
-            <p class="text-gray-600 text-center mb-6">Échangez des messages, planifiez des sessions et collaborez via notre plateforme sécurisée.</p>
+            <h3 class="text-xl font-semibold mb-3 text-center">Connect and learn</h3>
+            <p class="text-gray-600 text-center mb-6">Exchange messages, schedule sessions, and collaborate through our secure platform.</p>
             <div class="flex justify-center">
               <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-100 group-hover:bg-purple-200 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -303,10 +303,10 @@
       
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">Nos avantages</span>
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">Pourquoi choisir Academ</h2>
+          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">Our advantages</span>
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">Why choose Academ</h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Une plateforme conçue pour offrir la meilleure expérience d'apprentissage possible
+            A platform designed to provide the best possible learning experience
           </p>
         </div>
         
@@ -325,14 +325,14 @@
                 </svg>
               </span>
             </div>
-            <h3 class="text-xl font-semibold mb-4 text-center">Enseignants experts</h3>
-            <p class="text-gray-600 text-center">Tous nos enseignants sont des professionnels vérifiés avec une expertise dans leurs domaines.</p>
+            <h3 class="text-xl font-semibold mb-4 text-center">Expert teachers</h3>
+            <p class="text-gray-600 text-center">All our teachers are verified professionals with expertise in their fields.</p>
             <div class="mt-6 text-center">
               <NuxtLink 
                 to="/teachers" 
                 class="text-purple-600 font-medium hover:text-purple-800 inline-flex items-center group"
               >
-                Parcourir les enseignants
+                Browse teachers
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -354,14 +354,14 @@
                 </svg>
               </span>
             </div>
-            <h3 class="text-xl font-semibold mb-4 text-center">Planning flexible</h3>
-            <p class="text-gray-600 text-center">Réservez des sessions qui correspondent à votre emploi du temps et à votre rythme d'apprentissage.</p>
+            <h3 class="text-xl font-semibold mb-4 text-center">Flexible scheduling</h3>
+            <p class="text-gray-600 text-center">Book sessions that fit your schedule and learning pace.</p>
             <div class="mt-6 text-center">
               <NuxtLink 
                 to="/teachers" 
                 class="text-purple-600 font-medium hover:text-purple-800 inline-flex items-center group"
               >
-                Trouver des sessions disponibles
+                Find available sessions
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -383,14 +383,14 @@
                 </svg>
               </span>
             </div>
-            <h3 class="text-xl font-semibold mb-4 text-center">Plateforme sécurisée</h3>
-            <p class="text-gray-600 text-center">Toutes les communications et transactions sont sécurisées et privées.</p>
+            <h3 class="text-xl font-semibold mb-4 text-center">Secure platform</h3>
+            <p class="text-gray-600 text-center">All communications and transactions are secure and private.</p>
             <div class="mt-6 text-center">
               <NuxtLink 
                 to="/messages" 
                 class="text-purple-600 font-medium hover:text-purple-800 inline-flex items-center group"
               >
-                Voir les messages
+                View messages
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -409,10 +409,10 @@
       
       <div class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-16">
-          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">Pour tous</span>
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">Une solution adaptée à chaque besoin</h2>
+          <span class="px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium inline-block mb-4">For everyone</span>
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">A solution adapted to every need</h2>
           <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-            Que vous soyez étudiant ou enseignant, notre plateforme est conçue pour vous
+            Whether you're a student or teacher, our platform is designed for you
           </p>
         </div>
         
@@ -427,9 +427,9 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                 </svg>
               </div>
-              <h2 class="text-3xl font-bold text-gray-900 mb-3">Pour les étudiants</h2>
+              <h2 class="text-3xl font-bold text-gray-900 mb-3">For students</h2>
               <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-                Obtenez un soutien académique personnalisé de la part d'enseignants qualifiés
+                Get personalized academic support from qualified teachers
               </p>
             </div>
             
@@ -439,19 +439,19 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span>Accès à des enseignants vérifiés dans diverses matières académiques</span>
+                  <span>Access to verified teachers in various academic subjects</span>
                 </li>
                 <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-purple-50/40 shadow-sm group-hover:shadow-md transition-shadow">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span>Planifiez des sessions individuelles aux horaires qui vous conviennent</span>
+                  <span>Schedule individual sessions at times that suit you</span>
                 </li>
                 <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-purple-50/40 shadow-sm group-hover:shadow-md transition-shadow">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span>Communiquez et échangez des fichiers via notre plateforme sécurisée</span>
+                  <span>Communicate and share files through our secure platform</span>
                 </li>
               </ul>
             </div>
@@ -461,7 +461,7 @@
                 to="/register" 
                 class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white bg-purple-600 hover:bg-purple-500 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-purple-200/50 w-full md:w-auto"
               >
-                S'inscrire comme étudiant
+                Sign up as a student
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -477,9 +477,9 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h2 class="text-3xl font-bold text-gray-900 mb-3">Pour les enseignants</h2>
+              <h2 class="text-3xl font-bold text-gray-900 mb-3">For teachers</h2>
               <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-                Partagez votre expertise et aidez les étudiants à réussir
+                Share your expertise and help students succeed
               </p>
             </div>
             
@@ -489,19 +489,19 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span>Créez un profil professionnel présentant votre expertise et vos qualifications</span>
+                  <span>Create a professional profile showcasing your expertise and qualifications</span>
                 </li>
                 <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-purple-50/40 shadow-sm group-hover:shadow-md transition-shadow">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span>Définissez votre propre disponibilité et vos tarifs horaires</span>
+                  <span>Set your own availability and hourly rates</span>
                 </li>
                 <li class="flex items-start p-4 rounded-xl bg-gradient-to-br from-white to-purple-50/40 shadow-sm group-hover:shadow-md transition-shadow">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-500 mt-0.5 mr-4 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                   </svg>
-                  <span>Connectez-vous avec des étudiants qui ont besoin de votre expertise spécifique</span>
+                  <span>Connect with students who need your specific expertise</span>
                 </li>
               </ul>
             </div>
@@ -511,7 +511,7 @@
                 to="/login" 
                 class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium rounded-xl text-purple-700 bg-white hover:bg-purple-50 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-purple-100/50 w-full md:w-auto"
               >
-                Se connecter en tant qu'enseignant
+                Log in as a teacher
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -533,16 +533,16 @@
       
       <div class="max-w-5xl mx-auto px-3 relative z-10">
         <div class="text-center">
-          <h2 class="text-4xl md:text-5xl font-bold mb-6 drop-shadow-sm">Prêt à commencer ?</h2>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6 drop-shadow-sm">Ready to get started?</h2>
           <p class="text-xl text-purple-100 mb-12 max-w-2xl mx-auto">
-            Rejoignez des milliers d'étudiants et d'enseignants qui utilisent déjà Academ pour atteindre l'excellence académique.
+            Join thousands of students and teachers who already use Academ to achieve academic excellence.
           </p>
           <div class="flex flex-col sm:flex-row justify-center gap-6 max-w-md mx-auto">
             <NuxtLink 
               to="/register" 
               class="group px-8 py-4 bg-white text-purple-600 font-medium rounded-xl hover:bg-purple-50 transform hover:translate-y-[-2px] transition-all shadow-lg hover:shadow-purple-900/30 flex items-center justify-center"
             >
-              <span>Créer un compte</span>
+              <span>Create an account</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -551,7 +551,7 @@
               to="/teachers" 
               class="group px-8 py-4 bg-transparent text-white font-medium rounded-xl hover:bg-white/10 backdrop-blur-sm transform hover:translate-y-[-2px] transition-all flex items-center justify-center"
             >
-              <span>Explorer les enseignants</span>
+              <span>Explore teachers</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -577,7 +577,7 @@
               <span class="text-2xl font-bold text-white">Academ</span>
               <span class="text-purple-400 ml-1">Message</span>
             </div>
-            <p class="text-gray-400 mb-6">Connecter les étudiants avec des enseignants qualifiés pour un soutien académique personnalisé.</p>
+            <p class="text-gray-400 mb-6">Connecting students with qualified teachers for personalized academic support.</p>
             <div class="flex space-x-4">
               <a href="#" aria-label="Twitter" class="bg-gray-800/80 text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-700 transition-colors">
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
@@ -592,21 +592,21 @@
           </div>
           
           <div>
-            <h3 class="text-white text-lg font-bold mb-5">Liens rapides</h3>
+            <h3 class="text-white text-lg font-bold mb-5">Quick links</h3>
             <ul class="space-y-3">
-              <li><NuxtLink to="/" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Accueil</NuxtLink></li>
-              <li><NuxtLink to="/teachers" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Trouver des enseignants</NuxtLink></li>
+              <li><NuxtLink to="/" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Home</NuxtLink></li>
+              <li><NuxtLink to="/teachers" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Find teachers</NuxtLink></li>
               <li><NuxtLink to="/messages" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Messages</NuxtLink></li>
-              <li><NuxtLink to="/profile" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Mon profil</NuxtLink></li>
+              <li><NuxtLink to="/profile" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> My profile</NuxtLink></li>
             </ul>
           </div>
           
           <div>
-            <h3 class="text-white text-lg font-bold mb-5">Légal</h3>
+            <h3 class="text-white text-lg font-bold mb-5">Legal</h3>
             <ul class="space-y-3">
-              <li><NuxtLink to="/terms" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Conditions d'utilisation</NuxtLink></li>
-              <li><NuxtLink to="/privacy" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Politique de confidentialité</NuxtLink></li>
-              <li><NuxtLink to="/cookies" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Politique de cookies</NuxtLink></li>
+              <li><NuxtLink to="/terms" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Terms of use</NuxtLink></li>
+              <li><NuxtLink to="/privacy" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Privacy policy</NuxtLink></li>
+              <li><NuxtLink to="/cookies" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Cookie policy</NuxtLink></li>
             </ul>
           </div>
           
@@ -634,9 +634,9 @@
         </div>
         
         <div class="pt-8 mt-8 border-t border-gray-800 text-center text-gray-500 text-sm flex flex-col sm:flex-row justify-between items-center">
-          <p>&copy; 2025 Academ. Tous droits réservés.</p>
+          <p>&copy; 2025 Academ. All rights reserved.</p>
           <div class="mt-3 sm:mt-0 flex space-x-6">
-            <NuxtLink to="/" class="hover:text-gray-400 transition-colors">Aide</NuxtLink>
+            <NuxtLink to="/" class="hover:text-gray-400 transition-colors">Help</NuxtLink>
             <NuxtLink to="/" class="hover:text-gray-400 transition-colors">Blog</NuxtLink>
             <NuxtLink to="/" class="hover:text-gray-400 transition-colors">FAQ</NuxtLink>
           </div>
@@ -660,7 +660,7 @@ watchEffect(() => {
 
 // Configuration de la page
 definePageMeta({
-  title: 'Academ - Plateforme d\'apprentissage',
+  title: 'Academ - Learning Platform',
   layout: 'default'
 });
 </script>

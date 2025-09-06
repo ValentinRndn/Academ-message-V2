@@ -11,11 +11,11 @@
       <!-- Formulaire d'inscription -->
       <div class="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
         <div class="mb-6">
-          <h2 class="text-xl font-semibold text-gray-900 text-center mb-2">Créer un compte</h2>
+          <h2 class="text-xl font-semibold text-gray-900 text-center mb-2">Create an account</h2>
           <p class="text-sm text-gray-500 text-center">
-            Déjà membre ? 
+            Already a member? 
             <NuxtLink to="/login" class="text-purple-600 hover:text-purple-700 font-medium">
-              Connectez-vous
+              Sign in
             </NuxtLink>
           </p>
         </div>
@@ -71,10 +71,10 @@
             />
           </div>
 
-          <!-- Mot de passe -->
+          <!-- Password -->
           <div>
             <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
-              Mot de passe
+              Password
             </label>
             <input
               id="password"

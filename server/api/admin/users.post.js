@@ -13,7 +13,7 @@ const createTransporter = async () => {
     
     const transporter = nodemailer.default || nodemailer;
     
-    return transporter.createTransporter({
+    return transporter.createTransport({
       host: config.smtpHost || 'smtp.gmail.com',
       port: config.smtpPort || 587,
       secure: false,
