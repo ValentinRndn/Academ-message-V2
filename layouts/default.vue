@@ -1,10 +1,10 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col">
-    <!-- Header pour les pages avec navigation -->
+    <!-- Header for pages with navigation -->
     <header v-if="shouldShowSidebar" class="bg-white border-b border-gray-200 shadow-sm flex-shrink-0"
             :class="{ 'header-with-sidebar': shouldShowSidebar }">
       <div class="px-4 py-3 flex justify-end items-center">        
-        <!-- Actions du header -->
+        <!-- Header actions -->
         <div class="flex items-center">
           <!-- Notifications -->
           <NotificationsPanel />
@@ -13,32 +13,32 @@
       </div>
     </header>
     
-    <!-- Main content avec scroll -->
+    <!-- Main content with scroll -->
     <main class="flex-1 overflow-auto bg-gray-50" :class="{ 'main-with-sidebar': shouldShowSidebar }">
       <slot />
     </main>
     
-    <!-- Alerte de session expirée -->
+    <!-- Expired session alert -->
     <SessionExpiredAlert />
     
-    <!-- Alerte d'expiration de session -->
+    <!-- Session expiration alert -->
     <SessionExpirationAlert ref="sessionExpirationAlert" />
     
-    <!-- Toast notifications (système principal) -->
+    <!-- Toast notifications (main system) -->
     <ToastContainer />
 
-    <!-- Sidebar en bas pour mobile, sur le côté pour desktop -->
+    <!-- Sidebar at bottom for mobile, on side for desktop -->
     <div v-if="shouldShowSidebar" 
          class="bg-white border-t border-gray-200 md:border-t-0 md:border-r shadow-sm md:w-64 md:h-screen md:fixed md:top-0 md:left-0 md:flex md:flex-col">
       
-      <!-- Logo section - visible uniquement sur desktop -->
+      <!-- Logo section - visible only on desktop -->
       <div class="hidden md:block p-4 border-b border-gray-200">
         <NuxtLink to="/" class="text-purple-600 text-xl font-bold flex items-center">
           <img src="/assets/images/logo_academ.png" alt="Academ Logo" class="w-8 h-8 mr-2" />
         </NuxtLink>
       </div>
 
-      <!-- User profile section - visible uniquement sur desktop -->
+      <!-- User profile section - visible only on desktop -->
       <div class="hidden md:flex p-4 border-b border-gray-200 items-center">
         <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-3">
           <span class="text-purple-600 font-semibold text-sm">
@@ -47,30 +47,30 @@
         </div>
         <div class="flex-1">
           <div class="font-semibold text-gray-800">{{ user?.firstName }} {{ user?.lastName }}</div>
-          <div class="text-xs text-gray-500 capitalize">{{ getRoleLabel(user?.role) }} • En ligne</div>
+          <div class="text-xs text-gray-500 capitalize">{{ getRoleLabel(user?.role) }} • Online</div>
         </div>
         <button @click="handleLogout" 
           class="ml-2 p-2 text-gray-400 hover:text-red-600 transition-colors" 
-          title="Se déconnecter">
+          title="Sign out">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
           </svg>
         </button>
       </div>
 
-      <!-- Search bar - visible uniquement sur desktop -->
+      <!-- Search bar - visible only on desktop -->
       <div class="hidden md:block p-4 border-b border-gray-200">
         <div class="relative">
-          <input type="text" placeholder="Rechercher..." class="w-full bg-gray-100 rounded-md pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <input type="text" placeholder="Search..." class="w-full bg-gray-100 rounded-md pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </div>
       </div>
 
-      <!-- Navigation menu pour desktop -->
+      <!-- Navigation menu for desktop -->
       <div class="hidden md:block flex-shrink-0">
-        <div class="p-2 font-medium text-xs text-gray-500 uppercase tracking-wider">Menu principal</div>
+        <div class="p-2 font-medium text-xs text-gray-500 uppercase tracking-wider">Main menu</div>
         <nav>
           <NuxtLink v-for="item in navigation" :key="item.to" 
             :to="item.to" 
@@ -91,13 +91,13 @@
 
     </div>
 
-    <!-- Navigation mobile fixée en bas de l'écran -->
+    <!-- Mobile navigation fixed at bottom of screen -->
     <nav v-if="shouldShowSidebar" 
          class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
       <div class="max-w-md mx-auto px-2">
-        <!-- Barre de navigation avec indicateur de position -->
+        <!-- Navigation bar with position indicator -->
         <div class="flex justify-around items-center relative py-2">
-          <!-- Indicateur de position actif -->
+          <!-- Active position indicator -->
           <div class="absolute bottom-full left-0 h-1 bg-purple-600 transition-all duration-300 ease-in-out"
                :style="{ width: `${100/mobileNavigation.length}%`, transform: `translateX(${activeMobileTabPosition}%)` }"></div>
           
@@ -130,20 +130,20 @@ const { user, logout } = useAuth()
 const { unreadCount } = useMessagesV2()
 const sessionExpirationAlert = ref(null)
 
-// État pour gérer l'affichage de la sidebar après hydration
+// State to manage sidebar display after hydration
 const isMounted = ref(false)
 
-// Routes où la sidebar ne doit pas apparaître
+// Routes where sidebar should not appear
 const noSidebarRoutes = ['/', '/login', '/register']
 
-// Fonction pour déterminer si la sidebar doit être affichée
+// Function to determine if sidebar should be displayed
 const shouldShowSidebar = computed(() => {
   return isMounted.value && !noSidebarRoutes.includes(route.path)
 })
 
-// Écouter l'événement d'expiration de session
+// Listen for session expiration event
 onMounted(() => {
-  // Marquer comme monté pour éviter les problèmes d'hydration
+  // Mark as mounted to avoid hydration issues
   isMounted.value = true
   
   window.addEventListener('session-expiring', (event) => {
@@ -157,13 +157,13 @@ onUnmounted(() => {
   window.removeEventListener('session-expiring', () => {});
 })
 
-// Calculer la position de l'indicateur actif mobile
+// Calculate mobile active indicator position
 const activeMobileTabPosition = computed(() => {
   const currentIndex = mobileNavigation.value.findIndex(item => item.to === route.path)
   return currentIndex >= 0 ? currentIndex * 100 : 0
 })
 
-// Icônes pour la navigation
+// Icons for navigation
 const getNavIcon = (iconName) => {
   const icons = {
     home: h('svg', { fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' }, [
@@ -202,31 +202,31 @@ const getNavIcon = (iconName) => {
   return icons[iconName] || icons.home
 }
 
-// Fonction pour gérer la déconnexion
+// Function to handle logout
 const handleLogout = async () => {
   await logout()
   navigateTo('/login')
 }
 
-// Fonction pour les libellés de rôle
+// Function for role labels
 const getRoleLabel = (role) => {
   const labels = {
-    admin: 'administrateur',
-    teacher: 'enseignant',
-    student: 'étudiant'
+    admin: 'administrator',
+    teacher: 'teacher',
+    student: 'student'
   }
-  return labels[role] || 'utilisateur'
+  return labels[role] || 'user'
 }
 </script>
 
 <style scoped>
-/* Assurer que la sidebar a une hauteur complète sur desktop */
+/* Ensure sidebar has full height on desktop */
 @media (min-width: 768px) {
   .md\:h-screen {
     height: 100vh;
   }
   
-  /* Appliquer la marge uniquement aux pages avec sidebar pour éviter le shift lors du hydration */
+  /* Apply margin only to pages with sidebar to avoid shift during hydration */
   .main-with-sidebar {
     margin-left: 16rem; /* 64px * 4 = 256px = 16rem */
   }
@@ -238,7 +238,7 @@ const getRoleLabel = (role) => {
 
 
 
-/* Personnalisation du scrollbar pour le contenu principal */
+/* Scrollbar customization for main content */
 main::-webkit-scrollbar {
   width: 6px;
 }
@@ -256,19 +256,19 @@ main::-webkit-scrollbar-thumb:hover {
   background: #818cf8;
 }
 
-/* Assurer que le contenu principal prend tout l'espace disponible */
+/* Ensure main content takes all available space */
 .min-h-screen {
   min-height: 100vh;
 }
 
-/* Ajouter un padding en bas pour le mobile afin d'éviter que le contenu ne soit caché par la barre de navigation */
+/* Add bottom padding for mobile to prevent content from being hidden by navigation bar */
 @media (max-width: 767px) {
   main {
-    padding-bottom: 5rem; /* Augmenté pour la nouvelle navbar */
+    padding-bottom: 5rem; /* Increased for new navbar */
   }
 }
 
-/* Style pour les éléments de navigation mobile */
+/* Style for mobile navigation elements */
 .mobile-nav-item {
   display: flex;
   flex-direction: column;
@@ -281,7 +281,7 @@ main::-webkit-scrollbar-thumb:hover {
   flex: 1;
 }
 
-/* Animation pour l'indicateur de position */
+/* Animation for position indicator */
 .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

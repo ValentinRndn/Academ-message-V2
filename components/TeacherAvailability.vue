@@ -4,7 +4,7 @@
     <div v-if="isEditing" class="space-y-6">
       <!-- Sélection des jours -->
       <div>
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Jours de disponibilité</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Available days</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
           <label 
             v-for="day in daysOfWeek" 
@@ -35,7 +35,7 @@
 
       <!-- Créneaux horaires -->
       <div>
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Créneaux horaires</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Time slots</h3>
         <div class="space-y-4">
           <div 
             v-for="(slot, index) in timeSlots" 
@@ -44,7 +44,7 @@
           >
             <div class="flex-1 grid grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Heure de début</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Start time</label>
                 <input
                   type="time"
                   v-model="slot.startTime"
@@ -52,7 +52,7 @@
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Heure de fin</label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">End time</label>
                 <input
                   type="time"
                   v-model="slot.endTime"
@@ -79,7 +79,7 @@
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
-              <span>Ajouter un créneau</span>
+              <span>Add time slot</span>
             </div>
           </button>
         </div>
@@ -91,14 +91,14 @@
           @click="cancelEdit"
           class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
         >
-          Annuler
+          Cancel
         </button>
         <button
           @click="saveAvailability"
           :disabled="!canSave"
           class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
-          Sauvegarder
+          Save
         </button>
       </div>
     </div>
@@ -108,12 +108,12 @@
       <!-- Aperçu des disponibilités -->
       <div v-if="availability.length > 0" class="space-y-4">
         <div class="flex items-center justify-between">
-          <h3 class="text-lg font-medium text-gray-900">Vos disponibilités actuelles</h3>
+          <h3 class="text-lg font-medium text-gray-900">Your current availability</h3>
           <button
             @click="startEdit"
             class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
-            Modifier
+            Edit
           </button>
         </div>
         
@@ -147,16 +147,16 @@
         <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <h3 class="mt-2 text-sm font-medium text-gray-900">Aucune disponibilité définie</h3>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No availability defined</h3>
         <p class="mt-1 text-sm text-gray-500">
-          Définissez vos créneaux de disponibilité pour que les étudiants puissent réserver des cours.
+          Set your availability slots so students can book lessons.
         </p>
         <div class="mt-6">
           <button
             @click="startEdit"
             class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
           >
-            Définir mes disponibilités
+            Set my availability
           </button>
         </div>
       </div>
@@ -165,7 +165,7 @@
     <!-- Indicateur de chargement -->
     <div v-if="loading" class="text-center py-4">
       <div class="animate-spin rounded-full h-6 w-6 border-b-2 border-purple-600 mx-auto"></div>
-      <p class="text-sm text-gray-500 mt-2">Chargement...</p>
+      <p class="text-sm text-gray-500 mt-2">Loading...</p>
     </div>
   </div>
 </template>
@@ -189,13 +189,13 @@ const availability = ref([]);
 
 // Jours de la semaine (0 = dimanche, 1 = lundi, etc.)
 const daysOfWeek = [
-  { value: 'sunday', label: 'Dimanche' },
-  { value: 'monday', label: 'Lundi' },
-  { value: 'tuesday', label: 'Mardi' },
-  { value: 'wednesday', label: 'Mercredi' },
-  { value: 'thursday', label: 'Jeudi' },
-  { value: 'friday', label: 'Vendredi' },
-  { value: 'saturday', label: 'Samedi' }
+  { value: 'sunday', label: 'Sunday' },
+  { value: 'monday', label: 'Monday' },
+  { value: 'tuesday', label: 'Tuesday' },
+  { value: 'wednesday', label: 'Wednesday' },
+  { value: 'thursday', label: 'Thursday' },
+  { value: 'friday', label: 'Friday' },
+  { value: 'saturday', label: 'Saturday' }
 ];
 
 // Computed properties
@@ -269,7 +269,7 @@ const saveAvailability = async () => {
     
     // Afficher une notification de succès
     if (typeof window !== 'undefined' && window.showToast) {
-      window.showToast('Disponibilités sauvegardées avec succès', 'success');
+      window.showToast('Availability saved successfully', 'success');
     }
     
     // Émettre un événement pour informer les autres composants
@@ -281,10 +281,10 @@ const saveAvailability = async () => {
     await loadAvailability();
     
   } catch (error) {
-    console.error('Erreur lors de la sauvegarde des disponibilités:', error);
+    console.error('Error saving availability:', error);
     
     if (typeof window !== 'undefined' && window.showToast) {
-      window.showToast('Erreur lors de la sauvegarde des disponibilités', 'error');
+      window.showToast('Error saving availability', 'error');
     }
   } finally {
     loading.value = false;
@@ -328,7 +328,7 @@ const loadAvailability = async () => {
     }
     
   } catch (error) {
-    console.error('Erreur lors du chargement des disponibilités:', error);
+    console.error('Error loading availability:', error);
     availability.value = [];
   } finally {
     loading.value = false;

@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (process.server) return;
   
   // Liste des routes publiques (pas besoin d'authentification)
-  const publicRoutes = ['/', '/login', '/register', '/teachers'];
+  const publicRoutes = ['/', '/login', '/register', '/teachers', '/privacy-policy', '/terms-of-service', '/refund-policy'];
   if (publicRoutes.includes(to.path)) {
     return;
   }

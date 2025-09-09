@@ -87,6 +87,20 @@
             <span v-else>Sign in</span>
           </button>
         </form>
+        
+        <!-- Legal links -->
+        <div class="mt-6 text-center">
+          <p class="text-xs text-gray-500">
+            By signing in, you agree to our
+            <a href="https://imators.com/terms-of-use" target="_blank" rel="noopener noreferrer" aria-label="Terms of service" class="text-purple-600 hover:text-purple-700 underline">
+              Terms of Service
+            </a>
+            and
+            <a href="https://imators.com/privacy" target="_blank" rel="noopener noreferrer" aria-label="Privacy policy" class="text-purple-600 hover:text-purple-700 underline">
+              Privacy Policy
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   </div>

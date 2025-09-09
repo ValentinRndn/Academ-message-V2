@@ -2,26 +2,26 @@
   <div class="p-6">
     <!-- Header -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900">Tableau de bord Administrateur</h1>
-      <p class="text-gray-600 mt-2">Vue d'ensemble de la plateforme Academ</p>
+      <h1 class="text-3xl font-bold text-gray-900">Administrator Dashboard</h1>
+      <p class="text-gray-600 mt-2">Overview of the Academ platform</p>
     </div>
 
-    <!-- Statistiques générales -->
+    <!-- General statistics -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
       <StatsCard 
-        title="Utilisateurs totaux" 
+        title="Total users" 
         :value="stats?.overview?.totalUsers || 0"
         icon="users"
         color="purple"
       />
       <StatsCard 
-        title="Étudiants" 
+        title="Students" 
         :value="stats?.overview?.totalStudents || 0"
         icon="academic-cap"
         color="purple"
       />
       <StatsCard 
-        title="Enseignants" 
+        title="Teachers" 
         :value="stats?.overview?.totalTeachers || 0"
         icon="user-group"
         color="purple"
@@ -34,46 +34,46 @@
       />
     </div>
 
-    <!-- Actions rapides -->
+    <!-- Quick actions -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 hidden">
-      <!-- Gestion des utilisateurs -->
+      <!-- User management -->
       <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">Gestion des utilisateurs</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">User management</h3>
         <div class="space-y-3">
           <NuxtLink to="/admin/users" 
             class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
-            👥 Voir tous les utilisateurs
+            👥 View all users
           </NuxtLink>
           <NuxtLink to="/admin/users?filter=pending" 
             class="block w-full text-left px-4 py-2 bg-yellow-50 text-yellow-700 rounded-md hover:bg-yellow-100 transition-colors">
-            ⏳ Enseignants en attente ({{ pendingTeachers }})
+            ⏳ Pending teachers ({{ pendingTeachers }})
           </NuxtLink>
           <NuxtLink to="/admin/users/create" 
             class="block w-full text-left px-4 py-2 bg-green-50 text-green-700 rounded-md hover:bg-green-100 transition-colors">
-            ➕ Créer un utilisateur
+            ➕ Create a user
           </NuxtLink>
           <NuxtLink to="/admin/create-teacher" 
             class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
-            👨‍🏫 Créer un professeur
+            👨‍🏫 Create a teacher
           </NuxtLink>
         </div>
       </div>
 
-      <!-- Modération -->
+      <!-- Moderation -->
       <div class="bg-white rounded-lg shadow p-6">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">Modération</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Moderation</h3>
         <div class="space-y-3">
           <NuxtLink to="/admin/reports" 
             class="block w-full text-left px-4 py-2 bg-red-50 text-red-700 rounded-md hover:bg-red-100 transition-colors">
-            🚨 Signalements ({{ reportsCount }})
+            🚨 Reports ({{ reportsCount }})
           </NuxtLink>
           <NuxtLink to="/admin/messages" 
             class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
-            💬 Surveiller les messages
+            💬 Monitor messages
           </NuxtLink>
           <NuxtLink to="/admin/reviews" 
             class="block w-full text-left px-4 py-2 bg-orange-50 text-orange-700 rounded-md hover:bg-orange-100 transition-colors">
-            ⭐ Gérer les avis
+            ⭐ Manage reviews
           </NuxtLink>
         </div>
       </div>
@@ -84,31 +84,31 @@
         <div class="space-y-3">
           <NuxtLink to="/admin/subjects" 
             class="block w-full text-left px-4 py-2 bg-purple-50 text-purple-700 rounded-md hover:bg-purple-100 transition-colors">
-            📚 Gérer les matières
+            📚 Manage subjects
           </NuxtLink>
           <NuxtLink to="/admin/settings" 
             class="block w-full text-left px-4 py-2 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 transition-colors">
-            ⚙️ Paramètres système
+            ⚙️ System settings
           </NuxtLink>
           <NuxtLink to="/admin/analytics" 
             class="block w-full text-left px-4 py-2 bg-pink-50 text-pink-700 rounded-md hover:bg-pink-100 transition-colors">
-            📊 Analytics détaillés
+            📊 Detailed analytics
           </NuxtLink>
         </div>
       </div>
     </div>
 
-    <!-- Contenu en deux colonnes -->
+    <!-- Two column content -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <!-- Utilisateurs récents -->
+      <!-- Recent users -->
       <div class="bg-white rounded-lg shadow">
         <div class="p-6 border-b border-gray-200">
-          <h3 class="text-lg font-semibold text-gray-900">Utilisateurs récents</h3>
+          <h3 class="text-lg font-semibold text-gray-900">Recent users</h3>
         </div>
         <div class="p-6">
           <div v-if="loading" class="text-center py-4">
             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-            <p class="text-gray-500 mt-2">Chargement...</p>
+            <p class="text-gray-500 mt-2">Loading...</p>
           </div>
           <div v-else-if="stats?.recent?.users?.length" class="space-y-4">
             <div v-for="user in stats.recent.users" :key="user._id" 
@@ -136,32 +136,32 @@
             </div>
           </div>
           <div v-else class="text-center py-4 text-gray-500">
-            Aucun utilisateur récent
+            No recent users
           </div>
         </div>
       </div>
 
-      <!-- Statistiques détaillées -->
+      <!-- Detailed statistics -->
       <div class="bg-white rounded-lg shadow">
         <div class="p-6 border-b border-gray-200">
-          <h3 class="text-lg font-semibold text-gray-900">Aperçu détaillé</h3>
+          <h3 class="text-lg font-semibold text-gray-900">Detailed overview</h3>
         </div>
         <div class="p-6">
           <div class="space-y-4">
             <div class="flex justify-between items-center py-2 border-b border-gray-100">
-              <span class="text-gray-600">Réservations totales</span>
+              <span class="text-gray-600">Total bookings</span>
               <span class="font-semibold text-gray-900">{{ stats?.overview?.totalBookings || 0 }}</span>
             </div>
             <div class="flex justify-between items-center py-2 border-b border-gray-100">
-              <span class="text-gray-600">Matières disponibles</span>
+              <span class="text-gray-600">Available subjects</span>
               <span class="font-semibold text-gray-900">{{ stats?.overview?.totalSubjects || 0 }}</span>
             </div>
             <div class="flex justify-between items-center py-2 border-b border-gray-100">
-              <span class="text-gray-600">Avis laissés</span>
+              <span class="text-gray-600">Reviews left</span>
               <span class="font-semibold text-gray-900">{{ stats?.overview?.totalReviews || 0 }}</span>
             </div>
             <div class="flex justify-between items-center py-2">
-              <span class="text-gray-600">Taux d'activité</span>
+              <span class="text-gray-600">Activity rate</span>
               <span class="font-semibold text-purple-600">{{ activityRate }}%</span>
             </div>
           </div>
@@ -172,14 +172,14 @@
 </template>
 
 <script setup>
-// Récupérer les statistiques
+// Get statistics
 const { data: stats, pending: loading } = await useFetch('/api/dashboard/stats');
 
-// Données réactives pour les compteurs
+// Reactive data for counters
 const pendingTeachers = ref(0);
 const reportsCount = ref(0);
 
-// Calculer le taux d'activité
+// Calculate activity rate
 const activityRate = computed(() => {
   if (!stats.value?.overview) return 0;
   const { totalUsers, totalMessages, totalBookings } = stats.value.overview;
@@ -187,7 +187,7 @@ const activityRate = computed(() => {
   return Math.round(((totalMessages + totalBookings) / totalUsers) * 10);
 });
 
-// Méthodes utilitaires
+// Utility methods
 const getRoleBadgeClass = (role) => {
   const classes = {
     admin: 'bg-purple-100 text-purple-800',
@@ -200,14 +200,14 @@ const getRoleBadgeClass = (role) => {
 const getRoleLabel = (role) => {
   const labels = {
     admin: 'Admin',
-    teacher: 'Enseignant',
-    student: 'Étudiant'
+    teacher: 'Teacher',
+    student: 'Student'
   };
   return labels[role] || role;
 };
 
 const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleDateString('fr-FR', {
+  return new Date(dateString).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'short',
     hour: '2-digit',
@@ -215,14 +215,14 @@ const formatDate = (dateString) => {
   });
 };
 
-// Charger les données complémentaires
+// Load additional data
 onMounted(async () => {
   try {
-    // Ici on pourrait ajouter d'autres appels API pour les données spécifiques
+    // Here we could add other API calls for specific data
     // pendingTeachers.value = await $fetch('/api/admin/pending-teachers-count');
     // reportsCount.value = await $fetch('/api/admin/reports-count');
   } catch (error) {
-    console.error('Erreur lors du chargement des données complémentaires:', error);
+    console.error('Error loading additional data:', error);
   }
 });
 </script>

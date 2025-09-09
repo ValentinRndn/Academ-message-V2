@@ -41,7 +41,7 @@
               A platform that connects students with qualified teachers for personalized and effective academic support.
             </p>
             
-            <!-- Points forts avec style amélioré -->
+            <!-- Key features with improved style -->
             <div class="flex flex-wrap gap-4 mb-10">
               <div class="flex items-center gap-2 bg-white/80 py-2 px-4 rounded-full shadow-sm hover:bg-white transition-all">
                 <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-sm">
@@ -90,7 +90,7 @@
               </NuxtLink>
             </div>
             
-            <!-- Stats avec design simplifié -->
+            <!-- Stats with simplified design -->
             <div class="mt-12 grid grid-cols-3 gap-4">
               <div class="text-center py-4 px-2 bg-white backdrop-blur-sm rounded-lg shadow-md transform hover:-translate-y-1 transition-all">
                 <div class="flex justify-center mb-1">
@@ -179,7 +179,7 @@
                   </button>
                 </div>
                 
-                <!-- Simple testimonial sans bordure -->
+                <!-- Simple testimonial without border -->
                 <div class="absolute -top-16 -right-12 bg-white rounded-lg p-3 shadow-sm max-w-[180px]">
                   <div class="flex items-center mb-2">
                     <div class="w-6 h-6 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-xs font-medium">M</div>
@@ -220,9 +220,9 @@
       </div>
     </section>
 
-    <!-- Comment ça marche - Section avec effet parallax -->
+    <!-- How it works - Section with parallax effect -->
     <section class="py-24 relative overflow-hidden" id="how-it-works">
-      <!-- Arrière-plan avec effet parallax et motif -->
+      <!-- Background with parallax effect and pattern -->
       <div class="absolute inset-0 bg-gradient-to-r from-purple-50 to-white -z-10"></div>
       <div class="absolute inset-0 -z-10 bg-how-it-works-pattern"></div>
       <div class="absolute -top-40 -right-40 w-96 h-96 bg-purple-100 rounded-full opacity-20 blur-3xl"></div>
@@ -239,9 +239,9 @@
         
         <!-- Steps Grid -->
         <div class="grid md:grid-cols-3 gap-8">
-          <!-- Étape 1 -->
+          <!-- Step 1 -->
           <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-purple-100 transition-all duration-300 relative">
-            <!-- Élément décoratif -->
+            <!-- Decorative element -->
             <div class="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
             <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">1</div>
@@ -256,9 +256,9 @@
             </div>
           </div>
           
-          <!-- Étape 2 -->
+          <!-- Step 2 -->
           <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-purple-100 transition-all duration-300 relative">
-            <!-- Élément décoratif -->
+            <!-- Decorative element -->
             <div class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
             <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">2</div>
@@ -273,9 +273,9 @@
             </div>
           </div>
           
-          <!-- Étape 3 -->
+          <!-- Step 3 -->
           <div class="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-purple-100 transition-all duration-300 relative">
-            <!-- Élément décoratif -->
+            <!-- Decorative element -->
             <div class="absolute -bottom-4 -right-4 w-8 h-8 rounded-full bg-purple-100 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             
             <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold mb-6 mx-auto transform group-hover:scale-110 transition-transform">3</div>
@@ -293,9 +293,9 @@
       </div>
     </section>
 
-    <!-- Pourquoi nous choisir - Section avec effet de "card hover" -->
+    <!-- Why choose us - Section with card hover effect -->
     <section class="py-28 bg-white relative overflow-hidden">
-      <!-- Éléments décoratifs en arrière-plan -->
+      <!-- Background decorative elements -->
       <div class="absolute inset-0 bg-gradient-to-br from-white via-purple-50/30 to-white -z-10"></div>
       <div class="absolute inset-0 -z-10 bg-features-pattern"></div>
       <div class="absolute top-20 right-0 w-72 h-72 bg-yellow-100/30 rounded-full blur-3xl"></div>
@@ -311,9 +311,9 @@
         </div>
         
         <div class="grid md:grid-cols-3 gap-8">
-          <!-- Carte 1 : Enseignants experts -->
+          <!-- Card 1: Expert teachers -->
           <div class="group bg-white p-8 rounded-2xl shadow-md transition-all duration-300 hover:shadow-xl relative overflow-hidden">
-            <!-- Effet de fond au survol amélioré -->
+            <!-- Improved hover background effect -->
             <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
             <div class="absolute right-0 bottom-0 w-40 h-40 bg-purple-100 rounded-full -mr-20 -mb-20 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
             <div class="absolute left-0 top-0 w-20 h-20 bg-purple-100 rounded-full -ml-10 -mt-10 opacity-0 group-hover:opacity-10 transition-all duration-500 delay-100"></div>
@@ -340,9 +340,9 @@
             </div>
           </div>
           
-          <!-- Carte 2 : Planning flexible -->
+          <!-- Card 2: Flexible scheduling -->
           <div class="group bg-white p-8 rounded-2xl shadow-md transition-all duration-300 hover:shadow-xl relative overflow-hidden">
-            <!-- Effet de fond au survol amélioré -->
+            <!-- Improved hover background effect -->
             <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
             <div class="absolute right-0 bottom-0 w-40 h-40 bg-purple-100 rounded-full -mr-20 -mb-20 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
             <div class="absolute left-0 top-0 w-20 h-20 bg-purple-100 rounded-full -ml-10 -mt-10 opacity-0 group-hover:opacity-10 transition-all duration-500 delay-100"></div>
@@ -369,9 +369,9 @@
             </div>
           </div>
           
-          <!-- Carte 3 : Plateforme sécurisée -->
+          <!-- Card 3: Secure platform -->
           <div class="group bg-white p-8 rounded-2xl shadow-md transition-all duration-300 hover:shadow-xl relative overflow-hidden">
-            <!-- Effet de fond au survol amélioré -->
+            <!-- Improved hover background effect -->
             <div class="absolute inset-0 bg-gradient-to-br from-purple-50 to-white opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
             <div class="absolute right-0 bottom-0 w-40 h-40 bg-purple-100 rounded-full -mr-20 -mb-20 opacity-0 group-hover:opacity-20 transition-all duration-500"></div>
             <div class="absolute left-0 top-0 w-20 h-20 bg-purple-100 rounded-full -ml-10 -mt-10 opacity-0 group-hover:opacity-10 transition-all duration-500 delay-100"></div>
@@ -401,9 +401,9 @@
       </div>
     </section>
     
-    <!-- Pour qui - Section avec deux colonnes -->
+    <!-- For whom - Two column section -->
     <section class="py-24 relative overflow-hidden">
-      <!-- Arrière-plan décoratif -->
+      <!-- Decorative background -->
       <div class="absolute inset-0 bg-gradient-to-br from-white via-purple-50/20 to-white -z-10"></div>
       <div class="absolute inset-0 -z-10 bg-for-who-pattern"></div>
       
@@ -417,7 +417,7 @@
         </div>
         
         <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-stretch">
-          <!-- Carte Étudiants -->
+          <!-- Students card -->
           <div class="group bg-white p-8 md:p-10 rounded-2xl shadow-xl flex flex-col hover:shadow-2xl transition-all duration-300">
             <div class="text-center mb-8">
               <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl text-3xl shadow-lg group-hover:shadow-purple-200 mb-6 transform group-hover:scale-105 transition-all">
@@ -469,7 +469,7 @@
             </div>
           </div>
           
-          <!-- Carte Enseignants -->
+          <!-- Teachers card -->
           <div class="group bg-white p-8 md:p-10 rounded-2xl shadow-xl flex flex-col hover:shadow-2xl transition-all duration-300">
             <div class="text-center mb-8">
               <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl text-3xl shadow-lg group-hover:shadow-purple-200 mb-6 transform group-hover:scale-105 transition-all">
@@ -522,9 +522,9 @@
       </div>
     </section>
     
-    <!-- Call to Action - Section avec effet de gradient dynamique -->
+    <!-- Call to Action - Section with dynamic gradient effect -->
     <section class="py-24 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-700 text-white relative overflow-hidden">
-      <!-- Éléments décoratifs -->
+      <!-- Decorative elements -->
       <div class="absolute inset-0 bg-cta-pattern opacity-25"></div>
       
       <!-- Blob shapes -->
@@ -561,9 +561,9 @@
       </div>
     </section>
     
-    <!-- Footer moderne avec effet de blur -->
+    <!-- Modern footer with blur effect -->
     <footer class="bg-gray-900 text-gray-300 py-16 relative overflow-hidden">
-      <!-- Éléments décoratifs -->
+      <!-- Decorative elements -->
       <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-purple-900/10 to-transparent"></div>
       <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-purple-800/10 blur-3xl"></div>
       <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-purple-800/5 blur-3xl"></div>
@@ -571,14 +571,13 @@
       <div class="absolute inset-0 bg-footer-pattern"></div>
       
       <div class="max-w-7xl mx-auto px-4 relative z-10">
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
           <div>
             <div class="flex items-center mb-4">
               <span class="text-2xl font-bold text-white">Academ</span>
-              <span class="text-purple-400 ml-1">Message</span>
             </div>
             <p class="text-gray-400 mb-6">Connecting students with qualified teachers for personalized academic support.</p>
-            <div class="flex space-x-4">
+            <!-- <div class="flex space-x-4">
               <a href="#" aria-label="Twitter" class="bg-gray-800/80 text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-700 transition-colors">
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
               </a>
@@ -588,27 +587,34 @@
               <a href="#" aria-label="Instagram" class="bg-gray-800/80 text-gray-400 hover:text-white p-2 rounded-full hover:bg-gray-700 transition-colors">
                 <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               </a>
-            </div>
+            </div> -->
           </div>
           
+        
           <div>
-            <h3 class="text-white text-lg font-bold mb-5">Quick links</h3>
-            <ul class="space-y-3">
-              <li><NuxtLink to="/" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Home</NuxtLink></li>
-              <li><NuxtLink to="/teachers" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Find teachers</NuxtLink></li>
-              <li><NuxtLink to="/messages" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Messages</NuxtLink></li>
-              <li><NuxtLink to="/profile" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> My profile</NuxtLink></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 class="text-white text-lg font-bold mb-5">Legal</h3>
-            <ul class="space-y-3">
-              <li><NuxtLink to="/terms" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Terms of use</NuxtLink></li>
-              <li><NuxtLink to="/privacy" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Privacy policy</NuxtLink></li>
-              <li><NuxtLink to="/cookies" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1"><span class="text-xs text-purple-400">→</span> Cookie policy</NuxtLink></li>
-            </ul>
-          </div>
+  <h3 class="text-white text-lg font-bold mb-5">Legal</h3>
+  <ul class="space-y-3">
+    <li>
+      <a href="https://imators.com/terms-of-use" target="_blank" rel="noopener noreferrer" aria-label="Terms of service"
+         class="text-gray-400 hover:text-white transition-colors flex items-center gap-1">
+        <span class="text-xs text-purple-400">→</span> Terms of Service
+      </a>
+    </li>
+    <li>
+      <a href="https://imators.com/privacy" target="_blank" rel="noopener noreferrer" aria-label="Privacy policy"
+         class="text-gray-400 hover:text-white transition-colors flex items-center gap-1">
+        <span class="text-xs text-purple-400">→</span> Privacy Policy
+      </a>
+    </li>
+    <li>
+      <a href="https://imators.com/refund-policy" target="_blank" rel="noopener noreferrer" aria-label="Refund policy"
+         class="text-gray-400 hover:text-white transition-colors flex items-center gap-1">
+        <span class="text-xs text-purple-400">→</span> Refund Policy
+      </a>
+    </li>
+  </ul>
+</div>
+
           
           <div>
             <h3 class="text-white text-lg font-bold mb-5">Contact</h3>
@@ -619,27 +625,31 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
-                <span class="text-gray-400">support@academessage.com</span>
+                <a href="mailto:ask@imators.com" 
+                  class="text-gray-400 hover:text-white transition-colors"
+                  aria-label="Send an email to ask@imators.com">
+                  ask@imators.com
+                </a>
               </li>
-              <li class="flex items-center">
+              <!-- <li class="flex items-center">
                 <div class="bg-gray-800/90 p-2 rounded-lg mr-3">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
                 <span class="text-gray-400">+33 (0)1 23 45 67 89</span>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>
         
         <div class="pt-8 mt-8 border-t border-gray-800 text-center text-gray-500 text-sm flex flex-col sm:flex-row justify-between items-center">
           <p>&copy; 2025 Academ. All rights reserved.</p>
-          <div class="mt-3 sm:mt-0 flex space-x-6">
+          <!-- <div class="mt-3 sm:mt-0 flex space-x-6">
             <NuxtLink to="/" class="hover:text-gray-400 transition-colors">Help</NuxtLink>
             <NuxtLink to="/" class="hover:text-gray-400 transition-colors">Blog</NuxtLink>
             <NuxtLink to="/" class="hover:text-gray-400 transition-colors">FAQ</NuxtLink>
-          </div>
+          </div> -->
         </div>
       </div>
     </footer>
@@ -647,18 +657,18 @@
 </template>
 
 <script setup>
-// Récupérer l'état d'authentification
+// Get authentication state
 const { user, isAuthenticated } = useAuth();
 
-// Redirection automatique pour les utilisateurs connectés
+// Automatic redirect for authenticated users
 watchEffect(() => {
   if (process.client && isAuthenticated.value && user.value) {
-    // Rediriger vers le dashboard
+    // Redirect to dashboard
     navigateTo('/dashboard');
   }
 });
 
-// Configuration de la page
+// Page configuration
 definePageMeta({
   title: 'Academ - Learning Platform',
   layout: 'default'
@@ -722,7 +732,7 @@ definePageMeta({
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
 
-/* Animations avancées */
+/* Advanced animations */
 @keyframes float {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-20px); }
@@ -825,7 +835,7 @@ definePageMeta({
   animation-delay: 4s;
 }
 
-/* Effet des points de suspension animés */
+/* Animated ellipsis effect */
 .animate-pulse-dots::after {
   content: "...";
   animation: pulse-dots 1.5s infinite;
