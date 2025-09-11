@@ -28,7 +28,7 @@ export const useNotifications = () => {
   const loading = ref(false)
   const error = ref<string | null>(null)
 
-  // Vérifier le support des notifications
+  // Check notification support
   const checkSupport = () => {
     isSupported.value = 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window
     if (isSupported.value) {
@@ -37,10 +37,10 @@ export const useNotifications = () => {
     return isSupported.value
   }
 
-  // Demander la permission
+  // Request permission
   const requestPermission = async (): Promise<boolean> => {
     if (!isSupported.value) {
-      error.value = 'Les notifications ne sont pas supportées par votre navigateur'
+      error.value = 'Notifications are not supported by your browser'
       return false
     }
 
@@ -55,18 +55,18 @@ export const useNotifications = () => {
         await subscribeToPush()
         return true
       } else {
-        error.value = 'Permission refusée pour les notifications'
+        // Don't set error for denied permission - UI handles this state
         return false
       }
     } catch (err: any) {
-      error.value = err.message || 'Erreur lors de la demande de permission'
+      error.value = err.message || 'Error requesting permission'
       return false
     } finally {
       loading.value = false
     }
   }
 
-  // S'abonner aux notifications push
+  // Subscribe to push notifications
   const subscribeToPush = async (): Promise<boolean> => {
     if (!isSupported.value || permission.value !== 'granted') {
       return false
@@ -95,8 +95,8 @@ export const useNotifications = () => {
       
       return true
     } catch (err: any) {
-      console.error('Erreur lors de l\'abonnement:', err)
-      error.value = err.message || 'Erreur lors de l\'abonnement aux notifications'
+      console.error('Subscription error:', err)
+      error.value = err.message || 'Error subscribing to notifications'
       return false
     }
   }
@@ -116,8 +116,8 @@ export const useNotifications = () => {
       
       return true
     } catch (err: any) {
-      console.error('Erreur lors du désabonnement:', err)
-      error.value = err.message || 'Erreur lors du désabonnement'
+      console.error('Unsubscription error:', err)
+      error.value = err.message || 'Error unsubscribing'
       return false
     }
   }
@@ -139,7 +139,7 @@ export const useNotifications = () => {
         credentials: 'include'
       })
     } catch (err: any) {
-      console.error('Erreur lors de la sauvegarde de l\'abonnement:', err)
+      console.error('Error saving subscription:', err)
       throw err
     }
   }
@@ -152,7 +152,7 @@ export const useNotifications = () => {
         credentials: 'include'
       })
     } catch (err: any) {
-      console.error('Erreur lors de la suppression de l\'abonnement:', err)
+      console.error('Error deleting subscription:', err)
       throw err
     }
   }
@@ -172,12 +172,12 @@ export const useNotifications = () => {
       actions: data.actions || [
         {
           action: 'view',
-          title: 'Voir',
+          title: 'View',
           icon: '/icon512_rounded.png'
         },
         {
           action: 'close',
-          title: 'Fermer',
+          title: 'Close',
           icon: '/icon512_rounded.png'
         }
       ]
