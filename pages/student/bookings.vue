@@ -78,7 +78,7 @@
             </svg>
           </div>
           <div>
-            <p class="text-sm text-gray-600">Note moyenne</p>
+            <p class="text-sm text-gray-600">Average rating</p>
             <p class="text-2xl font-bold text-gray-900">{{ stats?.averageRating?.toFixed(1) || '0.0' }}/5</p>
           </div>
         </div>
@@ -133,7 +133,7 @@
     <!-- Loading state -->
     <div v-if="loading" class="flex items-center justify-center py-12">
       <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
-      <p class="ml-3 text-gray-600">Chargement de vos cours...</p>
+      <p class="ml-3 text-gray-600">Loading your courses...</p>
     </div>
 
     <!-- Error state -->
@@ -143,7 +143,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div>
-          <h3 class="text-lg font-medium text-purple-800">Erreur</h3>
+          <h3 class="text-lg font-medium text-purple-800">Error</h3>
           <p class="text-purple-600">{{ error }}</p>
         </div>
       </div>
@@ -276,7 +276,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          Trouver un enseignant
+          Find a teacher
         </NuxtLink>
       </div>
     </div>
@@ -449,7 +449,7 @@ const changePage = (page) => {
 
 // Actions
 const cancelBooking = async (bookingId) => {
-  if (!confirm('Êtes-vous sûr de vouloir annuler ce cours ?')) {
+  if (!confirm('Are you sure you want to cancel this class?')) {
     return;
   }
 

@@ -12,20 +12,20 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <h1 class="text-3xl font-bold text-gray-900">Détails de l'étudiant</h1>
+          <h1 class="text-3xl font-bold text-gray-900">Student Details</h1>
         </div>
       </div>
 
       <div v-if="loading" class="text-center py-8">
         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-        <p class="text-gray-500 mt-2">Chargement des détails...</p>
+        <p class="text-gray-500 mt-2">Loading details...</p>
       </div>
 
       <div v-else-if="!student" class="text-center py-8">
         <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
         </svg>
-        <p class="mt-2 text-gray-500">Étudiant non trouvé</p>
+        <p class="mt-2 text-gray-500">Student not found</p>
       </div>
 
       <div v-else class="space-y-8">
@@ -57,7 +57,7 @@
                 </div>
                 
                 <div class="space-y-1 text-gray-600">
-                  <p><strong>Email :</strong> {{ student.email }}</p>
+                  <p><strong>Email:</strong> {{ student.email }}</p>
                   <p><strong>Phone:</strong> {{ student.phone || 'Not provided' }}</p>
                   <p><strong>Subjects:</strong> {{ student.subjects.join(', ') }}</p>
                   <p><strong>Student since:</strong> {{ formatDate(student.createdAt) }}</p>
@@ -87,7 +87,7 @@
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                   </svg>
-                  <span>Programmer</span>
+                  <span>Schedule</span>
                 </div>
               </button>
             </div>
@@ -99,28 +99,28 @@
           <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div class="text-center">
               <p class="text-2xl font-bold text-gray-900">{{ student.totalCourses }}</p>
-              <p class="text-sm text-gray-500">Cours total</p>
+              <p class="text-sm text-gray-500">Total courses</p>
             </div>
           </div>
           
           <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div class="text-center">
               <p class="text-2xl font-bold text-gray-900">{{ student.totalHours }}h</p>
-              <p class="text-sm text-gray-500">Heures totales</p>
+              <p class="text-sm text-gray-500">Total hours</p>
             </div>
           </div>
           
           <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div class="text-center">
               <p class="text-2xl font-bold text-gray-900">{{ student.averageRating }}/5</p>
-              <p class="text-sm text-gray-500">Note moyenne</p>
+              <p class="text-sm text-gray-500">Average rating</p>
             </div>
           </div>
           
           <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
             <div class="text-center">
               <p class="text-2xl font-bold text-gray-900">{{ student.recentProgress }}%</p>
-              <p class="text-sm text-gray-500">Progrès récent</p>
+              <p class="text-sm text-gray-500">Recent progress</p>
             </div>
           </div>
         </div>
@@ -150,10 +150,10 @@
           <div class="p-6">
             <!-- Onglet Cours -->
             <div v-if="activeTab === 'courses'">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Historique des cours</h3>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Course History</h3>
               
               <div v-if="courses.length === 0" class="text-center py-8">
-                <p class="text-gray-500">Aucun cours trouvé</p>
+                <p class="text-gray-500">No courses found</p>
               </div>
               
               <div v-else class="space-y-4">
@@ -191,12 +191,12 @@
 
             <!-- Onglet Progrès -->
             <div v-if="activeTab === 'progress'">
-              <h3 class="text-lg font-semibold text-gray-900 mb-4">Suivi des progrès</h3>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">Progress Tracking</h3>
               
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Graphique des notes -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                  <h4 class="font-medium text-gray-900 mb-3">Évolution des notes</h4>
+                  <h4 class="font-medium text-gray-900 mb-3">Rating Evolution</h4>
                   <div class="h-32 flex items-end justify-between space-x-2">
                     <div 
                       v-for="(rating, index) in progressData.ratings" 
@@ -214,7 +214,7 @@
 
                 <!-- Objectifs -->
                 <div class="bg-gray-50 rounded-lg p-4">
-                  <h4 class="font-medium text-gray-900 mb-3">Objectifs</h4>
+                  <h4 class="font-medium text-gray-900 mb-3">Goals</h4>
                   <div class="space-y-3">
                     <div 
                       v-for="goal in progressData.goals" 
@@ -240,17 +240,17 @@
             <!-- Onglet Notes -->
             <div v-if="activeTab === 'notes'">
               <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Notes et observations</h3>
+                <h3 class="text-lg font-semibold text-gray-900">Notes and Observations</h3>
                 <button 
                   @click="addNote"
                   class="px-3 py-1 bg-purple-600 text-white text-sm rounded-lg hover:bg-purple-700 transition-colors"
                 >
-                  Ajouter une note
+                  Add a note
                 </button>
               </div>
               
               <div v-if="notes.length === 0" class="text-center py-8">
-                <p class="text-gray-500">Aucune note pour le moment</p>
+                <p class="text-gray-500">No notes yet</p>
               </div>
               
               <div v-else class="space-y-4">
@@ -284,43 +284,43 @@
 </template>
 
 <script setup>
-// Récupérer l'ID de l'étudiant depuis l'URL
+// Get student ID from URL
 const route = useRoute();
 const studentId = route.params.id;
 
-// Récupérer l'utilisateur
+// Get user
 const { user } = useAuth();
 
-// État réactif
+// Reactive state
 const loading = ref(false);
 const student = ref(null);
 const activeTab = ref('courses');
 const courses = ref([]);
 const notes = ref([]);
 
-// Données de progrès
+// Progress data
 const progressData = ref({
   ratings: [4.2, 4.5, 4.8, 4.3, 4.7, 4.9],
   goals: [
-    { id: 1, description: 'Maîtriser les équations du second degré', progress: 75 },
-    { id: 2, description: 'Améliorer la rédaction', progress: 60 },
-    { id: 3, description: 'Réussir l\'examen final', progress: 90 }
+    { id: 1, description: 'Master quadratic equations', progress: 75 },
+    { id: 2, description: 'Improve writing skills', progress: 60 },
+    { id: 3, description: 'Pass the final exam', progress: 90 }
   ]
 });
 
-// Onglets
+// Tabs
 const tabs = [
-  { id: 'courses', name: 'Cours' },
-  { id: 'progress', name: 'Progrès' },
+  { id: 'courses', name: 'Courses' },
+  { id: 'progress', name: 'Progress' },
   { id: 'notes', name: 'Notes' }
 ];
 
-// Méthodes
+// Methods
 const loadStudentDetails = async () => {
   try {
     loading.value = true;
     
-    // Simuler des données pour l'exemple
+    // Simulate data for example
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     student.value = {
@@ -330,7 +330,7 @@ const loadStudentDetails = async () => {
       email: 'alice.martin@email.com',
       phone: '06 12 34 56 78',
       status: 'active',
-      subjects: ['Mathématiques', 'Physique'],
+      subjects: ['Mathematics', 'Physics'],
       totalCourses: 12,
       totalHours: 24,
       averageRating: 4.8,
@@ -338,53 +338,53 @@ const loadStudentDetails = async () => {
       createdAt: new Date('2023-09-01')
     };
 
-    // Charger les cours
+    // Load courses
     courses.value = [
       {
         _id: '1',
-        subject: 'Mathématiques',
+        subject: 'Mathematics',
         date: new Date('2024-01-20'),
         duration: 2,
         status: 'completed',
         rating: 5,
-        notes: 'Très bonne séance sur les dérivées'
+        notes: 'Very good session on derivatives'
       },
       {
         _id: '2',
-        subject: 'Physique',
+        subject: 'Physics',
         date: new Date('2024-01-15'),
         duration: 1.5,
         status: 'completed',
         rating: 4,
-        notes: 'Révision des lois de Newton'
+        notes: 'Review of Newton\'s laws'
       },
       {
         _id: '3',
-        subject: 'Mathématiques',
+        subject: 'Mathematics',
         date: new Date('2024-01-10'),
         duration: 2,
         status: 'completed',
         rating: 5,
-        notes: 'Introduction aux intégrales'
+        notes: 'Introduction to integrals'
       }
     ];
 
-    // Charger les notes
+    // Load notes
     notes.value = [
       {
         id: 1,
-        content: 'Alice montre un excellent niveau en mathématiques. Elle comprend rapidement les concepts et pose de bonnes questions.',
+        content: 'Alice shows an excellent level in mathematics. She quickly understands concepts and asks good questions.',
         createdAt: new Date('2024-01-18')
       },
       {
         id: 2,
-        content: 'Progrès notable en physique. Il faudrait insister sur la résolution de problèmes pratiques.',
+        content: 'Notable progress in physics. Should focus more on practical problem solving.',
         createdAt: new Date('2024-01-12')
       }
     ];
 
   } catch (error) {
-    console.error('Erreur lors du chargement des détails:', error);
+    console.error('Error loading details:', error);
   } finally {
     loading.value = false;
   }
@@ -403,17 +403,17 @@ const getStatusClass = (status) => {
 
 const getStatusText = (status) => {
   switch (status) {
-    case 'active': return 'Actif';
-    case 'inactive': return 'Inactif';
-    case 'completed': return 'Terminé';
-    case 'pending': return 'En attente';
-    case 'cancelled': return 'Annulé';
+    case 'active': return 'Active';
+    case 'inactive': return 'Inactive';
+    case 'completed': return 'Completed';
+    case 'pending': return 'Pending';
+    case 'cancelled': return 'Cancelled';
     default: return status;
   }
 };
 
 const formatDate = (date) => {
-  return new Date(date).toLocaleDateString('fr-FR');
+  return new Date(date).toLocaleDateString('en-US');
 };
 
 const goBack = () => {
@@ -429,12 +429,12 @@ const scheduleCourse = () => {
 };
 
 const addNote = () => {
-  // TODO: Implémenter l'ajout de note
-  console.log('Ajouter une note');
+  // TODO: Implement note addition
+  console.log('Add a note');
 };
 
 const deleteNote = (noteId) => {
-  // TODO: Implémenter la suppression de note
+  // TODO: Implement note deletion
   console.log('Delete note:', noteId);
 };
 

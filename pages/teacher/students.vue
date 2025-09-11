@@ -69,7 +69,7 @@
               </div>
             </div>
             <div class="ml-4">
-              <p class="text-sm font-medium text-gray-500">Note moyenne</p>
+              <p class="text-sm font-medium text-gray-500">Average rating</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.averageRating }}/5</p>
             </div>
           </div>
@@ -89,14 +89,14 @@
           </div>
           
           <select v-model="statusFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
-            <option value="all">Tous les statuts</option>
+            <option value="all">All statuses</option>
             <option value="active">Active</option>
-            <option value="inactive">Inactifs</option>
-            <option value="new">Nouveaux</option>
+            <option value="inactive">Inactive</option>
+            <option value="new">New</option>
           </select>
           
           <select v-model="subjectFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
-            <option value="all">Toutes les matières</option>
+            <option value="all">All subjects</option>
             <option v-for="subject in subjects" :key="subject" :value="subject">{{ subject }}</option>
           </select>
           
@@ -224,7 +224,7 @@
             <div v-if="student.recentProgress" class="mt-4 pt-4 border-t border-gray-100">
               <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                  <span class="text-sm font-medium text-gray-700">Progrès récent :</span>
+                  <span class="text-sm font-medium text-gray-700">Recent progress:</span>
                   <div class="flex items-center space-x-2">
                     <div class="w-24 bg-gray-200 rounded-full h-2">
                       <div 

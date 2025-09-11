@@ -62,7 +62,7 @@
             @click="resetFilters"
             class="w-full px-4 py-2 bg-white border border-purple-200 text-purple-600 rounded-md hover:bg-purple-50 transition-colors"
           >
-            Réinitialiser
+            Reset
           </button>
         </div>
       </div>
@@ -128,19 +128,19 @@
     </div>
 
     <!-- Teachers pending approval -->
-    <div v-if="pendingTeachers.length > 0" class="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-6">
+    <div v-if="pendingTeachers.length > 0" class="bg-purple-50 border border-purple-200 rounded-lg p-6 mb-6">
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <div class="ml-3">
-            <h3 class="text-lg font-medium text-orange-800">
+            <h3 class="text-lg font-medium text-purple-800">
               Teachers pending approval ({{ pendingTeachers.length }})
             </h3>
-            <p class="text-sm text-orange-600">
+            <p class="text-sm text-purple-600">
               These teachers are waiting for approval to access the platform.
             </p>
           </div>
@@ -149,11 +149,11 @@
       
       <div class="space-y-3">
         <div v-for="teacher in pendingTeachers" :key="teacher._id" 
-             class="bg-white rounded-lg border border-orange-200 p-4 flex items-center justify-between">
+             class="bg-white rounded-lg border border-purple-200 p-4 flex items-center justify-between">
           <div class="flex items-center space-x-4">
             <div class="flex-shrink-0 h-10 w-10">
-              <div class="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center">
-                <span class="text-sm font-medium text-orange-700">
+              <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center">
+                <span class="text-sm font-medium text-purple-700">
                   {{ teacher.firstName?.charAt(0) }}{{ teacher.lastName?.charAt(0) }}
                 </span>
               </div>
@@ -164,7 +164,7 @@
               </div>
               <div class="text-sm text-gray-500">{{ teacher.email }}</div>
               <div class="text-xs text-gray-400">
-                Inscrit le {{ formatDate(teacher.createdAt) }}
+                Registered on {{ formatDate(teacher.createdAt) }}
               </div>
             </div>
           </div>
@@ -172,18 +172,18 @@
           <div class="flex items-center space-x-2">
             <button
               @click="viewUser(teacher)"
-              class="px-3 py-1 text-sm border border-orange-200 text-orange-700 rounded-md hover:bg-orange-50"
+              class="px-3 py-1 text-sm border border-purple-200 text-purple-700 rounded-md hover:bg-purple-50"
             >
-              Voir profil
+              View Profile
             </button>
             <button
               @click="approveTeacher(teacher)"
-              class="px-4 py-2 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center"
+              class="px-4 py-2 text-sm bg-purple-600 text-white rounded-md hover:bg-purple-700 flex items-center"
             >
               <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              Approuver
+              Approve
             </button>
             <button
               @click="rejectTeacher(teacher)"
@@ -192,7 +192,7 @@
               <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
-              Rejeter
+              Reject
             </button>
           </div>
         </div>
@@ -285,7 +285,7 @@
                   <button
                     @click="viewUser(user)"
                     class="text-purple-600 hover:text-purple-900"
-                    title="Voir les détails"
+                    title="View details"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -295,7 +295,7 @@
                   <button
                     @click="editUser(user)"
                     class="text-blue-600 hover:text-blue-900"
-                    title="Modifier"
+                    title="Edit"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -317,7 +317,7 @@
                   <button
                     v-else
                     @click="toggleUserStatus(user)"
-                    :class="user.status === 'active' ? 'text-orange-500 hover:text-orange-700' : 'text-green-600 hover:text-green-800'"
+                    :class="user.status === 'active' ? 'text-purple-500 hover:text-purple-700' : 'text-purple-600 hover:text-purple-800'"
                     :title="user.status === 'active' ? 'Deactivate' : 'Activate'"
                   >
                     <svg v-if="user.status === 'active'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -349,7 +349,7 @@
       <div v-if="totalPages > 1" class="px-6 py-4 border-t border-gray-200">
         <div class="flex items-center justify-between">
           <div class="text-sm text-gray-700">
-            Affichage de {{ startIndex + 1 }} à {{ endIndex }} sur {{ filteredUsers.length }} utilisateurs
+            Showing {{ startIndex + 1 }} to {{ endIndex }} of {{ filteredUsers.length }} users
           </div>
           <div class="flex space-x-2">
             <button
@@ -357,24 +357,24 @@
               :disabled="currentPage === 1"
               class="px-3 py-1 border border-purple-200 text-purple-600 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-50"
             >
-              Précédent
+              Previous
             </button>
             <span class="px-3 py-1 text-sm text-purple-700">
-              Page {{ currentPage }} sur {{ totalPages }}
+              Page {{ currentPage }} of {{ totalPages }}
             </span>
             <button
               @click="currentPage++"
               :disabled="currentPage === totalPages"
               class="px-3 py-1 border border-purple-200 text-purple-600 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-purple-50"
             >
-              Suivant
+              Next
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal de détails utilisateur améliorée -->
+    <!-- Enhanced user details modal -->
     <div v-if="showUserModal" class="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center p-4">
       <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
         <!-- Header avec photo de profil -->
@@ -432,8 +432,8 @@
                   <p class="text-lg text-gray-900">{{ selectedUser?.email }}</p>
                 </div>
                 <div class="bg-white p-3 rounded-lg">
-                  <label class="block text-sm font-medium text-gray-500">Téléphone</label>
-                  <p class="text-lg text-gray-900">{{ selectedUser?.phone || 'Non renseigné' }}</p>
+                  <label class="block text-sm font-medium text-gray-500">Phone</label>
+                  <p class="text-lg text-gray-900">{{ selectedUser?.phone || 'Not provided' }}</p>
                 </div>
                 <div class="bg-white p-3 rounded-lg">
                   <label class="block text-sm font-medium text-gray-500">Registration date</label>
@@ -452,28 +452,28 @@
                 <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
-                Statistiques
+                Statistics
               </h3>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-white p-4 rounded-lg text-center">
                   <div class="text-3xl font-bold text-purple-600">{{ userDetails.stats.accountAge }}</div>
-                  <div class="text-sm text-gray-500 mt-1">Jours d'ancienneté</div>
+                  <div class="text-sm text-gray-500 mt-1">Days of membership</div>
                 </div>
                 <div class="bg-white p-4 rounded-lg text-center">
                   <div class="text-3xl font-bold text-purple-600">{{ userDetails.stats.lastLoginAgo || 'N/A' }}</div>
-                  <div class="text-sm text-gray-500 mt-1">Jours depuis dernière connexion</div>
+                  <div class="text-sm text-gray-500 mt-1">Days since last login</div>
                 </div>
                 <div class="bg-white p-4 rounded-lg text-center">
                   <div class="text-3xl font-bold" :class="userDetails.stats.isNewUser ? 'text-green-600' : 'text-gray-400'">
-                    {{ userDetails.stats.isNewUser ? 'Oui' : 'Non' }}
+                    {{ userDetails.stats.isNewUser ? 'Yes' : 'No' }}
                   </div>
-                  <div class="text-sm text-gray-500 mt-1">Nouvel utilisateur</div>
+                  <div class="text-sm text-gray-500 mt-1">New user</div>
                 </div>
                 <div class="bg-white p-4 rounded-lg text-center">
                   <div class="text-3xl font-bold" :class="userDetails.stats.hasEverLoggedIn ? 'text-green-600' : 'text-red-600'">
-                    {{ userDetails.stats.hasEverLoggedIn ? 'Oui' : 'Non' }}
+                    {{ userDetails.stats.hasEverLoggedIn ? 'Yes' : 'No' }}
                   </div>
-                  <div class="text-sm text-gray-500 mt-1">Déjà connecté</div>
+                  <div class="text-sm text-gray-500 mt-1">Ever logged in</div>
                 </div>
               </div>
             </div>
@@ -488,23 +488,23 @@
               </h3>
               <div class="space-y-4">
                 <div v-if="selectedUser?.bio" class="bg-white p-4 rounded-lg">
-                  <label class="block text-sm font-medium text-gray-500 mb-2">Biographie</label>
+                  <label class="block text-sm font-medium text-gray-500 mb-2">Biography</label>
                   <p class="text-gray-900 leading-relaxed">{{ selectedUser.bio }}</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div class="bg-white p-3 rounded-lg">
-                    <label class="block text-sm font-medium text-gray-500">Spécialisation</label>
-                    <p class="text-lg text-gray-900">{{ selectedUser?.specialization || 'Non renseignée' }}</p>
+                    <label class="block text-sm font-medium text-gray-500">Specialization</label>
+                    <p class="text-lg text-gray-900">{{ selectedUser?.specialization || 'Not specified' }}</p>
                   </div>
                   <div class="bg-white p-3 rounded-lg">
-                    <label class="block text-sm font-medium text-gray-500">Expérience</label>
-                    <p class="text-lg text-gray-900">{{ selectedUser?.experience || 0 }} années</p>
+                    <label class="block text-sm font-medium text-gray-500">Experience</label>
+                    <p class="text-lg text-gray-900">{{ selectedUser?.experience || 0 }} years</p>
                   </div>
                 </div>
 
                 <div v-if="selectedUser?.subjects?.length" class="bg-white p-4 rounded-lg">
-                  <label class="block text-sm font-medium text-gray-500 mb-2">Matières enseignées</label>
+                  <label class="block text-sm font-medium text-gray-500 mb-2">Subjects taught</label>
                   <div class="flex flex-wrap gap-2">
                     <span v-for="subject in selectedUser.subjects" :key="subject" 
                           class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
@@ -516,24 +516,24 @@
                 <div v-if="userDetails?.teacherDetails" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div class="bg-white p-4 rounded-lg text-center">
                     <div class="text-2xl font-bold text-purple-600">{{ userDetails.teacherDetails.hourlyRate || 0 }}€</div>
-                    <div class="text-sm text-gray-500">Tarif/heure</div>
+                    <div class="text-sm text-gray-500">Hourly rate</div>
                   </div>
                   <div class="bg-white p-4 rounded-lg text-center">
                     <div class="text-2xl font-bold text-yellow-600">{{ userDetails.teacherDetails.averageRating || 0 }}/5</div>
-                    <div class="text-sm text-gray-500">Note moyenne</div>
+                    <div class="text-sm text-gray-500">Average Rating</div>
                   </div>
                   <div class="bg-white p-4 rounded-lg text-center">
                     <div class="text-2xl font-bold text-green-600">{{ userDetails.teacherDetails.sessionsCompleted || 0 }}</div>
-                    <div class="text-sm text-gray-500">Sessions complétées</div>
+                    <div class="text-sm text-gray-500">Completed sessions</div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- Actions pour professeurs en attente -->
+            <!-- Actions for pending teachers -->
             <div v-if="selectedUser?.role === 'teacher' && selectedUser?.status === 'pending'" 
-                 class="bg-orange-50 border border-orange-200 rounded-lg p-4">
-              <h3 class="text-lg font-semibold text-orange-800 mb-3">Actions d'approbation</h3>
+                 class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <h3 class="text-lg font-semibold text-purple-800 mb-3">Approval Actions</h3>
               <div class="flex space-x-3">
                 <button
                   @click="approveTeacher(selectedUser)"
@@ -560,7 +560,7 @@
       </div>
     </div>
 
-    <!-- Modal d'édition utilisateur -->
+    <!-- User edit modal -->
     <div v-if="showEditModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
       <div class="relative top-20 mx-auto p-5 border w-11/12 max-w-2xl shadow-lg rounded-md bg-white">
         <div class="mt-3">
@@ -603,7 +603,7 @@
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700">Téléphone</label>
+                <label class="block text-sm font-medium text-gray-700">Phone</label>
                 <input
                   v-model="editForm.phone"
                   type="tel"
@@ -616,9 +616,9 @@
                   v-model="editForm.role"
                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
                 >
-                  <option value="student">Étudiant</option>
-                  <option value="teacher">Professeur</option>
-                  <option value="admin">Administrateur</option>
+                  <option value="student">Student</option>
+                  <option value="teacher">Teacher</option>
+                  <option value="admin">Administrator</option>
                 </select>
               </div>
               <div>
@@ -628,7 +628,7 @@
                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
                 >
                   <option value="pending">Pending</option>
-                  <option value="active">Actif</option>
+                  <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
                 </select>
               </div>
@@ -638,7 +638,7 @@
               <h4 class="text-md font-medium text-gray-900">Teacher Information</h4>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700">Spécialisation</label>
+                  <label class="block text-sm font-medium text-gray-700">Specialization</label>
                   <input
                     v-model="editForm.specialization"
                     type="text"
@@ -646,7 +646,7 @@
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-gray-700">Expérience (années)</label>
+                  <label class="block text-sm font-medium text-gray-700">Experience (years)</label>
                   <input
                     v-model.number="editForm.experience"
                     type="number"
@@ -678,7 +678,7 @@
                 :disabled="loading"
                 class="px-4 py-2 text-sm font-medium text-white bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 disabled:opacity-50"
               >
-                {{ loading ? 'Sauvegarde...' : 'Sauvegarder' }}
+                {{ loading ? 'Saving...' : 'Save' }}
               </button>
             </div>
           </form>
@@ -724,7 +724,7 @@
       </div>
     </div>
 
-    <!-- Modal de rejet de professeur -->
+    <!-- Teacher rejection modal -->
     <div v-if="showRejectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
       <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <div class="mt-3 text-center">
@@ -738,7 +738,7 @@
             <p class="text-sm text-gray-500 mb-4">
               Are you sure you want to reject the request from 
               <strong>{{ userToReject?.firstName }} {{ userToReject?.lastName }}</strong> ?
-              Cette action supprimera définitivement le compte et enverra un email de notification.
+              This action will permanently delete the account and send a notification email.
             </p>
             
             <div class="text-left">
@@ -750,7 +750,7 @@
                 v-model="rejectionReason"
                 rows="3"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 text-sm"
-                placeholder="Expliquez brièvement pourquoi cette demande est rejetée..."
+                placeholder="Briefly explain why this request is rejected..."
               ></textarea>
             </div>
           </div>
@@ -778,12 +778,12 @@
 </template>
 
 <script setup>
-// Middleware d'authentification et vérification du rôle admin
+// Authentication middleware and admin role verification
 definePageMeta({
-  title: 'Gestion des utilisateurs'
+  title: 'User Management'
 });
 
-// Vérifier que l'utilisateur est admin
+// Verify user is admin
 const { user, initAuth } = useAuth();
 
 // Reactive state
@@ -829,7 +829,7 @@ const statusFilter = ref('');
 const currentPage = ref(1);
 const itemsPerPage = 10;
 
-// Récupérer les utilisateurs
+// Fetch users
 const fetchUsers = async () => {
   try {
     loading.value = true;
@@ -837,13 +837,13 @@ const fetchUsers = async () => {
     // Vérifier l'authentification d'abord
     const isAuthenticated = await initAuth();
     if (!isAuthenticated) {
-      console.error('Utilisateur non authentifié');
+      console.error('User not authenticated');
       return;
     }
     
-    // Vérifier que l'utilisateur est admin
+    // Verify user is admin
     if (user.value?.role !== 'admin') {
-      console.error('Accès réservé aux administrateurs');
+      console.error('Access restricted to administrators');
       return;
     }
     
@@ -853,7 +853,7 @@ const fetchUsers = async () => {
   } catch (error) {
     console.error('Error loading users:', error);
     const { showError } = useToast();
-    showError('Erreur', 'Impossible de charger les utilisateurs');
+    showError('Error', 'Unable to load users');
   } finally {
     loading.value = false;
   }
@@ -906,8 +906,8 @@ const getRoleBadgeClass = (role) => {
 const getRoleLabel = (role) => {
   const labels = {
     admin: 'Admin',
-    teacher: 'Professeur',
-    student: 'Étudiant'
+    teacher: 'Teacher',
+    student: 'Student'
   };
   return labels[role] || role;
 };
@@ -923,7 +923,7 @@ const getStatusBadgeClass = (status) => {
 
 const getStatusLabel = (status) => {
   const labels = {
-    active: 'Actif',
+    active: 'Active',
     inactive: 'Inactive',
     pending: 'Pending'
   };
@@ -932,7 +932,7 @@ const getStatusLabel = (status) => {
 
 const formatDate = (dateString) => {
   if (!dateString) return '';
-  return new Date(dateString).toLocaleDateString('fr-FR', {
+  return new Date(dateString).toLocaleDateString('en-US', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
@@ -993,7 +993,7 @@ const viewUser = async (user) => {
   } catch (error) {
     console.error('Error retrieving details:', error);
     const { showError } = useToast();
-    showError('Erreur', 'Impossible de récupérer les détails de l\'utilisateur');
+    showError('Error', 'Unable to retrieve user details');
     closeUserModal();
   } finally {
     loading.value = false;
@@ -1034,7 +1034,7 @@ const saveUserChanges = async () => {
     });
 
     if (response.success) {
-      // Mettre à jour l'utilisateur dans la liste locale
+      // Update user in local list
       const userIndex = users.value.findIndex(u => u._id === selectedUser.value._id);
       if (userIndex !== -1) {
         users.value[userIndex] = { ...users.value[userIndex], ...response.user };
@@ -1108,7 +1108,7 @@ const toggleUserStatus = async (user) => {
   } catch (error) {
     console.error('Error updating status:', error);
     const { showError } = useToast();
-    showError('Erreur', 'Impossible de mettre à jour le statut');
+    showError('Error', 'Unable to update status');
   }
 };
 
@@ -1121,7 +1121,7 @@ const approveTeacher = async (user) => {
     });
 
     if (response.success) {
-      // Mettre à jour l'utilisateur dans la liste locale
+      // Update user in local list
       const userIndex = users.value.findIndex(u => u._id === user._id);
       if (userIndex !== -1) {
         users.value[userIndex] = { ...users.value[userIndex], ...response.user };
@@ -1131,7 +1131,7 @@ const approveTeacher = async (user) => {
       stats.value.pendingUsers--;
       
       const { showSuccess } = useToast();
-      showSuccess('Professeur approuvé !', response.message);
+      showSuccess('Teacher approved!', response.message);
       
       // Close details modal if open
       if (showUserModal.value) {
@@ -1173,7 +1173,7 @@ const confirmRejectTeacher = async () => {
       stats.value.pendingUsers--;
       
       const { showSuccess } = useToast();
-      showSuccess('Professeur rejeté', response.message);
+      showSuccess('Teacher rejected', response.message);
       
       closeRejectModal();
       

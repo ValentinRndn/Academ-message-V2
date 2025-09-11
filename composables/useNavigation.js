@@ -1,20 +1,20 @@
-// Composable pour la gestion de la navigation selon les rôles
+// Composable for role-based navigation management
 export const useNavigation = () => {
   const { user } = useAuth();
 
-  // Navigation pour les administrateurs
+  // Navigation for administrators
   const adminNavigation = [
     {
       name: 'Dashboard',
       to: '/dashboard',
       icon: 'home',
-      description: 'Vue d\'ensemble'
+      description: 'Overview'
     },
     {
-      name: 'Utilisateurs',
+      name: 'Users',
       to: '/admin/users',
       icon: 'users',
-      description: 'Gestion des comptes'
+      description: 'Account management'
     },
     // {
     //   name: 'Messages',
@@ -23,7 +23,7 @@ export const useNavigation = () => {
     //   description: 'Modération'
     // },
     {
-      name: 'Matières',
+      name: 'Subjects',
       to: '/admin/subjects',
       icon: 'book',
       description: 'Configuration'
@@ -35,20 +35,20 @@ export const useNavigation = () => {
     //   description: 'Analytics'
     // },
     {
-      name: 'Paramètres',
+      name: 'Settings',
       to: '/admin/settings',
       icon: 'settings',
       description: 'Configuration'
     }
   ];
 
-  // Navigation pour les enseignants
+  // Navigation for teachers
   const teacherNavigation = [
     {
       name: 'Dashboard',
       to: '/dashboard',
       icon: 'home',
-      description: 'Tableau de bord'
+      description: 'Dashboard'
     },
     {
       name: 'Messages',
@@ -57,51 +57,51 @@ export const useNavigation = () => {
       description: 'Conversations'
     },
          {
-       name: 'Planning',
+       name: 'Schedule',
        to: '/teacher/schedule',
        icon: 'calendar',
-       description: 'Mon planning'
+       description: 'My schedule'
      },
      
     {
-      name: 'Disponibilités',
+      name: 'Availability',
       to: '/teacher/availability',
       icon: 'clock',
-      description: 'Horaires libres'
+      description: 'Free hours'
     },
     {
-      name: 'Mes étudiants',
+      name: 'My Students',
       to: '/teacher/students',
       icon: 'users',
-      description: 'Élèves'
+      description: 'Students'
     },
     {
-      name: 'Avis',
+      name: 'Reviews',
       to: '/teacher/reviews',
       icon: 'star',
-      description: 'Évaluations'
+      description: 'Evaluations'
     },
     {
-      name: 'Profil',
+      name: 'Profile',
       to: '/teacher/profile',
       icon: 'user',
-      description: 'Mon compte'
+      description: 'My account'
     }
   ];
 
-  // Navigation pour les étudiants
+  // Navigation for students
   const studentNavigation = [
     {
       name: 'Dashboard',
       to: '/dashboard',
       icon: 'home',
-      description: 'Tableau de bord'
+      description: 'Dashboard'
     },
     {
-      name: 'Enseignants',
+      name: 'Teachers',
       to: '/teachers',
       icon: 'users',
-      description: 'Trouver un prof'
+      description: 'Find a teacher'
     },
     {
       name: 'Messages',
@@ -110,16 +110,16 @@ export const useNavigation = () => {
       description: 'Conversations'
     },
     {
-      name: 'Mes cours',
+      name: 'My Courses',
       to: '/student/bookings',
       icon: 'calendar',
-      description: 'Réservations'
+      description: 'Bookings'
     },
     {
-      name: 'Profil',
+      name: 'Profile',
       to: '/student/profile',
       icon: 'user',
-      description: 'Mon compte'
+      description: 'My account'
     }
   ];
 
@@ -131,23 +131,23 @@ export const useNavigation = () => {
       case 'admin':
         return [
           { name: 'Dashboard', to: '/dashboard', icon: 'home' },
-          { name: 'Utilisateurs', to: '/admin/users', icon: 'users' },
-          { name: 'Matières', to: '/admin/subjects', icon: 'book' },
-          { name: 'Paramètres', to: '/admin/settings', icon: 'settings' }
+          { name: 'Users', to: '/admin/users', icon: 'users' },
+          { name: 'Subjects', to: '/admin/subjects', icon: 'book' },
+          { name: 'Settings', to: '/admin/settings', icon: 'settings' }
         ];
       case 'teacher':
         return [
           { name: 'Dashboard', to: '/dashboard', icon: 'home' },
           { name: 'Messages', to: '/messages', icon: 'chat' },
-          { name: 'Planning', to: '/teacher/schedule', icon: 'calendar' },
-          { name: 'Profil', to: '/teacher/profile', icon: 'user' }
+          { name: 'Schedule', to: '/teacher/schedule', icon: 'calendar' },
+          { name: 'Profile', to: '/teacher/profile', icon: 'user' }
         ];
       case 'student':
         return [
           { name: 'Dashboard', to: '/dashboard', icon: 'home' },
-          { name: 'Enseignants', to: '/teachers', icon: 'users' },
+          { name: 'Teachers', to: '/teachers', icon: 'users' },
           { name: 'Messages', to: '/messages', icon: 'chat' },
-          { name: 'Profil', to: '/student/profile', icon: 'user' }
+          { name: 'Profile', to: '/student/profile', icon: 'user' }
         ];
       default:
         return [];
@@ -170,7 +170,7 @@ export const useNavigation = () => {
     }
   });
 
-  // Vérifier si une route est accessible selon le rôle
+  // Check if a route is accessible according to role
   const canAccessRoute = (route) => {
     if (!user.value) return false;
     
@@ -179,28 +179,28 @@ export const useNavigation = () => {
     
     const role = user.value.role;
     
-    // Routes admin
+    // Admin routes
     if (route.startsWith('/admin')) {
       return role === 'admin';
     }
     
-    // Routes enseignant
+    // Teacher routes
     if (route.startsWith('/teacher')) {
       return role === 'teacher';
     }
     
-    // Routes étudiant
+    // Student routes
     if (route.startsWith('/student')) {
       return role === 'student';
     }
     
-    // Routes communes (dashboard, messages, profile)
+    // Common routes (dashboard, messages, profile)
     const commonRoutes = ['/dashboard', '/messages', '/profile'];
     if (commonRoutes.some(commonRoute => route.startsWith(commonRoute))) {
       return ['admin', 'teacher', 'student'].includes(role);
     }
     
-    // Routes enseignants pour étudiants (consultation)
+    // Teacher routes for students (viewing)
     if (route.startsWith('/teachers') || route.startsWith('/subjects')) {
       return ['student', 'admin'].includes(role);
     }
@@ -208,10 +208,10 @@ export const useNavigation = () => {
     return false;
   };
 
-  // Obtenir la navigation breadcrumb
+  // Get navigation breadcrumb
   const getBreadcrumb = (currentPath) => {
     const segments = currentPath.split('/').filter(Boolean);
-    const breadcrumb = [{ name: 'Accueil', to: '/dashboard' }];
+    const breadcrumb = [{ name: 'Home', to: '/dashboard' }];
     
     let currentRoute = '';
     for (const segment of segments) {
