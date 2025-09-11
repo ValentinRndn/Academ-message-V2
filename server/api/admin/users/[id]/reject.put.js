@@ -223,6 +223,21 @@ export default defineEventHandler(async (event) => {
       });
     }
 
+    // Supprimer aussi l'entrée teacher si elle existe
+    try {
+      console.log('🗑️ Suppression de l\'éventuelle entrée teacher...');
+      const teacherDeleteResult = await database.collection('teachers').deleteOne({ userId: objectId });
+      
+      if (teacherDeleteResult.deletedCount > 0) {
+        console.log('✅ Entrée teacher supprimée');
+      } else {
+        console.log('ℹ️ Aucune entrée teacher trouvée à supprimer');
+      }
+    } catch (teacherError) {
+      console.error('❌ Erreur lors de la suppression de l\'entrée teacher:', teacherError);
+      // On continue même si la suppression teacher échoue
+    }
+
     // Envoyer l'email de rejet
     try {
       await sendRejectionEmail({

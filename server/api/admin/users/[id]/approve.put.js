@@ -1,5 +1,6 @@
 // API pour approuver un professeur en attente
 import { MongoClient, ObjectId } from 'mongodb';
+import Teacher from '../../../../models/Teacher.js';
 
 // Singleton pour maintenir la connexion à MongoDB
 let client = null;
@@ -208,6 +209,65 @@ export default defineEventHandler(async (event) => {
       });
     }
 
+    // Créer l'entrée dans la table teachers
+    try {
+      console.log('📚 Création de l\'entrée dans la table teachers...');
+      
+      // Vérifier si une entrée existe déjà
+      const existingTeacher = await database.collection('teachers').findOne({ userId: objectId });
+      
+      if (!existingTeacher) {
+        const teacherData = {
+          userId: objectId,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          bio: user.bio || '',
+          avatar: user.avatar || '',
+          subjects: user.subjectIds || [],
+          availability: [],
+          hourlyRate: 30, // Tarif par défaut
+          languages: ['french'],
+          experience: user.experience || 0,
+          averageRating: 0,
+          reviewCount: 0,
+          sessionsCompleted: 0,
+          status: 'active',
+          stripeCustomerId: null,
+          stripeAccountId: null,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        };
+
+        const teacherResult = await database.collection('teachers').insertOne(teacherData);
+        
+        if (teacherResult.insertedId) {
+          console.log('✅ Entrée teacher créée avec l\'ID:', teacherResult.insertedId);
+        } else {
+          console.warn('⚠️ Problème lors de la création de l\'entrée teacher');
+        }
+      } else {
+        console.log('✅ Entrée teacher existante trouvée:', existingTeacher._id);
+        
+        // Mettre à jour le statut si nécessaire
+        if (existingTeacher.status !== 'active') {
+          await database.collection('teachers').updateOne(
+            { _id: existingTeacher._id },
+            { 
+              $set: {
+                status: 'active',
+                updatedAt: new Date()
+              }
+            }
+          );
+          console.log('✅ Statut teacher mis à jour vers "active"');
+        }
+      }
+    } catch (teacherError) {
+      console.error('❌ Erreur lors de la création/mise à jour de l\'entrée teacher:', teacherError);
+      // On continue même si la création teacher échoue pour ne pas bloquer l'approbation
+    }
+
     // Envoyer l'email de confirmation d'approbation
     try {
       await sendApprovalConfirmationEmail({
@@ -232,7 +292,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      message: `Le professeur ${user.firstName} ${user.lastName} a été approuvé avec succès`,
+      message: `Le professeur ${user.firstName} ${user.lastName} a été approuvé avec succès et ajouté à la base des professeurs`,
       user: {
         _id: updatedUser._id,
         firstName: updatedUser.firstName,

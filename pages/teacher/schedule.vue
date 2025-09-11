@@ -42,14 +42,6 @@
           <TeacherAvailability :teacherId="'current'" />
         </div>
 
-        <!-- Onglet Statistiques -->
-        <div v-if="activeTab === 'stats'" class="p-6">
-          <div class="mb-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-2">Mes statistiques</h2>
-            <p class="text-gray-600">Consultez vos performances et vos indicateurs clés.</p>
-          </div>
-          <TeacherStats :teacherId="'current'" />
-        </div>
 
         <!-- Onglet Cours programmés -->
         <div v-if="activeTab === 'bookings'" class="p-6">
@@ -285,11 +277,6 @@ const tabs = [
     id: 'calendar',
     name: 'Calendrier',
     icon: 'CalendarDaysIcon'
-  },
-  {
-    id: 'stats',
-    name: 'Statistiques',
-    icon: 'ChartIcon'
   }
 ];
 
@@ -297,7 +284,6 @@ const tabs = [
 const ClockIcon = { template: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>' };
 const CalendarIcon = { template: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' };
 const CalendarDaysIcon = { template: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>' };
-const ChartIcon = { template: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>' };
 
 // Jours de la semaine
 const weekDays = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
