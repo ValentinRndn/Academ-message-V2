@@ -39,66 +39,69 @@ export default defineEventHandler(async (event) => {
   const isPublicRoute = publicRoutes.includes(event.path) || 
                        publicRoutePatterns.some(pattern => pattern.test(event.path));
   
-  // Vérifier si la route nécessite une authentification
-  const needsAuth = (event.path.startsWith('/api/') && !isPublicRoute) || 
-                    protectedRoutes.some(route => event.path.startsWith(route));
-  
-  console.log('🛡️  Path:', event.path, 'Needs auth:', needsAuth, 'Is public:', isPublicRoute);
-  
-  if (!needsAuth) {
-    console.log('✅ Public route, skipping auth');
+  // Séparer la logique pour les pages et les APIs
+  if (!event.path.startsWith('/api/')) {
+    console.log('📄 Non-API route, skipping server auth');
     return;
   }
   
-  // Vérifier le token pour les routes API
-  if (event.path.startsWith('/api/')) {
-    const token = getCookie(event, 'auth_token');
-    
-    if (!token) {
-      return createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-        message: 'Authentification requise'
-      });
-    }
-    
-    const decoded = verifyToken(token);
-    if (!decoded) {
-      return createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-        message: 'Token invalide ou expiré'
-      });
-    }
-    
-    // Vérifier si l'utilisateur existe toujours
-    const user = await findUserById(decoded.userId);
-    if (!user) {
-      return createError({
-        statusCode: 401,
-        statusMessage: 'Unauthorized',
-        message: 'Utilisateur non trouvé'
-      });
-    }
-    
-    // Vérifier si le compte est actif
-    if (user.status !== 'active') {
-      return createError({
-        statusCode: 403,
-        statusMessage: 'Forbidden',
-        message: 'Votre compte est désactivé'
-      });
-    }
-    
-    // Ajouter les informations de l'utilisateur au contexte
-    event.context.auth = {
-      user: {
-        _id: user._id,
-        email: user.email,
-        role: user.role,
-      },
-      token
-    };
-    console.log('🎫 Auth context set for user:', user.email);
+  // Vérifier si la route API nécessite une authentification
+  const needsAuth = !isPublicRoute || protectedRoutes.some(route => event.path.startsWith(route));
+  
+  console.log('🛡️  API Path:', event.path, 'Needs auth:', needsAuth, 'Is public:', isPublicRoute);
+  
+  if (!needsAuth) {
+    console.log('✅ Public API route, skipping auth');
+    return;
   }
+  
+  // Vérifier le token
+  const token = getCookie(event, 'auth_token');
+  
+  if (!token) {
+    return createError({
+      statusCode: 401,
+      statusMessage: 'Unauthorized',
+      message: 'Authentification requise'
+    });
+  }
+  
+  const decoded = verifyToken(token);
+  if (!decoded) {
+    return createError({
+      statusCode: 401,
+      statusMessage: 'Unauthorized',
+      message: 'Token invalide ou expiré'
+    });
+  }
+  
+  // Vérifier si l'utilisateur existe toujours
+  const user = await findUserById(decoded.userId);
+  if (!user) {
+    return createError({
+      statusCode: 401,
+      statusMessage: 'Unauthorized',
+      message: 'Utilisateur non trouvé'
+    });
+  }
+  
+  // Vérifier si le compte est actif
+  if (user.status !== 'active') {
+    return createError({
+      statusCode: 403,
+      statusMessage: 'Forbidden',
+      message: 'Votre compte est désactivé'
+    });
+  }
+  
+  // Ajouter les informations de l'utilisateur au contexte
+  event.context.auth = {
+    user: {
+      _id: user._id,
+      email: user.email,
+      role: user.role,
+    },
+    token
+  };
+  console.log('🎫 Auth context set for user:', user.email);
 });
