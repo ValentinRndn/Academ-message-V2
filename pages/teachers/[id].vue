@@ -64,12 +64,12 @@
             <!-- Bio -->
             <div>
               <h2 class="text-xl font-semibold text-gray-900 mb-4">À propos</h2>
-              <p class="text-gray-600">{{ teacher.bio || 'Aucune biographie disponible.' }}</p>
+              <p class="text-gray-600">{{ teacher.bio || 'No biography available.' }}</p>
           </div>
           
             <!-- Subjects -->
             <div>
-              <h2 class="text-xl font-semibold text-gray-900 mb-4">Matières enseignées</h2>
+              <h2 class="text-xl font-semibold text-gray-900 mb-4">Subjects Taught</h2>
                 <div class="flex flex-wrap gap-2">
                   <span 
                     v-for="subject in teacher.subjects" 
@@ -143,7 +143,7 @@
                 class="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors mb-4"
                 @click="bookLesson"
                   >
-                Réserver un cours
+                Book a lesson
                   </button>
                 
                 <button 
@@ -153,7 +153,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                   </svg>
-                Contacter
+                Contact
                 </button>
               </div>
               
@@ -199,7 +199,7 @@ onMounted(async () => {
     const data = await fetchTeacherById(teacherId);
     
     if (!data) {
-      error.value = 'Professeur non trouvé';
+      error.value = 'Teacher not found';
       return;
     }
     
@@ -234,7 +234,7 @@ const availabilityByDay = computed(() => {
     }
   });
   
-  // Trier les créneaux par heure de début
+  // Sort slots by start time
   days.forEach(day => {
     day.slots.sort((a, b) => a.startTime.localeCompare(b.startTime));
   });

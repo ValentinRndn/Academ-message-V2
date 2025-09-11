@@ -6,8 +6,8 @@
     
     <!-- Header section with animation -->
     <div class="relative animate-fade-in">
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Trouvez Votre Professeur Idéal</h1>
-      <p class="text-lg text-gray-600 mb-8">Connectez-vous avec des experts qualifiés dans toutes les matières pour exceller dans vos études</p>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Find Your Perfect Teacher</h1>
+      <p class="text-lg text-gray-600 mb-8">Connect with qualified experts in all subjects to excel in your studies</p>
     </div>
     
     <!-- Search and Filters with animation -->
@@ -15,7 +15,7 @@
       <div class="flex flex-col md:flex-row md:items-end gap-6 mb-6">
         <!-- Search -->
         <div class="flex-grow">
-          <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Recherche</label>
+          <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
           <div class="relative rounded-md shadow-sm">
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,7 +26,7 @@
               id="search"
               v-model="searchQuery"
               type="text"
-              placeholder="Rechercher par nom, matière ou mot-clé..."
+              placeholder="Search by name, subject or keyword..."
               class="block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
               @keyup.enter="applyFilters"
             />
@@ -42,7 +42,7 @@
         
         <!-- Subject Filter -->
         <div class="w-full md:w-64">
-          <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Matière</label>
+          <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
           <div class="relative">
             <select
               id="subject"
@@ -62,7 +62,7 @@
         
         <!-- Rating Filter -->
         <div class="w-full md:w-64">
-          <label for="rating" class="block text-sm font-medium text-gray-700 mb-1">Note minimum</label>
+          <label for="rating" class="block text-sm font-medium text-gray-700 mb-1">Minimum Rating</label>
           <div class="relative">
             <select
               id="rating"
@@ -125,7 +125,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
           </svg>
-          Effacer tous les filtres
+          Clear all filters
         </button>
       </div>
       
@@ -153,7 +153,7 @@
           
           <!-- Expérience -->
           <div>
-            <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Expérience</label>
+            <label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Experience</label>
             <div class="relative">
               <select
                 id="experience"
@@ -203,7 +203,7 @@
       <!-- Active Filters -->
       <div v-if="hasActiveFilters" class="flex flex-wrap gap-2 animate-fade-in">
         <div v-if="searchQuery" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-          Recherche : {{ searchQuery }}
+          Search: {{ searchQuery }}
           <button @click="searchQuery = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -211,7 +211,7 @@
           </button>
         </div>
         <div v-if="selectedSubject" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-          Matière : {{ getSubjectName(selectedSubject) }}
+          Subject: {{ getSubjectName(selectedSubject) }}
           <button @click="selectedSubject = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -219,7 +219,7 @@
           </button>
         </div>
         <div v-if="minRating > 0" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-          Note : {{ minRating }}+ Stars
+          Rating: {{ minRating }}+ Stars
           <button @click="minRating = 0" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -227,7 +227,7 @@
           </button>
         </div>
         <div v-if="priceRange" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-          Prix : {{ getPriceRangeLabel() }}
+          Price: {{ getPriceRangeLabel() }}
           <button @click="priceRange = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -235,7 +235,7 @@
           </button>
         </div>
         <div v-if="experienceLevel" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-          Expérience : {{ getExpérienceLevelLabel() }}
+          Experience: {{ getExperienceLevelLabel() }}
           <button @click="experienceLevel = ''" class="ml-1 text-purple-600 hover:text-purple-800 focus:outline-none transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -268,15 +268,15 @@
       </p>
       
       <div class="flex items-center space-x-2">
-        <span class="text-sm text-gray-700">Trier par :</span>
+        <span class="text-sm text-gray-700">Sort by:</span>
         <select
           v-model="sortOption"
           class="text-sm border border-gray-300 rounded-md py-1.5 pl-3 pr-10 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
         >
           <option value="relevance">Pertinence</option>
           <option value="rating">Meilleure note</option>
-          <option value="price-asc">Prix : Croissant</option>
-          <option value="price-desc">Prix : Décroissant</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
           <option value="experience">Plus expérimenté</option>
         </select>
         
@@ -315,7 +315,7 @@
         <div></div>
         <div></div>
       </div>
-      <p class="mt-6 text-gray-500">Recherche des meilleurs enseignants pour vous...</p>
+      <p class="mt-6 text-gray-500">Searching for the best teachers for you...</p>
     </div>
     
     <!-- Empty results state -->
@@ -325,7 +325,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
-      <h3 class="text-xl font-bold text-gray-900 mb-2">Aucun enseignant trouvé</h3>
+      <h3 class="text-xl font-bold text-gray-900 mb-2">No teachers found</h3>
       <p class="text-gray-600 mb-8">Nous n'avons trouvé aucun enseignant correspondant à vos critères de recherche. Essayez d'ajuster vos filtres ou de commencer une nouvelle recherche.</p>
       <button 
         @click="clearFilters" 
@@ -350,7 +350,7 @@
         <div class="relative">
           <!-- Available now indicator -->
           <div v-if="teacher.isAvailableNow" class="absolute top-4 right-4 bg-green-500 text-white text-xs px-2.5 py-0.5 rounded-full font-medium animate-pulse">
-            Disponible maintenant
+            Available now
           </div>
           
           <div class="p-6">
@@ -389,7 +389,7 @@
             
             <!-- Subjects taught -->
             <div class="mt-4">
-              <h3 class="text-sm font-medium text-gray-900 mb-2">Matières</h3>
+              <h3 class="text-sm font-medium text-gray-900 mb-2">Subjects</h3>
               <div class="flex flex-wrap gap-2">
                 <span 
                   v-for="subject in teacher.subjects.slice(0, 3)" 
@@ -413,7 +413,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                {{ getTeacherExpérience(teacher) }} Expérience
+                {{ getTeacherExperience(teacher) }} Experience
               </div>
               <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -479,7 +479,7 @@
             </div>
             
             <div v-if="teacher.isAvailableNow" class="mt-2 bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">
-              Disponible maintenant
+              Available now
             </div>
           </div>
           
@@ -523,7 +523,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                {{ getTeacherExpérience(teacher) }} Expérience
+                {{ getTeacherExperience(teacher) }} Experience
               </div>
               <div class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -825,7 +825,7 @@ const getPriceRangeLabel = () => {
   return '';
 };
 
-const getExpérienceLevelLabel = () => {
+const getExperienceLevelLabel = () => {
   if (experienceLevel.value === 'beginner') return '1-3 ans';
   if (experienceLevel.value === 'intermediate') return '4-7 ans';
   if (experienceLevel.value === 'expert') return '8+ ans';
@@ -840,7 +840,7 @@ const getAvailabilityLabel = () => {
   return labels.join(', ');
 };
 
-const getTeacherExpérience = (teacher) => {
+const getTeacherExperience = (teacher) => {
   return `${teacher.experience || 5}+ ans`;
 };
 
@@ -995,7 +995,7 @@ onMounted(async () => {
   animation: pop-in 0.3s ease-out forwards;
 }
 
-/* Pulse animation for "Disponible maintenant" badge */
+/* Pulse animation for "Available now" badge */
 @keyframes pulse {
   0% {
     opacity: 0.6;

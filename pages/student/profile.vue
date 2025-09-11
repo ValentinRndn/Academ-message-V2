@@ -8,8 +8,8 @@
       <div class="relative z-10">
         <div class="flex items-center justify-between">
           <div>
-            <h1 class="text-3xl font-bold mb-2">Mon Profil</h1>
-            <p class="text-purple-100">Gérez vos informations personnelles et préférences</p>
+            <h1 class="text-3xl font-bold mb-2">My Profile</h1>
+            <p class="text-purple-100">Manage your personal information and preferences</p>
           </div>
           <button 
             @click="isEditing = !isEditing" 
@@ -22,7 +22,7 @@
               <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
-              {{ isEditing ? 'Annuler' : 'Modifier' }}
+              {{ isEditing ? 'Cancel' : 'Edit' }}
             </span>
           </button>
         </div>
@@ -41,7 +41,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div>
-          <h3 class="text-lg font-medium text-purple-800">Erreur</h3>
+          <h3 class="text-lg font-medium text-purple-800">Error</h3>
           <p class="text-purple-600">{{ error }}</p>
         </div>
       </div>
@@ -230,7 +230,7 @@
           <div class="p-8 space-y-6">
             <!-- Matières d'intérêt -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Matières d'intérêt</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Subjects of Interest</label>
               <div v-if="!isEditing">
                 <div v-if="profile.subjectsOfInterest && profile.subjectsOfInterest.length > 0" class="flex flex-wrap gap-2">
                   <span 
@@ -308,7 +308,7 @@
           @click="cancelEdit"
           class="px-6 py-3 border border-purple-200 text-purple-600 rounded-lg hover:bg-purple-50 transition-colors"
         >
-          Annuler
+          Cancel
         </button>
         <button 
           @click="saveProfile"
@@ -322,7 +322,7 @@
             </svg>
             Sauvegarde...
           </span>
-          <span v-else>Sauvegarder</span>
+          <span v-else>Save</span>
         </button>
       </div>
       

@@ -3,13 +3,13 @@
     <div class=" mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Mes Avis</h1>
+        <h1 class="text-3xl font-bold text-gray-900">My Reviews</h1>
         <p class="mt-2 text-gray-600">
-          Consultez et gérez les évaluations de vos étudiants.
+          View and manage reviews from your students.
         </p>
       </div>
 
-      <!-- Statistiques des avis -->
+      <!-- Review statistics -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div class="flex items-center">
@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="ml-4">
-              <p class="text-sm font-medium text-gray-500">Note moyenne</p>
+              <p class="text-sm font-medium text-gray-500">Average Rating</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.averageRating }}/5</p>
             </div>
           </div>
@@ -30,14 +30,14 @@
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+              <div class="w-8 h-8 bg-purple-400 rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
             </div>
             <div class="ml-4">
-              <p class="text-sm font-medium text-gray-500">Total avis</p>
+              <p class="text-sm font-medium text-gray-500">Total Reviews</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.totalReviews }}</p>
             </div>
           </div>
@@ -46,14 +46,14 @@
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 bg-yellow-500 rounded-lg flex items-center justify-center">
+              <div class="w-8 h-8 bg-purple-300 rounded-lg flex items-center justify-center"
                 <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
               </div>
             </div>
             <div class="ml-4">
-              <p class="text-sm font-medium text-gray-500">5 étoiles</p>
+              <p class="text-sm font-medium text-gray-500">5 stars</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.fiveStars }}</p>
             </div>
           </div>
@@ -76,18 +76,18 @@
         </div>
       </div>
 
-      <!-- Répartition des notes -->
+      <!-- Rating distribution -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-        <h3 class="text-lg font-semibold text-gray-900 mb-4">Répartition des notes</h3>
+        <h3 class="text-lg font-semibold text-gray-900 mb-4">Rating Distribution</h3>
         <div class="space-y-3">
           <div v-for="rating in ratingDistribution" :key="rating.stars" class="flex items-center">
             <div class="flex items-center w-16">
-              <span class="text-sm font-medium text-gray-700">{{ rating.stars }} étoiles</span>
+              <span class="text-sm font-medium text-gray-700">{{ rating.stars }} stars</span>
             </div>
             <div class="flex-1 mx-4">
               <div class="w-full bg-gray-200 rounded-full h-2">
                 <div 
-                  class="bg-yellow-400 h-2 rounded-full transition-all duration-300"
+                  class="bg-purple-400 h-2 rounded-full transition-all duration-300"
                   :style="{ width: `${rating.percentage}%` }"
                 ></div>
               </div>
@@ -106,23 +106,23 @@
             <input 
               v-model="searchQuery" 
               type="text" 
-              placeholder="Rechercher dans les avis..."
+              placeholder="Search reviews..."
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
           
           <select v-model="ratingFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
             <option value="all">Toutes les notes</option>
-            <option value="5">5 étoiles</option>
-            <option value="4">4 étoiles</option>
-            <option value="3">3 étoiles</option>
-            <option value="2">2 étoiles</option>
-            <option value="1">1 étoile</option>
+            <option value="5">5 stars</option>
+            <option value="4">4 stars</option>
+            <option value="3">3 stars</option>
+            <option value="2">2 stars</option>
+            <option value="1">1 star</option>
           </select>
           
           <select v-model="sortBy" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
-            <option value="date">Plus récents</option>
-            <option value="rating">Note</option>
+            <option value="date">Most recent</option>
+            <option value="rating">Rating</option>
             <option value="student">Étudiant</option>
           </select>
           
@@ -135,22 +135,22 @@
         </div>
       </div>
 
-      <!-- Liste des avis -->
+      <!-- Reviews list -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200">
-          <h2 class="text-lg font-semibold text-gray-900">Tous les avis</h2>
+          <h2 class="text-lg font-semibold text-gray-900">All Reviews</h2>
         </div>
 
         <div v-if="loading" class="p-8 text-center">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-          <p class="text-gray-500 mt-2">Chargement des avis...</p>
+          <p class="text-gray-500 mt-2">Loading reviews...</p>
         </div>
 
         <div v-else-if="filteredReviews.length === 0" class="p-8 text-center">
           <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
           </svg>
-          <p class="mt-2 text-gray-500">Aucun avis trouvé</p>
+          <p class="mt-2 text-gray-500">No reviews found</p>
         </div>
 
         <div v-else class="divide-y divide-gray-200">
@@ -167,7 +167,7 @@
                 </span>
               </div>
 
-              <!-- Contenu de l'avis -->
+              <!-- Review content -->
               <div class="flex-1 min-w-0">
                 <div class="flex items-center justify-between mb-2">
                   <div class="flex items-center space-x-3">
@@ -175,7 +175,7 @@
                     <span class="text-sm text-gray-500">{{ formatDate(review.createdAt) }}</span>
                   </div>
                   
-                  <!-- Note -->
+                  <!-- Rating -->
                   <div class="flex items-center space-x-1">
                     <div class="flex">
                       <svg 
@@ -183,7 +183,7 @@
                         :key="star"
                         :class="[
                           'w-5 h-5',
-                          star <= review.rating ? 'text-yellow-400' : 'text-gray-300'
+                          star <= review.rating ? 'text-purple-400' : 'text-gray-300'
                         ]"
                         fill="currentColor" 
                         viewBox="0 0 20 20"
@@ -226,7 +226,7 @@
                     @click="replyToReview(review)"
                     class="text-sm text-purple-600 hover:text-purple-800 font-medium"
                   >
-                    Répondre
+                    Reply
                   </button>
                   <button 
                     @click="viewStudentProfile(review.studentId)"
@@ -237,22 +237,22 @@
                   <button 
                     v-if="review.reply"
                     @click="viewReply(review)"
-                    class="text-sm text-green-600 hover:text-green-800"
+                    class="text-sm text-purple-600 hover:text-purple-800"
                   >
                     Voir ma réponse
                   </button>
                 </div>
 
                 <!-- Réponse du professeur -->
-                <div v-if="review.reply" class="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                <div v-if="review.reply" class="mt-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
                   <div class="flex items-start space-x-2">
-                    <svg class="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 text-purple-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <div class="flex-1">
-                      <p class="text-sm text-green-800 font-medium mb-1">Votre réponse :</p>
-                      <p class="text-sm text-green-700">{{ review.reply }}</p>
-                      <p class="text-xs text-green-600 mt-2">{{ formatDate(review.replyDate) }}</p>
+                      <p class="text-sm text-purple-800 font-medium mb-1">Your response:</p>
+                      <p class="text-sm text-purple-700">{{ review.reply }}</p>
+                      <p class="text-xs text-purple-600 mt-2">{{ formatDate(review.replyDate) }}</p>
                     </div>
                   </div>
                 </div>
@@ -265,7 +265,7 @@
       <!-- Pagination -->
       <div v-if="totalPages > 1" class="mt-8 flex items-center justify-between">
         <div class="text-sm text-gray-700">
-          Affichage de {{ (currentPage - 1) * pageSize + 1 }} à {{ Math.min(currentPage * pageSize, totalReviews) }} sur {{ totalReviews }} avis
+          Showing {{ (currentPage - 1) * pageSize + 1 }} to {{ Math.min(currentPage * pageSize, totalReviews) }} of {{ totalReviews }} reviews
         </div>
         
         <div class="flex items-center space-x-2">
@@ -279,7 +279,7 @@
                 : 'text-gray-700 hover:bg-gray-100'
             ]"
           >
-            Précédent
+            Previous
           </button>
           
           <div class="flex items-center space-x-1">
@@ -308,7 +308,7 @@
                 : 'text-gray-700 hover:bg-gray-100'
             ]"
           >
-            Suivant
+            Next
           </button>
         </div>
       </div>
@@ -338,7 +338,7 @@ const stats = ref({
   withComments: 0
 });
 
-// Répartition des notes
+// Rating distribution
 const ratingDistribution = ref([
   { stars: 5, count: 0, percentage: 0 },
   { stars: 4, count: 0, percentage: 0 },
@@ -398,7 +398,7 @@ const loadReviews = async () => {
     ratingDistribution.value = response.ratingDistribution || [];
 
   } catch (error) {
-    console.error('Erreur lors du chargement des avis:', error);
+    console.error('Error loading reviews:', error);
     reviews.value = [];
     totalReviews.value = 0;
   } finally {
@@ -415,8 +415,8 @@ const formatDate = (date) => {
 };
 
 const replyToReview = (review) => {
-  // TODO: Implémenter la réponse à un avis
-  console.log('Répondre à l\'avis:', review);
+  // TODO: Implement review response
+  console.log('Reply to review:', review);
 };
 
 const viewStudentProfile = (studentId) => {
@@ -429,8 +429,8 @@ const viewReply = (review) => {
 };
 
 const exportReviews = () => {
-  // TODO: Exporter les avis
-  console.log('Exporter les avis');
+  // TODO: Export reviews
+  console.log('Export reviews');
 };
 
 const previousPage = () => {

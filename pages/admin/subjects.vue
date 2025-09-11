@@ -4,8 +4,8 @@
     <div class="mb-8">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900">Gestion des matières</h1>
-          <p class="text-gray-600 mt-2">Gérer les matières disponibles sur la plateforme</p>
+          <h1 class="text-3xl font-bold text-gray-900">Subject Management</h1>
+          <p class="text-gray-600 mt-2">Manage subjects available on the platform</p>
         </div>
         <button
           @click="showCreateModal = true"
@@ -14,12 +14,12 @@
           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
           </svg>
-          Ajouter une matière
+          Add Subject
         </button>
       </div>
     </div>
 
-    <!-- Contenu principal -->
+    <!-- Main Content -->
       <!-- Loading state -->
       <div v-if="loading" class="flex justify-center items-center py-12">
         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
@@ -32,40 +32,40 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
           <div>
-            <h3 class="text-sm font-medium text-red-800">Erreur</h3>
+            <h3 class="text-sm font-medium text-red-800">Error</h3>
             <p class="mt-1 text-sm text-red-700">{{ error }}</p>
           </div>
         </div>
       </div>
 
-      <!-- Liste des matières -->
+      <!-- Subject List -->
       <div v-else class="bg-white shadow-sm rounded-lg">
-        <!-- En-tête du tableau -->
+        <!-- Table Header -->
         <div class="px-6 py-4 border-b border-gray-200">
           <div class="flex justify-between items-center">
             <h2 class="text-lg font-medium text-gray-900">
-              {{ subjects.length }} matière{{ subjects.length > 1 ? 's' : '' }}
+              {{ subjects.length }} subject{{ subjects.length > 1 ? 's' : '' }}
             </h2>
             <div class="flex items-center space-x-4">
-              <!-- Filtre par catégorie -->
+              <!-- Category Filter -->
               <select
                 v-model="selectedCategory"
                 class="border border-gray-300 rounded-lg px-3 py-2 text-sm"
               >
-                <option value="">Toutes les catégories</option>
+                <option value="">All categories</option>
                 <option value="sciences">Sciences</option>
-                <option value="languages">Langues</option>
+                <option value="languages">Languages</option>
                 <option value="arts">Arts</option>
-                <option value="humanities">Sciences Humaines</option>
-                <option value="technology">Technologie</option>
-                <option value="other">Autre</option>
+                <option value="humanities">Humanities</option>
+                <option value="technology">Technology</option>
+                <option value="other">Other</option>
               </select>
-              <!-- Barre de recherche -->
+              <!-- Search Bar -->
               <div class="relative">
                 <input
                   v-model="searchQuery"
                   type="text"
-                  placeholder="Rechercher..."
+                  placeholder="Search..."
                   class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-64 text-sm"
                 >
                 <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -76,25 +76,25 @@
           </div>
         </div>
 
-        <!-- Tableau -->
+        <!-- Table -->
         <div class="overflow-x-auto">
           <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
               <tr>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Matière
+                  Subject
                 </th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Catégorie
+                  Category
                 </th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Description
                 </th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Professeurs
+                  Teachers
                 </th>
                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Créée le
+                  Created
                 </th>
                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Actions
@@ -124,11 +124,11 @@
                 </td>
                 <td class="px-6 py-4">
                   <div class="text-sm text-gray-900 max-w-xs truncate">
-                    {{ subject.description || 'Aucune description' }}
+                    {{ subject.description || 'No description' }}
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {{ subject.teacherCount || 0 }} professeur{{ (subject.teacherCount || 0) > 1 ? 's' : '' }}
+                  {{ subject.teacherCount || 0 }} teacher{{ (subject.teacherCount || 0) > 1 ? 's' : '' }}
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {{ formatDate(subject.createdAt) }}
@@ -160,20 +160,20 @@
           </table>
         </div>
 
-        <!-- État vide -->
+        <!-- Empty State -->
         <div v-if="filteredSubjects.length === 0" class="text-center py-12">
           <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 48 48">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13v13m0-13c1.168-.776 2.754-1.253 4.5-1.253s3.332.477 4.5 1.253v13M3 19.253v13M3 19.253c1.168-.776 2.754-1.253 4.5-1.253s3.332.477 4.5 1.253m3-13v13M21 19.253v13c-1.168-.776-2.754-1.253-4.5-1.253s-3.332.477-4.5 1.253"></path>
           </svg>
-          <h3 class="mt-4 text-sm font-medium text-gray-900">Aucune matière trouvée</h3>
+          <h3 class="mt-4 text-sm font-medium text-gray-900">No subjects found</h3>
           <p class="mt-1 text-sm text-gray-500">
-            {{ searchQuery || selectedCategory ? 'Aucun résultat pour ces critères.' : 'Commencez par ajouter une matière.' }}
+            {{ searchQuery || selectedCategory ? 'No results for these criteria.' : 'Start by adding a subject.' }}
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Modal Créer/Modifier matière -->
+    <!-- Create/Edit Subject Modal -->
     <div
       v-if="showCreateModal || showEditModal"
       class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
@@ -182,39 +182,39 @@
       <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
         <div class="mt-3">
           <h3 class="text-lg font-medium text-gray-900 mb-4">
-            {{ showCreateModal ? 'Ajouter une matière' : 'Modifier la matière' }}
+            {{ showCreateModal ? 'Add Subject' : 'Edit Subject' }}
           </h3>
           
           <form @submit.prevent="submitForm" class="space-y-4">
-            <!-- Nom -->
+            <!-- Name -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                Nom de la matière *
+                Subject Name *
               </label>
               <input
                 v-model="form.name"
                 type="text"
                 required
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="Ex: Mathématiques"
+                placeholder="e.g. Mathematics"
               >
             </div>
 
-            <!-- Catégorie -->
+            <!-- Category -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                Catégorie
+                Category
               </label>
               <select
                 v-model="form.category"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
               >
                 <option value="sciences">Sciences</option>
-                <option value="languages">Langues</option>
+                <option value="languages">Languages</option>
                 <option value="arts">Arts</option>
-                <option value="humanities">Sciences Humaines</option>
-                <option value="technology">Technologie</option>
-                <option value="other">Autre</option>
+                <option value="humanities">Humanities</option>
+                <option value="technology">Technology</option>
+                <option value="other">Other</option>
               </select>
             </div>
 
@@ -227,14 +227,14 @@
                 v-model="form.description"
                 rows="3"
                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                placeholder="Description de la matière..."
+                placeholder="Subject description..."
               ></textarea>
             </div>
 
-            <!-- Icône -->
+            <!-- Icon -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">
-                Icône (emoji ou caractère)
+                Icon (emoji or character)
               </label>
               <input
                 v-model="form.icon"
@@ -245,21 +245,21 @@
               >
             </div>
 
-            <!-- Boutons -->
+            <!-- Buttons -->
             <div class="flex justify-end space-x-3 pt-4">
               <button
                 type="button"
                 @click="closeModal"
                 class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200"
               >
-                Annuler
+                Cancel
               </button>
               <button
                 type="submit"
                 :disabled="submitting"
                 class="px-4 py-2 text-sm font-medium text-white bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 disabled:opacity-50"
               >
-                {{ submitting ? 'Enregistrement...' : (showCreateModal ? 'Créer' : 'Modifier') }}
+                {{ submitting ? 'Saving...' : (showCreateModal ? 'Create' : 'Update') }}
               </button>
             </div>
           </form>
@@ -290,12 +290,12 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 
-// Métadonnées
+// Metadata
 definePageMeta({
-  title: 'Gestion des matières'
+  title: 'Subject Management'
 })
 
-// État
+// State
 const loading = ref(true)
 const error = ref('')
 const subjects = ref([])
@@ -345,7 +345,7 @@ const filteredSubjects = computed(() => {
   return filtered
 })
 
-// Méthodes
+// Methods
 const loadSubjects = async () => {
   try {
     loading.value = true
@@ -357,7 +357,7 @@ const loadSubjects = async () => {
     
     subjects.value = data.subjects
   } catch (err) {
-    error.value = err.data?.message || 'Erreur lors du chargement des matières'
+    error.value = err.data?.message || 'Error loading subjects'
   } finally {
     loading.value = false
   }
@@ -376,11 +376,11 @@ const submitForm = async () => {
       credentials: 'include'
     })
     
-    showToast('success', showCreateModal.value ? 'Matière créée avec succès' : 'Matière modifiée avec succès')
+    showToast('success', showCreateModal.value ? 'Subject created successfully' : 'Subject updated successfully')
     closeModal()
     await loadSubjects()
   } catch (err) {
-    showToast('error', err.data?.message || 'Erreur lors de la sauvegarde')
+    showToast('error', err.data?.message || 'Error saving')
   } finally {
     submitting.value = false
   }
@@ -399,11 +399,11 @@ const editSubject = (subject) => {
 
 const deleteSubject = async (subject) => {
   if (subject.teacherCount > 0) {
-    showToast('error', 'Impossible de supprimer une matière utilisée par des professeurs')
+    showToast('error', 'Cannot delete a subject used by teachers')
     return
   }
   
-  if (!confirm(`Êtes-vous sûr de vouloir supprimer la matière "${subject.name}" ?`)) {
+  if (!confirm(`Are you sure you want to delete the subject "${subject.name}"?`)) {
     return
   }
   
@@ -413,10 +413,10 @@ const deleteSubject = async (subject) => {
       credentials: 'include'
     })
     
-    showToast('success', 'Matière supprimée avec succès')
+    showToast('success', 'Subject deleted successfully')
     await loadSubjects()
   } catch (err) {
-    showToast('error', err.data?.message || 'Erreur lors de la suppression')
+    showToast('error', err.data?.message || 'Error deleting')
   }
 }
 
@@ -442,13 +442,13 @@ const showToast = (type, message) => {
 const getCategoryName = (category) => {
   const names = {
     sciences: 'Sciences',
-    languages: 'Langues',
+    languages: 'Languages',
     arts: 'Arts',
-    humanities: 'Sciences Humaines',
-    technology: 'Technologie',
-    other: 'Autre'
+    humanities: 'Humanities',
+    technology: 'Technology',
+    other: 'Other'
   }
-  return names[category] || 'Autre'
+  return names[category] || 'Other'
 }
 
 const getCategoryClass = (category) => {
@@ -464,7 +464,7 @@ const getCategoryClass = (category) => {
 }
 
 const formatDate = (date) => {
-  return new Date(date).toLocaleDateString('fr-FR')
+  return new Date(date).toLocaleDateString('en-US')
 }
 
 // Lifecycle

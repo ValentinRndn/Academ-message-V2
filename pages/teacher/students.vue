@@ -3,13 +3,13 @@
     <div class=" mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Mes Étudiants</h1>
+        <h1 class="text-3xl font-bold text-gray-900">My Students</h1>
         <p class="mt-2 text-gray-600">
-          Gérez vos étudiants et suivez leurs progrès.
+          Manage your students and track their progress.
         </p>
       </div>
 
-      <!-- Statistiques rapides -->
+      <!-- Quick statistics -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div class="flex items-center">
@@ -21,7 +21,7 @@
               </div>
             </div>
             <div class="ml-4">
-              <p class="text-sm font-medium text-gray-500">Total étudiants</p>
+              <p class="text-sm font-medium text-gray-500">Total students</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.totalStudents }}</p>
             </div>
           </div>
@@ -30,14 +30,14 @@
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center">
+              <div class="w-8 h-8 bg-purple-400 rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
             </div>
             <div class="ml-4">
-              <p class="text-sm font-medium text-gray-500">Actifs ce mois</p>
+              <p class="text-sm font-medium text-gray-500">Active this month</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.activeStudents }}</p>
             </div>
           </div>
@@ -53,7 +53,7 @@
               </div>
             </div>
             <div class="ml-4">
-              <p class="text-sm font-medium text-gray-500">Heures enseignées</p>
+              <p class="text-sm font-medium text-gray-500">Hours taught</p>
               <p class="text-2xl font-bold text-gray-900">{{ stats.totalHours }}h</p>
             </div>
           </div>
@@ -62,7 +62,7 @@
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+              <div class="w-8 h-8 bg-purple-300 rounded-lg flex items-center justify-center">
                 <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                 </svg>
@@ -83,14 +83,14 @@
             <input 
               v-model="searchQuery" 
               type="text" 
-              placeholder="Rechercher un étudiant..."
+              placeholder="Search for a student..."
               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
             />
           </div>
           
           <select v-model="statusFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
             <option value="all">Tous les statuts</option>
-            <option value="active">Actifs</option>
+            <option value="active">Active</option>
             <option value="inactive">Inactifs</option>
             <option value="new">Nouveaux</option>
           </select>
@@ -109,22 +109,22 @@
         </div>
       </div>
 
-      <!-- Liste des étudiants -->
+      <!-- Students list -->
       <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200">
-          <h2 class="text-lg font-semibold text-gray-900">Liste des étudiants</h2>
+          <h2 class="text-lg font-semibold text-gray-900">Students List</h2>
         </div>
 
         <div v-if="loading" class="p-8 text-center">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-          <p class="text-gray-500 mt-2">Chargement des étudiants...</p>
+          <p class="text-gray-500 mt-2">Loading students...</p>
         </div>
 
         <div v-else-if="filteredStudents.length === 0" class="p-8 text-center">
           <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
           </svg>
-          <p class="mt-2 text-gray-500">Aucun étudiant trouvé</p>
+          <p class="mt-2 text-gray-500">No students found</p>
         </div>
 
         <div v-else class="divide-y divide-gray-200">
@@ -164,12 +164,12 @@
                     <span>•</span>
                     <span>{{ student.subjects.join(', ') }}</span>
                     <span>•</span>
-                    <span>{{ student.totalCourses }} cours</span>
+                    <span>{{ student.totalCourses }} lessons</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Statistiques rapides -->
+              <!-- Quick statistics -->
               <div class="flex items-center space-x-6 text-sm">
                 <div class="text-center">
                   <p class="font-medium text-gray-900">{{ student.totalHours }}h</p>
@@ -180,7 +180,7 @@
                   <p class="text-gray-500">Note</p>
                 </div>
                 <div class="text-center">
-                  <p class="font-medium text-gray-900">{{ student.lastCourseDate ? formatDate(student.lastCourseDate) : 'Jamais' }}</p>
+                  <p class="font-medium text-gray-900">{{ student.lastCourseDate ? formatDate(student.lastCourseDate) : 'Never' }}</p>
                   <p class="text-gray-500">Dernier cours</p>
                 </div>
               </div>
@@ -190,7 +190,7 @@
                 <button 
                   @click.stop="sendMessage(student)"
                   class="p-2 text-gray-400 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
-                  title="Envoyer un message"
+                  title="Send message"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
@@ -198,9 +198,9 @@
                 </button>
                 
                 <button 
-                  @click.stop="scheduleCourse(student)"
-                  class="p-2 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
-                  title="Programmer un cours"
+                  @click.stop="scheduleLesson(student)"
+                  class="p-2 text-gray-400 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+                  title="Schedule a lesson"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
@@ -210,7 +210,7 @@
                 <button 
                   @click.stop="viewStudentDetails(student)"
                   class="p-2 text-gray-400 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
-                  title="Voir les détails"
+                  title="View details"
                 >
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -228,7 +228,7 @@
                   <div class="flex items-center space-x-2">
                     <div class="w-24 bg-gray-200 rounded-full h-2">
                       <div 
-                        class="bg-green-500 h-2 rounded-full transition-all duration-300"
+                        class="bg-purple-500 h-2 rounded-full transition-all duration-300"
                         :style="{ width: `${student.recentProgress}%` }"
                       ></div>
                     </div>
@@ -264,8 +264,8 @@ const stats = ref({
   averageRating: 0
 });
 
-// Matières disponibles
-const subjects = ref(['Mathématiques', 'Physique', 'Chimie', 'Français', 'Anglais', 'Histoire']);
+// Available subjects
+const subjects = ref(['Mathematics', 'Physics', 'Chemistry', 'French', 'English', 'History']);
 
 // Computed properties - Les filtres sont maintenant gérés côté serveur
 const filteredStudents = computed(() => {
@@ -296,7 +296,7 @@ const loadStudents = async () => {
     };
 
   } catch (error) {
-    console.error('Erreur lors du chargement des étudiants:', error);
+    console.error('Error loading students:', error);
     // En cas d'erreur, utiliser des données de fallback
     students.value = [];
     stats.value = {
@@ -310,12 +310,12 @@ const loadStudents = async () => {
   }
 };
 
-// Supprimer cette fonction car les stats viennent maintenant de l'API
+// Remove this function as stats now come from the API
 
 const getStatusClass = (status) => {
   switch (status) {
-    case 'active': return 'bg-green-100 text-green-800';
-    case 'inactive': return 'bg-red-100 text-red-800';
+    case 'active': return 'bg-purple-100 text-purple-800';
+    case 'inactive': return 'bg-gray-100 text-gray-800';
     default: return 'bg-gray-100 text-gray-800';
   }
 };
@@ -333,26 +333,26 @@ const formatDate = (date) => {
 };
 
 const viewStudentDetails = (student) => {
-  // TODO: Naviguer vers la page de détails de l'étudiant
-  console.log('Voir les détails de:', student);
+  // TODO: Navigate to student details page
+  console.log('View details of:', student);
   navigateTo(`/teacher/students/${student._id}`);
 };
 
 const sendMessage = (student) => {
   // TODO: Ouvrir la conversation avec l'étudiant
-  console.log('Envoyer un message à:', student);
+  console.log('Send message to:', student);
   navigateTo(`/messages?student=${student._id}`);
 };
 
-const scheduleCourse = (student) => {
+const scheduleLesson = (student) => {
   // TODO: Programmer un cours avec l'étudiant
   console.log('Programmer un cours avec:', student);
   navigateTo(`/teacher/schedule?student=${student._id}`);
 };
 
 const exportStudents = () => {
-  // TODO: Exporter la liste des étudiants
-  console.log('Exporter les étudiants');
+  // TODO: Export students list
+  console.log('Export students');
 };
 
 // Recharger les données quand les filtres changent

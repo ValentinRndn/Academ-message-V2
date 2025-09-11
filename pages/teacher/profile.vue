@@ -190,7 +190,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
-              Matières enseignées
+              Subjects Taught
             </h2>
           </div>
           
@@ -521,12 +521,12 @@ const addSubject = () => {
   // Trouver l'objet matière complet
   const selectedSubject = availableSubjects.value.find(subject => subject._id === newSubject.value);
   if (!selectedSubject) {
-    console.log('❌ Matière introuvable:', newSubject.value);
-    console.log('🎓 Matières disponibles:', availableSubjects.value);
+    console.log('❌ Subject not found:', newSubject.value);
+    console.log('🎓 Available subjects:', availableSubjects.value);
     return;
   }
   
-  console.log('✅ Matière trouvée:', selectedSubject);
+  console.log('✅ Subject found:', selectedSubject);
 
   // Initialiser le tableau si nécessaire
   if (!editedProfile.value.subjects) {
@@ -645,13 +645,13 @@ const loadProfile = async () => {
     
     if (profileResponse.teacher) {
       console.log('📋 Profil teacher récupéré:', profileResponse.teacher);
-      console.log('📚 Matières du profil:', profileResponse.teacher.subjects);
+      console.log('📚 Profile subjects:', profileResponse.teacher.subjects);
       
       profile.value = profileResponse.teacher;
       editedProfile.value = { ...profileResponse.teacher };
       
       console.log('✏️ editedProfile initialisé:', editedProfile.value);
-      console.log('📚 Matières dans editedProfile:', editedProfile.value.subjects);
+      console.log('📚 Subjects in editedProfile:', editedProfile.value.subjects);
     }
     
     if (statsResponse) {
@@ -659,7 +659,7 @@ const loadProfile = async () => {
     }
     
     if (subjectsResponse) {
-      console.log('🎓 Matières disponibles récupérées:', subjectsResponse.subjects);
+      console.log('🎓 Available subjects retrieved:', subjectsResponse.subjects);
       availableSubjects.value = subjectsResponse.subjects || [];
     }
   } catch (err) {

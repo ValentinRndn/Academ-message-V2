@@ -13,7 +13,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
         </svg>
-        Ajouter un enseignant
+        Add Teacher
       </button>
     </div>
     
@@ -458,7 +458,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
           </svg>
-          Ajouter un enseignant
+          Add Teacher
         </button>
       </div>
     </div>
@@ -470,7 +470,7 @@
           <!-- Modal header -->
           <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-purple-600 to-purple-500 rounded-t-xl">
             <h3 class="text-lg font-bold text-white">
-              {{ showEditTeacherModal ? 'Modifier l\'enseignant' : 'Ajouter un nouvel enseignant' }}
+              {{ showEditTeacherModal ? 'Edit Teacher' : 'Add New Teacher' }}
             </h3>
             <button 
               @click="cancelTeacherModal"
@@ -609,7 +609,7 @@
                         v-model="newSubject" 
                         @keydown.enter.prevent="addSubjectToForm"
                         type="text" 
-                        placeholder="Ajouter une matière..." 
+                        placeholder="Add a subject..." 
                         class="border-0 p-1 focus:ring-0 text-sm bg-transparent"
                       />
                       <button 
@@ -646,7 +646,7 @@
                   @click="cancelTeacherModal"
                   class="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
-                  Annuler
+                  Cancel
                 </button>
                 <button 
                   type="submit"
@@ -655,7 +655,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  {{ showEditTeacherModal ? 'Mettre à jour l\'enseignant' : 'Ajouter un enseignant' }}
+                  {{ showEditTeacherModal ? 'Update Teacher' : 'Add Teacher' }}
                 </button>
               </div>
             </form>

@@ -58,9 +58,9 @@
                 
                 <div class="space-y-1 text-gray-600">
                   <p><strong>Email :</strong> {{ student.email }}</p>
-                  <p><strong>Téléphone :</strong> {{ student.phone || 'Non renseigné' }}</p>
-                  <p><strong>Matières :</strong> {{ student.subjects.join(', ') }}</p>
-                  <p><strong>Étudiant depuis :</strong> {{ formatDate(student.createdAt) }}</p>
+                  <p><strong>Phone:</strong> {{ student.phone || 'Not provided' }}</p>
+                  <p><strong>Subjects:</strong> {{ student.subjects.join(', ') }}</p>
+                  <p><strong>Student since:</strong> {{ formatDate(student.createdAt) }}</p>
                 </div>
               </div>
             </div>
@@ -435,7 +435,7 @@ const addNote = () => {
 
 const deleteNote = (noteId) => {
   // TODO: Implémenter la suppression de note
-  console.log('Supprimer la note:', noteId);
+  console.log('Delete note:', noteId);
 };
 
 // Lifecycle

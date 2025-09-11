@@ -3,9 +3,9 @@
     <div class="mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Gérer mes disponibilités</h1>
+        <h1 class="text-3xl font-bold text-gray-900">Manage My Availability</h1>
         <p class="mt-2 text-gray-600">
-          Définissez vos créneaux de disponibilité pour que les étudiants puissent réserver des cours.
+          Set your availability slots so students can book lessons.
         </p>
       </div>
 
@@ -16,25 +16,25 @@
 
       <!-- Instructions -->
       <div class="mt-8 bg-purple-50 border border-purple-200 rounded-lg p-6">
-        <h3 class="text-lg font-semibold text-purple-900 mb-3">💡 Comment ça marche ?</h3>
+        <h3 class="text-lg font-semibold text-purple-900 mb-3">💡 How does it work?</h3>
         <div class="space-y-2 text-sm text-purple-800">
-          <p>• <strong>Sélectionnez les jours</strong> où vous êtes disponible</p>
-          <p>• <strong>Définissez vos créneaux horaires</strong> pour chaque jour</p>
-          <p>• <strong>Sauvegardez</strong> vos disponibilités</p>
-          <p>• Les étudiants pourront <strong>voir et réserver</strong> uniquement ces créneaux</p>
-          <p>• Les créneaux déjà réservés seront <strong>automatiquement bloqués</strong></p>
+          <p>• <strong>Select the days</strong> when you are available</p>
+          <p>• <strong>Set your time slots</strong> for each day</p>
+          <p>• <strong>Save</strong> your availability</p>
+          <p>• Students will be able to <strong>see and book</strong> only these slots</p>
+          <p>• Already booked slots will be <strong>automatically blocked</strong></p>
         </div>
       </div>
 
       <!-- Preview -->
       <div class="mt-8 bg-white shadow-lg rounded-2xl overflow-hidden">
         <div class="p-6 border-b border-gray-200">
-          <h3 class="text-lg font-semibold text-gray-900">Aperçu de vos disponibilités</h3>
+          <h3 class="text-lg font-semibold text-gray-900">Preview of Your Availability</h3>
         </div>
         <div class="p-6">
           <div v-if="loading" class="text-center py-8">
             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-            <p class="text-gray-500 mt-2">Chargement...</p>
+            <p class="text-gray-500 mt-2">Loading...</p>
           </div>
           
           <div v-else-if="availability.length > 0" class="grid grid-cols-7 gap-4">
@@ -47,7 +47,7 @@
                 </div>
               </div>
               <div v-else class="text-sm text-gray-500 italic">
-                Non disponible
+                Not available
               </div>
             </div>
           </div>
@@ -56,8 +56,8 @@
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <p class="mt-2">Aucune disponibilité définie</p>
-            <p class="text-sm">Utilisez le formulaire ci-dessus pour définir vos créneaux</p>
+            <p class="mt-2">No availability defined</p>
+            <p class="text-sm">Use the form above to set your time slots</p>
           </div>
         </div>
       </div>
@@ -76,19 +76,19 @@ definePageMeta({
 const availability = ref([]);
 const loading = ref(true);
 
-// Formater les disponibilités par jour
+// Format availability by day
 const availabilityByDay = computed(() => {
   const days = [
-    { name: 'Dimanche', dayOfWeek: 0, slots: [] },
-    { name: 'Lundi', dayOfWeek: 1, slots: [] },
-    { name: 'Mardi', dayOfWeek: 2, slots: [] },
-    { name: 'Mercredi', dayOfWeek: 3, slots: [] },
-    { name: 'Jeudi', dayOfWeek: 4, slots: [] },
-    { name: 'Vendredi', dayOfWeek: 5, slots: [] },
-    { name: 'Samedi', dayOfWeek: 6, slots: [] }
+    { name: 'Sunday', dayOfWeek: 0, slots: [] },
+    { name: 'Monday', dayOfWeek: 1, slots: [] },
+    { name: 'Tuesday', dayOfWeek: 2, slots: [] },
+    { name: 'Wednesday', dayOfWeek: 3, slots: [] },
+    { name: 'Thursday', dayOfWeek: 4, slots: [] },
+    { name: 'Friday', dayOfWeek: 5, slots: [] },
+    { name: 'Saturday', dayOfWeek: 6, slots: [] }
   ];
   
-  // Regrouper les créneaux par jour
+  // Group slots by day
   availability.value.forEach(slot => {
     const day = days.find(d => d.dayOfWeek === slot.dayOfWeek);
     if (day) {
@@ -96,7 +96,7 @@ const availabilityByDay = computed(() => {
     }
   });
   
-  // Trier les créneaux par heure de début
+  // Sort slots by start time
   days.forEach(day => {
     day.slots.sort((a, b) => a.startTime.localeCompare(b.startTime));
   });
@@ -112,7 +112,7 @@ const formatTime = (time) => {
   });
 };
 
-// Charger les disponibilités
+// Load availability
 const loadAvailability = async () => {
   try {
     loading.value = true;
@@ -121,13 +121,13 @@ const loadAvailability = async () => {
     });
     availability.value = response.availability || [];
   } catch (error) {
-    console.error('Erreur lors du chargement des disponibilités:', error);
+    console.error('Error loading availability:', error);
   } finally {
     loading.value = false;
   }
 };
 
-// Écouter les changements de disponibilités depuis le composant
+// Listen for availability changes from component
 const handleAvailabilityUpdated = () => {
   loadAvailability();
 };

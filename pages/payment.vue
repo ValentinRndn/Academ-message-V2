@@ -29,7 +29,7 @@
         <!-- Résumé de la réservation -->
         <div class="lg:col-span-2">
           <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">Détails de votre cours</h2>
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Your Lesson Details</h2>
             
             <div class="space-y-4">
               <!-- Professeur -->
@@ -43,19 +43,19 @@
                   <p class="font-medium text-gray-900">
                     {{ booking.teacherId?.firstName }} {{ booking.teacherId?.lastName }}
                   </p>
-                  <p class="text-sm text-gray-600">Professeur certifié</p>
+                  <p class="text-sm text-gray-600">Certified Teacher</p>
                 </div>
               </div>
 
               <!-- Matière -->
               <div class="flex items-center justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-600">Matière</span>
+                <span class="text-gray-600">Subject</span>
                 <span class="font-medium text-gray-900">{{ booking.subjectId?.name }}</span>
               </div>
 
               <!-- Date et heure -->
               <div class="flex items-center justify-between py-2 border-b border-gray-200">
-                <span class="text-gray-600">Date et heure</span>
+                <span class="text-gray-600">Date and time</span>
                 <div class="text-right">
                   <p class="font-medium text-gray-900">{{ formatDate(booking.startTime) }}</p>
                   <p class="text-sm text-gray-600">{{ formatTime(booking.startTime) }} - {{ formatTime(booking.endTime) }}</p>
@@ -206,7 +206,7 @@ const loadBooking = async () => {
 
     booking.value = response.booking;
     
-    // Créer l'intention de paiement
+    // Create payment intent
     await createPaymentIntent();
   } catch (err) {
     console.error('Erreur lors du chargement de la réservation:', err);
@@ -216,7 +216,7 @@ const loadBooking = async () => {
   }
 };
 
-// Créer l'intention de paiement
+// Create payment intent
 const createPaymentIntent = async () => {
   try {
     const response = await $fetch('/api/payments/create-intent', {
@@ -252,12 +252,12 @@ const initializeStripe = async () => {
     const publishableKey = 'pk_test_dummy_key_replace_with_your_actual_key';
     stripe = window.Stripe(publishableKey);
 
-    // Créer les éléments
+    // Create elements
     elements = stripe.elements();
     
     await nextTick();
 
-    // Créer l'élément carte
+    // Create card element
     cardElement = elements.create('card', {
       style: {
         base: {

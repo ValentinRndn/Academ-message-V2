@@ -8,8 +8,8 @@
       <div class="relative z-10">
         <div class="flex items-center justify-between">
           <div>
-            <h1 class="text-3xl font-bold mb-2">Mes Cours</h1>
-            <p class="text-purple-100">Gérez vos réservations et suivez votre progression</p>
+            <h1 class="text-3xl font-bold mb-2">My Lessons</h1>
+            <p class="text-purple-100">Manage your bookings and track your progress</p>
           </div>
           <NuxtLink 
             to="/teachers" 
@@ -19,7 +19,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
               </svg>
-              Réserver un cours
+              Book a lesson
             </span>
           </NuxtLink>
         </div>
@@ -36,7 +36,7 @@
             </svg>
           </div>
           <div>
-            <p class="text-sm text-gray-600">Total des cours</p>
+            <p class="text-sm text-gray-600">Total lessons</p>
             <p class="text-2xl font-bold text-gray-900">{{ stats?.totalBookings || 0 }}</p>
           </div>
         </div>
@@ -50,7 +50,7 @@
             </svg>
           </div>
           <div>
-            <p class="text-sm text-gray-600">Cours terminés</p>
+            <p class="text-sm text-gray-600">Completed lessons</p>
             <p class="text-2xl font-bold text-gray-900">{{ stats?.completedBookings || 0 }}</p>
           </div>
         </div>
@@ -64,7 +64,7 @@
             </svg>
           </div>
           <div>
-            <p class="text-sm text-gray-600">Heures de cours</p>
+            <p class="text-sm text-gray-600">Lesson hours</p>
             <p class="text-2xl font-bold text-gray-900">{{ stats?.totalHours || 0 }}h</p>
           </div>
         </div>
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <!-- Filtres et recherche -->
+    <!-- Filters and search -->
     <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
       <div class="flex flex-wrap gap-4 items-center">
         <div class="flex-1 min-w-64">
@@ -101,22 +101,22 @@
           v-model="statusFilter" 
           class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
         >
-          <option value="all">Tous les statuts</option>
-          <option value="pending">En attente</option>
-          <option value="confirmed">Confirmé</option>
-          <option value="completed">Terminé</option>
-          <option value="cancelled">Annulé</option>
+          <option value="all">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
         </select>
         
         <select 
           v-model="timeFilter" 
           class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
         >
-          <option value="all">Toutes les dates</option>
-          <option value="upcoming">Cours à venir</option>
-          <option value="past">Cours passés</option>
-          <option value="today">Aujourd'hui</option>
-          <option value="week">Cette semaine</option>
+          <option value="all">All dates</option>
+          <option value="upcoming">Upcoming lessons</option>
+          <option value="past">Past lessons</option>
+          <option value="today">Today</option>
+          <option value="week">This week</option>
         </select>
         
         <button 
@@ -170,7 +170,7 @@
                   <h3 class="text-lg font-semibold text-gray-900">
                     {{ booking.teacherId?.firstName }} {{ booking.teacherId?.lastName }}
                   </h3>
-                  <p class="text-gray-600">{{ booking.subjectId?.name || 'Cours particulier' }}</p>
+                  <p class="text-gray-600">{{ booking.subjectId?.name || 'Private lesson' }}</p>
                 </div>
               </div>
               
@@ -202,7 +202,7 @@
               </div>
             </div>
             
-            <!-- Statut et actions -->
+            <!-- Status and actions -->
             <div class="flex flex-col items-end space-y-3">
               <span 
                 class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
@@ -212,7 +212,7 @@
               </span>
               
               <div class="flex space-x-2">
-                <!-- Actions selon le statut -->
+                <!-- Actions based on status -->
                 <button 
                   v-if="booking.status === 'pending'"
                   @click="cancelBooking(booking._id)"
@@ -226,7 +226,7 @@
                     </svg>
                     Annulation...
                   </span>
-                  <span v-else>Annuler</span>
+                  <span v-else>Cancel</span>
                 </button>
                 
                 <button 
@@ -263,11 +263,11 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-300 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
         </svg>
-        <h3 class="text-lg font-medium text-gray-900 mb-2">Aucun cours trouvé</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">No lessons found</h3>
         <p class="text-gray-500 mb-6">
           {{ searchQuery || statusFilter !== 'all' || timeFilter !== 'all' 
-            ? 'Aucun cours ne correspond à vos critères de recherche.' 
-            : 'Vous n\'avez pas encore réservé de cours.' }}
+            ? 'No lessons match your search criteria.' 
+            : 'You haven\'t booked any lessons yet.' }}
         </p>
         <NuxtLink 
           to="/teachers" 
@@ -330,7 +330,7 @@ const bookings = ref([]);
 const stats = ref(null);
 const cancelling = ref(null);
 
-// Filtres
+// Filters
 const searchQuery = ref('');
 const statusFilter = ref('all');
 const timeFilter = ref('all');
@@ -354,7 +354,7 @@ const filteredBookings = computed(() => {
     );
   }
 
-  // Filtre par statut
+  // Filter by status
   if (statusFilter.value !== 'all') {
     filtered = filtered.filter(booking => booking.status === statusFilter.value);
   }
@@ -397,9 +397,9 @@ const visiblePages = computed(() => {
   return pages;
 });
 
-// Fonctions utilitaires
+// Utility functions
 const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleDateString('fr-FR', {
+  return new Date(dateString).toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -408,7 +408,7 @@ const formatDate = (dateString) => {
 };
 
 const formatTime = (dateString) => {
-  return new Date(dateString).toLocaleTimeString('fr-FR', {
+  return new Date(dateString).toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit'
   });
@@ -426,10 +426,10 @@ const getStatusClass = (status) => {
 
 const getStatusLabel = (status) => {
   const labels = {
-    pending: 'En attente',
-    confirmed: 'Confirmé',
-    completed: 'Terminé',
-    cancelled: 'Annulé'
+    pending: 'Pending',
+    confirmed: 'Confirmed',
+    completed: 'Completed',
+    cancelled: 'Cancelled'
   };
   return labels[status] || status;
 };
@@ -519,7 +519,7 @@ onMounted(() => {
   loadBookings();
 });
 
-// Recharger quand les filtres changent
+// Reload when filters change
 watch([searchQuery, statusFilter, timeFilter], () => {
   currentPage.value = 1;
   loadBookings();

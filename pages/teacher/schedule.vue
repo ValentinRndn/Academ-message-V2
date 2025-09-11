@@ -36,8 +36,8 @@
         <!-- Availability Tab -->
         <div v-if="activeTab === 'availability'" class="p-6">
           <div class="mb-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-2">Gérer mes disponibilités</h2>
-            <p class="text-gray-600">Définissez vos créneaux de disponibilité pour que les étudiants puissent réserver des cours.</p>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Manage My Availability</h2>
+            <p class="text-gray-600">Set your availability slots so students can book lessons.</p>
           </div>
           <TeacherAvailability :teacherId="'current'" />
         </div>
@@ -46,39 +46,39 @@
         <!-- Scheduled Lessons Tab -->
         <div v-if="activeTab === 'bookings'" class="p-6">
           <div class="mb-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-2">Mes cours programmés</h2>
-            <p class="text-gray-600">Consultez et gérez vos réservations de cours.</p>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">My Scheduled Lessons</h2>
+            <p class="text-gray-600">View and manage your lesson bookings.</p>
           </div>
           
-          <!-- Filtres -->
+          <!-- Filters -->
           <div class="mb-6 flex flex-wrap gap-4">
             <select v-model="bookingFilter" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
-              <option value="all">Tous les cours</option>
+              <option value="all">All lessons</option>
               <option value="upcoming">Upcoming Lessons</option>
               <option value="past">Past Lessons</option>
-              <option value="pending">En attente</option>
-              <option value="confirmed">Confirmés</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
             </select>
             
             <input 
               v-model="searchQuery" 
               type="text" 
-              placeholder="Rechercher un étudiant ou une matière..."
+              placeholder="Search for a student or subject..."
               class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 flex-1 min-w-64"
             />
           </div>
 
-          <!-- Liste des cours -->
+          <!-- Lessons list -->
           <div v-if="loading" class="text-center py-8">
             <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-            <p class="text-gray-500 mt-2">Chargement des cours...</p>
+            <p class="text-gray-500 mt-2">Loading lessons...</p>
           </div>
 
           <div v-else-if="filteredBookings.length === 0" class="text-center py-8">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <p class="mt-2 text-gray-500">Aucun cours trouvé</p>
+            <p class="mt-2 text-gray-500">No lessons found</p>
           </div>
 
           <div v-else class="space-y-4">
@@ -103,18 +103,18 @@
                   
                   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
                     <div>
-                      <span class="font-medium">Étudiant :</span> {{ booking.studentName }}
+                      <span class="font-medium">Student:</span> {{ booking.studentName }}
                     </div>
                     <div>
-                      <span class="font-medium">Date :</span> {{ formatDate(booking.startTime) }}
+                      <span class="font-medium">Date:</span> {{ formatDate(booking.startTime) }}
                     </div>
                     <div>
-                      <span class="font-medium">Heure :</span> {{ formatTime(booking.startTime) }} - {{ formatTime(booking.endTime) }}
+                      <span class="font-medium">Time:</span> {{ formatTime(booking.startTime) }} - {{ formatTime(booking.endTime) }}
                     </div>
                   </div>
 
                   <div v-if="booking.notes" class="mt-3 p-3 bg-gray-50 rounded-lg">
-                    <span class="font-medium text-gray-700">Notes :</span>
+                    <span class="font-medium text-gray-700">Notes:</span>
                     <p class="text-gray-600 mt-1">{{ booking.notes }}</p>
                   </div>
                 </div>
@@ -125,27 +125,27 @@
                       @click="confirmBooking(booking._id)"
                       class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors"
                     >
-                      Confirmer
+                      Confirm
                     </button>
                     <button 
                       v-if="booking.status === 'pending'"
                       @click="cancelBooking(booking._id)"
                       class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
                     >
-                      Refuser
+                      Decline
                     </button>
                     <button 
                       v-if="booking.status === 'confirmed' && isUpcoming(booking.startTime)"
                       @click="sendReminder(booking._id)"
                       class="px-3 py-1 bg-yellow-600 text-white text-sm rounded hover:bg-yellow-700 transition-colors"
                     >
-                      Rappel
+                      Reminder
                     </button>
                     <button 
                       @click="viewBookingDetails(booking)"
                       class="px-3 py-1 bg-purple-600 text-white text-sm rounded hover:bg-purple-700 transition-colors"
                     >
-                      Détails
+                      Details
                     </button>
                   </div>
               </div>
@@ -156,11 +156,11 @@
         <!-- Calendar Tab -->
         <div v-if="activeTab === 'calendar'" class="p-6">
           <div class="mb-6">
-            <h2 class="text-xl font-semibold text-gray-900 mb-2">Vue calendrier</h2>
-            <p class="text-gray-600">Visualisez vos cours dans un calendrier mensuel.</p>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Calendar View</h2>
+            <p class="text-gray-600">View your lessons in a monthly calendar.</p>
           </div>
           
-          <!-- Navigation du calendrier -->
+          <!-- Calendar navigation -->
           <div class="flex items-center justify-between mb-6">
             <button 
               @click="previousMonth"
@@ -185,9 +185,9 @@
             </button>
           </div>
 
-          <!-- Calendrier -->
+          <!-- Calendar -->
           <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
-            <!-- En-têtes des jours -->
+            <!-- Day headers -->
             <div class="grid grid-cols-7 bg-gray-50">
               <div 
                 v-for="day in weekDays" 
@@ -198,7 +198,7 @@
               </div>
             </div>
 
-            <!-- Grille du calendrier -->
+            <!-- Calendar grid -->
             <div class="grid grid-cols-7">
               <div 
                 v-for="day in calendarDays" 
@@ -221,7 +221,7 @@
                   </span>
                 </div>
 
-                <!-- Événements du jour -->
+                <!-- Daily events -->
                 <div class="space-y-1">
                   <div 
                     v-for="booking in getBookingsForDay(day.date)"
@@ -246,14 +246,14 @@
 </template>
 
 <script setup>
-// Pas de middleware pour le test
+// No middleware for testing
 // definePageMeta({
 // });
 
-// Récupérer l'utilisateur
+// Get user
 const { user } = useAuth();
 
-// État réactif
+// Reactive state
 const activeTab = ref('availability');
 const loading = ref(false);
 const bookings = ref([]);
@@ -275,22 +275,22 @@ const tabs = [
   },
   {
     id: 'calendar',
-    name: 'Calendrier',
+    name: 'Calendar',
     icon: 'CalendarDaysIcon'
   }
 ];
 
-// Icônes (simplifiées)
+// Icons (simplified)
 const ClockIcon = { template: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>' };
 const CalendarIcon = { template: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>' };
 const CalendarDaysIcon = { template: '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" /></svg>' };
 
-// Jours de la semaine
-const weekDays = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+// Days of the week
+const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 // Computed properties
 const currentMonthName = computed(() => {
-  return currentDate.value.toLocaleDateString('fr-FR', { month: 'long' });
+  return currentDate.value.toLocaleDateString('en-US', { month: 'long' });
 });
 
 const currentYear = computed(() => {
@@ -404,7 +404,7 @@ const getBookingClass = (status) => {
 };
 
 const formatDate = (dateString) => {
-  return new Date(dateString).toLocaleDateString('fr-FR', {
+  return new Date(dateString).toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -413,7 +413,7 @@ const formatDate = (dateString) => {
 };
 
 const formatTime = (dateString) => {
-  return new Date(dateString).toLocaleTimeString('fr-FR', {
+  return new Date(dateString).toLocaleTimeString('en-US', {
     hour: '2-digit',
     minute: '2-digit'
   });
@@ -466,7 +466,7 @@ const cancelBooking = async (bookingId) => {
 
 const viewBookingDetails = (booking) => {
   // TODO: Implémenter la modal de détails
-  console.log('Détails de la réservation:', booking);
+  console.log('Booking details:', booking);
 };
 
 const isUpcoming = (startTime) => {
@@ -483,11 +483,11 @@ const sendReminder = async (bookingId) => {
       credentials: 'include'
     });
     
-    console.log('Rappel envoyé:', response);
+    console.log('Reminder sent:', response);
     
     // Afficher une notification de succès
     if (typeof window !== 'undefined' && window.showToast) {
-      window.showToast('Rappel envoyé avec succès', 'success');
+      window.showToast('Reminder sent successfully', 'success');
     }
   } catch (error) {
     console.error('Erreur lors de l\'envoi du rappel:', error);

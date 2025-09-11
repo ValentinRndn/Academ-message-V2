@@ -4,8 +4,8 @@
     <div class="mb-8">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900">Paramètres</h1>
-          <p class="text-gray-600 mt-2">Configuration de la plateforme</p>
+          <h1 class="text-3xl font-bold text-gray-900">Settings</h1>
+          <p class="text-gray-600 mt-2">Platform configuration</p>
         </div>
         <button
           @click="saveAllSettings"
@@ -16,7 +16,7 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          {{ saving ? 'Enregistrement...' : 'Sauvegarder' }}
+          {{ saving ? 'Saving...' : 'Save' }}
         </button>
       </div>
     </div>
@@ -34,7 +34,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
           <div>
-            <h3 class="text-sm font-medium text-red-800">Erreur</h3>
+            <h3 class="text-sm font-medium text-red-800">Error</h3>
             <p class="mt-1 text-sm text-red-700">{{ error }}</p>
           </div>
         </div>
@@ -45,15 +45,15 @@
         <!-- Paramètres généraux -->
         <div class="bg-white shadow-sm rounded-lg">
           <div class="px-6 py-4 border-b border-gray-200">
-            <h2 class="text-lg font-medium text-gray-900">Paramètres généraux</h2>
-            <p class="mt-1 text-sm text-gray-600">Configuration générale de la plateforme</p>
+            <h2 class="text-lg font-medium text-gray-900">General Settings</h2>
+            <p class="mt-1 text-sm text-gray-600">General platform configuration</p>
           </div>
           <div class="px-6 py-6 space-y-6">
 
             <!-- Email de contact -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
-                Email de contact
+                Contact Email
               </label>
               <input
                 v-model="settings.general.contactEmail"
@@ -72,7 +72,7 @@
                 class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
               >
               <label class="ml-2 block text-sm text-gray-700">
-                Mode maintenance (empêche l'accès aux utilisateurs)
+                Maintenance mode (prevents user access)
               </label>
             </div>
           </div>
@@ -82,14 +82,14 @@
         <!-- Paramètres des cours -->
         <div class="bg-white shadow-sm rounded-lg">
           <div class="px-6 py-4 border-b border-gray-200">
-            <h2 class="text-lg font-medium text-gray-900">Paramètres des cours</h2>
-            <p class="mt-1 text-sm text-gray-600">Configuration des réservations et cours</p>
+            <h2 class="text-lg font-medium text-gray-900">Lesson Settings</h2>
+            <p class="mt-1 text-sm text-gray-600">Booking and lesson configuration</p>
           </div>
           <div class="px-6 py-6 space-y-6">
             <!-- Durée minimum d'un cours -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
-                Durée minimum d'un cours (minutes)
+                Minimum lesson duration (minutes)
               </label>
               <select
                 v-model.number="settings.booking.minDuration"
@@ -97,30 +97,30 @@
               >
                 <option :value="15">15 minutes</option>
                 <option :value="30">30 minutes</option>
-                <option :value="60">1 heure</option>
+                <option :value="60">1 hour</option>
               </select>
             </div>
 
             <!-- Durée maximum d'un cours -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
-                Durée maximum d'un cours (heures)
+                Maximum lesson duration (hours)
               </label>
               <select
                 v-model.number="settings.booking.maxDuration"
                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
-                <option :value="120">2 heures</option>
-                <option :value="180">3 heures</option>
-                <option :value="240">4 heures</option>
-                <option :value="300">5 heures</option>
+                <option :value="120">2 hours</option>
+                <option :value="180">3 hours</option>
+                <option :value="240">4 hours</option>
+                <option :value="300">5 hours</option>
               </select>
             </div>
 
             <!-- Préavis minimum pour réserver -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
-                Préavis minimum pour réserver (heures)
+                Minimum advance booking (hours)
               </label>
               <input
                 v-model.number="settings.booking.minAdvanceBooking"
@@ -129,13 +129,13 @@
                 max="72"
                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
-              <p class="mt-1 text-sm text-gray-500">Temps minimum avant le début du cours pour pouvoir réserver</p>
+              <p class="mt-1 text-sm text-gray-500">Minimum time before lesson start to allow booking</p>
             </div>
 
             <!-- Préavis minimum pour annuler -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
-                Préavis minimum pour annuler (heures)
+                Minimum cancellation notice (hours)
               </label>
               <input
                 v-model.number="settings.booking.minCancelAdvance"
@@ -144,7 +144,7 @@
                 max="72"
                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
-              <p class="mt-1 text-sm text-gray-500">Temps minimum avant le début du cours pour pouvoir annuler</p>
+              <p class="mt-1 text-sm text-gray-500">Minimum time before lesson start to allow cancellation</p>
             </div>
 
             <!-- Auto-confirmation -->
@@ -155,7 +155,7 @@
                 class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
               >
               <label class="ml-2 block text-sm text-gray-700">
-                Confirmation automatique des réservations
+                Automatic booking confirmation
               </label>
             </div>
           </div>
@@ -164,8 +164,8 @@
         <!-- Paramètres de notification -->
         <div class="bg-white shadow-sm rounded-lg">
           <div class="px-6 py-4 border-b border-gray-200">
-            <h2 class="text-lg font-medium text-gray-900">Paramètres de notification</h2>
-            <p class="mt-1 text-sm text-gray-600">Configuration des emails et notifications</p>
+            <h2 class="text-lg font-medium text-gray-900">Notification Settings</h2>
+            <p class="mt-1 text-sm text-gray-600">Email and notification configuration</p>
           </div>
           <div class="px-6 py-6 space-y-6">
             <!-- Email des notifications -->
@@ -176,7 +176,7 @@
                 class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
               >
               <label class="ml-2 block text-sm text-gray-700">
-                Activer les notifications par email
+                Enable email notifications
               </label>
             </div>
 
@@ -188,14 +188,14 @@
                 class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
               >
               <label class="ml-2 block text-sm text-gray-700">
-                Activer les notifications push
+                Enable push notifications
               </label>
             </div>
 
             <!-- Email expéditeur -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
-                Email expéditeur
+                Sender Email
               </label>
               <input
                 v-model="settings.notifications.fromEmail"
@@ -208,7 +208,7 @@
             <!-- Nom expéditeur -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2">
-                Nom expéditeur
+                Sender Name
               </label>
               <input
                 v-model="settings.notifications.fromName"
@@ -223,20 +223,20 @@
         <!-- Informations système -->
         <div class="bg-white shadow-sm rounded-lg">
           <div class="px-6 py-4 border-b border-gray-200">
-            <h2 class="text-lg font-medium text-gray-900">Informations système</h2>
-            <p class="mt-1 text-sm text-gray-600">État actuel de la plateforme</p>
+            <h2 class="text-lg font-medium text-gray-900">System Information</h2>
+            <p class="mt-1 text-sm text-gray-600">Current platform status</p>
           </div>
           <div class="px-6 py-6 space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 class="text-sm font-medium text-gray-700">Version de l'application</h4>
+                <h4 class="text-sm font-medium text-gray-700">Application Version</h4>
                 <p class="text-sm text-gray-600">{{ systemInfo.appVersion }}</p>
               </div>
               <div>
-                <h4 class="text-sm font-medium text-gray-700">Base de données</h4>
+                <h4 class="text-sm font-medium text-gray-700">Database</h4>
                 <div class="flex items-center">
                   <span :class="systemInfo.dbStatus === 'connected' ? 'text-green-600' : 'text-red-600'" class="text-sm">
-                    {{ systemInfo.dbStatus === 'connected' ? '✅ Connectée' : '❌ Déconnectée' }}
+                    {{ systemInfo.dbStatus === 'connected' ? '✅ Connected' : '❌ Disconnected' }}
                   </span>
                 </div>
               </div>
@@ -244,12 +244,12 @@
                 <h4 class="text-sm font-medium text-gray-700">Stripe</h4>
                 <div class="flex items-center">
                   <span :class="systemInfo.stripeStatus === 'configured' ? 'text-green-600' : 'text-red-600'" class="text-sm">
-                    {{ systemInfo.stripeStatus === 'configured' ? '✅ Configuré' : '❌ Non configuré' }}
+                    {{ systemInfo.stripeStatus === 'configured' ? '✅ Configured' : '❌ Not configured' }}
                   </span>
                 </div>
               </div>
               <div>
-                <h4 class="text-sm font-medium text-gray-700">Utilisateurs actifs</h4>
+                <h4 class="text-sm font-medium text-gray-700">Active Users</h4>
                 <p class="text-sm text-gray-600">{{ systemInfo.activeUsers }}</p>
               </div>
             </div>
@@ -284,7 +284,7 @@ import { ref, onMounted } from 'vue'
 
 // Métadonnées
 definePageMeta({
-  title: 'Paramètres'
+  title: 'Settings'
 })
 
 // État

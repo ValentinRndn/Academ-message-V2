@@ -29,20 +29,20 @@
           <input
             v-model="searchQuery"
             type="text"
-            placeholder="Nom, email..."
+            placeholder="Name, email..."
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           />
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Rôle</label>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
           <select
             v-model="roleFilter"
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           >
-            <option value="">Tous les rôles</option>
-            <option value="admin">Administrateur</option>
-            <option value="teacher">Professeur</option>
-            <option value="student">Étudiant</option>
+            <option value="">All roles</option>
+            <option value="admin">Administrator</option>
+            <option value="teacher">Teacher</option>
+            <option value="student">Student</option>
           </select>
         </div>
         <div>
@@ -51,10 +51,10 @@
             v-model="statusFilter"
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
           >
-            <option value="">Tous les statuts</option>
-            <option value="active">Actif</option>
-            <option value="inactive">Inactif</option>
-            <option value="pending">En attente</option>
+            <option value="">All statuses</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="pending">Pending</option>
           </select>
         </div>
         <div class="flex items-end">
@@ -78,7 +78,7 @@
             </svg>
           </div>
           <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">Total utilisateurs</p>
+            <p class="text-sm font-medium text-gray-600">Total users</p>
             <p class="text-2xl font-bold text-gray-900">{{ stats.totalUsers }}</p>
           </div>
         </div>
@@ -92,7 +92,7 @@
             </svg>
           </div>
           <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">Professeurs</p>
+            <p class="text-sm font-medium text-gray-600">Teachers</p>
             <p class="text-2xl font-bold text-gray-900">{{ stats.totalTeachers }}</p>
           </div>
         </div>
@@ -106,7 +106,7 @@
             </svg>
           </div>
           <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">Étudiants</p>
+            <p class="text-sm font-medium text-gray-600">Students</p>
             <p class="text-2xl font-bold text-gray-900">{{ stats.totalStudents }}</p>
           </div>
         </div>
@@ -120,7 +120,7 @@
             </svg>
           </div>
           <div class="ml-4">
-            <p class="text-sm font-medium text-gray-600">En attente</p>
+            <p class="text-sm font-medium text-gray-600">Pending</p>
             <p class="text-2xl font-bold text-gray-900">{{ stats.pendingUsers }}</p>
           </div>
         </div>
@@ -141,7 +141,7 @@
               Teachers pending approval ({{ pendingTeachers.length }})
             </h3>
             <p class="text-sm text-orange-600">
-              Ces professeurs attendent une approbation pour accéder à la plateforme.
+              These teachers are waiting for approval to access the platform.
             </p>
           </div>
         </div>
@@ -199,15 +199,15 @@
       </div>
     </div>
 
-    <!-- Liste des utilisateurs -->
+    <!-- User List -->
     <div class="bg-white rounded-lg shadow-sm overflow-hidden">
       <div class="px-6 py-4 border-b border-gray-200">
-        <h2 class="text-lg font-semibold text-gray-900">Liste des utilisateurs</h2>
+        <h2 class="text-lg font-semibold text-gray-900">User List</h2>
       </div>
 
       <div v-if="loading" class="p-8 text-center">
         <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-        <p class="text-gray-500 mt-2">Chargement...</p>
+        <p class="text-gray-500 mt-2">Loading...</p>
       </div>
 
       <div v-else-if="filteredUsers.length === 0" class="p-8 text-center">
@@ -222,19 +222,19 @@
           <thead class="bg-gray-50">
             <tr>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Utilisateur
+                User
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Rôle
+                Role
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date d'inscription
+                Registration date
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Dernière connexion
+                Last login
               </th>
               <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
@@ -278,7 +278,7 @@
                 {{ formatDate(user.createdAt) }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {{ user.lastLogin ? formatDate(user.lastLogin) : 'Jamais' }}
+                {{ user.lastLogin ? formatDate(user.lastLogin) : 'Never' }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 <div class="flex items-center justify-end space-x-2">
@@ -301,7 +301,7 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                   </button>
-                  <!-- Bouton d'approbation pour professeurs en attente -->
+                  <!-- Approval button for pending teachers -->
                   <button
                     v-if="user.role === 'teacher' && user.status === 'pending'"
                     @click="approveTeacher(user)"
@@ -318,7 +318,7 @@
                     v-else
                     @click="toggleUserStatus(user)"
                     :class="user.status === 'active' ? 'text-orange-500 hover:text-orange-700' : 'text-green-600 hover:text-green-800'"
-                    :title="user.status === 'active' ? 'Désactiver' : 'Activer'"
+                    :title="user.status === 'active' ? 'Deactivate' : 'Activate'"
                   >
                     <svg v-if="user.status === 'active'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728L5.636 5.636m12.728 12.728L18.364 5.636M5.636 18.364l12.728-12.728" />
@@ -330,7 +330,7 @@
                   <button
                     @click="deleteUser(user)"
                     class="text-red-600 hover:text-red-900"
-                    title="Supprimer"
+                    title="Delete"
                     :disabled="user._id === $user?._id"
                     :class="{ 'opacity-50 cursor-not-allowed': user._id === $user?._id }"
                   >
@@ -420,11 +420,11 @@
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white p-3 rounded-lg">
-                  <label class="block text-sm font-medium text-gray-500">Prénom</label>
+                  <label class="block text-sm font-medium text-gray-500">First Name</label>
                   <p class="text-lg text-gray-900">{{ selectedUser?.firstName }}</p>
                 </div>
                 <div class="bg-white p-3 rounded-lg">
-                  <label class="block text-sm font-medium text-gray-500">Nom</label>
+                  <label class="block text-sm font-medium text-gray-500">Last Name</label>
                   <p class="text-lg text-gray-900">{{ selectedUser?.lastName }}</p>
                 </div>
                 <div class="bg-white p-3 rounded-lg">
@@ -436,12 +436,12 @@
                   <p class="text-lg text-gray-900">{{ selectedUser?.phone || 'Non renseigné' }}</p>
                 </div>
                 <div class="bg-white p-3 rounded-lg">
-                  <label class="block text-sm font-medium text-gray-500">Date d'inscription</label>
+                  <label class="block text-sm font-medium text-gray-500">Registration date</label>
                   <p class="text-lg text-gray-900">{{ formatDate(selectedUser?.createdAt) }}</p>
                 </div>
                 <div class="bg-white p-3 rounded-lg">
-                  <label class="block text-sm font-medium text-gray-500">Dernière connexion</label>
-                  <p class="text-lg text-gray-900">{{ selectedUser?.lastLogin ? formatDate(selectedUser.lastLogin) : 'Jamais' }}</p>
+                  <label class="block text-sm font-medium text-gray-500">Last login</label>
+                  <p class="text-lg text-gray-900">{{ selectedUser?.lastLogin ? formatDate(selectedUser.lastLogin) : 'Never' }}</p>
                 </div>
               </div>
             </div>
@@ -565,7 +565,7 @@
       <div class="relative top-20 mx-auto p-5 border w-11/12 max-w-2xl shadow-lg rounded-md bg-white">
         <div class="mt-3">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-medium text-gray-900">Modifier l'utilisateur</h3>
+            <h3 class="text-lg font-medium text-gray-900">Edit User</h3>
             <button @click="closeEditModal" class="text-gray-400 hover:text-gray-600">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -576,7 +576,7 @@
           <form @submit.prevent="saveUserChanges" class="space-y-4">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700">Prénom *</label>
+                <label class="block text-sm font-medium text-gray-700">First Name *</label>
                 <input
                   v-model="editForm.firstName"
                   type="text"
@@ -585,7 +585,7 @@
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700">Nom *</label>
+                <label class="block text-sm font-medium text-gray-700">Last Name *</label>
                 <input
                   v-model="editForm.lastName"
                   type="text"
@@ -611,7 +611,7 @@
                 />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700">Rôle</label>
+                <label class="block text-sm font-medium text-gray-700">Role</label>
                 <select
                   v-model="editForm.role"
                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
@@ -627,9 +627,9 @@
                   v-model="editForm.status"
                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
                 >
-                  <option value="pending">En attente</option>
+                  <option value="pending">Pending</option>
                   <option value="active">Actif</option>
-                  <option value="inactive">Inactif</option>
+                  <option value="inactive">Inactive</option>
                 </select>
               </div>
             </div>
@@ -671,7 +671,7 @@
                 @click="closeEditModal"
                 class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
               >
-                Annuler
+                Cancel
               </button>
               <button
                 type="submit"
@@ -695,12 +695,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.96-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z" />
             </svg>
           </div>
-          <h3 class="text-lg leading-6 font-medium text-gray-900 mt-2">Supprimer l'utilisateur</h3>
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mt-2">Delete User</h3>
           <div class="mt-2 px-7 py-3">
             <p class="text-sm text-gray-500">
-              Êtes-vous sûr de vouloir supprimer l'utilisateur 
+              Are you sure you want to delete user 
               <strong>{{ userToDelete?.firstName }} {{ userToDelete?.lastName }}</strong> ?
-              Cette action est irréversible.
+              This action is irreversible.
             </p>
           </div>
           <div class="items-center px-4 py-3">
@@ -709,14 +709,14 @@
                 @click="closeDeleteModal"
                 class="px-4 py-2 bg-white text-gray-500 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-100"
               >
-                Annuler
+                Cancel
               </button>
               <button
                 @click="confirmDeleteUser"
                 :disabled="loading"
                 class="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700 disabled:opacity-50"
               >
-                {{ loading ? 'Suppression...' : 'Supprimer' }}
+                {{ loading ? 'Deleting...' : 'Delete' }}
               </button>
             </div>
           </div>
@@ -736,7 +736,7 @@
           <h3 class="text-lg leading-6 font-medium text-gray-900 mt-2">Reject Teacher</h3>
           <div class="mt-2 px-7 py-3">
             <p class="text-sm text-gray-500 mb-4">
-              Êtes-vous sûr de vouloir rejeter la demande de 
+              Are you sure you want to reject the request from 
               <strong>{{ userToReject?.firstName }} {{ userToReject?.lastName }}</strong> ?
               Cette action supprimera définitivement le compte et enverra un email de notification.
             </p>
@@ -760,7 +760,7 @@
                 @click="closeRejectModal"
                 class="px-4 py-2 bg-white text-gray-500 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-100"
               >
-                Annuler
+                Cancel
               </button>
               <button
                 @click="confirmRejectTeacher"
@@ -786,7 +786,7 @@ definePageMeta({
 // Vérifier que l'utilisateur est admin
 const { user, initAuth } = useAuth();
 
-// État réactif
+// Reactive state
 const loading = ref(true);
 const users = ref([]);
 const stats = ref({
@@ -851,7 +851,7 @@ const fetchUsers = async () => {
     users.value = response.users;
     stats.value = response.stats;
   } catch (error) {
-    console.error('Erreur lors du chargement des utilisateurs:', error);
+    console.error('Error loading users:', error);
     const { showError } = useToast();
     showError('Erreur', 'Impossible de charger les utilisateurs');
   } finally {
@@ -864,7 +864,7 @@ const pendingTeachers = computed(() => {
   return users.value.filter(user => user.role === 'teacher' && user.status === 'pending');
 });
 
-// Utilisateurs filtrés
+// Filtered users
 const filteredUsers = computed(() => {
   return users.value.filter(user => {
     const matchesSearch = !searchQuery.value || 
@@ -924,8 +924,8 @@ const getStatusBadgeClass = (status) => {
 const getStatusLabel = (status) => {
   const labels = {
     active: 'Actif',
-    inactive: 'Inactif',
-    pending: 'En attente'
+    inactive: 'Inactive',
+    pending: 'Pending'
   };
   return labels[status] || status;
 };
@@ -991,7 +991,7 @@ const viewUser = async (user) => {
       selectedUser.value = response.user;
     }
   } catch (error) {
-    console.error('Erreur lors de la récupération des détails:', error);
+    console.error('Error retrieving details:', error);
     const { showError } = useToast();
     showError('Erreur', 'Impossible de récupérer les détails de l\'utilisateur');
     closeUserModal();
@@ -1041,13 +1041,13 @@ const saveUserChanges = async () => {
       }
       
       const { showSuccess } = useToast();
-      showSuccess('Succès', response.message);
+      showSuccess('Success', response.message);
       closeEditModal();
     }
   } catch (error) {
-    console.error('Erreur lors de la mise à jour:', error);
+    console.error('Error updating:', error);
     const { showError } = useToast();
-    showError('Erreur', error.data?.message || 'Erreur lors de la mise à jour');
+    showError('Error', error.data?.message || 'Error updating');
   } finally {
     loading.value = false;
   }
@@ -1077,13 +1077,13 @@ const confirmDeleteUser = async () => {
       }
       
       const { showSuccess } = useToast();
-      showSuccess('Succès', response.message);
+      showSuccess('Success', response.message);
       closeDeleteModal();
     }
   } catch (error) {
-    console.error('Erreur lors de la suppression:', error);
+    console.error('Error deleting:', error);
     const { showError } = useToast();
-    showError('Erreur', error.data?.message || 'Erreur lors de la suppression');
+    showError('Error', error.data?.message || 'Error deleting');
   } finally {
     loading.value = false;
   }
@@ -1102,11 +1102,11 @@ const toggleUserStatus = async (user) => {
       const { showSuccess } = useToast();
       showSuccess(
         'Status updated', 
-        `L'utilisateur ${user.firstName} ${user.lastName} est maintenant ${newStatus === 'active' ? 'actif' : 'inactif'}`
+        `User ${user.firstName} ${user.lastName} is now ${newStatus === 'active' ? 'active' : 'inactive'}`
       );
     }
   } catch (error) {
-    console.error('Erreur lors de la mise à jour du statut:', error);
+    console.error('Error updating status:', error);
     const { showError } = useToast();
     showError('Erreur', 'Impossible de mettre à jour le statut');
   }
@@ -1139,9 +1139,9 @@ const approveTeacher = async (user) => {
       }
     }
   } catch (error) {
-    console.error('Erreur lors de l\'approbation:', error);
+    console.error('Error during approval:', error);
     const { showError } = useToast();
-    showError('Erreur', error.data?.message || 'Erreur lors de l\'approbation du professeur');
+    showError('Error', error.data?.message || 'Error approving teacher');
   } finally {
     loading.value = false;
   }
@@ -1183,9 +1183,9 @@ const confirmRejectTeacher = async () => {
       }
     }
   } catch (error) {
-    console.error('Erreur lors du rejet:', error);
+    console.error('Error during rejection:', error);
     const { showError } = useToast();
-    showError('Erreur', error.data?.message || 'Erreur lors du rejet du professeur');
+    showError('Error', error.data?.message || 'Error rejecting teacher');
   } finally {
     loading.value = false;
   }

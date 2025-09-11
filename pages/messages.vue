@@ -34,8 +34,8 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 md:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
-            <span class="hidden sm:inline">Nouvelle Conversation</span>
-            <span class="sm:hidden">Nouveau</span>
+            <span class="hidden sm:inline">New Conversation</span>
+            <span class="sm:hidden">New</span>
           </NuxtLink>
         </div>
       </div>
@@ -46,7 +46,7 @@
       <!-- Liste des conversations -->
       <div :class="[
         'bg-gray-50 border-r border-gray-200 flex flex-col',
-        // Sur mobile : masquer la liste quand une conversation est sélectionnée
+        // On mobile: hide list when a conversation is selected
         isMobile ? (currentConversation ? 'hidden' : 'w-full') : 'w-80 lg:w-96'
       ]">
           <div class="h-full flex flex-col">
@@ -61,7 +61,7 @@
                 <input
                   type="text"
                   v-model="searchQuery"
-                  placeholder="Rechercher des conversations..."
+                  placeholder="Search conversations..."
                   class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
                 />
               </div>
@@ -79,8 +79,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                   </svg>
                 </div>
-                <p class="text-gray-700 font-medium">Aucune conversation</p>
-                <p class="text-gray-500 text-center mt-2 mb-4">Commencez par contacter un professeur</p>
+                <p class="text-gray-700 font-medium">No conversations</p>
+                <p class="text-gray-500 text-center mt-2 mb-4">Start by contacting a teacher</p>
                 <NuxtLink 
                   to="/teachers" 
                   class="inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg text-white bg-purple-600 hover:bg-purple-700"
@@ -116,7 +116,7 @@
                         <div>
                           <h3 class="text-sm font-semibold text-gray-900 truncate">
                             {{ conversation.otherParticipant.firstName }} {{ conversation.otherParticipant.lastName }}
-                            <span v-if="conversation.otherParticipant.role === 'teacher'" class="ml-1 text-xs text-purple-600">(Professeur)</span>
+                            <span v-if="conversation.otherParticipant.role === 'teacher'" class="ml-1 text-xs text-purple-600">(Teacher)</span>
                           </h3>
                           <p v-if="conversation.lastMessage" class="text-sm text-gray-500 truncate mt-1">
                             {{ conversation.lastMessage.content }}
@@ -137,10 +137,10 @@
       <!-- Zone de messages -->
       <div :class="[
         'flex flex-col bg-white',
-        // Sur mobile : masquer les messages quand aucune conversation n'est sélectionnée
+        // On mobile: hide messages when no conversation is selected
         isMobile ? (currentConversation ? 'w-full' : 'hidden') : 'flex-1'
       ]">
-        <!-- En-tête de conversation (masqué sur mobile car info dans le header) -->
+        <!-- Conversation header (hidden on mobile as info is in header) -->
         <div v-if="currentConversation && !isMobile" class="px-6 py-4 border-b border-gray-200 bg-white">
           <div class="flex items-center">
             <Avatar
@@ -167,8 +167,8 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
-            <p class="text-lg font-medium text-center">Sélectionnez une conversation</p>
-            <p class="text-sm text-center mt-2">Choisissez une conversation dans la liste pour commencer à échanger</p>
+            <p class="text-lg font-medium text-center">Select a conversation</p>
+            <p class="text-sm text-center mt-2">Choose a conversation from the list to start chatting</p>
           </div>
 
           <div v-else>
@@ -219,7 +219,7 @@
               v-model="newMessage"
               @input="handleTyping"
               type="text"
-              placeholder="Tapez votre message..."
+              placeholder="Type your message..."
               class="flex-1 block w-full rounded-full border-gray-300 px-4 py-2 md:py-3 text-sm md:text-base shadow-sm focus:border-purple-500 focus:ring-purple-500"
               :disabled="!currentConversation"
             />
@@ -251,7 +251,7 @@ const route = useRoute()
 const router = useRouter()
 const { user } = useAuth()
 
-// Composable de messagerie
+// Messaging composable
 const {
   conversations,
   currentConversation,
@@ -282,7 +282,7 @@ const checkIsMobile = () => {
   isMobile.value = window.innerWidth < 768
 }
 
-// Gestion du redimensionnement
+// Handle resizing
 const handleResize = () => {
   checkIsMobile()
 }
@@ -356,10 +356,10 @@ const handleTyping = () => {
   }, 3000)
 }
 
-// Fermer la conversation sur mobile (retour à la liste)
+// Close conversation on mobile (return to list)
 const closeConversation = () => {
   if (isMobile.value) {
-    // Réinitialiser la conversation sélectionnée
+    // Reset selected conversation
     currentConversation.value = null
     currentMessages.value = []
   }
@@ -374,7 +374,7 @@ onMounted(async () => {
   await initializeSocket()
   await fetchConversations()
   
-  // Si une conversation est spécifiée dans l'URL, la sélectionner
+  // If a conversation is specified in the URL, select it
   const conversationId = route.query.conversation
   if (conversationId) {
     const conversation = conversations.value.find(conv => conv._id === conversationId)
