@@ -56,7 +56,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            Informations personnelles
+            Personal Information
           </h2>
         </div>
         
@@ -81,10 +81,10 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
                     </svg>
-                    Étudiant
+                    Student
                   </span>
                   <span class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-50 text-purple-600">
-                    Actif
+                    Active
                   </span>
                 </div>
               </div>
@@ -100,7 +100,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Cours suivis</p>
+                    <p class="text-sm text-gray-600">Courses taken</p>
                     <p class="text-xl font-bold text-gray-900">{{ stats?.totalCourses || 0 }}</p>
                   </div>
                 </div>
@@ -114,7 +114,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Heures d'étude</p>
+                    <p class="text-sm text-gray-600">Study hours</p>
                     <p class="text-xl font-bold text-gray-900">{{ stats?.totalHours || 0 }}h</p>
                   </div>
                 </div>
@@ -128,7 +128,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Enseignants</p>
+                    <p class="text-sm text-gray-600">Teachers</p>
                     <p class="text-xl font-bold text-gray-900">{{ stats?.teachersCount || 0 }}</p>
                   </div>
                 </div>
@@ -142,7 +142,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="text-sm text-gray-600">Note moyenne</p>
+                    <p class="text-sm text-gray-600">Average grade</p>
                     <p class="text-xl font-bold text-gray-900">{{ stats?.averageGrade?.toFixed(1) || '0.0' }}/5</p>
                   </div>
                 </div>
@@ -161,7 +161,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              Informations de contact
+              Contact Information
             </h2>
           </div>
           
@@ -177,15 +177,15 @@
                 v-model="editedProfile.email"
                 type="email"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                placeholder="votre.email@exemple.com"
+                placeholder="your.email@example.com"
               />
             </div>
 
             <!-- Téléphone -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Téléphone</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
               <div v-if="!isEditing" class="px-4 py-3 bg-gray-50 rounded-lg text-gray-700">
-                {{ profile.phone || 'Non renseigné' }}
+                {{ profile.phone || 'Not provided' }}
               </div>
               <input
                 v-else
@@ -198,7 +198,7 @@
 
             <!-- Niveau d'études -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Niveau d'études</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Education Level</label>
               <div v-if="!isEditing" class="px-4 py-3 bg-gray-50 rounded-lg text-gray-700">
                 {{ getEducationLevelLabel(profile.educationLevel) }}
               </div>
@@ -207,7 +207,7 @@
                 v-model="editedProfile.educationLevel"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
               >
-                <option value="">Sélectionner un niveau</option>
+                <option value="">Select a level</option>
                 <option v-for="level in educationLevels" :key="level.value" :value="level.value">
                   {{ level.label }}
                 </option>
@@ -223,7 +223,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
-              Préférences d'apprentissage
+              Learning Preferences
             </h2>
           </div>
           
@@ -241,7 +241,7 @@
                     {{ subject.name || subject }}
                   </span>
                 </div>
-                <p v-else class="text-gray-500 italic">Aucune matière renseignée</p>
+                <p v-else class="text-gray-500 italic">No subjects specified</p>
               </div>
               
               <div v-else>
@@ -264,37 +264,37 @@
 
             <!-- Objectifs d'apprentissage -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Objectifs d'apprentissage</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Learning Goals</label>
               <div v-if="!isEditing" class="px-4 py-3 bg-gray-50 rounded-lg text-gray-700">
-                {{ profile.learningGoals || 'Aucun objectif défini' }}
+                {{ profile.learningGoals || 'No goals defined' }}
               </div>
               <textarea
                 v-else
                 v-model="editedProfile.learningGoals"
                 rows="3"
                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 resize-none"
-                placeholder="Décrivez vos objectifs d'apprentissage..."
+                placeholder="Describe your learning goals..."
               />
             </div>
 
             <!-- Disponibilités préférées -->
             <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">Créneaux préférés</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Preferred Time Slots</label>
               <div v-if="!isEditing" class="px-4 py-3 bg-gray-50 rounded-lg text-gray-700">
                 {{ getPreferredTimeSlots(profile.preferredTimeSlots) }}
               </div>
               <div v-else class="space-y-2">
                 <label class="flex items-center">
                   <input v-model="editedProfile.preferredTimeSlots" value="morning" type="checkbox" class="mr-2" />
-                  Matin (8h-12h)
+                  Morning (8AM-12PM)
                 </label>
                 <label class="flex items-center">
                   <input v-model="editedProfile.preferredTimeSlots" value="afternoon" type="checkbox" class="mr-2" />
-                  Après-midi (12h-18h)
+                  Afternoon (12PM-6PM)
                 </label>
                 <label class="flex items-center">
                   <input v-model="editedProfile.preferredTimeSlots" value="evening" type="checkbox" class="mr-2" />
-                  Soir (18h-22h)
+                  Evening (6PM-10PM)
                 </label>
               </div>
             </div>
@@ -320,7 +320,7 @@
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            Sauvegarde...
+            Saving...
           </span>
           <span v-else>Save</span>
         </button>
@@ -333,15 +333,15 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
-            Sécurité
+            Security
           </h2>
         </div>
         
         <div class="p-8">
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-lg font-semibold text-gray-900">Mot de passe</h3>
-              <p class="text-gray-600 mt-1">Changez votre mot de passe pour sécuriser votre compte</p>
+              <h3 class="text-lg font-semibold text-gray-900">Password</h3>
+              <p class="text-gray-600 mt-1">Change your password to secure your account</p>
             </div>
             <button 
               @click="showChangePasswordModal = true"
@@ -350,7 +350,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
               </svg>
-              Changer le mot de passe
+              Change Password
             </button>
           </div>
         </div>
@@ -389,9 +389,9 @@ import AvatarUpload from '~/components/AvatarUpload.vue'
 import NotificationToggle from '~/components/NotificationToggle.vue'
 import ChangePasswordModal from '~/components/ChangePasswordModal.vue'
 
-// L'authentification est gérée par le middleware global
+// Authentication is handled by global middleware
 
-// État réactif
+// Reactive state
 const isEditing = ref(false);
 const saving = ref(false);
 const profile = ref(null);
@@ -402,30 +402,30 @@ const stats = ref(null);
 const availableSubjects = ref([]);
 const showChangePasswordModal = ref(false);
 
-// Niveaux d'études disponibles
+// Available education levels
 const educationLevels = [
-  { value: 'elementary', label: 'École primaire' },
-  { value: 'middle_school', label: 'Collège' },
-  { value: 'high_school', label: 'Lycée' },
-  { value: 'bachelor', label: 'Licence (Bac+3)' },
-  { value: 'master', label: 'Master (Bac+5)' },
-  { value: 'phd', label: 'Doctorat (Bac+8)' },
-  { value: 'other', label: 'Autre' }
+  { value: 'elementary', label: 'Elementary School' },
+  { value: 'middle_school', label: 'Middle School' },
+  { value: 'high_school', label: 'High School' },
+  { value: 'bachelor', label: 'Bachelor\'s Degree' },
+  { value: 'master', label: 'Master\'s Degree' },
+  { value: 'phd', label: 'PhD' },
+  { value: 'other', label: 'Other' }
 ];
 
-// Fonctions utilitaires
+// Utility functions
 const getEducationLevelLabel = (level) => {
   const educationLevel = educationLevels.find(l => l.value === level);
-  return educationLevel ? educationLevel.label : 'Non renseigné';
+  return educationLevel ? educationLevel.label : 'Not specified';
 };
 
 const getPreferredTimeSlots = (slots) => {
-  if (!slots || slots.length === 0) return 'Aucune préférence';
+  if (!slots || slots.length === 0) return 'No preference';
   
   const labels = {
-    morning: 'Matin',
-    afternoon: 'Après-midi',
-    evening: 'Soir'
+    morning: 'Morning',
+    afternoon: 'Afternoon',
+    evening: 'Evening'
   };
   
   return slots.map(slot => labels[slot] || slot).join(', ');
@@ -449,34 +449,34 @@ const saveProfile = async () => {
       profile.value = response.profile;
       isEditing.value = false;
       
-      // Afficher une notification de succès
-      // TODO: Intégrer le système de notifications
+      // Show success notification
+      // TODO: Integrate notification system
     }
   } catch (err) {
-    console.error('Erreur lors de la sauvegarde:', err);
-    error.value = err.data?.message || 'Erreur lors de la sauvegarde du profil';
+    console.error('Error saving profile:', err);
+    error.value = err.data?.message || 'Error saving profile';
   } finally {
     saving.value = false;
   }
 };
 
 const handleAvatarUploadSuccess = (avatarUrl) => {
-  // L'avatar a été mis à jour automatiquement via v-model
-  console.log('Avatar mis à jour avec succès:', avatarUrl);
-  // TODO: Afficher une notification de succès
+  // Avatar updated automatically via v-model
+  console.log('Avatar updated successfully:', avatarUrl);
+  // TODO: Show success notification
 };
 
 const handleAvatarUploadError = (errorMessage) => {
-  console.error('Erreur upload avatar:', errorMessage);
-  // TODO: Afficher une notification d'erreur
+  console.error('Avatar upload error:', errorMessage);
+  // TODO: Show error notification
 };
 
 const handlePasswordChangeSuccess = () => {
-  console.log('Mot de passe changé avec succès');
-  // Le modal se ferme automatiquement et la notification est affichée par le composant
+  console.log('Password changed successfully');
+  // Modal closes automatically and notification is shown by component
 };
 
-// Charger les données
+// Load data
 const loadProfile = async () => {
   try {
     loading.value = true;
@@ -508,7 +508,7 @@ const loadProfile = async () => {
   }
 };
 
-// Charger les données au montage
+// Load data on mount
 onMounted(() => {
   loadProfile();
 });
