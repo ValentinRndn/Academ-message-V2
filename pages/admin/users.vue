@@ -127,6 +127,69 @@
       </div>
     </div>
 
+    <!-- Professeurs en attente d'approbation -->
+    <div v-if="pendingTeachers.length > 0" class="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-lg font-medium text-orange-800">
+              Professeurs en attente d'approbation ({{ pendingTeachers.length }})
+            </h3>
+            <p class="text-sm text-orange-600">
+              Ces professeurs attendent une approbation pour accéder à la plateforme.
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="space-y-3">
+        <div v-for="teacher in pendingTeachers" :key="teacher._id" 
+             class="bg-white rounded-lg border border-orange-200 p-4 flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0 h-10 w-10">
+              <div class="h-10 w-10 rounded-full bg-orange-100 flex items-center justify-center">
+                <span class="text-sm font-medium text-orange-700">
+                  {{ teacher.firstName?.charAt(0) }}{{ teacher.lastName?.charAt(0) }}
+                </span>
+              </div>
+            </div>
+            <div>
+              <div class="text-sm font-medium text-gray-900">
+                {{ teacher.firstName }} {{ teacher.lastName }}
+              </div>
+              <div class="text-sm text-gray-500">{{ teacher.email }}</div>
+              <div class="text-xs text-gray-400">
+                Inscrit le {{ formatDate(teacher.createdAt) }}
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <button
+              @click="viewUser(teacher)"
+              class="px-3 py-1 text-sm border border-orange-200 text-orange-700 rounded-md hover:bg-orange-50"
+            >
+              Voir profil
+            </button>
+            <button
+              @click="approveTeacher(teacher)"
+              class="px-4 py-2 text-sm bg-green-600 text-white rounded-md hover:bg-green-700 flex items-center"
+            >
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Approuver
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Liste des utilisateurs -->
     <div class="bg-white rounded-lg shadow-sm overflow-hidden">
       <div class="px-6 py-4 border-b border-gray-200">
@@ -229,7 +292,21 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                   </button>
+                  <!-- Bouton d'approbation pour professeurs en attente -->
                   <button
+                    v-if="user.role === 'teacher' && user.status === 'pending'"
+                    @click="approveTeacher(user)"
+                    class="text-green-600 hover:text-green-800"
+                    title="Approuver ce professeur"
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
+                  
+                  <!-- Bouton toggle statut pour les autres cas -->
+                  <button
+                    v-else
                     @click="toggleUserStatus(user)"
                     :class="user.status === 'active' ? 'text-orange-500 hover:text-orange-700' : 'text-green-600 hover:text-green-800'"
                     :title="user.status === 'active' ? 'Désactiver' : 'Activer'"
@@ -650,6 +727,11 @@ const fetchUsers = async () => {
   }
 };
 
+// Professeurs en attente d'approbation
+const pendingTeachers = computed(() => {
+  return users.value.filter(user => user.role === 'teacher' && user.status === 'pending');
+});
+
 // Utilisateurs filtrés
 const filteredUsers = computed(() => {
   return users.value.filter(user => {
@@ -889,6 +971,36 @@ const toggleUserStatus = async (user) => {
     console.error('Erreur lors de la mise à jour du statut:', error);
     const { showError } = useToast();
     showError('Erreur', 'Impossible de mettre à jour le statut');
+  }
+};
+
+const approveTeacher = async (user) => {
+  try {
+    loading.value = true;
+    
+    const response = await $fetch(`/api/admin/users/${user._id}/approve`, {
+      method: 'PUT'
+    });
+
+    if (response.success) {
+      // Mettre à jour l'utilisateur dans la liste locale
+      const userIndex = users.value.findIndex(u => u._id === user._id);
+      if (userIndex !== -1) {
+        users.value[userIndex] = { ...users.value[userIndex], ...response.user };
+      }
+      
+      // Mettre à jour les stats
+      stats.value.pendingUsers--;
+      
+      const { showSuccess } = useToast();
+      showSuccess('Professeur approuvé !', response.message);
+    }
+  } catch (error) {
+    console.error('Erreur lors de l\'approbation:', error);
+    const { showError } = useToast();
+    showError('Erreur', error.data?.message || 'Erreur lors de l\'approbation du professeur');
+  } finally {
+    loading.value = false;
   }
 };
 

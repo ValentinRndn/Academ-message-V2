@@ -108,29 +108,52 @@ export const useAuthStore = () => {
         credentials: 'include'
       });
       
-      if (data && data.user) {
-        // Stocker les informations utilisateur
-        user.value = data.user;
-        isAuthenticated.value = true;
-        
-        console.log('✅ Inscription réussie, utilisateur:', user.value);
-        
-        // Notification de succès
-        if (process.client) {
-          setTimeout(() => {
-            const { showSuccess } = useToast();
-            showSuccess(
-              'Compte créé avec succès !', 
-              `Bienvenue ${data.user.firstName} ${data.user.lastName}`,
-              5000
-            );
-          }, 100);
+      if (data) {
+        // Cas spécial : professeur en attente d'approbation
+        if (data.pendingApproval) {
+          console.log('✅ Inscription reçue, en attente d\'approbation:', data.user);
+          
+          // Ne pas connecter l'utilisateur, juste afficher une notification
+          if (process.client) {
+            setTimeout(() => {
+              const { showInfo } = useToast();
+              showInfo(
+                'Inscription reçue !', 
+                data.message || 'Votre demande est en cours de vérification.',
+                8000
+              );
+            }, 100);
+          }
+          
+          // Retourner un statut spécial pour déclencher la redirection
+          return 'pending_approval';
         }
         
-        // Démarrer la vérification de session
-        startSessionCheck();
-        
-        return true;
+        // Inscription normale (étudiants ou autres rôles)
+        if (data.user) {
+          // Stocker les informations utilisateur
+          user.value = data.user;
+          isAuthenticated.value = true;
+          
+          console.log('✅ Inscription réussie, utilisateur:', user.value);
+          
+          // Notification de succès
+          if (process.client) {
+            setTimeout(() => {
+              const { showSuccess } = useToast();
+              showSuccess(
+                'Compte créé avec succès !', 
+                `Bienvenue ${data.user.firstName} ${data.user.lastName}`,
+                5000
+              );
+            }, 100);
+          }
+          
+          // Démarrer la vérification de session
+          startSessionCheck();
+          
+          return true;
+        }
       }
       
       return false;

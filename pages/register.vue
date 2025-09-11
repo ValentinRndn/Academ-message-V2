@@ -199,9 +199,13 @@ const userData = reactive({
 
 // Registration function
 const register = async () => {
-  const success = await authRegister(userData)
+  const result = await authRegister(userData)
   
-  if (success) {
+  if (result === 'pending_approval') {
+    // Rediriger vers la page d'attente pour les professeurs
+    router.push('/pending-approval')
+  } else if (result === true) {
+    // Connexion normale pour les étudiants
     router.push('/messages')
   }
 }

@@ -2,6 +2,7 @@
 import { hashPassword } from '../../utils/password.js';
 import { generateToken } from '../../utils/jwt.js';
 import { createUser, findUserByEmail } from '../../models/userModel.js';
+import { sendPendingApprovalEmail } from '../../utils/email.js';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -47,14 +48,37 @@ export default defineEventHandler(async (event) => {
       lastLoginAt: new Date()
     });
     
+    // Masquer le mot de passe dans la réponse
+    const { password: _, ...safeUser } = newUser;
+    
+    // Si c'est un professeur en attente, envoyer l'email et ne pas connecter
+    if (role === 'teacher' && initialStatus === 'pending') {
+      // Envoyer l'email d'attente d'approbation
+      try {
+        await sendPendingApprovalEmail({
+          to: email,
+          firstName,
+          lastName
+        });
+        console.log('✅ Email d\'attente envoyé à:', email);
+      } catch (emailError) {
+        console.error('❌ Erreur lors de l\'envoi de l\'email d\'attente:', emailError);
+        // On continue même si l'email échoue
+      }
+      
+      return {
+        user: safeUser,
+        pendingApproval: true,
+        message: 'Votre demande d\'inscription a été soumise. Vous recevrez un email une fois votre compte approuvé.'
+      };
+    }
+    
+    // Pour les étudiants ou autres rôles, procéder à la connexion normale
     // Générer un token JWT
     const token = generateToken({
       userId: newUser._id,
       role: newUser.role
     });
-    
-    // Masquer le mot de passe dans la réponse
-    const { password: _, ...safeUser } = newUser;
     
     // Définir le cookie avec le token
     setCookie(event, 'auth_token', token, {
