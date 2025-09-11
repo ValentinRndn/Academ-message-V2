@@ -1,17 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node:*)",
-      "Bash(npm run build:*)",
-      "Bash(find:*)",
-      "Bash(npm install:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(npm run dev:*)",
-      "Bash(for file in pages/dashboard.vue pages/admin/create-teacher.vue pages/admin/settings.vue pages/admin/subjects.vue pages/admin/users.vue pages/teacher/schedule.vue pages/teacher/profile.vue pages/teacher/availability.vue pages/test-notifications.vue)",
-      "Bash(do)",
-      "Bash(echo \"=== $file ===\")",
-      "Bash(sed:*)",
-      "Bash(done)"
+      "Bash(env)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []

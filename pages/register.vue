@@ -143,10 +143,14 @@
           <!-- Terms -->
           <div class="text-xs text-gray-500 leading-relaxed">
             By creating an account, you accept our
-            <NuxtLink to="/terms-of-service" class="text-purple-600 hover:text-purple-700 underline">terms of service</NuxtLink>
-            and our
-            <NuxtLink to="/privacy-policy" class="text-purple-600 hover:text-purple-700 underline">privacy policy</NuxtLink>.
-          </div>
+            <a href="https://imators.com/terms-of-use" target="_blank" rel="noopener noreferrer" aria-label="Terms of service" class="text-purple-600 hover:text-purple-700 underline">
+              Terms of Service
+            </a>
+            and
+            <a href="https://imators.com/privacy" target="_blank" rel="noopener noreferrer" aria-label="Privacy policy" class="text-purple-600 hover:text-purple-700 underline">
+              Privacy Policy
+            </a>
+            </div>
 
           <!-- Registration button -->
           <button

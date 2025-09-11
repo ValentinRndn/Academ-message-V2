@@ -222,7 +222,7 @@
                   </button>
                   <button
                     @click="editUser(user)"
-                    class="text-purple-600 hover:text-purple-900"
+                    class="text-blue-600 hover:text-blue-900"
                     title="Modifier"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -231,7 +231,7 @@
                   </button>
                   <button
                     @click="toggleUserStatus(user)"
-                    :class="user.status === 'active' ? 'text-purple-400 hover:text-purple-600' : 'text-purple-600 hover:text-purple-800'"
+                    :class="user.status === 'active' ? 'text-orange-500 hover:text-orange-700' : 'text-green-600 hover:text-green-800'"
                     :title="user.status === 'active' ? 'Désactiver' : 'Activer'"
                   >
                     <svg v-if="user.status === 'active'" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -239,6 +239,17 @@
                     </svg>
                     <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </button>
+                  <button
+                    @click="deleteUser(user)"
+                    class="text-red-600 hover:text-red-900"
+                    title="Supprimer"
+                    :disabled="user._id === $user?._id"
+                    :class="{ 'opacity-50 cursor-not-allowed': user._id === $user?._id }"
+                  >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                     </svg>
                   </button>
                 </div>
@@ -276,6 +287,287 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal de détails utilisateur -->
+    <div v-if="showUserModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+      <div class="relative top-20 mx-auto p-5 border w-11/12 max-w-2xl shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-medium text-gray-900">Détails de l'utilisateur</h3>
+            <button @click="closeUserModal" class="text-gray-400 hover:text-gray-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          
+          <div v-if="selectedUser" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Prénom</label>
+                <p class="mt-1 text-sm text-gray-900">{{ selectedUser.firstName }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Nom</label>
+                <p class="mt-1 text-sm text-gray-900">{{ selectedUser.lastName }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Email</label>
+                <p class="mt-1 text-sm text-gray-900">{{ selectedUser.email }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Téléphone</label>
+                <p class="mt-1 text-sm text-gray-900">{{ selectedUser.phone || 'Non renseigné' }}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Rôle</label>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                  :class="getRoleBadgeClass(selectedUser.role)">
+                  {{ getRoleLabel(selectedUser.role) }}
+                </span>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Statut</label>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                  :class="getStatusBadgeClass(selectedUser.status)">
+                  {{ getStatusLabel(selectedUser.status) }}
+                </span>
+              </div>
+            </div>
+
+            <div v-if="userDetails?.stats" class="mt-6">
+              <h4 class="text-md font-medium text-gray-900 mb-3">Statistiques</h4>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center">
+                  <p class="text-2xl font-bold text-purple-600">{{ userDetails.stats.accountAge }}</p>
+                  <p class="text-sm text-gray-500">Jours d'ancienneté</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-2xl font-bold text-purple-600">{{ userDetails.stats.lastLoginAgo || 'Jamais' }}</p>
+                  <p class="text-sm text-gray-500">Dernière connexion (jours)</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-2xl font-bold" :class="userDetails.stats.isNewUser ? 'text-green-600' : 'text-gray-400'">
+                    {{ userDetails.stats.isNewUser ? 'Oui' : 'Non' }}
+                  </p>
+                  <p class="text-sm text-gray-500">Nouvel utilisateur</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-2xl font-bold" :class="userDetails.stats.hasEverLoggedIn ? 'text-green-600' : 'text-red-600'">
+                    {{ userDetails.stats.hasEverLoggedIn ? 'Oui' : 'Non' }}
+                  </p>
+                  <p class="text-sm text-gray-500">Déjà connecté</p>
+                </div>
+              </div>
+            </div>
+
+            <div v-if="userDetails?.teacherDetails" class="mt-6">
+              <h4 class="text-md font-medium text-gray-900 mb-3">Détails Professeur</h4>
+              <div class="space-y-3">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Spécialisation</label>
+                  <p class="mt-1 text-sm text-gray-900">{{ selectedUser.specialization || 'Non renseignée' }}</p>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Expérience</label>
+                  <p class="mt-1 text-sm text-gray-900">{{ selectedUser.experience || 0 }} années</p>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Bio</label>
+                  <p class="mt-1 text-sm text-gray-900">{{ selectedUser.bio || 'Non renseignée' }}</p>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Matières</label>
+                  <p class="mt-1 text-sm text-gray-900">{{ (selectedUser.subjects || []).join(', ') || 'Aucune matière' }}</p>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Tarif horaire</label>
+                  <p class="mt-1 text-sm text-gray-900">{{ userDetails.teacherDetails.hourlyRate || 0 }}€/h</p>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700">Note moyenne</label>
+                    <p class="mt-1 text-sm text-gray-900">{{ userDetails.teacherDetails.averageRating || 0 }}/5</p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700">Avis</label>
+                    <p class="mt-1 text-sm text-gray-900">{{ userDetails.teacherDetails.reviewCount || 0 }}</p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700">Sessions</label>
+                    <p class="mt-1 text-sm text-gray-900">{{ userDetails.teacherDetails.sessionsCompleted || 0 }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal d'édition utilisateur -->
+    <div v-if="showEditModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+      <div class="relative top-20 mx-auto p-5 border w-11/12 max-w-2xl shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-medium text-gray-900">Modifier l'utilisateur</h3>
+            <button @click="closeEditModal" class="text-gray-400 hover:text-gray-600">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          
+          <form @submit.prevent="saveUserChanges" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Prénom *</label>
+                <input
+                  v-model="editForm.firstName"
+                  type="text"
+                  required
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Nom *</label>
+                <input
+                  v-model="editForm.lastName"
+                  type="text"
+                  required
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Email *</label>
+                <input
+                  v-model="editForm.email"
+                  type="email"
+                  required
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Téléphone</label>
+                <input
+                  v-model="editForm.phone"
+                  type="tel"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Rôle</label>
+                <select
+                  v-model="editForm.role"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                >
+                  <option value="student">Étudiant</option>
+                  <option value="teacher">Professeur</option>
+                  <option value="admin">Administrateur</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Statut</label>
+                <select
+                  v-model="editForm.status"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                >
+                  <option value="pending">En attente</option>
+                  <option value="active">Actif</option>
+                  <option value="inactive">Inactif</option>
+                </select>
+              </div>
+            </div>
+
+            <div v-if="editForm.role === 'teacher'" class="space-y-4 border-t pt-4">
+              <h4 class="text-md font-medium text-gray-900">Informations professeur</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Spécialisation</label>
+                  <input
+                    v-model="editForm.specialization"
+                    type="text"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Expérience (années)</label>
+                  <input
+                    v-model.number="editForm.experience"
+                    type="number"
+                    min="0"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                  />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Bio</label>
+                <textarea
+                  v-model="editForm.bio"
+                  rows="3"
+                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="flex justify-end space-x-3 pt-4">
+              <button
+                type="button"
+                @click="closeEditModal"
+                class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+              >
+                Annuler
+              </button>
+              <button
+                type="submit"
+                :disabled="loading"
+                class="px-4 py-2 text-sm font-medium text-white bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 disabled:opacity-50"
+              >
+                {{ loading ? 'Sauvegarde...' : 'Sauvegarder' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div v-if="showDeleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+            <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.96-.833-2.732 0L3.732 16c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          </div>
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mt-2">Supprimer l'utilisateur</h3>
+          <div class="mt-2 px-7 py-3">
+            <p class="text-sm text-gray-500">
+              Êtes-vous sûr de vouloir supprimer l'utilisateur 
+              <strong>{{ userToDelete?.firstName }} {{ userToDelete?.lastName }}</strong> ?
+              Cette action est irréversible.
+            </p>
+          </div>
+          <div class="items-center px-4 py-3">
+            <div class="flex justify-center space-x-3">
+              <button
+                @click="closeDeleteModal"
+                class="px-4 py-2 bg-white text-gray-500 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-100"
+              >
+                Annuler
+              </button>
+              <button
+                @click="confirmDeleteUser"
+                :disabled="loading"
+                class="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700 disabled:opacity-50"
+              >
+                {{ loading ? 'Suppression...' : 'Supprimer' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -296,6 +588,27 @@ const stats = ref({
   totalTeachers: 0,
   totalStudents: 0,
   pendingUsers: 0
+});
+
+// États des modales
+const showUserModal = ref(false);
+const showEditModal = ref(false);
+const showDeleteModal = ref(false);
+const selectedUser = ref(null);
+const userDetails = ref(null);
+const userToDelete = ref(null);
+
+// Formulaire d'édition
+const editForm = ref({
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  role: '',
+  status: '',
+  specialization: '',
+  experience: 0,
+  bio: ''
 });
 
 // Filtres
@@ -414,15 +727,146 @@ const formatDate = (dateString) => {
   });
 };
 
+// Actions des modales
+const closeUserModal = () => {
+  showUserModal.value = false;
+  selectedUser.value = null;
+  userDetails.value = null;
+};
+
+const closeEditModal = () => {
+  showEditModal.value = false;
+  selectedUser.value = null;
+  editForm.value = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    role: '',
+    status: '',
+    specialization: '',
+    experience: 0,
+    bio: ''
+  };
+};
+
+const closeDeleteModal = () => {
+  showDeleteModal.value = false;
+  userToDelete.value = null;
+};
+
 // Actions
-const viewUser = (user) => {
-  // TODO: Implémenter la vue détaillée d'un utilisateur
-  console.log('Voir utilisateur:', user);
+const viewUser = async (user) => {
+  try {
+    loading.value = true;
+    selectedUser.value = user;
+    showUserModal.value = true;
+
+    // Récupérer les détails complets de l'utilisateur
+    const response = await $fetch(`/api/admin/users/${user._id}/details`);
+    userDetails.value = response;
+    
+    // Mettre à jour les informations de base avec les détails récupérés
+    if (response.user) {
+      selectedUser.value = response.user;
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des détails:', error);
+    const { showError } = useToast();
+    showError('Erreur', 'Impossible de récupérer les détails de l\'utilisateur');
+    closeUserModal();
+  } finally {
+    loading.value = false;
+  }
 };
 
 const editUser = (user) => {
-  // TODO: Implémenter l'édition d'un utilisateur
-  console.log('Modifier utilisateur:', user);
+  selectedUser.value = user;
+  
+  // Pré-remplir le formulaire avec les données actuelles
+  editForm.value = {
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
+    email: user.email || '',
+    phone: user.phone || '',
+    role: user.role || '',
+    status: user.status || '',
+    specialization: user.specialization || '',
+    experience: user.experience || 0,
+    bio: user.bio || ''
+  };
+  
+  showEditModal.value = true;
+};
+
+const deleteUser = (user) => {
+  userToDelete.value = user;
+  showDeleteModal.value = true;
+};
+
+const saveUserChanges = async () => {
+  try {
+    loading.value = true;
+    
+    const response = await $fetch(`/api/admin/users/${selectedUser.value._id}/update`, {
+      method: 'PUT',
+      body: editForm.value
+    });
+
+    if (response.success) {
+      // Mettre à jour l'utilisateur dans la liste locale
+      const userIndex = users.value.findIndex(u => u._id === selectedUser.value._id);
+      if (userIndex !== -1) {
+        users.value[userIndex] = { ...users.value[userIndex], ...response.user };
+      }
+      
+      const { showSuccess } = useToast();
+      showSuccess('Succès', response.message);
+      closeEditModal();
+    }
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour:', error);
+    const { showError } = useToast();
+    showError('Erreur', error.data?.message || 'Erreur lors de la mise à jour');
+  } finally {
+    loading.value = false;
+  }
+};
+
+const confirmDeleteUser = async () => {
+  try {
+    loading.value = true;
+    
+    const response = await $fetch(`/api/admin/users/${userToDelete.value._id}/delete`, {
+      method: 'DELETE'
+    });
+
+    if (response.success) {
+      // Retirer l'utilisateur de la liste locale
+      users.value = users.value.filter(u => u._id !== userToDelete.value._id);
+      
+      // Mettre à jour les stats
+      stats.value.totalUsers--;
+      if (userToDelete.value.role === 'teacher') {
+        stats.value.totalTeachers--;
+      } else if (userToDelete.value.role === 'student') {
+        stats.value.totalStudents--;
+      }
+      if (userToDelete.value.status === 'pending') {
+        stats.value.pendingUsers--;
+      }
+      
+      const { showSuccess } = useToast();
+      showSuccess('Succès', response.message);
+      closeDeleteModal();
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression:', error);
+    const { showError } = useToast();
+    showError('Erreur', error.data?.message || 'Erreur lors de la suppression');
+  } finally {
+    loading.value = false;
+  }
 };
 
 const toggleUserStatus = async (user) => {
