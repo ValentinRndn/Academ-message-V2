@@ -234,7 +234,7 @@
                     class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                   >
                     <option value="">Sélectionner une matière</option>
-                    <option v-for="subject in availableSubjects" :key="subject._id" :value="subject._id">
+                    <option v-for="subject in filteredAvailableSubjects" :key="subject._id" :value="subject._id">
                       {{ subject.name }}
                     </option>
                   </select>
@@ -452,7 +452,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useTeacherProfile } from '~/composables/useTeacherProfile'
 import AvatarUpload from '~/components/AvatarUpload.vue'
 import NotificationToggle from '~/components/NotificationToggle.vue'
@@ -474,6 +474,18 @@ const availableSubjects = ref([]);
 const newSubject = ref('');
 const showChangePasswordModal = ref(false);
 
+// Computed properties
+const filteredAvailableSubjects = computed(() => {
+  return availableSubjects.value.filter(subject => {
+    // Filtrer les matières déjà sélectionnées
+    return !profile.value.subjects.some(selectedSubject => {
+      // Gérer le cas où selectedSubject peut être un string ID ou un objet avec _id
+      const selectedId = typeof selectedSubject === 'string' ? selectedSubject : selectedSubject._id;
+      return selectedId === subject._id;
+    });
+  });
+});
+
 // Langues disponibles
 const availableLanguages = [
   { value: 'french', label: 'Français' },
@@ -493,13 +505,46 @@ const getLanguageName = (code) => {
 };
 
 const addSubject = () => {
-  if (newSubject.value && !editedProfile.value.subjects?.includes(newSubject.value)) {
-    if (!editedProfile.value.subjects) {
-      editedProfile.value.subjects = [];
-    }
-    editedProfile.value.subjects.push(newSubject.value);
-    newSubject.value = '';
+  if (!newSubject.value) {
+    console.log('Aucune matière sélectionnée');
+    return;
   }
+
+  // Trouver l'objet matière complet
+  const selectedSubject = availableSubjects.value.find(subject => subject._id === newSubject.value);
+  if (!selectedSubject) {
+    console.log('Matière introuvable:', newSubject.value);
+    return;
+  }
+
+  // Initialiser le tableau si nécessaire
+  if (!editedProfile.value.subjects) {
+    editedProfile.value.subjects = [];
+  }
+
+  // Vérifier si la matière n'est pas déjà ajoutée
+  const isAlreadyAdded = editedProfile.value.subjects.some(subject => {
+    if (typeof subject === 'string') {
+      return subject === newSubject.value;
+    } else if (subject._id) {
+      return subject._id === newSubject.value;
+    }
+    return false;
+  });
+
+  if (isAlreadyAdded) {
+    console.log('Matière déjà ajoutée');
+    return;
+  }
+
+  // Ajouter la matière (on peut choisir d'ajouter l'objet complet ou juste l'ID)
+  editedProfile.value.subjects.push({
+    _id: selectedSubject._id,
+    name: selectedSubject.name
+  });
+  
+  console.log('Matière ajoutée:', selectedSubject.name);
+  newSubject.value = '';
 };
 
 const removeSubject = (index) => {
