@@ -2,7 +2,85 @@
 import { hashPassword } from '../../utils/password.js';
 import { generateToken } from '../../utils/jwt.js';
 import { createUser, findUserByEmail } from '../../models/userModel.js';
-import { sendPendingApprovalEmail } from '../../utils/email.js';
+
+// Configuration du transporteur email
+const createTransporter = async () => {
+  try {
+    const nodemailer = await import('nodemailer');
+    const config = useRuntimeConfig();
+    
+    return nodemailer.default.createTransporter({
+      host: config.smtpHost || 'smtp.gmail.com',
+      port: config.smtpPort || 587,
+      secure: false,
+      auth: {
+        user: config.smtpUser,
+        pass: config.smtpPass
+      }
+    });
+  } catch (error) {
+    console.error('Erreur lors de la création du transporteur email:', error);
+    throw error;
+  }
+};
+
+// Email d'attente d'approbation pour les professeurs
+async function sendPendingApprovalEmail({ to, firstName, lastName }) {
+  const config = useRuntimeConfig();
+  
+  if (!config.smtpUser || !config.smtpPass) {
+    console.warn('⚠️ Variables SMTP non configurées. Email non envoyé.');
+    return { success: false, message: 'Variables SMTP non configurées' };
+  }
+
+  const subject = 'Votre inscription est en cours de vérification - Academ';
+  
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Inscription en attente - Academ</title>
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .content { background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <h1>⏳ Inscription reçue</h1>
+        <p>Bonjour ${firstName} ${lastName}</p>
+      </div>
+      <div class="content">
+        <p>Merci d'avoir créé votre compte professeur sur Academ !</p>
+        <p>Notre équipe examine actuellement votre profil pour s'assurer qu'il respecte nos standards de qualité.</p>
+        <p><strong>Ce processus prend généralement entre 24 et 48 heures.</strong></p>
+        <p>Dès que votre compte sera approuvé, nous vous enverrons un email de confirmation avec un lien pour accéder à votre espace professeur.</p>
+        <p>Cordialement,<br>L'équipe Academ</p>
+      </div>
+    </body>
+    </html>
+  `;
+
+  try {
+    const transporter = await createTransporter();
+    const mailOptions = {
+      from: config.smtpFrom || 'noreply@academ-message.com',
+      to: to,
+      subject: subject,
+      html: htmlContent
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log('✅ Email d\'attente d\'approbation envoyé:', info.messageId);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('❌ Erreur lors de l\'envoi de l\'email d\'attente:', error);
+    throw error;
+  }
+}
 
 export default defineEventHandler(async (event) => {
   try {
