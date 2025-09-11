@@ -1,15 +1,15 @@
 <template>
   <div class="notification-toggle">
     <div v-if="!isSupported" class="text-sm text-gray-500">
-      Les notifications ne sont pas supportées par votre navigateur
+      Notifications are not supported by your browser
     </div>
     
     <div v-else-if="permission === 'default'" class="space-y-3">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-medium text-gray-900">Notifications push</h3>
+          <h3 class="text-sm font-medium text-gray-900">Push Notifications</h3>
           <p class="text-sm text-gray-500">
-            Recevez des notifications pour vos cours, messages et rappels
+            Receive notifications for your courses, messages, and reminders
           </p>
         </div>
                  <button
@@ -21,7 +21,7 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          {{ loading ? 'Activation...' : 'Activer' }}
+          {{ loading ? 'Activating...' : 'Activate' }}
         </button>
       </div>
     </div>
@@ -29,9 +29,9 @@
     <div v-else-if="permission === 'granted'" class="space-y-3">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-medium text-gray-900">Notifications push</h3>
+          <h3 class="text-sm font-medium text-gray-900">Push Notifications</h3>
           <p class="text-sm text-gray-500">
-            <span class="text-green-600">✓ Activées</span> - Vous recevrez des notifications
+            <span class="text-green-600">✓ Enabled</span> - You will receive notifications
           </p>
         </div>
         <button
@@ -43,7 +43,7 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          {{ loading ? 'Désactivation...' : 'Désactiver' }}
+          {{ loading ? 'Disabling...' : 'Disable' }}
         </button>
       </div>
       
@@ -56,20 +56,20 @@
           </div>
           <div class="ml-3">
             <h3 class="text-sm font-medium text-green-800">
-              Notifications activées
+              Notifications enabled
             </h3>
                               <div class="mt-2 text-sm text-green-700">
-                    <p>Vous recevrez des notifications pour :</p>
+                    <p>You will receive notifications for:</p>
                     <ul class="mt-1 list-disc list-inside space-y-1">
-                      <li>Nouvelles réservations de cours</li>
-                      <li>Confirmations et annulations</li>
-                      <li>Nouveaux messages</li>
-                      <li>Rappels de cours (1h avant)</li>
-                      <li>Nouveaux avis</li>
-                      <li>Paiements confirmés</li>
+                      <li>New course bookings</li>
+                      <li>Confirmations and cancellations</li>
+                      <li>New messages</li>
+                      <li>Course reminders (1h before)</li>
+                      <li>New reviews</li>
+                      <li>Payment confirmations</li>
                     </ul>
                     
-                    <!-- Bouton de test -->
+                    <!-- Test button -->
                     <div class="mt-4">
                       <button
                         @click="testNotification"
@@ -80,7 +80,7 @@
                           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        {{ testing ? 'Envoi...' : 'Tester' }}
+                        {{ testing ? 'Sending...' : 'Test' }}
                       </button>
                     </div>
                   </div>
@@ -92,9 +92,9 @@
     <div v-else-if="permission === 'denied'" class="space-y-3">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-sm font-medium text-gray-900">Notifications push</h3>
+          <h3 class="text-sm font-medium text-gray-900">Push Notifications</h3>
           <p class="text-sm text-red-600">
-            Permission refusée - Activez les notifications dans les paramètres de votre navigateur
+            Permission denied - Enable notifications in your browser settings
           </p>
         </div>
       </div>
@@ -108,14 +108,14 @@
           </div>
           <div class="ml-3">
             <h3 class="text-sm font-medium text-red-800">
-              Notifications désactivées
+              Notifications disabled
             </h3>
             <div class="mt-2 text-sm text-red-700">
-              <p>Pour activer les notifications :</p>
+              <p>To enable notifications:</p>
               <ol class="mt-1 list-decimal list-inside space-y-1">
-                <li>Cliquez sur l'icône de cadenas dans la barre d'adresse</li>
-                <li>Autorisez les notifications pour ce site</li>
-                <li>Rechargez la page</li>
+                <li>Click on the lock icon in the address bar</li>
+                <li>Allow notifications for this site</li>
+                <li>Refresh the page</li>
               </ol>
             </div>
           </div>
@@ -123,7 +123,7 @@
       </div>
     </div>
     
-    <!-- Message d'erreur -->
+    <!-- Error message -->
     <div v-if="error" class="bg-red-50 border border-red-200 rounded-lg p-3">
       <div class="flex">
         <div class="flex-shrink-0">
@@ -133,7 +133,7 @@
         </div>
         <div class="ml-3">
           <h3 class="text-sm font-medium text-red-800">
-            Erreur
+            Error
           </h3>
           <div class="mt-2 text-sm text-red-700">
             <p>{{ error }}</p>
@@ -160,30 +160,30 @@ const {
 
 const testing = ref(false)
 
-// Initialiser les notifications au montage du composant
+// Initialize notifications on component mount
 onMounted(() => {
   checkSupport()
 })
 
-// Demander la permission
+// Request permission
 const requestPermissionHandler = async () => {
   const success = await requestPermission()
   if (success) {
-    // Optionnel : afficher un message de succès
-    console.log('Notifications activées avec succès !')
+    // Optional: show success message
+    console.log('Notifications activated successfully!')
   }
 }
 
-// Se désabonner
+// Unsubscribe
 const unsubscribe = async () => {
   const success = await unsubscribeFromPush()
   if (success) {
-    // Optionnel : afficher un message de succès
-    console.log('Notifications désactivées avec succès !')
+    // Optional: show success message
+    console.log('Notifications disabled successfully!')
   }
 }
 
-// Tester les notifications
+// Test notifications
 const testNotification = async () => {
   try {
     testing.value = true
@@ -194,10 +194,10 @@ const testNotification = async () => {
     })
     
     if (response.success) {
-      console.log('Notification de test envoyée avec succès !')
+      console.log('Test notification sent successfully!')
     }
   } catch (err) {
-    console.error('Erreur lors du test de notification:', err)
+    console.error('Error testing notification:', err)
   } finally {
     testing.value = false
   }
