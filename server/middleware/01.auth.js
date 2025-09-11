@@ -6,6 +6,8 @@ import { findUserById } from '../models/userModel.js';
  * Middleware pour vérifier si l'utilisateur est authentifié
  */
 export default defineEventHandler(async (event) => {
+  console.log('🔒 Auth middleware called for:', event.path);
+  
   // Exclure les routes publiques
   const publicRoutes = [
     '/api/auth/login',
@@ -41,7 +43,10 @@ export default defineEventHandler(async (event) => {
   const needsAuth = (event.path.startsWith('/api/') && !isPublicRoute) || 
                     protectedRoutes.some(route => event.path.startsWith(route));
   
+  console.log('🛡️  Path:', event.path, 'Needs auth:', needsAuth, 'Is public:', isPublicRoute);
+  
   if (!needsAuth) {
+    console.log('✅ Public route, skipping auth');
     return;
   }
   
@@ -94,5 +99,6 @@ export default defineEventHandler(async (event) => {
       },
       token
     };
+    console.log('🎫 Auth context set for user:', user.email);
   }
 });
