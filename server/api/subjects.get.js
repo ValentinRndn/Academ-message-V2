@@ -3,10 +3,10 @@ import { connectToDatabase } from '../config/database.js';
 
 export default defineEventHandler(async (event) => {
   try {
-    // S'assurer que la connexion à la base de données est établie
+    // Ensure database connection is established
     await connectToDatabase();
     
-    // Récupérer toutes les matières actives
+    // Retrieve all active subjects
     const subjects = await Subject.find({})
       .sort({ name: 1 });
 
@@ -16,12 +16,12 @@ export default defineEventHandler(async (event) => {
     };
 
   } catch (error) {
-    console.error('Erreur lors de la récupération des matières:', error);
+    console.error('Error retrieving subjects:', error);
     
     throw createError({
       statusCode: 500,
       statusMessage: 'Internal Server Error',
-      message: 'Erreur lors de la récupération des matières'
+      message: 'Error retrieving subjects'
     });
   }
 });

@@ -88,8 +88,8 @@ export const useAuthStore = () => {
       
       return false;
     } catch (err) {
-      console.error('Erreur lors de la connexion:', err);
-      error.value = err.data?.message || 'Erreur lors de la connexion';
+      console.error('Error during login:', err);
+      error.value = err.data?.message || 'Error during login';
       return false;
     } finally {
       loading.value = false;
@@ -175,7 +175,7 @@ export const useAuthStore = () => {
         credentials: 'include'
       });
     } catch (err) {
-      console.error('Erreur lors de la déconnexion:', err);
+      console.error('Error during logout:', err);
     } finally {
       // Arrêter la vérification de session
       stopSessionCheck();

@@ -8,8 +8,8 @@
       <div class="relative z-10">
         <div class="flex items-center justify-between">
           <div>
-            <h1 class="text-3xl font-bold mb-2">Mon Profil</h1>
-            <p class="text-purple-100">Gérez vos informations personnelles et professionnelles</p>
+            <h1 class="text-3xl font-bold mb-2">My Profile</h1>
+            <p class="text-purple-100">Manage your personal and professional information</p>
           </div>
           <button 
             @click="isEditing = !isEditing" 
@@ -22,7 +22,7 @@
               <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
-              {{ isEditing ? 'Annuler' : 'Modifier' }}
+              {{ isEditing ? 'Cancel' : 'Edit' }}
             </span>
           </button>
         </div>
@@ -41,7 +41,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <div>
-          <h3 class="text-lg font-medium text-red-800">Erreur</h3>
+          <h3 class="text-lg font-medium text-red-800">Error</h3>
           <p class="text-red-600">{{ error }}</p>
         </div>
       </div>
@@ -49,14 +49,14 @@
 
     <!-- Profile content -->
     <div v-else-if="profile" class="space-y-8">
-      <!-- Informations personnelles -->
+      <!-- Personal Information -->
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div class="bg-gray-50 px-8 py-6 border-b">
           <h2 class="text-xl font-bold text-gray-900 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            Informations personnelles
+            Personal Information
           </h2>
         </div>
         
@@ -181,7 +181,7 @@
         </div>
       </div>
 
-      <!-- Informations professionnelles -->
+      <!-- Professional Information -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <!-- Matières enseignées -->
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
@@ -205,7 +205,7 @@
                   {{ subject.name || subject }}
                 </span>
               </div>
-              <p v-else class="text-gray-500 italic">Aucune matière renseignée</p>
+              <p v-else class="text-gray-500 italic">No subjects specified</p>
             </div>
             
             <div v-else>
@@ -233,7 +233,7 @@
                     v-model="newSubject"
                     class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                   >
-                    <option value="">Sélectionner une matière</option>
+                    <option value="">Select a subject</option>
                     <option v-for="subject in filteredAvailableSubjects" :key="subject._id" :value="subject._id">
                       {{ subject.name }}
                     </option>
@@ -243,7 +243,7 @@
                     :disabled="!newSubject"
                     class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Ajouter
+                    Add
                   </button>
                 </div>
               </div>
@@ -251,14 +251,14 @@
           </div>
         </div>
 
-        <!-- Tarif horaire -->
+        <!-- Hourly Rate -->
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div class="bg-gray-50 px-8 py-6 border-b">
             <h2 class="text-xl font-bold text-gray-900 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
               </svg>
-              Tarif horaire
+              Hourly Rate
             </h2>
           </div>
           
@@ -282,7 +282,7 @@
                 />
                 <span class="text-gray-600">€ / heure</span>
               </div>
-              <p class="text-sm text-gray-500 mt-2">Définissez votre tarif horaire pour les cours</p>
+              <p class="text-sm text-gray-500 mt-2">Set your hourly rate for lessons</p>
             </div>
           </div>
         </div>
@@ -334,14 +334,14 @@
           </div>
         </div>
 
-        <!-- Expérience -->
+        <!-- Experience -->
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div class="bg-gray-50 px-8 py-6 border-b">
             <h2 class="text-xl font-bold text-gray-900 flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
               </svg>
-              Expérience
+              Experience
             </h2>
           </div>
           
@@ -377,7 +377,7 @@
           @click="cancelEdit"
           class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
         >
-          Annuler
+          Cancel
         </button>
         <button 
           @click="saveProfile"
@@ -389,9 +389,9 @@
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
-            Sauvegarde...
+            Saving...
           </span>
-          <span v-else>Sauvegarder</span>
+          <span v-else>Save</span>
         </button>
       </div>
       
@@ -491,19 +491,19 @@ const filteredAvailableSubjects = computed(() => {
   });
 });
 
-// Langues disponibles
+// Available languages
 const availableLanguages = [
-  { value: 'french', label: 'Français' },
-  { value: 'english', label: 'Anglais' },
-  { value: 'spanish', label: 'Espagnol' },
-  { value: 'german', label: 'Allemand' },
-  { value: 'italian', label: 'Italien' },
-  { value: 'chinese', label: 'Chinois' },
-  { value: 'japanese', label: 'Japonais' },
-  { value: 'arabic', label: 'Arabe' }
+  { value: 'french', label: 'French' },
+  { value: 'english', label: 'English' },
+  { value: 'spanish', label: 'Spanish' },
+  { value: 'german', label: 'German' },
+  { value: 'italian', label: 'Italian' },
+  { value: 'chinese', label: 'Chinese' },
+  { value: 'japanese', label: 'Japanese' },
+  { value: 'arabic', label: 'Arabic' }
 ];
 
-// Fonctions utilitaires
+// Utility functions
 const getLanguageName = (code) => {
   const language = availableLanguages.find(lang => lang.value === code);
   return language ? language.label : code;
@@ -514,7 +514,7 @@ const addSubject = () => {
   console.log('📋 editedProfile.value.subjects avant ajout:', editedProfile.value.subjects);
   
   if (!newSubject.value) {
-    console.log('❌ Aucune matière sélectionnée');
+    console.log('❌ No subject selected');
     return;
   }
 
@@ -544,17 +544,17 @@ const addSubject = () => {
   });
 
   if (isAlreadyAdded) {
-    console.log('Matière déjà ajoutée');
+    console.log('Subject already added');
     return;
   }
 
-  // Ajouter la matière (on peut choisir d'ajouter l'objet complet ou juste l'ID)
+  // Add subject (we can choose to add the complete object or just the ID)
   editedProfile.value.subjects.push({
     _id: selectedSubject._id,
     name: selectedSubject.name
   });
   
-  console.log('✅ Matière ajoutée:', selectedSubject.name);
+  console.log('✅ Subject added:', selectedSubject.name);
   console.log('📋 editedProfile.value.subjects après ajout:', editedProfile.value.subjects);
   newSubject.value = '';
 };
@@ -609,7 +609,7 @@ const saveProfile = async () => {
     }
   } catch (err) {
     console.error('Erreur lors de la sauvegarde:', err);
-    error.value = err.data?.message || 'Erreur lors de la sauvegarde du profil';
+    error.value = err.data?.message || 'Error saving profile';
   } finally {
     saving.value = false;
   }
@@ -663,8 +663,8 @@ const loadProfile = async () => {
       availableSubjects.value = subjectsResponse.subjects || [];
     }
   } catch (err) {
-    console.error('Erreur lors du chargement du profil:', err);
-    error.value = err.data?.message || 'Erreur lors du chargement du profil';
+    console.error('Error loading profile:', err);
+    error.value = err.data?.message || 'Error loading profile';
   } finally {
     loading.value = false;
   }

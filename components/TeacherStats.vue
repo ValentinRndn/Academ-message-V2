@@ -1,18 +1,18 @@
 <template>
   <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-    <h3 class="text-lg font-semibold text-gray-900 mb-4">Mes statistiques</h3>
+    <h3 class="text-lg font-semibold text-gray-900 mb-4">My Statistics</h3>
     
     <div v-if="loading" class="text-center py-8">
       <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600 mx-auto"></div>
-      <p class="text-gray-500 mt-2">Chargement des statistiques...</p>
+      <p class="text-gray-500 mt-2">Loading statistics...</p>
     </div>
 
     <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <!-- Cours ce mois -->
+      <!-- Lessons this month -->
       <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm font-medium text-purple-600">Cours ce mois</p>
+            <p class="text-sm font-medium text-purple-600">Lessons this month</p>
             <p class="text-2xl font-bold text-purple-900">{{ stats.monthlyBookings }}</p>
           </div>
           <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
@@ -23,12 +23,12 @@
         </div>
         <div class="mt-2">
           <span class="text-xs text-purple-600">
-            {{ stats.monthlyGrowth > 0 ? '+' : '' }}{{ stats.monthlyGrowth }}% vs mois dernier
+            {{ stats.monthlyGrowth > 0 ? '+' : '' }}{{ stats.monthlyGrowth }}% vs last month
           </span>
         </div>
       </div>
 
-      <!-- Taux de satisfaction -->
+      <!-- Satisfaction Rate -->
       <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg">
         <div class="flex items-center justify-between">
           <div>
@@ -49,16 +49,16 @@
                 :style="{ width: `${stats.satisfactionRate}%` }"
               ></div>
             </div>
-            <span class="text-xs text-green-600 ml-2">{{ stats.totalReviews }} avis</span>
+            <span class="text-xs text-green-600 ml-2">{{ stats.totalReviews }} reviews</span>
           </div>
         </div>
       </div>
 
-      <!-- Heures enseignées -->
+      <!-- Hours Taught -->
       <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm font-medium text-purple-600">Heures enseignées</p>
+            <p class="text-sm font-medium text-purple-600">Hours Taught</p>
             <p class="text-2xl font-bold text-purple-900">{{ stats.totalHours }}h</p>
           </div>
           <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
@@ -69,16 +69,16 @@
         </div>
         <div class="mt-2">
           <span class="text-xs text-purple-600">
-            {{ stats.weeklyHours }}h cette semaine
+            {{ stats.weeklyHours }}h this week
           </span>
         </div>
       </div>
 
-      <!-- Étudiants actifs -->
+      <!-- Active Students -->
       <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-4 rounded-lg">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-sm font-medium text-orange-600">Étudiants actifs</p>
+            <p class="text-sm font-medium text-orange-600">Active Students</p>
             <p class="text-2xl font-bold text-orange-900">{{ stats.activeStudents }}</p>
           </div>
           <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
@@ -89,7 +89,7 @@
         </div>
         <div class="mt-2">
           <span class="text-xs text-orange-600">
-            +{{ stats.newStudents }} ce mois
+            +{{ stats.newStudents }} this month
           </span>
         </div>
       </div>
@@ -97,7 +97,7 @@
 
     <!-- Graphique des cours par jour -->
     <div class="mt-8">
-      <h4 class="text-md font-medium text-gray-900 mb-4">Cours par jour (7 derniers jours)</h4>
+      <h4 class="text-md font-medium text-gray-900 mb-4">Lessons per day (last 7 days)</h4>
       <div class="h-32 flex items-end justify-between space-x-2">
         <div 
           v-for="(day, index) in weeklyStats" 
@@ -116,25 +116,25 @@
 
     <!-- Actions rapides -->
     <div class="mt-6 pt-6 border-t border-gray-200">
-      <h4 class="text-md font-medium text-gray-900 mb-3">Actions rapides</h4>
+      <h4 class="text-md font-medium text-gray-900 mb-3">Quick Actions</h4>
       <div class="flex flex-wrap gap-2">
         <button 
           @click="exportStats"
           class="px-3 py-1 bg-purple-100 text-purple-700 text-sm rounded-full hover:bg-purple-200 transition-colors"
         >
-          Exporter les stats
+          Export Stats
         </button>
         <button 
           @click="viewDetailedStats"
           class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full hover:bg-gray-200 transition-colors"
         >
-          Voir les détails
+          View Details
         </button>
         <button 
           @click="refreshStats"
           class="px-3 py-1 bg-green-100 text-green-700 text-sm rounded-full hover:bg-green-200 transition-colors"
         >
-          Actualiser
+          Refresh
         </button>
       </div>
     </div>
@@ -152,7 +152,7 @@ const props = defineProps({
   }
 });
 
-// État réactif
+// Reactive state
 const loading = ref(false);
 const stats = ref({
   monthlyBookings: 0,
@@ -166,13 +166,13 @@ const stats = ref({
 });
 
 const weeklyStats = ref([
-  { day: 'Lun', count: 0 },
-  { day: 'Mar', count: 0 },
-  { day: 'Mer', count: 0 },
-  { day: 'Jeu', count: 0 },
-  { day: 'Ven', count: 0 },
-  { day: 'Sam', count: 0 },
-  { day: 'Dim', count: 0 }
+  { day: 'Mon', count: 0 },
+  { day: 'Tue', count: 0 },
+  { day: 'Wed', count: 0 },
+  { day: 'Thu', count: 0 },
+  { day: 'Fri', count: 0 },
+  { day: 'Sat', count: 0 },
+  { day: 'Sun', count: 0 }
 ]);
 
 // Computed properties
@@ -180,13 +180,13 @@ const maxWeeklyCount = computed(() => {
   return Math.max(...weeklyStats.value.map(day => day.count), 1);
 });
 
-// Méthodes
+// Methods
 const loadStats = async () => {
   try {
     loading.value = true;
     
-    // Simuler des données pour l'exemple
-    // En production, cela viendrait d'une API
+    // Simulate data for example
+    // In production, this would come from an API
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     stats.value = {
@@ -201,30 +201,30 @@ const loadStats = async () => {
     };
 
     weeklyStats.value = [
-      { day: 'Lun', count: 3 },
-      { day: 'Mar', count: 5 },
-      { day: 'Mer', count: 2 },
-      { day: 'Jeu', count: 4 },
-      { day: 'Ven', count: 6 },
-      { day: 'Sam', count: 1 },
-      { day: 'Dim', count: 0 }
+      { day: 'Mon', count: 3 },
+      { day: 'Tue', count: 5 },
+      { day: 'Wed', count: 2 },
+      { day: 'Thu', count: 4 },
+      { day: 'Fri', count: 6 },
+      { day: 'Sat', count: 1 },
+      { day: 'Sun', count: 0 }
     ];
 
   } catch (error) {
-    console.error('Erreur lors du chargement des statistiques:', error);
+    console.error('Error loading statistics:', error);
   } finally {
     loading.value = false;
   }
 };
 
 const exportStats = () => {
-  // TODO: Implémenter l'export des statistiques
-  console.log('Export des statistiques');
+  // TODO: Implement statistics export
+  console.log('Export statistics');
 };
 
 const viewDetailedStats = () => {
-  // TODO: Naviguer vers une page de statistiques détaillées
-  console.log('Voir les statistiques détaillées');
+  // TODO: Navigate to detailed statistics page
+  console.log('View detailed statistics');
 };
 
 const refreshStats = () => {

@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 401,
         statusMessage: 'Unauthorized',
-        message: 'Authentification requise'
+        message: 'Authentication required'
       });
     }
 
@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 403,
         statusMessage: 'Forbidden',
-        message: 'Accès réservé aux administrateurs'
+        message: 'Access restricted to administrators'
       });
     }
 
@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 400,
         statusMessage: 'Bad Request',
-        message: 'ID utilisateur requis'
+        message: 'User ID required'
       });
     }
 
@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 404,
         statusMessage: 'Not Found',
-        message: 'Utilisateur non trouvé'
+        message: 'User not found'
       });
     }
 
@@ -95,16 +95,16 @@ export default defineEventHandler(async (event) => {
       } : null,
       hasTeacherEntry: !!teacherEntry,
       message: teacherEntry 
-        ? 'Utilisateur trouvé avec entrée teacher correspondante' 
-        : 'Utilisateur trouvé mais aucune entrée teacher correspondante'
+        ? 'User found with corresponding teacher entry' 
+        : 'User found but no corresponding teacher entry'
     };
 
   } catch (error) {
-    console.error('Erreur lors de la vérification de l\'entrée teacher:', error);
+    console.error('Error checking teacher entry:', error);
     return createError({
       statusCode: 500,
       statusMessage: 'Internal Server Error',
-      message: `Erreur lors de la vérification: ${error.message}`
+      message: `Error during verification: ${error.message}`
     });
   }
 });

@@ -22,7 +22,7 @@ const createTransporter = async () => {
       }
     });
   } catch (error) {
-    console.error('Erreur lors de l\'import de nodemailer:', error);
+    console.error('Error importing nodemailer:', error);
     throw error;
   }
 };
@@ -42,25 +42,25 @@ async function sendPendingApprovalEmail({ to, firstName, lastName }) {
   console.log('SMTP_PORT:', config.smtpPort || '❌ Non configuré');
   
   if (!smtpUser || !smtpPass) {
-    console.warn('⚠️ Variables SMTP non configurées. Email non envoyé.');
-    console.warn('Pour configurer l\'envoi d\'emails, ajoutez les variables suivantes dans votre fichier .env :');
+    console.warn('⚠️ SMTP variables not configured. Email not sent.');
+    console.warn('To configure email sending, add the following variables to your .env file:');
     console.warn('SMTP_HOST=smtp.gmail.com');
     console.warn('SMTP_PORT=587');
     console.warn('SMTP_USER=votre-email@gmail.com');
     console.warn('SMTP_PASS=votre-mot-de-passe-app');
     console.warn('SMTP_FROM=noreply@academ-message.com');
-    return { success: false, message: 'Variables SMTP non configurées' };
+    return { success: false, message: 'SMTP variables not configured' };
   }
 
-  const subject = 'Votre inscription est en cours de vérification - Academ';
+  const subject = 'Your registration is under review - Academ';
   
   const htmlContent = `
     <!DOCTYPE html>
-    <html lang="fr">
+    <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Inscription en attente - Academ</title>
+      <title>Registration Pending - Academ</title>
       <style>
         body {
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -101,56 +101,56 @@ async function sendPendingApprovalEmail({ to, firstName, lastName }) {
     <body>
       <div class="header">
         <div style="font-size: 48px; margin: 20px 0;">⏳</div>
-        <h1>Inscription reçue</h1>
-        <p>Bonjour ${firstName} ${lastName}</p>
+        <h1>Registration Received</h1>
+        <p>Hello ${firstName} ${lastName}</p>
       </div>
       
       <div class="content">
-        <p>Merci d'avoir créé votre compte professeur sur Academ !</p>
+        <p>Thank you for creating your teacher account on Academ!</p>
         
-        <p>Notre équipe examine actuellement votre profil pour s'assurer qu'il respecte nos standards de qualité.</p>
+        <p>Our team is currently reviewing your profile to ensure it meets our quality standards.</p>
         
         <div class="warning">
-          <h4>⏱️ Délai de traitement</h4>
-          <p>Ce processus prend généralement entre <strong>24 et 48 heures</strong>.</p>
+          <h4>⏱️ Processing Time</h4>
+          <p>This process typically takes between <strong>24 and 48 hours</strong>.</p>
         </div>
         
-        <p>Dès que votre compte sera approuvé, nous vous enverrons un email de confirmation avec un lien pour accéder à votre espace professeur.</p>
+        <p>Once your account is approved, we will send you a confirmation email with a link to access your teacher dashboard.</p>
         
-        <p>Si vous avez des questions, n'hésitez pas à contacter notre équipe support à <strong>support@academ.com</strong>.</p>
+        <p>If you have any questions, please feel free to contact our support team at <strong>support@academ.com</strong>.</p>
         
-        <p>Cordialement,<br>L'équipe Academ</p>
+        <p>Best regards,<br>The Academ Team</p>
       </div>
       
       <div class="footer">
-        <p>Cet email a été envoyé automatiquement. Merci de ne pas y répondre.</p>
-        <p>© 2024 Academ. Tous droits réservés.</p>
+        <p>This email was sent automatically. Please do not reply.</p>
+        <p>© 2024 Academ. All rights reserved.</p>
       </div>
     </body>
     </html>
   `;
 
   const textContent = `
-    Inscription reçue - Academ
+    Registration Received - Academ
     
-    Bonjour ${firstName} ${lastName},
+    Hello ${firstName} ${lastName},
     
-    Merci d'avoir créé votre compte professeur sur Academ !
+    Thank you for creating your teacher account on Academ!
     
-    Notre équipe examine actuellement votre profil pour s'assurer qu'il respecte nos standards de qualité.
+    Our team is currently reviewing your profile to ensure it meets our quality standards.
     
-    Délai de traitement : Ce processus prend généralement entre 24 et 48 heures.
+    Processing Time: This process typically takes between 24 and 48 hours.
     
-    Dès que votre compte sera approuvé, nous vous enverrons un email de confirmation avec un lien pour accéder à votre espace professeur.
+    Once your account is approved, we will send you a confirmation email with a link to access your teacher dashboard.
     
-    Si vous avez des questions, n'hésitez pas à contacter notre équipe support à support@academ.com.
+    If you have any questions, please feel free to contact our support team at support@academ.com.
     
-    Cordialement,
-    L'équipe Academ
+    Best regards,
+    The Academ Team
     
     ---
-    Cet email a été envoyé automatiquement. Merci de ne pas y répondre.
-    © 2024 Academ. Tous droits réservés.
+    This email was sent automatically. Please do not reply.
+    © 2024 Academ. All rights reserved.
   `;
 
   try {
@@ -164,10 +164,10 @@ async function sendPendingApprovalEmail({ to, firstName, lastName }) {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Email d\'attente d\'approbation envoyé:', info.messageId);
+    console.log('✅ Pending approval email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('❌ Erreur lors de l\'envoi de l\'email d\'attente:', error);
+    console.error('❌ Error sending pending email:', error);
     throw error;
   }
 }

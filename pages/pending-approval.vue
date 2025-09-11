@@ -20,20 +20,20 @@
 
           <!-- Title -->
           <h2 class="text-2xl font-semibold text-gray-900 mb-4">
-            Compte en attente d'approbation
+            Account Pending Approval
           </h2>
 
           <!-- Description -->
           <div class="space-y-4 text-gray-600">
             <p class="leading-relaxed">
-              Votre demande d'inscription en tant que professeur a été soumise avec succès.
+              Your teacher registration request has been successfully submitted.
             </p>
             <p class="leading-relaxed">
-              Un administrateur va examiner votre profil et vous recevrez un email de confirmation 
-              une fois votre compte approuvé.
+              An administrator will review your profile and you will receive a confirmation email 
+              once your account is approved.
             </p>
             <p class="text-sm text-gray-500">
-              Ce processus prend généralement entre 24 et 48 heures.
+              This process typically takes between 24 and 48 hours.
             </p>
           </div>
 
@@ -47,11 +47,11 @@
               </div>
               <div class="text-left">
                 <h4 class="text-sm font-medium text-blue-900 mb-1">
-                  Email de notification envoyé
+                  Notification Email Sent
                 </h4>
                 <p class="text-sm text-blue-700">
-                  Nous avons envoyé un email de confirmation à votre adresse. 
-                  Vous recevrez un second email lorsque votre compte sera approuvé.
+                  We have sent a confirmation email to your address. 
+                  You will receive a second email when your account is approved.
                 </p>
               </div>
             </div>
@@ -63,21 +63,21 @@
               to="/"
               class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-medium py-3 px-4 rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl inline-block"
             >
-              Retour à l'accueil
+              Return to Home
             </NuxtLink>
             
             <NuxtLink 
               to="/login"
               class="w-full border border-gray-200 text-gray-700 hover:bg-gray-50 font-medium py-3 px-4 rounded-xl transition-all duration-200 inline-block"
             >
-              Se connecter avec un autre compte
+              Sign in with another account
             </NuxtLink>
           </div>
 
           <!-- Contact info -->
           <div class="mt-6 pt-6 border-t border-gray-100">
             <p class="text-xs text-gray-500">
-              Des questions ? Contactez-nous à 
+              Have questions? Contact us at 
               <a href="mailto:support@academ.com" class="text-purple-600 hover:text-purple-700 underline">
                 support@academ.com
               </a>
@@ -91,7 +91,7 @@
 
 <script setup>
 definePageMeta({
-  title: 'Compte en attente - Academ',
+  title: 'Account Pending - Academ',
   layout: 'default',
   auth: false
 })

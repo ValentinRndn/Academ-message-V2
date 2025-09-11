@@ -61,33 +61,33 @@ async function sendApprovalConfirmationEmail({ to, firstName, lastName }) {
   const smtpUser = config.smtpUser;
   const smtpPass = config.smtpPass;
   
-  console.log('🔍 Vérification des variables SMTP:');
-  console.log('SMTP_USER:', smtpUser ? '✅ Configuré' : '❌ Non configuré');
-  console.log('SMTP_PASS:', smtpPass ? '✅ Configuré' : '❌ Non configuré');
-  console.log('SMTP_HOST:', config.smtpHost || '❌ Non configuré');
-  console.log('SMTP_PORT:', config.smtpPort || '❌ Non configuré');
+  console.log('🔍 Checking SMTP variables:');
+  console.log('SMTP_USER:', smtpUser ? '✅ Configured' : '❌ Not configured');
+  console.log('SMTP_PASS:', smtpPass ? '✅ Configured' : '❌ Not configured');
+  console.log('SMTP_HOST:', config.smtpHost || '❌ Not configured');
+  console.log('SMTP_PORT:', config.smtpPort || '❌ Not configured');
   
   if (!smtpUser || !smtpPass) {
-    console.warn('⚠️ Variables SMTP non configurées. Email non envoyé.');
-    console.warn('Pour configurer l\'envoi d\'emails, ajoutez les variables suivantes dans votre fichier .env :');
+    console.warn('⚠️ SMTP variables not configured. Email not sent.');
+    console.warn('To configure email sending, add the following variables to your .env file:');
     console.warn('SMTP_HOST=smtp.gmail.com');
     console.warn('SMTP_PORT=587');
-    console.warn('SMTP_USER=votre-email@gmail.com');
-    console.warn('SMTP_PASS=votre-mot-de-passe-app');
+    console.warn('SMTP_USER=your-email@gmail.com');
+    console.warn('SMTP_PASS=your-app-password');
     console.warn('SMTP_FROM=noreply@academ-message.com');
-    return { success: false, message: 'Variables SMTP non configurées' };
+    return { success: false, message: 'SMTP variables not configured' };
   }
 
-  const subject = 'Félicitations ! Votre compte professeur a été approuvé - Academ';
+  const subject = 'Congratulations! Your teacher account has been approved - Academ';
   const baseUrl = config.baseUrl || 'https://academ.my';
   
   const htmlContent = `
     <!DOCTYPE html>
-    <html lang="fr">
+    <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Compte approuvé - Academ</title>
+      <title>Account Approved - Academ</title>
       <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
         .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
@@ -97,16 +97,16 @@ async function sendApprovalConfirmationEmail({ to, firstName, lastName }) {
     </head>
     <body>
       <div class="header">
-        <h1>🎉 Félicitations !</h1>
-        <p>Votre compte a été approuvé</p>
+        <h1>🎉 Congratulations!</h1>
+        <p>Your account has been approved</p>
       </div>
       <div class="content">
-        <p>Bonjour ${firstName} ${lastName},</p>
-        <p><strong>Excellente nouvelle !</strong> Votre profil de professeur a été approuvé par notre équipe.</p>
-        <p>Vous pouvez maintenant accéder à votre espace professeur et commencer à enseigner sur Academ.</p>
-        <a href="${baseUrl}/login" class="button">🚀 Accéder à mon espace professeur</a>
-        <p>Bienvenue dans la communauté Academ !</p>
-        <p>Cordialement,<br>L'équipe Academ</p>
+        <p>Hello ${firstName} ${lastName},</p>
+        <p><strong>Great news!</strong> Your teacher profile has been approved by our team.</p>
+        <p>You can now access your teacher dashboard and start teaching on Academ.</p>
+        <a href="${baseUrl}/login" class="button">🚀 Access my teacher dashboard</a>
+        <p>Welcome to the Academ community!</p>
+        <p>Best regards,<br>The Academ Team</p>
       </div>
     </body>
     </html>
@@ -122,10 +122,10 @@ async function sendApprovalConfirmationEmail({ to, firstName, lastName }) {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Email d\'approbation envoyé:', info.messageId);
+    console.log('✅ Approval email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('❌ Erreur lors de l\'envoi de l\'email d\'approbation:', error);
+    console.error('❌ Error sending approval email:', error);
     throw error;
   }
 }
@@ -176,7 +176,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 400,
         statusMessage: 'Bad Request',
-        message: 'Seuls les professeurs peuvent être approuvés'
+        message: 'Only teachers can be approved'
       });
     }
 
@@ -184,7 +184,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 400,
         statusMessage: 'Bad Request',
-        message: 'Cet utilisateur n\'est pas en attente d\'approbation'
+        message: 'This user is not pending approval'
       });
     }
 
@@ -205,13 +205,13 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 500,
         statusMessage: 'Internal Server Error',
-        message: 'Erreur lors de l\'approbation de l\'utilisateur'
+        message: 'Error approving user'
       });
     }
 
     // Créer l'entrée dans la table teachers
     try {
-      console.log('📚 Création de l\'entrée dans la table teachers...');
+      console.log('📚 Creating entry in teachers table...');
       
       // Vérifier si une entrée existe déjà
       const existingTeacher = await database.collection('teachers').findOne({ userId: objectId });
@@ -242,12 +242,12 @@ export default defineEventHandler(async (event) => {
         const teacherResult = await database.collection('teachers').insertOne(teacherData);
         
         if (teacherResult.insertedId) {
-          console.log('✅ Entrée teacher créée avec l\'ID:', teacherResult.insertedId);
+          console.log('✅ Teacher entry created with ID:', teacherResult.insertedId);
         } else {
-          console.warn('⚠️ Problème lors de la création de l\'entrée teacher');
+          console.warn('⚠️ Issue creating teacher entry');
         }
       } else {
-        console.log('✅ Entrée teacher existante trouvée:', existingTeacher._id);
+        console.log('✅ Existing teacher entry found:', existingTeacher._id);
         
         // Mettre à jour le statut si nécessaire
         if (existingTeacher.status !== 'active') {
@@ -260,11 +260,11 @@ export default defineEventHandler(async (event) => {
               }
             }
           );
-          console.log('✅ Statut teacher mis à jour vers "active"');
+          console.log('✅ Teacher status updated to "active"');
         }
       }
     } catch (teacherError) {
-      console.error('❌ Erreur lors de la création/mise à jour de l\'entrée teacher:', teacherError);
+      console.error('❌ Error creating/updating teacher entry:', teacherError);
       // On continue même si la création teacher échoue pour ne pas bloquer l'approbation
     }
 
@@ -275,16 +275,16 @@ export default defineEventHandler(async (event) => {
         firstName: user.firstName,
         lastName: user.lastName
       });
-      console.log('✅ Email d\'approbation envoyé à:', user.email);
+      console.log('✅ Approval email sent to:', user.email);
     } catch (emailError) {
-      console.error('❌ Erreur lors de l\'envoi de l\'email d\'approbation:', emailError);
+      console.error('❌ Error sending approval email:', emailError);
       // On continue même si l'email échoue
     }
 
     // Récupérer l'utilisateur mis à jour
     const updatedUser = await database.collection('users').findOne({ _id: objectId });
 
-    console.log(`✅ Professeur approuvé par l'admin ${event.context.auth.user.email}:`, {
+    console.log(`✅ Teacher approved by admin ${event.context.auth.user.email}:`, {
       userId: userId,
       teacherEmail: user.email,
       approvedBy: event.context.auth.user._id
@@ -292,7 +292,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      message: `Le professeur ${user.firstName} ${user.lastName} a été approuvé avec succès et ajouté à la base des professeurs`,
+      message: `Teacher ${user.firstName} ${user.lastName} has been successfully approved and added to the teachers database`,
       user: {
         _id: updatedUser._id,
         firstName: updatedUser.firstName,

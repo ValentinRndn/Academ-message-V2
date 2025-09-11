@@ -4,8 +4,8 @@
     <div class="mb-8">
       <div class="flex items-center justify-between">
         <div>
-          <h1 class="text-3xl font-bold text-gray-900">Gestion des utilisateurs</h1>
-          <p class="text-gray-600 mt-2">Gérer tous les utilisateurs de la plateforme</p>
+          <h1 class="text-3xl font-bold text-gray-900">User Management</h1>
+          <p class="text-gray-600 mt-2">Manage all platform users</p>
         </div>
         <div class="flex space-x-3">
           <NuxtLink 
@@ -15,7 +15,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
             </svg>
-            Créer un utilisateur
+            Create User
           </NuxtLink>
         </div>
       </div>
@@ -25,7 +25,7 @@
     <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Rechercher</label>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
           <input
             v-model="searchQuery"
             type="text"
@@ -46,7 +46,7 @@
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Statut</label>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
           <select
             v-model="statusFilter"
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
@@ -127,7 +127,7 @@
       </div>
     </div>
 
-    <!-- Professeurs en attente d'approbation -->
+    <!-- Teachers pending approval -->
     <div v-if="pendingTeachers.length > 0" class="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-6">
       <div class="flex items-center justify-between mb-4">
         <div class="flex items-center">
@@ -138,7 +138,7 @@
           </div>
           <div class="ml-3">
             <h3 class="text-lg font-medium text-orange-800">
-              Professeurs en attente d'approbation ({{ pendingTeachers.length }})
+              Teachers pending approval ({{ pendingTeachers.length }})
             </h3>
             <p class="text-sm text-orange-600">
               Ces professeurs attendent une approbation pour accéder à la plateforme.
@@ -214,7 +214,7 @@
         <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
         </svg>
-        <p class="text-gray-500">Aucun utilisateur trouvé</p>
+        <p class="text-gray-500">No users found</p>
       </div>
 
       <div v-else class="overflow-x-auto">
@@ -228,7 +228,7 @@
                 Rôle
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Statut
+                Status
               </th>
               <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Date d'inscription
@@ -306,7 +306,7 @@
                     v-if="user.role === 'teacher' && user.status === 'pending'"
                     @click="approveTeacher(user)"
                     class="text-green-600 hover:text-green-800"
-                    title="Approuver ce professeur"
+                    title="Approve this teacher"
                   >
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -410,13 +410,13 @@
         <div class="overflow-y-auto max-h-[calc(90vh-200px)]">
           <div class="p-6 space-y-6">
             
-            <!-- Informations personnelles -->
+            <!-- Personal Information -->
             <div class="bg-gray-50 rounded-lg p-4">
               <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                Informations personnelles
+                Personal Information
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="bg-white p-3 rounded-lg">
@@ -478,13 +478,13 @@
               </div>
             </div>
 
-            <!-- Détails professeur -->
+            <!-- Teacher Details -->
             <div v-if="selectedUser?.role === 'teacher'" class="bg-gray-50 rounded-lg p-4">
               <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
-                Détails Professeur
+                Teacher Details
               </h3>
               <div class="space-y-4">
                 <div v-if="selectedUser?.bio" class="bg-white p-4 rounded-lg">
@@ -542,7 +542,7 @@
                   <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  Approuver ce professeur
+                  Approve this teacher
                 </button>
                 <button
                   @click="rejectTeacher(selectedUser)"
@@ -551,7 +551,7 @@
                   <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
-                  Rejeter ce professeur
+                  Reject this teacher
                 </button>
               </div>
             </div>
@@ -622,7 +622,7 @@
                 </select>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700">Statut</label>
+                <label class="block text-sm font-medium text-gray-700">Status</label>
                 <select
                   v-model="editForm.status"
                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500"
@@ -635,7 +635,7 @@
             </div>
 
             <div v-if="editForm.role === 'teacher'" class="space-y-4 border-t pt-4">
-              <h4 class="text-md font-medium text-gray-900">Informations professeur</h4>
+              <h4 class="text-md font-medium text-gray-900">Teacher Information</h4>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-sm font-medium text-gray-700">Spécialisation</label>
@@ -733,7 +733,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <h3 class="text-lg leading-6 font-medium text-gray-900 mt-2">Rejeter le professeur</h3>
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mt-2">Reject Teacher</h3>
           <div class="mt-2 px-7 py-3">
             <p class="text-sm text-gray-500 mb-4">
               Êtes-vous sûr de vouloir rejeter la demande de 
@@ -743,7 +743,7 @@
             
             <div class="text-left">
               <label for="rejection-reason" class="block text-sm font-medium text-gray-700 mb-2">
-                Raison du rejet (optionnel)
+                Reason for rejection (optional)
               </label>
               <textarea
                 id="rejection-reason"
@@ -767,7 +767,7 @@
                 :disabled="loading"
                 class="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700 disabled:opacity-50"
               >
-                {{ loading ? 'Rejet...' : 'Rejeter' }}
+                {{ loading ? 'Rejecting...' : 'Reject' }}
               </button>
             </div>
           </div>
@@ -859,7 +859,7 @@ const fetchUsers = async () => {
   }
 };
 
-// Professeurs en attente d'approbation
+// Teachers pending approval
 const pendingTeachers = computed(() => {
   return users.value.filter(user => user.role === 'teacher' && user.status === 'pending');
 });
@@ -1101,7 +1101,7 @@ const toggleUserStatus = async (user) => {
       user.status = newStatus;
       const { showSuccess } = useToast();
       showSuccess(
-        'Statut mis à jour', 
+        'Status updated', 
         `L'utilisateur ${user.firstName} ${user.lastName} est maintenant ${newStatus === 'active' ? 'actif' : 'inactif'}`
       );
     }
@@ -1133,7 +1133,7 @@ const approveTeacher = async (user) => {
       const { showSuccess } = useToast();
       showSuccess('Professeur approuvé !', response.message);
       
-      // Fermer la modal de détails si ouverte
+      // Close details modal if open
       if (showUserModal.value) {
         closeUserModal();
       }
@@ -1177,7 +1177,7 @@ const confirmRejectTeacher = async () => {
       
       closeRejectModal();
       
-      // Fermer la modal de détails si ouverte
+      // Close details modal if open
       if (showUserModal.value) {
         closeUserModal();
       }

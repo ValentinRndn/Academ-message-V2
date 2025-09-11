@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
       throw createError({
         statusCode: 401,
         statusMessage: 'Unauthorized',
-        message: 'Authentification requise'
+        message: 'Authentication required'
       });
     }
 
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
       throw createError({
         statusCode: 403,
         statusMessage: 'Forbidden',
-        message: 'Accès réservé aux professeurs'
+        message: 'Access restricted to teachers'
       });
     }
 
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
       throw createError({
         statusCode: 404,
         statusMessage: 'Not Found',
-        message: 'Profil professeur non trouvé'
+        message: 'Teacher profile not found'
       });
     }
 
@@ -82,10 +82,10 @@ export default defineEventHandler(async (event) => {
 
     return {
       teacher: updatedProfile.toObject(),
-      message: 'Profil mis à jour avec succès'
+      message: 'Profile updated successfully'
     };
   } catch (error) {
-    console.error('Erreur lors de la mise à jour du profil professeur:', error);
+    console.error('Error updating teacher profile:', error);
     
     if (error.statusCode) {
       throw error;
@@ -94,7 +94,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 500,
       statusMessage: 'Internal Server Error',
-      message: 'Erreur lors de la mise à jour du profil professeur'
+      message: 'Error updating teacher profile'
     });
   }
 });

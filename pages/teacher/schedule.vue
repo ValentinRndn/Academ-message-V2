@@ -3,13 +3,13 @@
     <div class=" mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Header -->
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-gray-900">Mon Planning</h1>
+        <h1 class="text-3xl font-bold text-gray-900">My Schedule</h1>
         <p class="mt-2 text-gray-600">
-          Gérez vos cours et vos disponibilités en un seul endroit.
+          Manage your lessons and availability in one place.
         </p>
       </div>
 
-      <!-- Navigation des onglets -->
+      <!-- Tab Navigation -->
       <div class="mb-8">
         <nav class="flex space-x-8">
           <button
@@ -31,9 +31,9 @@
         </nav>
       </div>
 
-      <!-- Contenu des onglets -->
+      <!-- Tab Content -->
       <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-        <!-- Onglet Disponibilités -->
+        <!-- Availability Tab -->
         <div v-if="activeTab === 'availability'" class="p-6">
           <div class="mb-6">
             <h2 class="text-xl font-semibold text-gray-900 mb-2">Gérer mes disponibilités</h2>
@@ -43,7 +43,7 @@
         </div>
 
 
-        <!-- Onglet Cours programmés -->
+        <!-- Scheduled Lessons Tab -->
         <div v-if="activeTab === 'bookings'" class="p-6">
           <div class="mb-6">
             <h2 class="text-xl font-semibold text-gray-900 mb-2">Mes cours programmés</h2>
@@ -54,8 +54,8 @@
           <div class="mb-6 flex flex-wrap gap-4">
             <select v-model="bookingFilter" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
               <option value="all">Tous les cours</option>
-              <option value="upcoming">Cours à venir</option>
-              <option value="past">Cours passés</option>
+              <option value="upcoming">Upcoming Lessons</option>
+              <option value="past">Past Lessons</option>
               <option value="pending">En attente</option>
               <option value="confirmed">Confirmés</option>
             </select>
@@ -153,7 +153,7 @@
           </div>
         </div>
 
-        <!-- Onglet Calendrier -->
+        <!-- Calendar Tab -->
         <div v-if="activeTab === 'calendar'" class="p-6">
           <div class="mb-6">
             <h2 class="text-xl font-semibold text-gray-900 mb-2">Vue calendrier</h2>
@@ -261,16 +261,16 @@ const bookingFilter = ref('all');
 const searchQuery = ref('');
 const currentDate = ref(new Date());
 
-// Onglets
+// Tabs
 const tabs = [
   {
     id: 'availability',
-    name: 'Disponibilités',
+    name: 'Availability',
     icon: 'ClockIcon'
   },
   {
     id: 'bookings',
-    name: 'Cours programmés',
+    name: 'Scheduled Lessons',
     icon: 'CalendarIcon'
   },
   {

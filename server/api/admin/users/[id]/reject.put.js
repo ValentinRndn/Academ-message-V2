@@ -52,7 +52,7 @@ const createTransporter = async () => {
   }
 };
 
-// Email de rejet d'approbation
+// Rejection email
 async function sendRejectionEmail({ to, firstName, lastName, reason }) {
   const config = useRuntimeConfig();
   
@@ -60,32 +60,32 @@ async function sendRejectionEmail({ to, firstName, lastName, reason }) {
   const smtpUser = config.smtpUser;
   const smtpPass = config.smtpPass;
   
-  console.log('🔍 Vérification des variables SMTP:');
-  console.log('SMTP_USER:', smtpUser ? '✅ Configuré' : '❌ Non configuré');
-  console.log('SMTP_PASS:', smtpPass ? '✅ Configuré' : '❌ Non configuré');
-  console.log('SMTP_HOST:', config.smtpHost || '❌ Non configuré');
-  console.log('SMTP_PORT:', config.smtpPort || '❌ Non configuré');
+  console.log('🔍 Checking SMTP variables:');
+  console.log('SMTP_USER:', smtpUser ? '✅ Configured' : '❌ Not configured');
+  console.log('SMTP_PASS:', smtpPass ? '✅ Configured' : '❌ Not configured');
+  console.log('SMTP_HOST:', config.smtpHost || '❌ Not configured');
+  console.log('SMTP_PORT:', config.smtpPort || '❌ Not configured');
   
   if (!smtpUser || !smtpPass) {
-    console.warn('⚠️ Variables SMTP non configurées. Email non envoyé.');
-    console.warn('Pour configurer l\'envoi d\'emails, ajoutez les variables suivantes dans votre fichier .env :');
+    console.warn('⚠️ SMTP variables not configured. Email not sent.');
+    console.warn('To configure email sending, add the following variables to your .env file:');
     console.warn('SMTP_HOST=smtp.gmail.com');
     console.warn('SMTP_PORT=587');
     console.warn('SMTP_USER=votre-email@gmail.com');
     console.warn('SMTP_PASS=votre-mot-de-passe-app');
     console.warn('SMTP_FROM=noreply@academ-message.com');
-    return { success: false, message: 'Variables SMTP non configurées' };
+    return { success: false, message: 'SMTP variables not configured' };
   }
 
-  const subject = 'Mise à jour de votre demande d\'inscription - Academ';
+  const subject = 'Update on your registration request - Academ';
   
   const htmlContent = `
     <!DOCTYPE html>
-    <html lang="fr">
+    <html lang="en">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Demande d'inscription - Academ</title>
+      <title>Registration Request - Academ</title>
       <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
         .header { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
@@ -96,38 +96,38 @@ async function sendRejectionEmail({ to, firstName, lastName, reason }) {
     </head>
     <body>
       <div class="header">
-        <h1>📋 Mise à jour de votre demande</h1>
-        <p>Bonjour ${firstName} ${lastName}</p>
+        <h1>📋 Update on your request</h1>
+        <p>Hello ${firstName} ${lastName}</p>
       </div>
       <div class="content">
-        <p>Nous vous remercions pour votre intérêt à rejoindre notre communauté de professeurs sur Academ.</p>
+        <p>Thank you for your interest in joining our community of teachers on Academ.</p>
         
-        <p>Après examen de votre profil, nous ne pouvons malheureusement pas approuver votre demande d'inscription en tant que professeur à ce moment.</p>
+        <p>After reviewing your profile, we unfortunately cannot approve your teacher registration request at this time.</p>
         
         ${reason ? `
         <div class="info-box">
-          <h4>📝 Raison du refus :</h4>
+          <h4>📝 Reason for rejection:</h4>
           <p>${reason}</p>
         </div>
         ` : ''}
         
-        <h3>Prochaines étapes</h3>
-        <p>Cette décision n'est pas définitive. Vous pouvez :</p>
+        <h3>Next steps</h3>
+        <p>This decision is not final. You can:</p>
         <ul>
-          <li>📚 Compléter vos qualifications ou certifications</li>
-          <li>📝 Améliorer votre profil et votre présentation</li>
-          <li>🔄 Soumettre une nouvelle demande dans le futur</li>
+          <li>📚 Complete your qualifications or certifications</li>
+          <li>📝 Improve your profile and presentation</li>
+          <li>🔄 Submit a new request in the future</li>
         </ul>
         
-        <p>Si vous avez des questions ou souhaitez plus d'informations, n'hésitez pas à nous contacter à <strong>support@academ.com</strong>.</p>
+        <p>If you have any questions or would like more information, please feel free to contact us at <strong>support@academ.com</strong>.</p>
         
         <a href="${config.baseUrl || 'https://academ.my'}" class="button">
-          Retourner sur Academ
+          Return to Academ
         </a>
         
-        <p>Nous vous encourageons à réessayer lorsque vous aurez eu l'opportunité d'enrichir votre profil.</p>
+        <p>We encourage you to try again when you have had the opportunity to enhance your profile.</p>
         
-        <p>Cordialement,<br>L'équipe Academ</p>
+        <p>Best regards,<br>The Academ Team</p>
       </div>
     </body>
     </html>
@@ -143,10 +143,10 @@ async function sendRejectionEmail({ to, firstName, lastName, reason }) {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Email de rejet envoyé:', info.messageId);
+    console.log('✅ Rejection email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('❌ Erreur lors de l\'envoi de l\'email de rejet:', error);
+    console.error('❌ Error sending rejection email:', error);
     throw error;
   }
 }
@@ -200,7 +200,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 400,
         statusMessage: 'Bad Request',
-        message: 'Seuls les professeurs peuvent être rejetés'
+        message: 'Only teachers can be rejected'
       });
     }
 
@@ -208,7 +208,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 400,
         statusMessage: 'Bad Request',
-        message: 'Cet utilisateur n\'est pas en attente d\'approbation'
+        message: 'This user is not pending approval'
       });
     }
 
@@ -219,22 +219,22 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 500,
         statusMessage: 'Internal Server Error',
-        message: 'Erreur lors du rejet de l\'utilisateur'
+        message: 'Error rejecting user'
       });
     }
 
     // Supprimer aussi l'entrée teacher si elle existe
     try {
-      console.log('🗑️ Suppression de l\'éventuelle entrée teacher...');
+      console.log('🗑️ Deleting potential teacher entry...');
       const teacherDeleteResult = await database.collection('teachers').deleteOne({ userId: objectId });
       
       if (teacherDeleteResult.deletedCount > 0) {
-        console.log('✅ Entrée teacher supprimée');
+        console.log('✅ Teacher entry deleted');
       } else {
-        console.log('ℹ️ Aucune entrée teacher trouvée à supprimer');
+        console.log('ℹ️ No teacher entry found to delete');
       }
     } catch (teacherError) {
-      console.error('❌ Erreur lors de la suppression de l\'entrée teacher:', teacherError);
+      console.error('❌ Error deleting teacher entry:', teacherError);
       // On continue même si la suppression teacher échoue
     }
 
@@ -246,13 +246,13 @@ export default defineEventHandler(async (event) => {
         lastName: user.lastName,
         reason: reason
       });
-      console.log('✅ Email de rejet envoyé à:', user.email);
+      console.log('✅ Rejection email sent to:', user.email);
     } catch (emailError) {
-      console.error('❌ Erreur lors de l\'envoi de l\'email de rejet:', emailError);
+      console.error('❌ Error sending rejection email:', emailError);
       // On continue même si l'email échoue
     }
 
-    console.log(`✅ Professeur rejeté par l'admin ${event.context.auth.user.email}:`, {
+    console.log(`✅ Teacher rejected by admin ${event.context.auth.user.email}:`, {
       userId: userId,
       teacherEmail: user.email,
       rejectedBy: event.context.auth.user._id,
@@ -261,7 +261,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       success: true,
-      message: `La demande de ${user.firstName} ${user.lastName} a été rejetée`,
+      message: `The request from ${user.firstName} ${user.lastName} has been rejected`,
       user: {
         _id: user._id,
         firstName: user.firstName,
