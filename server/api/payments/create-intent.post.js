@@ -7,6 +7,10 @@ import Stripe from 'stripe';
 
 export default defineEventHandler(async (event) => {
   try {
+    console.log('🚀 Payment intent endpoint called');
+    console.log('📋 Request path:', event.path);
+    console.log('🔐 Auth context:', event.context.auth ? 'Present' : 'Missing');
+    
     // Récupérer la configuration runtime
     const config = useRuntimeConfig();
     const stripeSecretKey = config.STRIPE_SECRET_KEY;
@@ -29,13 +33,16 @@ export default defineEventHandler(async (event) => {
     
     // Vérifier que l'utilisateur est authentifié
     const auth = event.context.auth;
+    console.log('👤 Auth object:', auth);
     if (!auth || !auth.user) {
+      console.error('❌ Authentication failed - auth:', auth);
       throw createError({
         statusCode: 401,
         statusMessage: 'Unauthorized',
         message: 'Authentification requise'
       });
     }
+    console.log('✅ User authenticated:', auth.user.email);
 
     const body = await readBody(event);
     const { bookingId } = body;
