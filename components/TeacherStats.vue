@@ -27,7 +27,7 @@
           </span>
         </div>
       </div>
-
+      
       <!-- Taux de satisfaction -->
       <div class="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg">
         <div class="flex items-center justify-between">
