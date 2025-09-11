@@ -1,4 +1,4 @@
-// API pour approuver un professeur en attente
+// API pour rejeter un professeur en attente
 import { MongoClient, ObjectId } from 'mongodb';
 
 // Singleton pour maintenir la connexion à MongoDB
@@ -52,8 +52,8 @@ const createTransporter = async () => {
   }
 };
 
-// Email de confirmation d'approbation
-async function sendApprovalConfirmationEmail({ to, firstName, lastName }) {
+// Email de rejet d'approbation
+async function sendRejectionEmail({ to, firstName, lastName, reason }) {
   const config = useRuntimeConfig();
   
   // Vérifier si les variables SMTP sont configurées
@@ -77,8 +77,7 @@ async function sendApprovalConfirmationEmail({ to, firstName, lastName }) {
     return { success: false, message: 'Variables SMTP non configurées' };
   }
 
-  const subject = 'Félicitations ! Votre compte professeur a été approuvé - Academ';
-  const baseUrl = config.baseUrl || 'https://academ.my';
+  const subject = 'Mise à jour de votre demande d\'inscription - Academ';
   
   const htmlContent = `
     <!DOCTYPE html>
@@ -86,25 +85,48 @@ async function sendApprovalConfirmationEmail({ to, firstName, lastName }) {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Compte approuvé - Academ</title>
+      <title>Demande d'inscription - Academ</title>
       <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+        .header { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
         .content { background: #f8f9fa; padding: 30px; border-radius: 0 0 10px 10px; }
-        .button { display: inline-block; background: #10b981; color: white; padding: 15px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; font-weight: bold; }
+        .info-box { background: #fef3c7; border: 1px solid #f59e0b; color: #92400e; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        .button { display: inline-block; background: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
       </style>
     </head>
     <body>
       <div class="header">
-        <h1>🎉 Félicitations !</h1>
-        <p>Votre compte a été approuvé</p>
+        <h1>📋 Mise à jour de votre demande</h1>
+        <p>Bonjour ${firstName} ${lastName}</p>
       </div>
       <div class="content">
-        <p>Bonjour ${firstName} ${lastName},</p>
-        <p><strong>Excellente nouvelle !</strong> Votre profil de professeur a été approuvé par notre équipe.</p>
-        <p>Vous pouvez maintenant accéder à votre espace professeur et commencer à enseigner sur Academ.</p>
-        <a href="${baseUrl}/login" class="button">🚀 Accéder à mon espace professeur</a>
-        <p>Bienvenue dans la communauté Academ !</p>
+        <p>Nous vous remercions pour votre intérêt à rejoindre notre communauté de professeurs sur Academ.</p>
+        
+        <p>Après examen de votre profil, nous ne pouvons malheureusement pas approuver votre demande d'inscription en tant que professeur à ce moment.</p>
+        
+        ${reason ? `
+        <div class="info-box">
+          <h4>📝 Raison du refus :</h4>
+          <p>${reason}</p>
+        </div>
+        ` : ''}
+        
+        <h3>Prochaines étapes</h3>
+        <p>Cette décision n'est pas définitive. Vous pouvez :</p>
+        <ul>
+          <li>📚 Compléter vos qualifications ou certifications</li>
+          <li>📝 Améliorer votre profil et votre présentation</li>
+          <li>🔄 Soumettre une nouvelle demande dans le futur</li>
+        </ul>
+        
+        <p>Si vous avez des questions ou souhaitez plus d'informations, n'hésitez pas à nous contacter à <strong>support@academ.com</strong>.</p>
+        
+        <a href="${config.baseUrl || 'https://academ.my'}" class="button">
+          Retourner sur Academ
+        </a>
+        
+        <p>Nous vous encourageons à réessayer lorsque vous aurez eu l'opportunité d'enrichir votre profil.</p>
+        
         <p>Cordialement,<br>L'équipe Academ</p>
       </div>
     </body>
@@ -121,10 +143,10 @@ async function sendApprovalConfirmationEmail({ to, firstName, lastName }) {
     };
 
     const info = await transporter.sendMail(mailOptions);
-    console.log('✅ Email d\'approbation envoyé:', info.messageId);
+    console.log('✅ Email de rejet envoyé:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
-    console.error('❌ Erreur lors de l\'envoi de l\'email d\'approbation:', error);
+    console.error('❌ Erreur lors de l\'envoi de l\'email de rejet:', error);
     throw error;
   }
 }
@@ -157,6 +179,9 @@ export default defineEventHandler(async (event) => {
       });
     }
 
+    const body = await readBody(event);
+    const { reason } = body;
+
     const database = await connectToMongoDB();
 
     // Récupérer l'utilisateur
@@ -175,7 +200,7 @@ export default defineEventHandler(async (event) => {
       return createError({
         statusCode: 400,
         statusMessage: 'Bad Request',
-        message: 'Seuls les professeurs peuvent être approuvés'
+        message: 'Seuls les professeurs peuvent être rejetés'
       });
     }
 
@@ -187,69 +212,55 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    // Mettre à jour le statut à "active"
-    const updateResult = await database.collection('users').updateOne(
-      { _id: objectId },
-      { 
-        $set: {
-          status: 'active',
-          approvedAt: new Date(),
-          approvedBy: new ObjectId(event.context.auth.user._id),
-          updatedAt: new Date()
-        }
-      }
-    );
+    // Supprimer l'utilisateur (rejet définitif)
+    const deleteResult = await database.collection('users').deleteOne({ _id: objectId });
 
-    if (updateResult.modifiedCount === 0) {
+    if (deleteResult.deletedCount === 0) {
       return createError({
         statusCode: 500,
         statusMessage: 'Internal Server Error',
-        message: 'Erreur lors de l\'approbation de l\'utilisateur'
+        message: 'Erreur lors du rejet de l\'utilisateur'
       });
     }
 
-    // Envoyer l'email de confirmation d'approbation
+    // Envoyer l'email de rejet
     try {
-      await sendApprovalConfirmationEmail({
+      await sendRejectionEmail({
         to: user.email,
         firstName: user.firstName,
-        lastName: user.lastName
+        lastName: user.lastName,
+        reason: reason
       });
-      console.log('✅ Email d\'approbation envoyé à:', user.email);
+      console.log('✅ Email de rejet envoyé à:', user.email);
     } catch (emailError) {
-      console.error('❌ Erreur lors de l\'envoi de l\'email d\'approbation:', emailError);
+      console.error('❌ Erreur lors de l\'envoi de l\'email de rejet:', emailError);
       // On continue même si l'email échoue
     }
 
-    // Récupérer l'utilisateur mis à jour
-    const updatedUser = await database.collection('users').findOne({ _id: objectId });
-
-    console.log(`✅ Professeur approuvé par l'admin ${event.context.auth.user.email}:`, {
+    console.log(`✅ Professeur rejeté par l'admin ${event.context.auth.user.email}:`, {
       userId: userId,
       teacherEmail: user.email,
-      approvedBy: event.context.auth.user._id
+      rejectedBy: event.context.auth.user._id,
+      reason: reason || 'Non spécifiée'
     });
 
     return {
       success: true,
-      message: `Le professeur ${user.firstName} ${user.lastName} a été approuvé avec succès`,
+      message: `La demande de ${user.firstName} ${user.lastName} a été rejetée`,
       user: {
-        _id: updatedUser._id,
-        firstName: updatedUser.firstName,
-        lastName: updatedUser.lastName,
-        email: updatedUser.email,
-        role: updatedUser.role,
-        status: updatedUser.status,
-        approvedAt: updatedUser.approvedAt
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
       }
     };
 
   } catch (error) {
-    console.error('Erreur lors de l\'approbation du professeur:', error);
+    console.error('Erreur lors du rejet du professeur:', error);
     return createError({
       statusCode: 500,
       statusMessage: 'Internal Server Error',
-      message: `Erreur lors de l\'approbation: ${error.message}`
+      message: `Erreur lors du rejet: ${error.message}`
     });
   }
 });

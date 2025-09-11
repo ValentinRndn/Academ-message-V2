@@ -185,6 +185,15 @@
               </svg>
               Approuver
             </button>
+            <button
+              @click="rejectTeacher(teacher)"
+              class="px-4 py-2 text-sm bg-red-600 text-white rounded-md hover:bg-red-700 flex items-center"
+            >
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Rejeter
+            </button>
           </div>
         </div>
       </div>
@@ -365,116 +374,185 @@
       </div>
     </div>
 
-    <!-- Modal de détails utilisateur -->
-    <div v-if="showUserModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
-      <div class="relative top-20 mx-auto p-5 border w-11/12 max-w-2xl shadow-lg rounded-md bg-white">
-        <div class="mt-3">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-medium text-gray-900">Détails de l'utilisateur</h3>
-            <button @click="closeUserModal" class="text-gray-400 hover:text-gray-600">
+    <!-- Modal de détails utilisateur améliorée -->
+    <div v-if="showUserModal" class="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full z-50 flex items-center justify-center p-4">
+      <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+        <!-- Header avec photo de profil -->
+        <div class="bg-gradient-to-r from-purple-600 to-purple-800 p-6 text-white">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div class="w-16 h-16 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-2xl font-bold">
+                {{ selectedUser?.firstName?.charAt(0) }}{{ selectedUser?.lastName?.charAt(0) }}
+              </div>
+              <div>
+                <h2 class="text-2xl font-bold">{{ selectedUser?.firstName }} {{ selectedUser?.lastName }}</h2>
+                <p class="text-purple-100">{{ selectedUser?.email }}</p>
+                <div class="flex items-center space-x-3 mt-2">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white bg-opacity-20">
+                    {{ getRoleLabel(selectedUser?.role) }}
+                  </span>
+                  <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
+                    :class="selectedUser?.status === 'active' ? 'bg-green-100 text-green-800' : selectedUser?.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800'">
+                    {{ getStatusLabel(selectedUser?.status) }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button @click="closeUserModal" class="text-white hover:text-gray-200 transition-colors">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
           </div>
-          
-          <div v-if="selectedUser" class="space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Prénom</label>
-                <p class="mt-1 text-sm text-gray-900">{{ selectedUser.firstName }}</p>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Nom</label>
-                <p class="mt-1 text-sm text-gray-900">{{ selectedUser.lastName }}</p>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Email</label>
-                <p class="mt-1 text-sm text-gray-900">{{ selectedUser.email }}</p>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Téléphone</label>
-                <p class="mt-1 text-sm text-gray-900">{{ selectedUser.phone || 'Non renseigné' }}</p>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Rôle</label>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                  :class="getRoleBadgeClass(selectedUser.role)">
-                  {{ getRoleLabel(selectedUser.role) }}
-                </span>
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700">Statut</label>
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                  :class="getStatusBadgeClass(selectedUser.status)">
-                  {{ getStatusLabel(selectedUser.status) }}
-                </span>
+        </div>
+
+        <!-- Contenu défilable -->
+        <div class="overflow-y-auto max-h-[calc(90vh-200px)]">
+          <div class="p-6 space-y-6">
+            
+            <!-- Informations personnelles -->
+            <div class="bg-gray-50 rounded-lg p-4">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Informations personnelles
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-3 rounded-lg">
+                  <label class="block text-sm font-medium text-gray-500">Prénom</label>
+                  <p class="text-lg text-gray-900">{{ selectedUser?.firstName }}</p>
+                </div>
+                <div class="bg-white p-3 rounded-lg">
+                  <label class="block text-sm font-medium text-gray-500">Nom</label>
+                  <p class="text-lg text-gray-900">{{ selectedUser?.lastName }}</p>
+                </div>
+                <div class="bg-white p-3 rounded-lg">
+                  <label class="block text-sm font-medium text-gray-500">Email</label>
+                  <p class="text-lg text-gray-900">{{ selectedUser?.email }}</p>
+                </div>
+                <div class="bg-white p-3 rounded-lg">
+                  <label class="block text-sm font-medium text-gray-500">Téléphone</label>
+                  <p class="text-lg text-gray-900">{{ selectedUser?.phone || 'Non renseigné' }}</p>
+                </div>
+                <div class="bg-white p-3 rounded-lg">
+                  <label class="block text-sm font-medium text-gray-500">Date d'inscription</label>
+                  <p class="text-lg text-gray-900">{{ formatDate(selectedUser?.createdAt) }}</p>
+                </div>
+                <div class="bg-white p-3 rounded-lg">
+                  <label class="block text-sm font-medium text-gray-500">Dernière connexion</label>
+                  <p class="text-lg text-gray-900">{{ selectedUser?.lastLogin ? formatDate(selectedUser.lastLogin) : 'Jamais' }}</p>
+                </div>
               </div>
             </div>
 
-            <div v-if="userDetails?.stats" class="mt-6">
-              <h4 class="text-md font-medium text-gray-900 mb-3">Statistiques</h4>
+            <!-- Statistiques -->
+            <div v-if="userDetails?.stats" class="bg-gray-50 rounded-lg p-4">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Statistiques
+              </h3>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="text-center">
-                  <p class="text-2xl font-bold text-purple-600">{{ userDetails.stats.accountAge }}</p>
-                  <p class="text-sm text-gray-500">Jours d'ancienneté</p>
+                <div class="bg-white p-4 rounded-lg text-center">
+                  <div class="text-3xl font-bold text-purple-600">{{ userDetails.stats.accountAge }}</div>
+                  <div class="text-sm text-gray-500 mt-1">Jours d'ancienneté</div>
                 </div>
-                <div class="text-center">
-                  <p class="text-2xl font-bold text-purple-600">{{ userDetails.stats.lastLoginAgo || 'Jamais' }}</p>
-                  <p class="text-sm text-gray-500">Dernière connexion (jours)</p>
+                <div class="bg-white p-4 rounded-lg text-center">
+                  <div class="text-3xl font-bold text-purple-600">{{ userDetails.stats.lastLoginAgo || 'N/A' }}</div>
+                  <div class="text-sm text-gray-500 mt-1">Jours depuis dernière connexion</div>
                 </div>
-                <div class="text-center">
-                  <p class="text-2xl font-bold" :class="userDetails.stats.isNewUser ? 'text-green-600' : 'text-gray-400'">
+                <div class="bg-white p-4 rounded-lg text-center">
+                  <div class="text-3xl font-bold" :class="userDetails.stats.isNewUser ? 'text-green-600' : 'text-gray-400'">
                     {{ userDetails.stats.isNewUser ? 'Oui' : 'Non' }}
-                  </p>
-                  <p class="text-sm text-gray-500">Nouvel utilisateur</p>
+                  </div>
+                  <div class="text-sm text-gray-500 mt-1">Nouvel utilisateur</div>
                 </div>
-                <div class="text-center">
-                  <p class="text-2xl font-bold" :class="userDetails.stats.hasEverLoggedIn ? 'text-green-600' : 'text-red-600'">
+                <div class="bg-white p-4 rounded-lg text-center">
+                  <div class="text-3xl font-bold" :class="userDetails.stats.hasEverLoggedIn ? 'text-green-600' : 'text-red-600'">
                     {{ userDetails.stats.hasEverLoggedIn ? 'Oui' : 'Non' }}
-                  </p>
-                  <p class="text-sm text-gray-500">Déjà connecté</p>
+                  </div>
+                  <div class="text-sm text-gray-500 mt-1">Déjà connecté</div>
                 </div>
               </div>
             </div>
 
-            <div v-if="userDetails?.teacherDetails" class="mt-6">
-              <h4 class="text-md font-medium text-gray-900 mb-3">Détails Professeur</h4>
-              <div class="space-y-3">
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Spécialisation</label>
-                  <p class="mt-1 text-sm text-gray-900">{{ selectedUser.specialization || 'Non renseignée' }}</p>
+            <!-- Détails professeur -->
+            <div v-if="selectedUser?.role === 'teacher'" class="bg-gray-50 rounded-lg p-4">
+              <h3 class="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                <svg class="w-5 h-5 mr-2 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                Détails Professeur
+              </h3>
+              <div class="space-y-4">
+                <div v-if="selectedUser?.bio" class="bg-white p-4 rounded-lg">
+                  <label class="block text-sm font-medium text-gray-500 mb-2">Biographie</label>
+                  <p class="text-gray-900 leading-relaxed">{{ selectedUser.bio }}</p>
                 </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Expérience</label>
-                  <p class="mt-1 text-sm text-gray-900">{{ selectedUser.experience || 0 }} années</p>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Bio</label>
-                  <p class="mt-1 text-sm text-gray-900">{{ selectedUser.bio || 'Non renseignée' }}</p>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Matières</label>
-                  <p class="mt-1 text-sm text-gray-900">{{ (selectedUser.subjects || []).join(', ') || 'Aucune matière' }}</p>
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700">Tarif horaire</label>
-                  <p class="mt-1 text-sm text-gray-900">{{ userDetails.teacherDetails.hourlyRate || 0 }}€/h</p>
-                </div>
-                <div class="grid grid-cols-3 gap-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Note moyenne</label>
-                    <p class="mt-1 text-sm text-gray-900">{{ userDetails.teacherDetails.averageRating || 0 }}/5</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="bg-white p-3 rounded-lg">
+                    <label class="block text-sm font-medium text-gray-500">Spécialisation</label>
+                    <p class="text-lg text-gray-900">{{ selectedUser?.specialization || 'Non renseignée' }}</p>
                   </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Avis</label>
-                    <p class="mt-1 text-sm text-gray-900">{{ userDetails.teacherDetails.reviewCount || 0 }}</p>
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700">Sessions</label>
-                    <p class="mt-1 text-sm text-gray-900">{{ userDetails.teacherDetails.sessionsCompleted || 0 }}</p>
+                  <div class="bg-white p-3 rounded-lg">
+                    <label class="block text-sm font-medium text-gray-500">Expérience</label>
+                    <p class="text-lg text-gray-900">{{ selectedUser?.experience || 0 }} années</p>
                   </div>
                 </div>
+
+                <div v-if="selectedUser?.subjects?.length" class="bg-white p-4 rounded-lg">
+                  <label class="block text-sm font-medium text-gray-500 mb-2">Matières enseignées</label>
+                  <div class="flex flex-wrap gap-2">
+                    <span v-for="subject in selectedUser.subjects" :key="subject" 
+                          class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                      {{ subject }}
+                    </span>
+                  </div>
+                </div>
+
+                <div v-if="userDetails?.teacherDetails" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="bg-white p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-purple-600">{{ userDetails.teacherDetails.hourlyRate || 0 }}€</div>
+                    <div class="text-sm text-gray-500">Tarif/heure</div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-yellow-600">{{ userDetails.teacherDetails.averageRating || 0 }}/5</div>
+                    <div class="text-sm text-gray-500">Note moyenne</div>
+                  </div>
+                  <div class="bg-white p-4 rounded-lg text-center">
+                    <div class="text-2xl font-bold text-green-600">{{ userDetails.teacherDetails.sessionsCompleted || 0 }}</div>
+                    <div class="text-sm text-gray-500">Sessions complétées</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actions pour professeurs en attente -->
+            <div v-if="selectedUser?.role === 'teacher' && selectedUser?.status === 'pending'" 
+                 class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+              <h3 class="text-lg font-semibold text-orange-800 mb-3">Actions d'approbation</h3>
+              <div class="flex space-x-3">
+                <button
+                  @click="approveTeacher(selectedUser)"
+                  class="flex-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center justify-center"
+                >
+                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Approuver ce professeur
+                </button>
+                <button
+                  @click="rejectTeacher(selectedUser)"
+                  class="flex-1 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 flex items-center justify-center"
+                >
+                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  Rejeter ce professeur
+                </button>
               </div>
             </div>
           </div>
@@ -645,6 +723,57 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal de rejet de professeur -->
+    <div v-if="showRejectModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3 text-center">
+          <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+            <svg class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mt-2">Rejeter le professeur</h3>
+          <div class="mt-2 px-7 py-3">
+            <p class="text-sm text-gray-500 mb-4">
+              Êtes-vous sûr de vouloir rejeter la demande de 
+              <strong>{{ userToReject?.firstName }} {{ userToReject?.lastName }}</strong> ?
+              Cette action supprimera définitivement le compte et enverra un email de notification.
+            </p>
+            
+            <div class="text-left">
+              <label for="rejection-reason" class="block text-sm font-medium text-gray-700 mb-2">
+                Raison du rejet (optionnel)
+              </label>
+              <textarea
+                id="rejection-reason"
+                v-model="rejectionReason"
+                rows="3"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 text-sm"
+                placeholder="Expliquez brièvement pourquoi cette demande est rejetée..."
+              ></textarea>
+            </div>
+          </div>
+          <div class="items-center px-4 py-3">
+            <div class="flex justify-center space-x-3">
+              <button
+                @click="closeRejectModal"
+                class="px-4 py-2 bg-white text-gray-500 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-100"
+              >
+                Annuler
+              </button>
+              <button
+                @click="confirmRejectTeacher"
+                :disabled="loading"
+                class="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700 disabled:opacity-50"
+              >
+                {{ loading ? 'Rejet...' : 'Rejeter' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -671,9 +800,12 @@ const stats = ref({
 const showUserModal = ref(false);
 const showEditModal = ref(false);
 const showDeleteModal = ref(false);
+const showRejectModal = ref(false);
 const selectedUser = ref(null);
 const userDetails = ref(null);
 const userToDelete = ref(null);
+const userToReject = ref(null);
+const rejectionReason = ref('');
 
 // Formulaire d'édition
 const editForm = ref({
@@ -837,6 +969,12 @@ const closeDeleteModal = () => {
   userToDelete.value = null;
 };
 
+const closeRejectModal = () => {
+  showRejectModal.value = false;
+  userToReject.value = null;
+  rejectionReason.value = '';
+};
+
 // Actions
 const viewUser = async (user) => {
   try {
@@ -994,11 +1132,60 @@ const approveTeacher = async (user) => {
       
       const { showSuccess } = useToast();
       showSuccess('Professeur approuvé !', response.message);
+      
+      // Fermer la modal de détails si ouverte
+      if (showUserModal.value) {
+        closeUserModal();
+      }
     }
   } catch (error) {
     console.error('Erreur lors de l\'approbation:', error);
     const { showError } = useToast();
     showError('Erreur', error.data?.message || 'Erreur lors de l\'approbation du professeur');
+  } finally {
+    loading.value = false;
+  }
+};
+
+const rejectTeacher = (user) => {
+  userToReject.value = user;
+  showRejectModal.value = true;
+};
+
+const confirmRejectTeacher = async () => {
+  try {
+    loading.value = true;
+    
+    const response = await $fetch(`/api/admin/users/${userToReject.value._id}/reject`, {
+      method: 'PUT',
+      body: {
+        reason: rejectionReason.value
+      }
+    });
+
+    if (response.success) {
+      // Retirer l'utilisateur de la liste locale
+      users.value = users.value.filter(u => u._id !== userToReject.value._id);
+      
+      // Mettre à jour les stats
+      stats.value.totalUsers--;
+      stats.value.totalTeachers--;
+      stats.value.pendingUsers--;
+      
+      const { showSuccess } = useToast();
+      showSuccess('Professeur rejeté', response.message);
+      
+      closeRejectModal();
+      
+      // Fermer la modal de détails si ouverte
+      if (showUserModal.value) {
+        closeUserModal();
+      }
+    }
+  } catch (error) {
+    console.error('Erreur lors du rejet:', error);
+    const { showError } = useToast();
+    showError('Erreur', error.data?.message || 'Erreur lors du rejet du professeur');
   } finally {
     loading.value = false;
   }
