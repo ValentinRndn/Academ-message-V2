@@ -476,9 +476,14 @@ const showChangePasswordModal = ref(false);
 
 // Computed properties
 const filteredAvailableSubjects = computed(() => {
+  // S'assurer que les données nécessaires sont disponibles
+  if (!availableSubjects.value || !editedProfile.value || !editedProfile.value.subjects) {
+    return availableSubjects.value || [];
+  }
+  
   return availableSubjects.value.filter(subject => {
-    // Filtrer les matières déjà sélectionnées
-    return !profile.value.subjects.some(selectedSubject => {
+    // Filtrer les matières déjà sélectionnées dans editedProfile
+    return !editedProfile.value.subjects.some(selectedSubject => {
       // Gérer le cas où selectedSubject peut être un string ID ou un objet avec _id
       const selectedId = typeof selectedSubject === 'string' ? selectedSubject : selectedSubject._id;
       return selectedId === subject._id;
@@ -505,17 +510,23 @@ const getLanguageName = (code) => {
 };
 
 const addSubject = () => {
+  console.log('🔍 addSubject appelée avec newSubject.value:', newSubject.value);
+  console.log('📋 editedProfile.value.subjects avant ajout:', editedProfile.value.subjects);
+  
   if (!newSubject.value) {
-    console.log('Aucune matière sélectionnée');
+    console.log('❌ Aucune matière sélectionnée');
     return;
   }
 
   // Trouver l'objet matière complet
   const selectedSubject = availableSubjects.value.find(subject => subject._id === newSubject.value);
   if (!selectedSubject) {
-    console.log('Matière introuvable:', newSubject.value);
+    console.log('❌ Matière introuvable:', newSubject.value);
+    console.log('🎓 Matières disponibles:', availableSubjects.value);
     return;
   }
+  
+  console.log('✅ Matière trouvée:', selectedSubject);
 
   // Initialiser le tableau si nécessaire
   if (!editedProfile.value.subjects) {
@@ -543,7 +554,8 @@ const addSubject = () => {
     name: selectedSubject.name
   });
   
-  console.log('Matière ajoutée:', selectedSubject.name);
+  console.log('✅ Matière ajoutée:', selectedSubject.name);
+  console.log('📋 editedProfile.value.subjects après ajout:', editedProfile.value.subjects);
   newSubject.value = '';
 };
 
@@ -561,9 +573,30 @@ const saveProfile = async () => {
   try {
     saving.value = true;
     
+    // Préparer les données pour la sauvegarde
+    const dataToSave = { ...editedProfile.value };
+    
+    // Convertir les matières en IDs seulement
+    if (dataToSave.subjects && Array.isArray(dataToSave.subjects)) {
+      dataToSave.subjects = dataToSave.subjects.map(subject => {
+        // Si c'est déjà un string ID, le garder tel quel
+        if (typeof subject === 'string') {
+          return subject;
+        }
+        // Si c'est un objet avec _id, extraire l'ID
+        if (subject._id) {
+          return subject._id;
+        }
+        // Sinon, retourner tel quel (sécurité)
+        return subject;
+      });
+    }
+    
+    console.log('Données à sauvegarder:', dataToSave);
+    
     const response = await $fetch('/api/teachers/my-profile', {
       method: 'PUT',
-      body: editedProfile.value
+      body: dataToSave
     });
     
     if (response.teacher) {
@@ -611,8 +644,14 @@ const loadProfile = async () => {
     ]);
     
     if (profileResponse.teacher) {
+      console.log('📋 Profil teacher récupéré:', profileResponse.teacher);
+      console.log('📚 Matières du profil:', profileResponse.teacher.subjects);
+      
       profile.value = profileResponse.teacher;
       editedProfile.value = { ...profileResponse.teacher };
+      
+      console.log('✏️ editedProfile initialisé:', editedProfile.value);
+      console.log('📚 Matières dans editedProfile:', editedProfile.value.subjects);
     }
     
     if (statsResponse) {
@@ -620,6 +659,7 @@ const loadProfile = async () => {
     }
     
     if (subjectsResponse) {
+      console.log('🎓 Matières disponibles récupérées:', subjectsResponse.subjects);
       availableSubjects.value = subjectsResponse.subjects || [];
     }
   } catch (err) {

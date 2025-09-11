@@ -53,7 +53,23 @@ export default defineEventHandler(async (event) => {
     // Mettre à jour uniquement les champs autorisés
     allowedFields.forEach(field => {
       if (body[field] !== undefined) {
-        teacherProfile[field] = body[field];
+        if (field === 'subjects' && Array.isArray(body[field])) {
+          // Validation spéciale pour les subjects - s'assurer que ce sont des ObjectIds valides
+          console.log('📚 Validation des matières reçues:', body[field]);
+          
+          const validSubjects = body[field].filter(subjectId => {
+            if (typeof subjectId === 'string' && subjectId.match(/^[0-9a-fA-F]{24}$/)) {
+              return true;
+            }
+            console.warn('⚠️ ID matière invalide ignoré:', subjectId);
+            return false;
+          });
+          
+          console.log('✅ Matières valides à sauvegarder:', validSubjects);
+          teacherProfile[field] = validSubjects;
+        } else {
+          teacherProfile[field] = body[field];
+        }
       }
     });
 
