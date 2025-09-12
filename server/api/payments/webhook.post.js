@@ -3,16 +3,30 @@ import { connectToDatabase } from '../../config/database.js';
 
 // Initialiser Stripe avec la clé secrète
 import Stripe from 'stripe';
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_dummy_key_replace_with_your_actual_key');
 
 export default defineEventHandler(async (event) => {
   try {
     // S'assurer que la connexion à la base de données est établie
     await connectToDatabase();
     
+    // Récupérer la configuration runtime
+    const config = useRuntimeConfig();
+    const stripeSecretKey = config.STRIPE_SECRET_KEY;
+    const webhookSecret = config.STRIPE_WEBHOOK_SECRET;
+
+    if (!stripeSecretKey) {
+      console.error('STRIPE_SECRET_KEY manquante');
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Configuration Error',
+        message: 'Configuration Stripe manquante'
+      });
+    }
+
+    const stripe = new Stripe(stripeSecretKey);
+    
     const body = await readRawBody(event);
     const signature = getHeader(event, 'stripe-signature');
-    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
     if (!webhookSecret) {
       console.error('STRIPE_WEBHOOK_SECRET n\'est pas défini');

@@ -170,7 +170,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue';
+import { ref, onMounted, nextTick, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useToast } from '~/composables/useToast';
 
@@ -226,7 +226,7 @@ const createPaymentIntent = async () => {
     });
 
     clientSecret.value = response.clientSecret;
-    await initializeStripe();
+    // Ne pas initialiser Stripe ici - on le fait après avoir affiché le formulaire
   } catch (err) {
     console.error('Erreur lors de la création de l\'intention de paiement:', err);
     paymentError.value = err.data?.message || 'Impossible d\'initialiser le paiement';
@@ -261,7 +261,29 @@ const initializeStripe = async () => {
     // Create elements
     elements = stripe.elements();
     
+    // Marquer Stripe comme chargé pour afficher le formulaire
+    stripeLoaded.value = true;
+    
+    // Attendre que le DOM soit mis à jour
     await nextTick();
+    await nextTick(); // Double nextTick pour être sûr
+    
+    // Attendre que l'élément soit présent dans le DOM
+    let retries = 0;
+    const maxRetries = 10;
+    let cardElementContainer = null;
+    
+    while (!cardElementContainer && retries < maxRetries) {
+      cardElementContainer = document.getElementById('card-element');
+      if (!cardElementContainer) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        retries++;
+      }
+    }
+    
+    if (!cardElementContainer) {
+      throw new Error('Élément #card-element non trouvé dans le DOM après plusieurs tentatives');
+    }
 
     // Create card element
     cardElement = elements.create('card', {
@@ -279,10 +301,10 @@ const initializeStripe = async () => {
     // Monter l'élément
     cardElement.mount('#card-element');
 
-    stripeLoaded.value = true;
   } catch (err) {
     console.error('Erreur lors de l\'initialisation de Stripe:', err);
     paymentError.value = 'Impossible de charger le système de paiement';
+    stripeLoaded.value = false; // Reset en cas d'erreur
   }
 };
 
@@ -349,6 +371,13 @@ const formatDuration = (minutes) => {
     return `${mins}min`;
   }
 };
+
+// Watcher pour initialiser Stripe quand clientSecret est disponible
+watch(clientSecret, async (newSecret) => {
+  if (newSecret && !stripeLoaded.value) {
+    await initializeStripe();
+  }
+});
 
 // Lifecycle
 onMounted(() => {

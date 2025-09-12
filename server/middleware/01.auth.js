@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
     '/api/auth/check-token',
     '/api/teachers', // Liste publique des professeurs
     '/api/subjects', // Liste publique des matières
+    '/api/payments/webhook', // Webhook Stripe (authentifié par signature)
   ];
 
   // Routes qui nécessitent une authentification (messages, profils, etc.)
