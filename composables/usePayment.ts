@@ -27,7 +27,13 @@ export const usePayment = () => {
     }
     
     // Initialiser Stripe avec la clé publique
-    const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY || 'pk_test_dummy_key_replace_with_your_actual_key'
+    const config = useRuntimeConfig()
+    const publishableKey = config.public.STRIPE_PUBLISHABLE_KEY
+    
+    if (!publishableKey) {
+      throw new Error('Clé publique Stripe manquante dans la configuration')
+    }
+    
     stripe.value = window.Stripe(publishableKey)
   }
 

@@ -248,8 +248,14 @@ const initializeStripe = async () => {
       });
     }
 
-    // Clé publique Stripe (remplacer par votre vraie clé)
-    const publishableKey = 'pk_test_dummy_key_replace_with_your_actual_key';
+    // Clé publique Stripe depuis la configuration
+    const config = useRuntimeConfig();
+    const publishableKey = config.public.STRIPE_PUBLISHABLE_KEY;
+    
+    if (!publishableKey) {
+      throw new Error('Clé publique Stripe manquante');
+    }
+    
     stripe = window.Stripe(publishableKey);
 
     // Create elements
