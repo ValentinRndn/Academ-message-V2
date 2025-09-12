@@ -1,6 +1,7 @@
 import Booking from '../../models/Booking.js';
 import { connectToDatabase } from '../../config/database.js';
 import { sendBookingConfirmationToStudent, sendBookingNotificationToTeacher } from '../../services/emailService.js';
+import { notifyPaymentSuccess } from '../../utils/notifications.js';
 
 // Initialiser Stripe avec la clé secrète
 import Stripe from 'stripe';
@@ -113,16 +114,17 @@ async function handlePaymentSucceeded(paymentIntent) {
 
     console.log(`Paiement confirmé pour la réservation ${booking._id}`);
 
-    // Envoyer les emails de confirmation
+    // Envoyer les emails et notifications de confirmation
     try {
       await Promise.all([
         sendBookingConfirmationToStudent(booking),
-        sendBookingNotificationToTeacher(booking)
+        sendBookingNotificationToTeacher(booking),
+        notifyPaymentSuccess(booking, booking.teacherId, booking.studentId)
       ]);
-      console.log('📧 Emails de confirmation envoyés avec succès');
+      console.log('📧 Emails et notifications de confirmation envoyés avec succès');
     } catch (emailError) {
-      console.error('❌ Erreur lors de l\'envoi des emails:', emailError);
-      // Ne pas faire échouer le webhook à cause d'une erreur d'email
+      console.error('❌ Erreur lors de l\'envoi des emails/notifications:', emailError);
+      // Ne pas faire échouer le webhook à cause d'une erreur d'email/notification
     }
 
     // TODO: Créer une notification dans l'application

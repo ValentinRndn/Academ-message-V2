@@ -2,23 +2,39 @@ import { connectToDatabase } from '../config/database.js'
 import { connectToMongoDB } from '../utils/mongodb.js'
 import webpush from 'web-push'
 
-// Configurer web-push
-const vapidKeys = {
-  publicKey: process.env.VAPID_PUBLIC_KEY,
-  privateKey: process.env.VAPID_PRIVATE_KEY
-}
+// Fonction pour configurer web-push avec les clés VAPID
+function configureWebPush() {
+  try {
+    const config = useRuntimeConfig()
+    const vapidKeys = {
+      publicKey: config.VAPID_PUBLIC_KEY,
+      privateKey: config.VAPID_PRIVATE_KEY
+    }
 
-if (vapidKeys.publicKey && vapidKeys.privateKey) {
-  webpush.setVapidDetails(
-    'mailto:contact@academ.com',
-    vapidKeys.publicKey,
-    vapidKeys.privateKey
-  )
+    if (vapidKeys.publicKey && vapidKeys.privateKey) {
+      webpush.setVapidDetails(
+        'mailto:contact@academ.com',
+        vapidKeys.publicKey,
+        vapidKeys.privateKey
+      )
+      return true
+    }
+    return false
+  } catch (error) {
+    console.error('Erreur lors de la configuration des clés VAPID:', error)
+    return false
+  }
 }
 
 // Fonction utilitaire pour envoyer une notification
 async function sendNotificationToUser(userId, notificationData) {
   try {
+    // Configurer web-push
+    if (!configureWebPush()) {
+      console.error('Impossible de configurer les clés VAPID')
+      return false
+    }
+
     await connectToDatabase()
     const db = await connectToMongoDB()
     

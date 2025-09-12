@@ -18,9 +18,10 @@ export default defineEventHandler(async (event) => {
     }
 
     // Configurer web-push avec les clés VAPID
+    const config = useRuntimeConfig()
     const vapidKeys = {
-      publicKey: process.env.VAPID_PUBLIC_KEY,
-      privateKey: process.env.VAPID_PRIVATE_KEY
+      publicKey: config.VAPID_PUBLIC_KEY,
+      privateKey: config.VAPID_PRIVATE_KEY
     }
 
     if (!vapidKeys.publicKey || !vapidKeys.privateKey) {
