@@ -60,10 +60,18 @@ export default defineEventHandler(async (event) => {
       startTime: booking.startTime,
       endTime: booking.endTime,
       status: booking.status,
+      notes: booking.studentNotes, // Pour l'affichage dans schedule.vue
       studentNotes: booking.studentNotes,
       teacherNotes: booking.teacherNotes,
-      student: booking.studentId,
-      subject: booking.subjectId,
+      studentName: `${booking.studentId?.firstName || ''} ${booking.studentId?.lastName || ''}`.trim(),
+      subject: booking.subjectId?.name || 'Unknown',
+      student: booking.studentId, // Garder pour compatibilité
+      subjectData: booking.subjectId, // Garder pour compatibilité
+      duration: booking.duration,
+      totalAmount: booking.totalAmount,
+      teacherAmount: booking.teacherAmount,
+      platformCommission: booking.platformCommission,
+      paymentStatus: booking.paymentStatus,
       createdAt: booking.createdAt,
       updatedAt: booking.updatedAt
     }));

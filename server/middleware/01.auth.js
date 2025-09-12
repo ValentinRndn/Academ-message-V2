@@ -47,7 +47,9 @@ export default defineEventHandler(async (event) => {
   }
   
   // Vérifier si la route API nécessite une authentification
-  const needsAuth = !isPublicRoute || protectedRoutes.some(route => event.path.startsWith(route));
+  // Si la route est publique, pas besoin d'auth
+  // Sinon, vérifier si elle correspond à une route protégée
+  const needsAuth = !isPublicRoute && protectedRoutes.some(route => event.path.startsWith(route));
   
   console.log('🛡️  API Path:', event.path, 'Needs auth:', needsAuth, 'Is public:', isPublicRoute);
   
