@@ -66,9 +66,9 @@
               />
               <span class="ml-2 text-sm text-gray-600">Remember me</span>
             </label>
-            <a href="#" class="text-sm text-purple-600 hover:text-purple-700">
+            <NuxtLink to="/forgot-password" class="text-sm text-purple-600 hover:text-purple-700">
               Forgot password?
-            </a>
+            </NuxtLink>
           </div>
 
           <!-- Login button -->

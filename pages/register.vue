@@ -17,6 +17,10 @@
             <NuxtLink to="/login" class="text-purple-600 hover:text-purple-700 font-medium">
               Sign in
             </NuxtLink>
+            or
+            <NuxtLink to="/forgot-password" class="text-purple-600 hover:text-purple-700 font-medium">
+              Forgot password?
+            </NuxtLink>
           </p>
         </div>
 

@@ -8,7 +8,10 @@
       "Bash(git push:*)",
       "Bash(git commit:*)",
       "Bash(pm2 list:*)",
-      "Bash(pm2 restart:*)"
+      "Bash(pm2 restart:*)",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "Bash(sudo rm:*)"
     ],
     "deny": [],
     "ask": []
